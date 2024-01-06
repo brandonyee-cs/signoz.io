@@ -74,7 +74,7 @@ As I mentioned, we also run OpenTelemetry APAC meetup group. Some of the key the
 
 2. **Optimising the value generated and cost involved** 
 
-Once the applications are instrumented the next question is how to optimise between the value generated and cost involved. Generally, people want to implement some sort of filtering mechanism of logs (e.g excluding healthcheck end points) or do sampling for traces. Esp. for tail based sampling (insert link) for traces people have lots of questions around how to do it correctly.
+Once the applications are instrumented the next question is how to optimise between the value generated and cost involved. Generally, people want to implement some sort of filtering mechanism of logs (e.g excluding healthcheck end points) or do sampling for traces. Esp. for [tail based sampling](https://opentelemetry.io/docs/concepts/sampling/#tail-sampling) for traces people have lots of questions around how to do it correctly.
 
 3. **Evagelization within the org** 
 
