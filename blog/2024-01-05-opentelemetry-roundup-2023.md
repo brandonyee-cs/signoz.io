@@ -1,9 +1,9 @@
 ---
-title: What happened in Opentelemetry in 2023 & what should you expect in 2024
+title: OpenTelemetry in 2023 - What we learnt from the community and our users
 slug: opentelemetry-roundup-2023
 date: 2024-01-06
 tags: [OpenTelemetry, Observability]
-authors: pranay
+authors: [pranay,srikanth]
 description: OpenTelemetry round for 2023 and what to expect in 2024
 image: /img/blog/2024/01/otel-roundup.jpg
 hide_table_of_contents: true
@@ -40,7 +40,7 @@ If you think  about it, it makes sense. It helps companies be more future proof 
 
 As a founder and maintainer of an OpenTelemetry native project (SigNoz) we are part of lots of users and customers trying to implement OpenTelemetry in the wild. I thought to sit down, and note what is the current state of OpenTelemetry as we exit 2023 and enter 2024. 
 
-We also run OTEL APAC end user group meetup, so we hear lots of user stories on challenges they face as they try to adopt OpenTelemetry in their orgs.
+We also run [OTEL APAC End user group](https://opentelemetry.io/community/end-user/discussion-group/) meetup, so we hear lots of user stories on challenges they face as they try to adopt OpenTelemetry in their orgs.
 
 ### OpenTelemetry is getting more adoption & becoming more mature
 
@@ -127,11 +127,11 @@ Open source products have support for emitting telemetry data in OTLP format so 
 
 8. **Using OTEL OpAMP framework for logs pipeline**
 
-We are amongst the early adopters of the [OpAMP](https://opentelemetry.io/docs/specs/opamp/). It allows us to enable our customers to do operations with logs attributes from the UI. The logs pipelines UI provides the ability to create and manage the processors. We provide an easy-to-use UI to create and manage the processors. 
+We are amongst the early adopters of the [OpAMP](https://opentelemetry.io/docs/specs/opamp/). It allows us to enable our customers to do operations with logs attributes from the UI. The logs pipelines UI provides the ability to create and manage the processors. SigNoz provides an easy-to-use UI to create and manage the processors which is loved by our users, and OpAMP was a big part of successfully implementing it.
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/opamp-signoz.png" alt="Logs Pipeline architure using OpAMP"/>
-    <figcaption><i>Logs Pipeline architure using OpAMP</i></figcaption>
+    <figcaption><i>Logs Pipeline architure using OpAMP in SigNoz</i></figcaption>
 </figure>
 <br/>
 
