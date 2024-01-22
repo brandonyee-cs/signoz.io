@@ -780,22 +780,17 @@ a.no-underline {
             position: relative;
 
             .cta-image-container {
+              object-fit: none;
+              object-position: left top;
               width: 240px;
               cursor: pointer;
               position: fixed;
-
-              background: linear-gradient(
-                95.84deg,
-                #f25733 -8.15%,
-                #864536 101.25%
-              );
 
               margin: 0 16px;
               display: flex;
               flex-direction: column;
               justify-content: center;
               align-items: center;
-              height: 240px;
               border-radius: 5px;
 
               .cta-image {

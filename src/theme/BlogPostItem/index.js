@@ -6,7 +6,7 @@ import BlogPostItemContent from "@theme/BlogPostItem/Content";
 import BlogPostItemFooter from "@theme/BlogPostItem/Footer";
 import Link from "@docusaurus/Link";
 
-import trySignozImg from "../../../static/img/trySignoz.png";
+import trySignozImg from "../../../static/img/try-signoz-cloud-blog-cta.png";
 
 // apply a bottom margin in list view
 function useContainerClassName(isBlogPostPage) {
