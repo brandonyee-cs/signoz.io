@@ -21,23 +21,25 @@ export default function BlogPostItem({ children, className }) {
     <BlogPostItemContainer
       className={`${containerClassName} ${className} signoz-blog-post`}
     >
-      <div className="blog-post-content">
-        <BlogPostItemHeader />
-        <BlogPostItemContent>{children}</BlogPostItemContent>
-        <BlogPostItemFooter />
-      </div>
-
-      {isBlogPostPage && (
-        <div className="blog-post-cta">
-          <Link
-            to="/teams"
-            className="cta-image-container"
-            id="try-signoz-cloud-blogpage-cta"
-          >
-            <img className="cta-image" src={trySignozImg} />
-          </Link>
+      <div className="blog-cta-container">
+        <div className="blog-post-content">
+          <BlogPostItemHeader />
+          <BlogPostItemContent>{children}</BlogPostItemContent>
+          <BlogPostItemFooter />
         </div>
-      )}
+
+        {isBlogPostPage && (
+          <div className="blog-post-cta">
+            <Link
+              to="/teams"
+              className="cta-image-container"
+              id="try-signoz-cloud-blogpage-cta"
+            >
+              <img className="cta-image" src={trySignozImg} />
+            </Link>
+          </div>
+        )}
+      </div>
     </BlogPostItemContainer>
   );
 }

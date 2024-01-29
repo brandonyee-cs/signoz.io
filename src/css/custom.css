@@ -756,7 +756,6 @@ a.no-underline {
 .blog-post-page {
   .main-wrapper {
     .container {
-      max-width: initial;
       .row {
         flex-direction: row-reverse;
 
@@ -765,37 +764,33 @@ a.no-underline {
         }
 
         .isBlogPostPage {
-          display: flex;
-
-          .blog-post-content {
-            flex: 1;
-          }
-
-          .blog-post-cta {
+          .blog-cta-container {
             display: flex;
-            flex: 0 0 360px;
-            justify-content: center;
-            overflow: hidden;
 
-            position: relative;
+            .blog-post-content {
+              flex: 1;
+              overflow: hidden;
+            }
 
-            .cta-image-container {
-              object-fit: none;
-              object-position: left top;
-              width: 240px;
-              cursor: pointer;
-              position: fixed;
-
-              margin: 0 16px;
+            .blog-post-cta {
               display: flex;
-              flex-direction: column;
+              width: 240px;
+              flex: 0 0 240px; /* Fix for older browsers */
               justify-content: center;
-              align-items: center;
-              border-radius: 5px;
 
-              .cta-image {
-                height: 100%;
-                width: 100%;
+              position: relative;
+
+              .cta-image-container {
+                cursor: pointer;
+                position: fixed;
+
+                margin: 0 16px;
+                border-radius: 5px;
+
+                .cta-image {
+                  height: 240px;
+                  width: 100%;
+                }
               }
             }
           }
