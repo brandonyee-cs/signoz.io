@@ -772,8 +772,8 @@ a.no-underline {
           margin-left: 0px;
         }
 
-        .col-2 {
-          --ifm-col-width: calc(3 / 12 * 100%);
+        .col--2 {
+          --ifm-col-width: calc(3 / 12 * 100%) !important;
         }
 
         .isBlogPostPage {
