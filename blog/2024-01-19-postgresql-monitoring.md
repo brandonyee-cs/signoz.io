@@ -15,6 +15,7 @@ keywords:
   - observability
   - postgresql
 ---
+
 import { LiteYoutubeEmbed } from "react-lite-yt-embed";
 
 <head>
@@ -29,14 +30,13 @@ Monitoring PostgreSQL for performance issues is critical. PostgreSQL is a powerf
 
 ![Cover Image](/img/blog/2024/01/postgresql-monitoring-cover.webp)
 
-
 ## What is PostgreSQL?
 
 PostgreSQL is an open-source relational database management system. The PostgreSQL project was started in 1986 at the University of California. It was originally named Postgres and was finally renamed to PostgreSQL in 1996 to highlight its support for SQL querying language.
 
 PostgreSQL is widely adopted due to its ability to store and scale complicated data workloads. it is technically an object-relational database allowing the creation of custom data types and supporting advanced features like inheritance and polymorphism.
 
-It supports fully ACID-compliant transactions and implements a unique feature called Multiversion Concurrency Control. This allows multiple transactions to run simultaneously without causing traffic jams or requiring locks. 
+It supports fully ACID-compliant transactions and implements a unique feature called Multiversion Concurrency Control. This allows multiple transactions to run simultaneously without causing traffic jams or requiring locks.
 
 It also offers a variety of extensions like PostGIS for geospatial data (used in applications like Uber), Citus for data sharding and distribution, and PG embedding for AI applications.
 
@@ -61,7 +61,7 @@ LIMIT 5
 
 This query fetches the top 5 queries based on their mean execution time, providing insights into potential bottlenecks. You can also see the other metrics from the `pg_stat_statements` table, like the number of calls or min and max execution times according to your requirements.
 
-Analyzing this data helps identify which queries might be causing performance issues, allowing for targeted optimization efforts. 
+Analyzing this data helps identify which queries might be causing performance issues, allowing for targeted optimization efforts.
 
 ### Disk Utilization and I/O Operations
 
@@ -72,7 +72,7 @@ Disk utilization and I/O operations are key aspects of PostgreSQL's performance.
 You can use the below query to regularly monitor how much disk space is being used by different objects in the PostgreSQL database:
 
 ```sql
-SELECT object_type, object_name, schema_name, size FROM 
+SELECT object_type, object_name, schema_name, size FROM
 (SELECT
     'Table' AS object_type,
     relname AS object_name,
@@ -111,7 +111,6 @@ Below is a sample output that you can get with the above query.
 </figure>
 <br/>
 
-
 If you're using PostgreSQL and want to check if you have any extra indexes that might be affecting your database's performance, you can use a simple query. This will show you a list of all the indexes in your database:
 
 ```sql
@@ -126,7 +125,6 @@ You will get an output like below:
 </figure>
 <br/>
 
-
 The `idx_scan` column tells you how many times each index has been used. If the number is high, the index is probably helping your queries run faster. But if it's low or zero, the index might not be very useful and could even be slowing down your database. By identifying such indexes, you can decide whether to keep them or remove them to improve your database's efficiency.
 
 ### Connection Health and Pooling
@@ -138,7 +136,6 @@ Connection health and pooling are critical components of a well-optimized Postgr
     <figcaption><i>Connection Pooling in PostgreSQL</i></figcaption>
 </figure>
 <br/>
-
 
 You can implement connection pooling directly in your application code. In the case of a monolithic application, you can create a common connection pool that can be used across the entire application.
 
@@ -153,7 +150,6 @@ You can leverage PgBouncer admin console to monitor a number of important metric
     <figcaption><i>Show Stats output for PgBouncer</i></figcaption>
 </figure>
 <br/>
-
 
 Some of the key PostgreSQL metrics that you can access with the `SHOW STATS` command are as follows:
 
@@ -180,7 +176,6 @@ In PostgreSQL, locks and deadlocks play a critical role in maintaining data inte
     <figcaption><i>Locks and Deadlocks in PostgreSQL</i></figcaption>
 </figure>
 <br/>
-
 
 To monitor your PostgreSQL for locks and deadlocks, you can use in-built as well as third-party tools.
 
@@ -211,7 +206,6 @@ Here's what a sample output might look like:
 </figure>
 <br/>
 
-
 Monitoring for locks and deadlocks involves regularly running queries against **`pg_locks`** and **`pg_stat_activity`** to identify any potential issues. By keeping an eye on these views, you can proactively address locking scenarios and take corrective actions to ensure smooth database operation.
 
 These queries can be scheduled as part of regular monitoring tasks to promptly detect and resolve any lock-related issues in your PostgreSQL database.
@@ -224,7 +218,7 @@ Now that you have some idea of key PostgreSQL metrics that you need to monitor, 
 
 ### Establishing Baselines of PostgreSQL Performance
 
-Establishing performance baselines is essential to understand the normal behavior of your PostgreSQL database under typical operational conditions. 
+Establishing performance baselines is essential to understand the normal behavior of your PostgreSQL database under typical operational conditions.
 
 This process involves:
 
@@ -262,17 +256,17 @@ Regular audits are essential for maintaining and enhancing the health and effici
 
 - **Scheduling Performance Reviews**: Conduct scheduled performance reviews and audits to assess the database's overall health. This includes examining query performance and system resource utilization.
 - **Analyzing and Optimizing Queries**:
-    - Utilize tools like **`pg_stat_statements`** to identify and analyze slow queries.
-    - Optimize queries through methods like index improvements, rewriting SQL statements, or adjusting database configurations.
+  - Utilize tools like **`pg_stat_statements`** to identify and analyze slow queries.
+  - Optimize queries through methods like index improvements, rewriting SQL statements, or adjusting database configurations.
 - **Reviewing PostgreSQL Configurations**:
-    - Continuously review and adjust PostgreSQL configurations to align with evolving workloads and performance needs.
-    - Ensure that the database settings are tuned to the current operational requirements.
+  - Continuously review and adjust PostgreSQL configurations to align with evolving workloads and performance needs.
+  - Ensure that the database settings are tuned to the current operational requirements.
 - **Assessing Resource Allocation**:
-    - Regularly evaluate the allocation of resources such as CPU, memory, and disk space.
-    - Ensure that the database has the necessary resources to efficiently handle the current and anticipated workload.
+  - Regularly evaluate the allocation of resources such as CPU, memory, and disk space.
+  - Ensure that the database has the necessary resources to efficiently handle the current and anticipated workload.
 - **Documenting Audit Findings**:
-    - Keep thorough documentation of audit findings, including performance improvements and any changes made.
-    - This documentation serves as a valuable reference for future tuning and audits.
+  - Keep thorough documentation of audit findings, including performance improvements and any changes made.
+  - This documentation serves as a valuable reference for future tuning and audits.
 
 ## Best Tools for PostgreSQL Monitoring
 
@@ -288,7 +282,6 @@ Below is the list of best tools for monitoring the PostgreSQL database.
 </figure>
 <br/>
 
-
 SigNoz is an open-source monitoring tool that excels in PostgreSQL metrics monitoring through OpenTelemetry. It collects PostgreSQL metrics using the OpenTelemetry Collector and visualizes this data effectively. SigNoz allows users to monitor key database metrics, enabling a comprehensive analysis of database performance. Its ability to set up customized dashboards and alerts makes it particularly useful for tracking and managing the health and efficiency of PostgreSQL instances.
 
 For a more detailed exploration of how SigNoz performs PostgreSQL monitoring, you can visit their guide: [Monitor PostgreSQL metrics with OpenTelemetry](https://signoz.io/blog/opentelemetry-postgresql-metrics-monitoring/).
@@ -300,7 +293,6 @@ For a more detailed exploration of how SigNoz performs PostgreSQL monitoring, yo
     <figcaption><i>PostgreSQL monitoring in pgAnalyze (Source: pgAnalyze website)</i></figcaption>
 </figure>
 <br/>
-
 
 Pganalyze is a comprehensive monitoring tool designed specifically for PostgreSQL databases. It provides deep insights into the performance of PostgreSQL instances, helping database administrators and developers to optimize and maintain their database systems effectively.
 
@@ -314,16 +306,15 @@ The tool offers features like performance monitoring, query analysis, log insigh
 </figure>
 <br/>
 
+PgDash is a comprehensive diagnostic and monitoring solution for PostgreSQL. It offers core reporting and visualization capabilities, presenting in-depth data about PostgreSQL performance.
 
-PgDash is a comprehensive diagnostic and monitoring solution for PostgreSQL. It offers core reporting and visualization capabilities, presenting in-depth data about PostgreSQL performance. 
-
-Key features include extensive SQL query information with time-series graphs and execution plans, diagnostics for scanning potential issues, and monitoring of replication metrics. PgDash also provides insights on tables, indexes, locks, and backends, along with team sharing capabilities. 
+Key features include extensive SQL query information with time-series graphs and execution plans, diagnostics for scanning potential issues, and monitoring of replication metrics. PgDash also provides insights on tables, indexes, locks, and backends, along with team sharing capabilities.
 
 It supports integrations with systems like AWS CloudWatch and PgBouncer, and offers alerting options. PgDash is available in both SaaS and self-hosted formats and is compatible with AWS RDS and Aurora.
 
 ### Prometheus
 
-Prometheus is an open-source monitoring solution that offers a multi-dimensional data model with time series data identified by metric name and key-value pairs. It features a powerful query language (PromQL) for detailed data analysis and supports efficient data storage, both in-memory and on local disk. 
+Prometheus is an open-source monitoring solution that offers a multi-dimensional data model with time series data identified by metric name and key-value pairs. It features a powerful query language (PromQL) for detailed data analysis and supports efficient data storage, both in-memory and on local disk.
 
 Prometheus provides flexible visualization options, including integration with Grafana, and is designed for reliable operation, with each server operating independently. It also offers precise alerting based on PromQL with an alert manager for handling notifications. Additionally, Prometheus is highly extensible, with many client libraries and integrations for third-party data.
 
@@ -335,8 +326,7 @@ Prometheus provides flexible visualization options, including integration with G
 </figure>
 <br/>
 
-
-New Relic is a versatile performance monitoring tool that offers robust features for monitoring PostgreSQL databases. It provides detailed insights into database performance, including query analysis, throughput, and response times. 
+New Relic is a versatile performance monitoring tool that offers robust features for monitoring PostgreSQL databases. It provides detailed insights into database performance, including query analysis, throughput, and response times.
 
 With New Relic, users can track and visualize key metrics like transaction volumes, error rates, and service response times. Its alerting system notifies users about performance anomalies or system issues. Additionally, New Relic supports integration with cloud and on-premise PostgreSQL instances, offering a comprehensive view of database health and performance in real time.
 
@@ -348,13 +338,11 @@ With New Relic, users can track and visualize key metrics like transaction volum
 </figure>
 <br/>
 
-
-Datadog is a robust monitoring tool that provides comprehensive insights for PostgreSQL databases. It automatically collects data from PostgreSQL's statistics collector, enabling visibility into key metrics in a customizable dashboard. 
+Datadog is a robust monitoring tool that provides comprehensive insights for PostgreSQL databases. It automatically collects data from PostgreSQL's statistics collector, enabling visibility into key metrics in a customizable dashboard.
 
 Datadog's integration facilitates query-level performance insights, allowing for the optimization of slow queries. It also supports tracing PostgreSQL queries within applications, aiding in identifying bottlenecks. This versatility makes Datadog ideal for both high-level monitoring and detailed performance analysis of PostgreSQL databases.
 
 ### Grafana
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/postgresql-monitoring-grafana.webp" alt="Postgresql monitoring tool - Grafana"/>
@@ -362,8 +350,7 @@ Datadog's integration facilitates query-level performance insights, allowing for
 </figure>
 <br/>
 
-
-Grafana is a powerful visualization and analytics software that integrates seamlessly with PostgreSQL for monitoring and data analysis. It enables users to create interactive, real-time dashboards to visualize PostgreSQL metrics and logs. 
+Grafana is a powerful visualization and analytics software that integrates seamlessly with PostgreSQL for monitoring and data analysis. It enables users to create interactive, real-time dashboards to visualize PostgreSQL metrics and logs.
 
 Grafana's versatility lies in its support for various data sources, including PostgreSQL, allowing for comprehensive database monitoring. Users can customize dashboards to track specific PostgreSQL metrics, set up alerts, and analyze long-term trends. This makes Grafana an essential tool for database administrators and teams who need to keep a close eye on database performance and health.
 

@@ -17,8 +17,10 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/ten-reasons-not-to-add-observability/"/>
 </head>
 
-Everyone talks about the need for observability, it even comes up in board meetings. But let’s talk about the reasons you *shouldn’t* add observability to production.
+Everyone talks about the need for observability, it even comes up in board meetings. But let’s talk about the reasons you _shouldn’t_ add observability to production.
+
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/09/ten_reasons/10-reasons-cover.webp)
 
 ## Observability is the enemy: ten reasons
@@ -52,12 +54,11 @@ Last outage, the CEO had to apologize. When’s that feature you want coming out
     <figcaption><i>Hit the brakes on all new features, and your short-term business problems disappear!</i></figcaption>
 </figure>
 
-
 ### 4. AWS needs to make their money
 
 Downscaling? resource overuse? You call it a wasted Operations budget, I call it stimulating the economy. Observability might be a great way to identify possible efficiencies, and even whole clusters that nobody is using, but really who needs the bother.
 
-When the company has to massively reduce size due to budget overruns, *then* we can downscale whole departments at a time. And without observability, that should happen in no time!
+When the company has to massively reduce size due to budget overruns, _then_ we can downscale whole departments at a time. And without observability, that should happen in no time!
 
 How else will Jeff Bezos afford another 10-and-a-half minutes in the upper atmosphere?
 
@@ -108,7 +109,7 @@ Tech debt leads to greater tech debt, but as long as your company’s balance sh
 
 A key component of any observability tool is how data will be analyzed and shared. Instead of Loom captures of an error in progress or screenshots of a console, sending a link to view a trace on an observability dashboard is faster, easier, and communicates much more clearly.
 
-And that’s why you should NEVER do it. After all, if everyone knows how and why problems are happening on production, how will they know you’re a genius for fixing the problem? 
+And that’s why you should NEVER do it. After all, if everyone knows how and why problems are happening on production, how will they know you’re a genius for fixing the problem?
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/ten_reasons/ten-reasons-9.webp" alt="an image of two silos in a field"/>
@@ -119,7 +120,7 @@ That leads us to the next big benefit:
 
 ### 10. A little thing called job security
 
-Observability offers basic insights into how your data and events move through your system. With a little mentorship, and the right observability tools, any intermediate engineer can master even a complex service in just a few months. If you’re an operations or architecture expert, you know that training up-and-coming engineers is the last thing you want to do. Where’s the job security in sharing knowledge? As long as you’re the only one who can fix the service, as long as you’re the one getting woken up day and night when something goes wrong, and as long as the blame falls on you every time something breaks; you *know* they’ll never fire you. You and the service will be forever interlinked. You’ll never get to work on anything more advanced, and the system will never significantly change as long as you keep nosy engineers out. Preventing full-stack observability is the first step to making sure your knowledge, and your application, are always together in your black box.
+Observability offers basic insights into how your data and events move through your system. With a little mentorship, and the right observability tools, any intermediate engineer can master even a complex service in just a few months. If you’re an operations or architecture expert, you know that training up-and-coming engineers is the last thing you want to do. Where’s the job security in sharing knowledge? As long as you’re the only one who can fix the service, as long as you’re the one getting woken up day and night when something goes wrong, and as long as the blame falls on you every time something breaks; you _know_ they’ll never fire you. You and the service will be forever interlinked. You’ll never get to work on anything more advanced, and the system will never significantly change as long as you keep nosy engineers out. Preventing full-stack observability is the first step to making sure your knowledge, and your application, are always together in your black box.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/ten_reasons/ten-reasons-10.webp" alt="a photo of a crowd of graduates wearing mortarboards"/>

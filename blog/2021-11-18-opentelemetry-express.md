@@ -6,7 +6,7 @@ tags: [OpenTelemetry Instrumentation, JavaScript]
 authors: ankit_anand
 description: OpenTelemetry is a vendor-agnostic isntrumentation library. In this article, learn how to set up monitoring for an Express application using OpenTelemetry.
 image: /img/blog/2021/11/monitor_express_cover.webp
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - opentelemetry javascript
@@ -33,7 +33,7 @@ Nodejs is a popular Javascript runtime environment that executes Javascript code
 ![Cover Image](/img/blog/2021/11/monitor_express_cover.webp)
 
 You can monitor your express application using OpenTelemetry and a tracing backend of your choice. OpenTelemetry is the leading open-source standard under the Cloud Native Computing Foundation that aims to standardize the process of instrumentation across multiple languages.
- 
+
 In this article, we will be using [SigNoz](https://signoz.io/) to store and visualize the telemetry data collected by OpenTelemetry from a sample Expressjs application.
 
 ## Running an Express application with OpenTelemetry
@@ -49,6 +49,7 @@ git clone -b main https://github.com/SigNoz/signoz.git
 cd signoz/deploy/
 ./install.sh
 ```
+
 <br></br>
 
 For detailed instructions, you can visit our documentation.
@@ -80,13 +81,14 @@ But, it would be better if you follow these steps to understand what's happening
 Check if node is installed on your machine by using the below command:
 
 ```jsx
-node -v
+node - v;
 ```
 
 Steps to get the app set up and running:
 
 1. **Make a directory and install express**<br></br>
    Make a directory for your sample app on your machine. Then open up the terminal, navigate to the directory path and install express with the following command:
+
    ```
    npm i express
    ```
@@ -96,24 +98,24 @@ Steps to get the app set up and running:
 
    ```jsx
    const express = require("express");
-   const cors = require('cors')
+   const cors = require("cors");
    const PORT = process.env.PORT || "5555";
    const app = express();
-   
+
    app.use(cors());
-   app.use(express.json())
-   
+   app.use(express.json());
+
    app.all("/", (req, res) => {
-    res.json({ method: req.method, message: "Hello World", ...req.body });
-    });
-    
-    app.get('/404', (req, res) => {
-    res.sendStatus(404);
-    })
-    
-    app.listen(parseInt(PORT, 10), () => {
-    console.log(`Listening for requests on http://localhost:${PORT}`);
-    })
+     res.json({ method: req.method, message: "Hello World", ...req.body });
+   });
+
+   app.get("/404", (req, res) => {
+     res.sendStatus(404);
+   });
+
+   app.listen(parseInt(PORT, 10), () => {
+     console.log(`Listening for requests on http://localhost:${PORT}`);
+   });
    ```
 
 3. **Check if your application is working**<br></br>
@@ -131,7 +133,7 @@ Steps to get the app set up and running:
 
 1. **Install OpenTelemetry packages**<br></br>
    You will need the following OpenTelemetry packages for this sample application.
-   
+
    ```jsx
    npm install --save @opentelemetry/sdk-node
    npm install --save @opentelemetry/auto-instrumentations-node
@@ -140,56 +142,61 @@ Steps to get the app set up and running:
 
    The dependencies included are briefly explained below:<br></br>
 
-    `@opentelemetry/sdk-node` - This package provides the full OpenTelemetry SDK for Node.js including tracing and metrics.<br></br>
-    
-    `@opentelemetry/auto-instrumentations-node` - This module provides a simple way to initialize multiple Node instrumentations.<br></br>
-    
-    `@opentelemetry/exporter-trace-otlp-http` - This module provides the exporter to be used with OTLP (`http/json`) compatible receivers.<br></br>
+   `@opentelemetry/sdk-node` - This package provides the full OpenTelemetry SDK for Node.js including tracing and metrics.<br></br>
+
+   `@opentelemetry/auto-instrumentations-node` - This module provides a simple way to initialize multiple Node instrumentations.<br></br>
+
+   `@opentelemetry/exporter-trace-otlp-http` - This module provides the exporter to be used with OTLP (`http/json`) compatible receivers.<br></br>
 
       <VersionPin />
-
 
 2. **Create `tracing.js` file**<br></br>
    Instantiate tracing by creating a `tracing.js` file and using the below code.
 
    ```jsx
    // tracing.js
-   'use strict'
-   const process = require('process');
-   const opentelemetry = require('@opentelemetry/sdk-node');
-   const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
-   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
-   const { Resource } = require('@opentelemetry/resources');
-   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
-   
+   "use strict";
+   const process = require("process");
+   const opentelemetry = require("@opentelemetry/sdk-node");
+   const {
+     getNodeAutoInstrumentations,
+   } = require("@opentelemetry/auto-instrumentations-node");
+   const {
+     OTLPTraceExporter,
+   } = require("@opentelemetry/exporter-trace-otlp-http");
+   const { Resource } = require("@opentelemetry/resources");
+   const {
+     SemanticResourceAttributes,
+   } = require("@opentelemetry/semantic-conventions");
+
    const exporterOptions = {
-      url: 'http://localhost:4318/v1/traces'
-      }
-      
+     url: "http://localhost:4318/v1/traces",
+   };
+
    const traceExporter = new OTLPTraceExporter(exporterOptions);
    const sdk = new opentelemetry.NodeSDK({
-      traceExporter,
-      instrumentations: [getNodeAutoInstrumentations()],
-      resource: new Resource({
-         [SemanticResourceAttributes.SERVICE_NAME]: 'node_app'
-         })
+     traceExporter,
+     instrumentations: [getNodeAutoInstrumentations()],
+     resource: new Resource({
+       [SemanticResourceAttributes.SERVICE_NAME]: "node_app",
+     }),
    });
-   
+
    // initialize the SDK and register with the OpenTelemetry API
    // this enables the API to record telemetry
-   
-   sdk.start()
-   
+
+   sdk.start();
+
    // gracefully shut down the SDK on process exit
-   process.on('SIGTERM', () => {
-      sdk.shutdown()
-    .then(() => console.log('Tracing terminated'))
-    .catch((error) => console.log('Error terminating tracing', error))
-    .finally(() => process.exit(0));
-    });
-   
+   process.on("SIGTERM", () => {
+     sdk
+       .shutdown()
+       .then(() => console.log("Tracing terminated"))
+       .catch((error) => console.log("Error terminating tracing", error))
+       .finally(() => process.exit(0));
+   });
    ```
-   
+
    OpenTelemetry Node SDK currently does not detect the `OTEL_RESOURCE_ATTRIBUTES` from `.env` files as of today. That’s why we need to include the variables in the `tracing.js` file itself.
 
    About environment variables:
@@ -199,7 +206,7 @@ Steps to get the app set up and running:
    `environment`: dev, prod, staging, etc.
 
    `http://localhost:4318/v1/traces` is the default url for sending your tracing data. We are assuming you have installed SigNoz on your `localhost`. Based on your environment, you can update it accordingly. It should be in the following format:
-      
+
    `http://<IP of SigNoz backend>:4318/v1/traces`
 
    :::note
@@ -225,10 +232,10 @@ And, congratulations! You have instrumented your sample Node.js app. You can now
     width={700}
 />
 
-
 SigNoz is open-source, and a full-stack APM. It comes with charts of RED metrics and a seamless transition from metrics to traces.
 
 ## Open-source tool to visualize telemetry data
+
 SigNoz makes it easy to visualize metrics and traces captured through OpenTelemetry instrumentation.
 
 SigNoz comes with out of box RED metrics charts and visualization. RED metrics stands for:
@@ -291,7 +298,6 @@ If you are someone who understands more from video, then you can watch the below
 
 <p>&nbsp;</p>
 
-
 If you have any questions or need any help in setting things up, join our slack community and ping us in `#support` channel.
 
 [![SigNoz Slack community](/img/blog/common/join_slack_cta.webp)](https://signoz.io/slack)
@@ -303,8 +309,3 @@ If you want to read more about SigNoz 👇
 [Golang Aplication Monitoring with OpenTelemetry and SigNoz](https://signoz.io/opentelemetry/go/)
 
 [OpenTelemetry collector - full guide](https://signoz.io/blog/opentelemetry-collector-complete-guide/)
-
-
-
-
-

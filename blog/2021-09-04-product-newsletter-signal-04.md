@@ -4,7 +4,7 @@ slug: community-update-04
 date: 2021-09-06
 tags: [Product Updates]
 authors: ankit_anand
-hide_table_of_contents: true
+hide_table_of_contents: false
 description: It's time for the monthly product update of SigNoz - a full-stack open-source and observability tool. Find out what we've been upto at SigNoz during August, 2021.
 image: /img/blog/2021/09/signal_04_cover-min.webp
 keywords:
@@ -35,11 +35,12 @@ This month, we enabled metrics ingestion through SigNoz, implemented Cypress for
 Latest Release link: [v0.3.6](https://github.com/SigNoz/signoz/releases/tag/v0.3.6)
 
 ### Metrics Ingestion
-We have enabled metrics ingestion through SigNoz. We are battle testing this for corner cases, but here's a sneak peek for you.  This was one of the most demanded features by our users and we are excited to see how the community utilizes it.
+
+We have enabled metrics ingestion through SigNoz. We are battle testing this for corner cases, but here's a sneak peek for you. This was one of the most demanded features by our users and we are excited to see how the community utilizes it.
 
 Expect a formal release in the coming weeks. If you want to beta test this feature, just write to us at hello@signoz.io.
 
-You will be able to  track metrics like CPU load and visualize it through SigNoz. A sneak peek into our CPU load metrics charts 👇
+You will be able to track metrics like CPU load and visualize it through SigNoz. A sneak peek into our CPU load metrics charts 👇
 
 import Screenshot from "@theme/Screenshot"
 
@@ -51,11 +52,9 @@ import Screenshot from "@theme/Screenshot"
    width={700}
 />
 
-
 ### Enabled Cypress for a more robust frontend
 
 Cypress is a Javascript-based end-to-end testing framework which can run in the browser making asynchronous testing simple and convenient. We have enabled Cypress for our front-end testing so that we can ship out error-free UIs which our users enjoy.
-
 
 <Screenshot
     alt="Cypress frontend testing framework"
@@ -77,7 +76,6 @@ We're striving everyday to make things easier for our users. On that front, we w
 
 Digital Ocean is a very popular cloud infrastructure provider used by a lot of devs. We want our users to have a simple single click install experience for SigNoz on Digital Ocean. We will appreciate if any of you wants to share any inputs on the [GitHub issue](https://github.com/SigNoz/signoz/issues/284).
 
-
 ## What's upcoming?
 
 We will be working primarily on metrics and alerts. As we have enabled metrics ingestion now, we will be testing out following metrics receivers:
@@ -89,13 +87,13 @@ We will be working primarily on metrics and alerts. As we have enabled metrics i
 
 You can find the complete list of receivers for which metrics ingestion pipeline will work [here](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver).
 
-Alerts are a critical component for any monitoring solution. We are currently scoping out requirements for a user-friendly alert system. You can expect a beta version in the next rollout. 
+Alerts are a critical component for any monitoring solution. We are currently scoping out requirements for a user-friendly alert system. You can expect a beta version in the next rollout.
 
 ## SigNoz news
 
 ### Expanding our team
 
-We are elated to welcome [Palash Gupta](https://github.com/palash-signoz) to our team as a core-team member working on SigNoz. He will be leading the front-end charter for SigNoz 🎉  
+We are elated to welcome [Palash Gupta](https://github.com/palash-signoz) to our team as a core-team member working on SigNoz. He will be leading the front-end charter for SigNoz 🎉
 
 Palash comes with an extensive experience of working on scalable frontend technologies in high-growth tech startups. He is passionate about the power of open-source software, trekking and finding gems of Hindi poems. 🕺
 
@@ -135,6 +133,7 @@ We are planning to conduct performance benchmarks for SigNoz. We would love to h
 **[SigNoz Performance Benchmarking](https://github.com/SigNoz/signoz/discussions/218)**
 
 ### Slack community
+
 We recently crossed 200+ members on our slack community. Our slack channel is a place where devs from diverse backgrounds come together to collaborate and we love it!
 
 Join us in our wonderful journey as we build the next-gen application monitoring & observability platform, the OSS way 👇

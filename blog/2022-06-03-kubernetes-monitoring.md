@@ -48,7 +48,7 @@ Before we deep-dive into the tutorial for Kubernetes monitoring, let’s have a 
 
 ## What is OpenTelemetry?
 
-<a href = "https://opentelemetry.io/" rel="noopener noreferrer nofollow" target="_blank">OpenTelemetry</a>, also known as OTel for short, is an open-source vendor-agnostic set of tools, APIs, and SDKs used to instrument applications to create and manage telemetry data(metrics, traces, and logs). It is backed by <a href = "https://www.cncf.io/" rel="noopener noreferrer nofollow" target="_blank">Cloud Native Computing Foundation</a>, the same foundation under which Kubernetes graduated. 
+<a href = "https://opentelemetry.io/" rel="noopener noreferrer nofollow" target="_blank">OpenTelemetry</a>, also known as OTel for short, is an open-source vendor-agnostic set of tools, APIs, and SDKs used to instrument applications to create and manage telemetry data(metrics, traces, and logs). It is backed by <a href = "https://www.cncf.io/" rel="noopener noreferrer nofollow" target="_blank">Cloud Native Computing Foundation</a>, the same foundation under which Kubernetes graduated.
 
 <br></br>
 
@@ -103,12 +103,11 @@ STATUS: deployed
 REVISION: 1
 NOTES:
 1. You have just deployed SigNoz cluster:
-
-- frontend version: '0.8.0'
-- query-service version: '0.8.0'
-- alertmanager version: '0.23.0-0.1'
-- otel-collector version: '0.43.0-0.1'
-- otel-collector-metrics version: '0.43.0-0.1'
+  - frontend version: "0.8.0"
+  - query-service version: "0.8.0"
+  - alertmanager version: "0.23.0-0.1"
+  - otel-collector version: "0.43.0-0.1"
+  - otel-collector-metrics version: "0.43.0-0.1"
 ```
 
 For detailed instructions to set up SigNoz cluster in Kubernetes, please refer to our documentation.
@@ -158,10 +157,10 @@ You need to update the below section.
 
 ```yaml
 exporters:
-   otlp:
-      endpoint: "<SigNoz-Otel-Collector-Address>:4317"
-      tls:
-         insecure: true
+  otlp:
+    endpoint: "<SigNoz-Otel-Collector-Address>:4317"
+    tls:
+      insecure: true
 ```
 
 If you are running SigNoz in the same Kubernetes cluster where your applications are, you have to replace the above endpoint in [agent/infra-metrics.yaml](https://github.com/SigNoz/otel-collector-k8s/blob/main/agent/infra-metrics.yaml#L47) and [deployment/all-in-one.yaml](https://github.com/SigNoz/otel-collector-k8s/blob/main/deployment/all-in-one.yaml#L19) by

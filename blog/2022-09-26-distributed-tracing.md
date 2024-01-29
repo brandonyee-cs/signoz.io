@@ -21,13 +21,11 @@ keywords:
   <meta name ="twitter:image" content="https://signoz.io/img/blog/2022/03/distributed_tracing_guide.webp"/>
 </head>
 
-
 Distributed tracing helps you track requests across services and understand issues affecting your application performance. In distributed cloud architecture, debugging performance issues is complicated. Distributed tracing gives visibility to teams on how a user request performs across different services, protocols, and cloud infrastructure.
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2022/09/distributed_tracing_cover.webp)
-
 
 Let’s start with a brief overview of distributed tracing.
 
@@ -36,7 +34,6 @@ Let’s start with a brief overview of distributed tracing.
 Distributed tracing is a method to track user requests in their entirety as it travels across components of a distributed system. Cloud and containerization technologies have enabled the creation of distributed system designs like microservices and FaaS (functions as a service).
 
 > Distributed tracing enables you to connect the dots of how your distributed system interacts. While traditional monitoring struggles to illuminate the behavior of distributed systems, distributed tracing can help you identify performance patterns of the various components in a distributed system.
-> 
 
 In a distributed system, a click from a user initiates a transaction that can travel through hundreds of components before completing the user request. Distributed tracing is the technique that shows how the different components interact together to complete the user request.
 
@@ -49,7 +46,7 @@ The top two important data points that distributed tracing captures about a user
 
 In the modern digital ecosystem, a user’s expectation of what’s possible digitally has no limits. It gave rise to the need for rapid innovation and on-demand scaling. Modern application architecture using cloud-native, containerization, and microservices is a very complex distributed system.
 
-The microservices architecture allows multiple technology stacks, decentralized data management, and independent evolution of services in an application. This leads to an ever-increasing number of components in an application’s architecture. 
+The microservices architecture allows multiple technology stacks, decentralized data management, and independent evolution of services in an application. This leads to an ever-increasing number of components in an application’s architecture.
 
 The benefits of microservices architecture come with the increased complexity of operation and troubleshooting. A user request can travel hundreds or even thousands of these components to fulfill a single-use case. As such, there are many failure points in the application, and robust monitoring is needed to identify failure points and latency issues.
 
@@ -62,13 +59,13 @@ A trace in distributed tracing represents an end-to-end user request and is comp
 The key components and data points that make up a trace are as follows:
 
 - **Root Span**<br></br>
-It’s the parent span that represents the first span in a trace.
+  It’s the parent span that represents the first span in a trace.
 - **Child Span**<br></br>
-A child span is triggered by a parent span and can be a function call, DB calls, calls to another service, etc.
+  A child span is triggered by a parent span and can be a function call, DB calls, calls to another service, etc.
 - **Duration or Latency**<br></br>
-It’s the time taken by each span to complete its process. It’s a key data point used to analyze application performance.
+  It’s the time taken by each span to complete its process. It’s a key data point used to analyze application performance.
 - **Causal relationship**<br></br>
-A trace relates all the spans involved in the request in a sequential relationship.
+  A trace relates all the spans involved in the request in a sequential relationship.
 
 A trace is usually visualized as Flamegraphs or Gantt charts. Below is a snapshot from the traces dashboard of [SigNoz](https://signoz.io/). In the trace diagram below, the root span spawns two child spans which call more inner processes.
 
@@ -88,7 +85,6 @@ You can also add tags and span attributes to provide more context for your spans
 
 <br></br>
 
-
 ## Deriving value from Distributed Tracing
 
 Distributed tracing gives the much needed visibility into the operations of a complex distributed system. It constructs a picture of how different distributed system components interact to process a user request.
@@ -96,10 +92,10 @@ Distributed tracing gives the much needed visibility into the operations of a co
 Tracing data can be utilized at two levels:
 
 ### Single Trace Data
+
 Tracing data can be visualized in the form of Flamegraphs and Gantt Charts to reconstruct the entire flow of a specific user request. This enables us to understand exactly what happened to that request in a particular component of the distributed system.
 
 [SigNoz](https://signoz.io/) shows Flamegraphs and Gantt charts both to make visualizing trace data easier. In the dashboard below, you can see the data for a single trace that consists of 50 spans.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2022/03/flamegraphs_gantt_charts_dark_mode.webp" alt="Flamegraphs and Gantt charts visualizing a single trace data"/>
@@ -107,9 +103,9 @@ Tracing data can be visualized in the form of Flamegraphs and Gantt Charts to re
 </figure>
 
 <br></br>
-    
 
 ### Aggregated Trace Data
+
 Using tags and tracing data, you can run aggregates to get relevant business metrics from the behavior of your distributed systems. For example, with SigNoz, you can get the error rate and 99th percentile latency of `customer_type: gold` or `deployment_version: v2`. This enables quick analysis of services affecting a particular user group or type of requests.
 
 <figure data-zoomable align='center'>
@@ -118,7 +114,7 @@ Using tags and tracing data, you can run aggregates to get relevant business met
 </figure>
 
 <br></br>
-    
+
 Distributed tracing can also serve as a knowledge base for your engineering team. It can act as a central overview dashboard that enables anyone to quickly get familiar with the application architecture.
 
 ## Distributed Tracing with OpenTelemetry
@@ -130,16 +126,16 @@ OpenTelemetry is used to instrument application code to generate telemetry data.
 The question is why is OpenTelemetry important for the future of distributed tracing. The reasons can be summarized in the following points:
 
 - **Eliminates the risk of vendor lock-in**<br></br>
-SaaS tools that provide distributed tracing capabilities have their own agents to instrument applications. Whereas OpenTelemetry supports various popular data formats with the help of an exporter. The data collected with OpenTelemetry can be sent to a backend of your choice.
+  SaaS tools that provide distributed tracing capabilities have their own agents to instrument applications. Whereas OpenTelemetry supports various popular data formats with the help of an exporter. The data collected with OpenTelemetry can be sent to a backend of your choice.
 
 - **Standard instrumentation across your distributed system**<br></br>
-OpenTelemetry covers all major frameworks, protocols, and programming languages. It also comes with a collector that can be used to collect and export data. It enables OpenTelemetry to be the single source of instrumentation across your entire distributed system.
+  OpenTelemetry covers all major frameworks, protocols, and programming languages. It also comes with a collector that can be used to collect and export data. It enables OpenTelemetry to be the single source of instrumentation across your entire distributed system.
 
 - **Open-source and community-backed**<br></br>
-A huge community is working on OpenTelemetry to make it the standard way of collecting and sending telemetry data to a backend platform. It is also supported by all the major cloud vendors.
+  A huge community is working on OpenTelemetry to make it the standard way of collecting and sending telemetry data to a backend platform. It is also supported by all the major cloud vendors.
 
 - **Ability to monitor emerging technologies**<br></br>
-OpenTelemetry has a wide number of libraries and SDKs for instrumenting code in various programming languages. If you decide to use any new technology, OpenTelemetry can readily be used to instrument it, and you don’t have to depend on propriety monitoring tools to extend that capability.
+  OpenTelemetry has a wide number of libraries and SDKs for instrumenting code in various programming languages. If you decide to use any new technology, OpenTelemetry can readily be used to instrument it, and you don’t have to depend on propriety monitoring tools to extend that capability.
 
 ## Getting started with Open Source Distributed Tracing
 
@@ -148,7 +144,6 @@ SigNoz is an open-source APM tool that provides distributed tracing as one of it
 It provides both metrics monitoring and distributed tracing with an ability to correlate metrics and traces seamlessly.
 
 For example, you can view traces at a particular timestamp where metrics like application latency are poor, and then you can dig deeper with traces generated around that timestamp.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2022/03/metrics_monitoring_signoz.webp" alt="Metrics monitoring with SigNoz"/>

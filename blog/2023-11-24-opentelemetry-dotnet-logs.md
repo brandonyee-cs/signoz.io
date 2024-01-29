@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: abhishek-policepatil
 description: OpenTelemetry can help you collect logs from .NET applications. You need to configure the ILogger interface to use OpenTelemetry. OpenTelemetry helps in augmenting the logging information by correlating it with other signals like traces...
 image: /img/blog/2023/11/opentelemetry-dotnet-logs-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -19,7 +19,6 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/opentelemetry-dotnet-logs/"/>
 </head>
 
-
 In the realm of modern software development, achieving true observability is paramount for understanding application behavior and performance. This demonstration focuses on a .NET application that harnesses the capabilities of OpenTelemetry to seamlessly integrate logging and tracing functionalities. OpenTelemetry, a key player in the Cloud Native Computing Foundation, provides a unified framework for comprehensive observability.
 
 <!--truncate-->
@@ -27,6 +26,7 @@ In the realm of modern software development, achieving true observability is par
 ![Cover Image](/img/blog/2023/11/opentelemetry-dotnet-logs-cover.webp)
 
 In this tutorial, we cover:
+
 - [What is OpenTelemetry?](#what-is-opentelemetry)
 - [Logging in .NET Applications](#logging-in-net-applications)
 - [Logging with Opentelemetry](#logging-with-opentelemetry)
@@ -36,10 +36,9 @@ In this tutorial, we cover:
 - [Conclusion](#conclusion)
 - [Further Reading](#further-reading)
 
-
 If you want to jump straight into implementation, start with this [prerequisites](#prerequisites) section.
 
-In this showcase, we'll guide you through the process of instrumenting a .NET application with OpenTelemetry, covering both logging and tracing aspects. Witness how logging captures critical execution details while tracing allows you to follow request flows across different components.  We'll illustrate the effortless integration of OpenTelemetry with the SigNoz Cloud platform. By the end, you'll have a clear understanding of how OpenTelemetry enhances application observability, providing valuable insights into performance and behavior.
+In this showcase, we'll guide you through the process of instrumenting a .NET application with OpenTelemetry, covering both logging and tracing aspects. Witness how logging captures critical execution details while tracing allows you to follow request flows across different components. We'll illustrate the effortless integration of OpenTelemetry with the SigNoz Cloud platform. By the end, you'll have a clear understanding of how OpenTelemetry enhances application observability, providing valuable insights into performance and behavior.
 
 ## What is OpenTelemetry?
 
@@ -72,13 +71,13 @@ The `Microsoft.Extensions.Logging` library provides native support for logging
 
 ### Exporting Opentelemetry logs to SigNoz cloud
 
-   **Step 1: Installing the OpenTelemetry dependency packages:**
+**Step 1: Installing the OpenTelemetry dependency packages:**
 
 ```bash
 dotnet add package OpenTelemetry
-dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol 
+dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
 dotnet add package OpenTelemetry.Extensions.Hosting
-dotnet add package OpenTelemetry.AutoInstrumentation 
+dotnet add package OpenTelemetry.AutoInstrumentation
 ```
 
 **Step 2: Adding OpenTelemetry as Logging and configuring exporter options in `Program.cs`:**
@@ -163,7 +162,7 @@ public static partial class ApplicationLogs
 
 Some details on the code in `program.cs` file:
 
-- **`ApplicationLogs`** is a static partial class,  the use of **`partial`** allows you to extend this class to other files.
+- **`ApplicationLogs`** is a static partial class, the use of **`partial`** allows you to extend this class to other files.
 - It contains a single static method **`StartingApp`**, which is marked as partial and has the **`LoggerMessage`** attribute applied.
 - The **`LoggerMessage`** attribute defines a logging message template with a message ID, log level (**`Information`** in this case), and the log message itself ("Starting the app...").
 - The **`GetExternalApiData`** method simulates making a request to an external API (in this case, the JSONPlaceholder API). The data retrieved from the external API is then logged along with the other log messages in the **`/`** route handler. This demonstrates how you can integrate external API calls and enrich your logs with information from those calls. Replace the API URL and response processing logic in the **`GetExternalApiData`** method with the specifics of your actual external API.
@@ -174,13 +173,10 @@ This is done by configuring an OpenTelemetry using extension methods and settin
 
 **Note**: You can find your Signoz cloud address and ingestion key under the settings of your Signoz cloud account.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/ingestion-key-details.webp" alt="Access the ingestion key details in SigNoz UI"/>
     <figcaption><i>Access the ingestion key details in SigNoz UI</i></figcaption>
 </figure>
-
-
 
 **Step 3. Running the .NET application:**
 
@@ -195,14 +191,12 @@ Once your application is running, generate some traffic by interacting with it.
 
 In the SigNoz account, open the `Logs` tab. Hit the `Refresh` button on the top right corner, and your logs should appear on the screen. Ensure that you're checking data for the `time range filter` applied in the top right corner. You might have to wait for a few seconds before the data appears on SigNoz UI.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/dotnet_log_capture.webp" alt="Logs captured from the .NET application"/>
     <figcaption><i>Logs captured from the .NET application</i></figcaption>
 </figure>
 <br/>
 
-                                                                
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/dotnet_log_details.webp" alt="Log Details in SigNoz Dashboard"/>
     <figcaption><i>Log Details in SigNoz Dashboard</i></figcaption>
@@ -211,13 +205,13 @@ In the SigNoz account, open the `Logs` tab. Hit the `Refresh` button on the t
 
 ## Correlating Logs With Traces
 
-To achieve OpenTelemetry tracing and logging correlation, you need to instrument your code with the OpenTelemetry API for tracing and add trace context to your log entries. 
+To achieve OpenTelemetry tracing and logging correlation, you need to instrument your code with the OpenTelemetry API for tracing and add trace context to your log entries.
 
 The program uses the <a href = "https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry.Instrumentation.AspNetCore/README.md" rel="noopener noreferrer nofollow" target="_blank">OpenTelemetry.Instrumentation.AspNetCore</a> package to automatically create traces for incoming ASP.NET Core requests.
 
 A great benefit of OpenTelemetry is that it configures this correlation for us by default. All we need to do is ensure we are using the OpenTelemetry tracing and logging client libraries.
 
-To start,  add an **`ActivitySource`** parameter to the **`MapGet`** method and use it to start a custom activity (**`MyCustomOperation`**). This will create a trace for the execution of your **`MapGet`** method, and you can see the trace ID in the log output. The trace context is automatically propagated to logs.
+To start, add an **`ActivitySource`** parameter to the **`MapGet`** method and use it to start a custom activity (**`MyCustomOperation`**). This will create a trace for the execution of your **`MapGet`** method, and you can see the trace ID in the log output. The trace context is automatically propagated to logs.
 
 Here is the modified `program.cs` class to demonstrate this correlation.
 
@@ -325,7 +319,6 @@ On inspecting a particular log from the list in SigNoz cloud, we can see the `tr
 </figure>
 <br/>
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/dotnet_request_trace.webp" alt="Trace of the request made that is linked with the logs"/>
     <figcaption><i>Trace of the request made that is linked with the logs</i></figcaption>
@@ -341,20 +334,20 @@ Below are the steps on how to use the console exporter:
 **Step 1. Adding the OpenTelemetry console exporter package:**
 
 ```bash
-dotnet add package OpenTelemetry.Exporter.Console 
+dotnet add package OpenTelemetry.Exporter.Console
 ```
 
-  **Step 2. Adding the console exporter method:**
+**Step 2. Adding the console exporter method:**
 
 ```csharp
  logging.SetResourceBuilder(resourceBuilder)
             .AddOtlpExporter(otlpOptions =>{
 
-              //sigNoz Cloud Endpoint 
+              //sigNoz Cloud Endpoint
            otlpOptions.Endpoint = new Uri("https://ingest.{region}.signoz.cloud:443");
 
            otlpOptions.Protocol = OtlpExportProtocol.Grpc;
-					
+
 					//SigNoz Cloud account Ingestion key
            string headerKey = "signoz-access-token";
            string headerValue = "<SIGNOZ_INGESTION_KEY>";
@@ -363,7 +356,7 @@ dotnet add package OpenTelemetry.Exporter.Console
            otlpOptions.Headers = formattedHeader;
             })
 			// ConsoleExporter is used for demo purpose only.
-            .AddConsoleExporter();                       
+            .AddConsoleExporter();
 
 });
 ```
@@ -440,7 +433,7 @@ LogRecord.ScopeValues (Key:Value):
 
 ## Conclusion
 
-OpenTelemetry can enhance the observability of .NET applications by helping you to generate and collect metrics, traces, and logs. By seamlessly integrating logging and tracing functionalities, developers gain a holistic view of application behavior. 
+OpenTelemetry can enhance the observability of .NET applications by helping you to generate and collect metrics, traces, and logs. By seamlessly integrating logging and tracing functionalities, developers gain a holistic view of application behavior.
 
 The showcased integration with Signoz Cloud further amplifies the power of observability, providing a streamlined platform for efficient monitoring and troubleshooting. With OpenTelemetry, developers can unlock new levels of insight, empowering them to build and maintain robust, performant applications with confidence.
 
@@ -449,6 +442,5 @@ The showcased integration with Signoz Cloud further amplifies the power of obser
 ## Further Reading
 
 [SigNoz - An OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/)
-
 
 ---

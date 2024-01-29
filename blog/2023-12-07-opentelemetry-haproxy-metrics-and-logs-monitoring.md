@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: abhishek-kothari
 description: Steps to monitor HAproxy metrics and logs with OpenTelemetry 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect HAProxy metrics and logs 3. Send collected data to SigNoz...
 image: /img/blog/2023/12/otel-haproxy-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -20,7 +20,6 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/opentelemetry-haproxy-metrics-and-logs-monitoring/"/>
 </head>
 
-
 For extremely high throughput web applications, it is important to load balance the traffic across multiple servers. However, load balancing the traffic alone is not enough at times. The reverse proxy server that handles the workload needs to be performant, too. In our [previous article](https://signoz.io/blog/nginx-metrics-and-logs-monitoring-with-opentelemetry/), we discussed the NGINX reverse proxy server and understood how to monitor it. In this article, we set up monitoring for an even more performant reverse proxy server - <a href = "https://www.haproxy.org" rel="noopener noreferrer nofollow" target="_blank" >HAProxy</a>.
 
 <!--truncate-->
@@ -28,6 +27,7 @@ For extremely high throughput web applications, it is important to load balance 
 ![Cover Image](/img/blog/2023/12/otel-haproxy-cover.webp)
 
 In this tutorial, we cover:
+
 - [A Brief Overview of HAProxy](#a-brief-overview-of-haproxy)
 - [A Brief Overview of OpenTelemetry](#a-brief-overview-of-opentelemetry)
 - [How does OpenTelemetry Collector collect data?](#how-does-opentelemetry-collector-collect-data)
@@ -36,7 +36,6 @@ In this tutorial, we cover:
 - [Monitoring with SigNoz Dashboard](#monitoring-with-signoz-dashboard)
 - [Reference: HAProxy metrics collected by OpenTelemetry Collector](#reference-haproxy-metrics-collected-by-opentelemetry-collector)
 - [Conclusion](#conclusion)
-
 
 If you want to jump straight into implementation, start with this [prerequisites](#pre-requisites) section.
 
@@ -114,23 +113,23 @@ service:
 
 ## Pre-requisites
 
-This tutorial assumes that you have the OpenTelemetry collector installed on the same host as your HAProxy if you plan to monitor a local HAProxy setup. In case you are looking to monitor a remote HAProxy setup, you would need to open up the network port to allow the OpenTelemetry collector to access the metrics. 
+This tutorial assumes that you have the OpenTelemetry collector installed on the same host as your HAProxy if you plan to monitor a local HAProxy setup. In case you are looking to monitor a remote HAProxy setup, you would need to open up the network port to allow the OpenTelemetry collector to access the metrics.
 
-Logs, however, would require an OpenTelemetry collector to run locally to access the files. 
+Logs, however, would require an OpenTelemetry collector to run locally to access the files.
 
 ### Preparing HAProxy
 
-HAProxy comes pre-installed for most popular Linux distributions. However, in case you do not have it installed, you can download it from <a href = "https://www.haproxy.org/#down" rel="noopener noreferrer nofollow" target="_blank" >here</a> or install it by following the below instructions. 
+HAProxy comes pre-installed for most popular Linux distributions. However, in case you do not have it installed, you can download it from <a href = "https://www.haproxy.org/#down" rel="noopener noreferrer nofollow" target="_blank" >here</a> or install it by following the below instructions.
 
 **Installing HAProxy on MacOS**
 
-You can easily install HAProxy on MacOS using HomeBrew. 
+You can easily install HAProxy on MacOS using HomeBrew.
 
 ```yaml
 brew update && brew install haproxy
 ```
 
-**Installing HAProxy on Ubuntu** 
+**Installing HAProxy on Ubuntu**
 
 You can install HAProxy on Ubuntu using apt
 
@@ -148,31 +147,33 @@ sudo apt update && sudo apt install haproxy -y
 yum update && yum install haproxy
 ```
 
-Once installed, we can configure HAProxy to contain an endpoint showing the server statistics. In order to do so, modify `/etc/haproxy/haproxy.conf` file as shown below. 
+Once installed, we can configure HAProxy to contain an endpoint showing the server statistics. In order to do so, modify `/etc/haproxy/haproxy.conf` file as shown below.
 
-We are intentionally binding the frontend to `8000` proxy to avoid conflict with any other server running on port 80. 
+We are intentionally binding the frontend to `8000` proxy to avoid conflict with any other server running on port 80.
 
-You would also require a backend server running behind the scenes to allow HAProxy to forward the traffic. 
+You would also require a backend server running behind the scenes to allow HAProxy to forward the traffic.
 
-Note here that the status URL configured is [localhost:8000/haproxy?stats](http://localhost:8000/haproxy?stats) . 
+Note here that the status URL configured is [localhost:8000/haproxy?stats](http://localhost:8000/haproxy?stats) .
 
 ```yaml
-global 
-	log /dev/log  local0
-... 
-... 
-... 
+global
+log /dev/log  local0
+---
+
+---
+
+---
 frontend haproxy-main
-    bind *:8000
-    option forwardfor  
-    stats uri /haproxy?stats
-    default_backend node_webservers
+bind *:8000
+option forwardfor
+stats uri /haproxy?stats
+default_backend node_webservers
 backend node_webservers
-    balance roundrobin
-    server local <your-local-webserver-url> check
+balance roundrobin
+server local <your-local-webserver-url> check
 ```
 
-Next, for logs, modify the file `/etc/rsyslog.d/49-haproxy.conf` (file name may differ) and add the below lines.  
+Next, for logs, modify the file `/etc/rsyslog.d/49-haproxy.conf` (file name may differ) and add the below lines.
 
 ```yaml
 $AddUnixListenSocket /var/lib/haproxy/dev/log
@@ -183,9 +184,9 @@ $AddUnixListenSocket /var/lib/haproxy/dev/log
 }
 ```
 
-Your HAProxy server is ready to serve the metrics and logs now. 
+Your HAProxy server is ready to serve the metrics and logs now.
 
-For the purpose of this tutorial, we will assume the following: 
+For the purpose of this tutorial, we will assume the following:
 
 - HAProxy is installed on the same host when you are setting up OpenTelemetry collector
 - Logs for HAProxy will be enabled and stored on the path `/var/log/haproxy.log`
@@ -231,7 +232,7 @@ In this tutorial, we would not just be monitoring the metrics of HAProxy but als
 
 Note:
 
-The configuration file should be created in the same directory where you unpack the `otel-collector-contrib` binary. If you have globally installed the binary, it is okay to create on any path. 
+The configuration file should be created in the same directory where you unpack the `otel-collector-contrib` binary. If you have globally installed the binary, it is okay to create on any path.
 
 ```yaml
 receivers:
@@ -247,7 +248,7 @@ receivers:
   filelog:
     include:
       - /var/log/haproxy.log
-  
+
 processors:
   batch:
     send_batch_size: 1000
@@ -289,7 +290,6 @@ You would need to replace `region` and `signoz-token` in the above file with the
 </figure>
 <br />
 
-
 The above configuration is quite simple - We utilize the local HAProxy setup exposing statistics on `http://localhost:8000/haproxy?stats` URL. You can also monitor multiple HAproxy servers by adding multiple receivers, as shown below:
 
 ```yaml
@@ -309,7 +309,7 @@ receivers:
   filelog:
     include:
       - /var/log/haproxy.log
-  
+
 processors:
   batch:
     send_batch_size: 1000
@@ -380,10 +380,9 @@ You should start seeing the metrics on your Signoz Cloud UI in about 30 seconds.
 
 ## Monitoring with SigNoz Dashboard
 
-You can import this dashboard <a href = "https://github.com/SigNoz/dashboards/tree/main/haproxy" rel="noopener noreferrer nofollow" target="_blank" >JSON</a> into your SigNoz environment quite easily to monitor your HAproxy instance. 
+You can import this dashboard <a href = "https://github.com/SigNoz/dashboards/tree/main/haproxy" rel="noopener noreferrer nofollow" target="_blank" >JSON</a> into your SigNoz environment quite easily to monitor your HAproxy instance.
 
 Once the above setup is done, you will be able to access the metrics in the SigNoz dashboard. You can go to the Dashboards tab and try adding a new panel. You can learn how to create dashboards in SigNoz [here](https://signoz.io/docs/userguide/manage-dashboards-and-panels/).
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/haproxy_metrics.webp" alt="HAProxy metrics collected by OpenTelemetry collector"/>
@@ -399,9 +398,7 @@ You can easily create charts with [query builder](https://signoz.io/docs/usergu
 </figure>
 <br/>
 
-You can build a complete dashboard around various metrics emitted. Here’s a look at a sample dashboard we built out using the metrics collected. 
-
-
+You can build a complete dashboard around various metrics emitted. Here’s a look at a sample dashboard we built out using the metrics collected.
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/haproxy_dashboard.webp" alt="Comprehensive HAProxy dashboard"/>
@@ -410,7 +407,6 @@ You can build a complete dashboard around various metrics emitted. Here’s a lo
 <br/>
 
 You can also create alerts on any metric. Learn how to create alerts [here](https://signoz.io/docs/userguide/alerts-management/).
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/haproxy_alerts.webp" alt=""/>
@@ -422,62 +418,61 @@ You can also create alerts on any metric. Learn how to create alerts [here](htt
 
 In order to visualize the logs sent by OpenTelemetry collector, head over to Signoz → Logs → Logs Explorer. In the logs explorer, you can filter your logs using the tag `app=haproxy`, as shown in the image below:
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/haproxy_logs.webp" alt=""/>
     <figcaption><i></i></figcaption>
 </figure>
 <br/>
 
-You can visualize the volume of logs as well as the actual log lines easily in this UI. 
+You can visualize the volume of logs as well as the actual log lines easily in this UI.
 
 ## Reference: HAProxy metrics collected by OpenTelemetry Collector
 
 Below HAProxy metics are enabled by default to be collected by OpenTelemetry Collector:
 
-| Metric | Description | Type |
-| --- | --- | --- |
-| haproxy_bytes_input | Incoming Network traffic  | Sum |
-| haproxy_bytes_output | Outgoing Network traffic | Sum |
-| haproxy_connections_errors | Total Connection errors | Sum |
-| haproxy_connections_rate | Rate of connections  | Gauge |
-| haproxy_connections_retries | Total connection retries | Sum |
-| haproxy_requests_denied | Total requests denied | Sum |
-| haproxy_requests_errors | Total request errors  | Sum |
-| haproxy_requests_queued | Total requests in queue | Sum |
-| haproxy_requests_rate | Net request rate | Gauge |
-| haproxy_requests_redispatched | Total requests redispatched  | Sum |
-| haproxy_requests_total | Total number of requests handled | Sum |
-| haproxy_responses_denied | Total number of responses denied  | Sum |
-| haproxy_responses_errors | Total errors in responses | Sum |
-| haproxy_server_selected_total | Number of times server was selected when redispatching the request | Sum |
-| haproxy_sessions_average | Average session time  | Gauge |
-| haproxy_sessions_count | Total active sessions | Gauge |
-| haproxy_sessions_rate | Number of sessions per second | Gauge |
+| Metric                        | Description                                                        | Type  |
+| ----------------------------- | ------------------------------------------------------------------ | ----- |
+| haproxy_bytes_input           | Incoming Network traffic                                           | Sum   |
+| haproxy_bytes_output          | Outgoing Network traffic                                           | Sum   |
+| haproxy_connections_errors    | Total Connection errors                                            | Sum   |
+| haproxy_connections_rate      | Rate of connections                                                | Gauge |
+| haproxy_connections_retries   | Total connection retries                                           | Sum   |
+| haproxy_requests_denied       | Total requests denied                                              | Sum   |
+| haproxy_requests_errors       | Total request errors                                               | Sum   |
+| haproxy_requests_queued       | Total requests in queue                                            | Sum   |
+| haproxy_requests_rate         | Net request rate                                                   | Gauge |
+| haproxy_requests_redispatched | Total requests redispatched                                        | Sum   |
+| haproxy_requests_total        | Total number of requests handled                                   | Sum   |
+| haproxy_responses_denied      | Total number of responses denied                                   | Sum   |
+| haproxy_responses_errors      | Total errors in responses                                          | Sum   |
+| haproxy_server_selected_total | Number of times server was selected when redispatching the request | Sum   |
+| haproxy_sessions_average      | Average session time                                               | Gauge |
+| haproxy_sessions_count        | Total active sessions                                              | Gauge |
+| haproxy_sessions_rate         | Number of sessions per second                                      | Gauge |
 
 The below metrics need to be explicitly enabled for `haproxyreceiver`:
 
-| Metric | Description | Type |
-| --- | --- | --- |
-| haproxy_clients_canceled | Number of data transfers aborted by the client | Sum |
-| haproxy_compression_bypass | Number of bytes bypassing the compression engine | Sum |
-| haproxy_compression_count | Number of HTTP responses that got compressed | Sum |
-| haproxy_compression_input | Total bytes fed into the compressor | Sum |
-| haproxy_compression_output | Total bytes emitted out by compressor | Sum |
-| haproxy_connections_total | Total connections to the frontend | Sum |
-| haproxy_downtime | Backend downtime  | Sum |
-| haproxy_failed_checks | Total failed backend checks  | Sum |
-| haproxy_sessions_total | Total HAProxy sessions created during the lifetime | Sum |
+| Metric                     | Description                                        | Type |
+| -------------------------- | -------------------------------------------------- | ---- |
+| haproxy_clients_canceled   | Number of data transfers aborted by the client     | Sum  |
+| haproxy_compression_bypass | Number of bytes bypassing the compression engine   | Sum  |
+| haproxy_compression_count  | Number of HTTP responses that got compressed       | Sum  |
+| haproxy_compression_input  | Total bytes fed into the compressor                | Sum  |
+| haproxy_compression_output | Total bytes emitted out by compressor              | Sum  |
+| haproxy_connections_total  | Total connections to the frontend                  | Sum  |
+| haproxy_downtime           | Backend downtime                                   | Sum  |
+| haproxy_failed_checks      | Total failed backend checks                        | Sum  |
+| haproxy_sessions_total     | Total HAProxy sessions created during the lifetime | Sum  |
 
 ### Attributes
 
 All the above metrics have the below three attributes associated:
 
-| Name | Description | Values | Enabled |
-| --- | --- | --- | --- |
-| haproxy_addr | address:port or "unix". IPv6 has brackets around the address. | Any Str | true |
-| haproxy_proxy_name | Proxy name | Any Str | true |
-| haproxy_service_name | Service name (FRONTEND for frontend, BACKEND for backend, any name for server/listener) | Any Str | true |
+| Name                 | Description                                                                             | Values  | Enabled |
+| -------------------- | --------------------------------------------------------------------------------------- | ------- | ------- |
+| haproxy_addr         | address:port or "unix". IPv6 has brackets around the address.                           | Any Str | true    |
+| haproxy_proxy_name   | Proxy name                                                                              | Any Str | true    |
+| haproxy_service_name | Service name (FRONTEND for frontend, BACKEND for backend, any name for server/listener) | Any Str | true    |
 
 ## Conclusion
 
@@ -486,7 +481,6 @@ In this tutorial, you installed an OpenTelemetry Collector to collect HAProxy me
 Visit our [complete guide](https://signoz.io/blog/opentelemetry-collector-complete-guide/) on OpenTelemetry Collector to learn more about it. OpenTelemetry is quietly becoming the world standard for open-source observability, and by using it, you can have advantages like a single standard for all telemetry signals, no vendor lock-in, etc.
 
 SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/) that can be used as a single backend for all your observability needs.
-
 
 ---
 

@@ -6,13 +6,14 @@ tags: [Tools Comparison]
 authors: ankit_anand
 description: DataDog and New Relic are both Application Monitoring Tools used to monitor applications for performance issues. Want to choose between DataDog and New Relic? In this article, let's go through 5 key capabilities of both the tools...
 image: /img/blog/2021/10/datadog_vs_newrelic_cover-min.webp
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - datadog
   - new relic
   - apm tools
   - application performance monitoring
 ---
+
 <head>
   <title>DataDog vs New Relic | Detailed comparison (5 key features)</title>
   <link rel="canonical" href="https://signoz.io/blog/datadog-vs-newrelic/"/>
@@ -40,11 +41,12 @@ DataDog and New Relic provide numerous products to monitor applications. Some of
 
 Let's compare DataDog and New Relic based on the features they provide in the above-mentioned categories.
 
->You can also check out [SigNoz](https://signoz.io/), a full-stack open-source APM tool. SigNoz provides logs, metrics, and traces all under a single dashboard. It is built to support OpenTelemetry natively. Choosing an open-source APM over SaaS vendors has many benefits for developers. At the same time, [SigNoz](https://signoz.io/) is built to avoid the pain of maintenance that comes with most open-source tools.
+> You can also check out [SigNoz](https://signoz.io/), a full-stack open-source APM tool. SigNoz provides logs, metrics, and traces all under a single dashboard. It is built to support OpenTelemetry natively. Choosing an open-source APM over SaaS vendors has many benefits for developers. At the same time, [SigNoz](https://signoz.io/) is built to avoid the pain of maintenance that comes with most open-source tools.
 
 ## Application Performance Monitoring
 
 ### DataDog APM
+
 DataDog's APM provides end-to-end distributed tracing connecting frontend devices to databases.
 
 Some of the key features of DataDog APM includes:
@@ -61,7 +63,6 @@ Some of the key features of DataDog APM includes:
     title="DataDog APM tool dashboard (Source: DataDog dashboard)"
     width={700}
 />
-
 
 ### New Relic APM
 
@@ -123,6 +124,7 @@ Some of the key features of New Relic infrastructure monitoring includes:
 ## Log Management
 
 ### DataDog Log Management
+
 DataDog log management provides capabilities to search and analyze logs at any scale.
 
 Some of the key features of DataDog Log Management includes:
@@ -142,7 +144,7 @@ Some of the key features of DataDog Log Management includes:
 
 ### New Relic Log Management
 
-With New Relic Log Management, you can easily ingest any text-based data. 
+With New Relic Log Management, you can easily ingest any text-based data.
 
 Some of the key features of New Relic log management include:
 
@@ -161,6 +163,7 @@ Some of the key features of New Relic log management include:
 ## Network Monitoring
 
 ### DataDog Network Monitoring
+
 Some of the key features of DataDog network monitoring include:
 
 - Provides metrics for point-to-point communication on your infrastructure
@@ -176,6 +179,7 @@ Some of the key features of DataDog network monitoring include:
 />
 
 ### New Relic Network Monitoring
+
 Some of the key features of New Relic Network monitoring include:
 
 - Provides pre-configured dashboards for monitoring popular cloud services like Azure, AWS, GCP, etc. and provides dynamic alerting
@@ -193,6 +197,7 @@ Some of the key features of New Relic Network monitoring include:
 ## Browser or real-user monitoring
 
 ### DataDog Real-User Monitoring
+
 DataDog provides end-to-end visibility into user journeys for mobile and web applications.
 
 Some of the key features of DataDog end-user monitoring:
@@ -210,6 +215,7 @@ Some of the key features of DataDog end-user monitoring:
 />
 
 ### New Relic Browser Monitoring
+
 New Relic provides monitoring for end-users using your application across web browsers, devices, operating systems, and networks.
 
 Some of the key features of New Relic Browser Monitoring include:
@@ -227,40 +233,42 @@ Some of the key features of New Relic Browser Monitoring include:
 />
 
 ## Issues with existing monitoring vendors
+
 DataDog and New Relic are great monitoring tools and provide a gamut of monitoring products that any organization can use. But these enterprise monitoring tools can have the following issues:
 
 - Crazy node-based pricing
-Node-based pricing doesn’t make sense in today’s micro-services architecture. Any node which is live for more than 8hrs in a month is charged. So, unsuitable for spiky workloads
+  Node-based pricing doesn’t make sense in today’s micro-services architecture. Any node which is live for more than 8hrs in a month is charged. So, unsuitable for spiky workloads
 
 - Very costly
- These tools are very costly if you want to do things like sending custom metrics.
+  These tools are very costly if you want to do things like sending custom metrics.
 
 - Cloud-only
-Hence,  not suitable for companies that have concerns with sending data outside their infra
+  Hence, not suitable for companies that have concerns with sending data outside their infra
 
 - Closed product roadmap
-For any small feature, you are dependent on their roadmap. We think this is an unnecessary restriction for a product which developers use. A product used by developers should be extendible
+  For any small feature, you are dependent on their roadmap. We think this is an unnecessary restriction for a product which developers use. A product used by developers should be extendible
 
-The other alternative can be going for an open-source alternative. But the problem with most open-source products is that they are resource-intensive to set up, maintain and scale up. That's where [SigNoz](https://signoz.io/) comes into the picture.  [SigNoz](https://signoz.io/) is a full-stack open-source APM platform with easy configuration and scalable architecture.
+The other alternative can be going for an open-source alternative. But the problem with most open-source products is that they are resource-intensive to set up, maintain and scale up. That's where [SigNoz](https://signoz.io/) comes into the picture. [SigNoz](https://signoz.io/) is a full-stack open-source APM platform with easy configuration and scalable architecture.
 
 ## An alternative to DataDog and New Relic - SigNoz
+
 [SigNoz](https://signoz.io/) is a full-stack open-source application performance monitoring and observability tool which can be used in place of DataDog and New Relic. SigNoz is built to give SaaS like user experience combined with the perks of open-source software. Developer tools should be developer first, and SigNoz was built by developers to address the gap between SaaS vendors and open-source software.
 
 Key architecture features:
 
 - **Logs, Metrics, and traces under a single dashboard**<br></br>
-    SigNoz provides logs, metrics, and traces all under a single dashboard. You can also correlate these telemetry signals to debug your application issues quickly. 
+  SigNoz provides logs, metrics, and traces all under a single dashboard. You can also correlate these telemetry signals to debug your application issues quickly.
 
 - **Native OpenTelemetry support**<br></br>
   SigNoz is built to support <a href = "https://opentelemetry.io/" rel="noopener noreferrer nofollow" target="_blank" ><b>OpenTelemetry</b></a> natively, which is quietly becoming the world standard to generate and manage telemetry data.
 
   <Screenshot
-    alt="Architecture of SigNoz with OpenTelemetry and ClickHouse"
-    height={500}
-    src="/img/architecture-signoz-clickhouse.svg"
-    title="Architecture of SigNoz with ClickHouse as storage backend and OpenTelemetry for code instrumentatiion"
-    width={700}
-/>
+      alt="Architecture of SigNoz with OpenTelemetry and ClickHouse"
+      height={500}
+      src="/img/architecture-signoz-clickhouse.svg"
+      title="Architecture of SigNoz with ClickHouse as storage backend and OpenTelemetry for code instrumentatiion"
+      width={700}
+  />
 
 SigNoz comes with out of box visualization of things like RED metrics.
 
@@ -310,7 +318,6 @@ The logs tab in SigNoz has advanced features like a log query builder, search ac
 
 <br></br>
 
-
 Some of the things SigNoz can help you track:
 
 - Out-of-the-box charts for application metrics like p90, p99, latency, error rates, request rates, etc.
@@ -321,7 +328,6 @@ Some of the things SigNoz can help you track:
 - Easy to set alerts with DIY query builder
 - Native support for OpenTelemetry native
 
-
 ## Getting started with SigNoz
 
 You can get started with SigNoz using just three commands at your terminal.
@@ -331,26 +337,20 @@ git clone -b main https://github.com/SigNoz/signoz.git
 cd signoz/deploy/
 ./install.sh
 ```
+
 <br></br>
 
 For detailed instructions, you can visit our documentation.
 
 [![Deployment Docs](/img/blog/common/deploy_docker_documentation.webp)](https://signoz.io/docs/install/)
 
-
 You can check out SigNoz's GitHub repo here 👇
 
 [![SigNoz GitHub repo](/img/blog/common/signoz_github.webp)](https://github.com/SigNoz/signoz)
 
-___
+---
 
 #### **Related Content**
 
 **[SigNoz vs Datadog](https://signoz.io/comparisons/signoz-vs-datadog/)**<br></br>
 **[SigNoz vs New Relic](https://signoz.io/comparisons/signoz-vs-newrelic/)**<br></br>
-
-
-
-
-
-

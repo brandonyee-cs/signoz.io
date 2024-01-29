@@ -6,7 +6,7 @@ tags: [OpenTelemetry Instrumentation, Python, Prometheus]
 authors: ankit_nayan
 description: In this blog, let's see how to set up Prometheus and Grafana in EKS and how to monitor Python based applications using Prometheus.
 image: /img/blog/2019/08/Python-Prometheus-2.webp
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - Prometheus
   - Grafana

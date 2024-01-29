@@ -20,11 +20,9 @@ keywords:
 
 Cloud has become the de-facto standard for new application development. Kubernetes solves many problems of modern-day cloud infrastructure. It has made microservices-based distributed software systems possible, enabling organizations to provide on-demand scaling. But at the same time, Kubernetes has also increased operational complexity.
 
-
 <!--truncate-->
 
 ![Cover Image](/img/blog/2023/03/kubernetes_observability_cover.webp)
-
 
 In simple terms, Kubernetes is a container orchestration tool. Container environments are dynamic and ephemeral. Monitoring a container-based environment is very different from monitoring a VM-based or physical machine-based environment. Setting up a robust observability framework for a Kubernetes cluster is critical for running it effectively.
 
@@ -50,24 +48,24 @@ Observability enables application owners to get answers to any question that mig
 
 ## What is Kubernetes observability, and why is it important?
 
-Observability in Kubernetes means the ability to troubleshoot issues quickly with the help of collected telemetry signals, namely, logs, metrics, and traces. Kubernetes observability is about having the complete visibility of your k8s clusters. 
+Observability in Kubernetes means the ability to troubleshoot issues quickly with the help of collected telemetry signals, namely, logs, metrics, and traces. Kubernetes observability is about having the complete visibility of your k8s clusters.
 
 A robust observability framework can make k8s clusters more resilient to failure and improve developer productivity. Here are some of the key benefits of Kubernetes observability:
 
 - **Improved visibility & troubleshooting**<br></br>
-Kubernetes provides a dynamic abstraction layer for the on-demand scaling of containers. Although it has many benefits, it makes it difficult to identify the root cause of issues and troubleshoot them. With good observability data, you can quickly identify the root cause of issues.
+  Kubernetes provides a dynamic abstraction layer for the on-demand scaling of containers. Although it has many benefits, it makes it difficult to identify the root cause of issues and troubleshoot them. With good observability data, you can quickly identify the root cause of issues.
 
 - **Improved Performance**<br></br>
-With telemetry data like traces, you can keep track of how requests are performing across services. If there are some requests which are taking more time, you can dig deeper and optimize them.
+  With telemetry data like traces, you can keep track of how requests are performing across services. If there are some requests which are taking more time, you can dig deeper and optimize them.
 
 - **Reduced downtime**<br></br>
-A good observability tool can help you reduce the downtime of your Kubernetes cluster. With contextual observability data, developers can troubleshoot issues faster or avoid them altogether.
+  A good observability tool can help you reduce the downtime of your Kubernetes cluster. With contextual observability data, developers can troubleshoot issues faster or avoid them altogether.
 
 - **Enhanced Security**<br></br>
-Observability tools can also help monitor Kubernetes clusters for suspicious activities and help identify security threats.
+  Observability tools can also help monitor Kubernetes clusters for suspicious activities and help identify security threats.
 
 - **Reduced costs**<br></br>
-A resilient Kubernetes cluster with low downtime and performance can save money. System administrators can also monitor resource usage and identify and optimize over-allocated resources.
+  A resilient Kubernetes cluster with low downtime and performance can save money. System administrators can also monitor resource usage and identify and optimize over-allocated resources.
 
 Observability starts with collecting important telemetry signals from your systems. Now that you understand the importance of observability, let’s have a brief look at the three pillars of observability.
 
@@ -93,7 +91,7 @@ Logs are simple messages that define the current state of the system.
 
 Let’s take a common error log we see in Kubernetes “**imagepullbackoff**” error.
 
- This log message helps us understand the issue of pulling images from the container repository. Digging deeper, we will get more information, like an authentication or tag-related issue, or the image name might be wrong. With this information, we will be able to identify the potential issue and resolve it.
+This log message helps us understand the issue of pulling images from the container repository. Digging deeper, we will get more information, like an authentication or tag-related issue, or the image name might be wrong. With this information, we will be able to identify the potential issue and resolve it.
 
 ### Traces:
 
@@ -124,7 +122,7 @@ It is also backed by Cloud Native Computing Foundation (<a href = "https://www.c
 
 Opentelementry’s goal is to provide a set of standardized vendor-agnostic SDKs, APIs, and tools for ingesting, transforming, and sending data to an observability back-end like SigNoz.
 
-**OpenTelemetry** is not an observability back-end like Jaeger or Prometheus. Instead, it supports exporting data to a variety of open-source and commercial back-ends. It provides a pluggable architecture so additional technology protocols and formats can be easily added. 
+**OpenTelemetry** is not an observability back-end like Jaeger or Prometheus. Instead, it supports exporting data to a variety of open-source and commercial back-ends. It provides a pluggable architecture so additional technology protocols and formats can be easily added.
 
 If you’re using OpenTelemetry, you can avoid vendor lock-in. For applications deployed on Kubernetes, OpenTelemetry provides an [operator](https://signoz.io/docs/tutorial/opentelemetry-operator-usage/) which makes it very easy to instrument workloads deployed on Kubernetes.
 

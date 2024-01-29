@@ -47,8 +47,7 @@ When we dive into these traces we get another clue: there’s almost 13 seconds 
 <figcaption><i>
 Automatic instrumentation is getting us nice values, thanks to our cleanly labeled functions</i></figcaption></figure>
 
-
-Here we get to one of the interesting facts about Observability: *systems are more observable the more knowledge and experience you have with the system.* It’s possible that a senior developer who’s worked with this codebase for years will know one of two things right away:
+Here we get to one of the interesting facts about Observability: _systems are more observable the more knowledge and experience you have with the system._ It’s possible that a senior developer who’s worked with this codebase for years will know one of two things right away:
 
 - Why `authenticate_check_db` can intermittently perform slowly
 - Failing that, how to check logs within the database and connect the log lines with this trace
@@ -69,12 +68,12 @@ For example, the OpenTelemetry collector may be removing attributes or dropping 
 
 ### Add attributes to identify requests
 
-The first thing we’d like to do is to differentiate these requests slightly. Currently our user authentication method request doesn’t show the user that’s logging. We can fix this by <a href = "https://opentelemetry.io/docs/instrumentation/python/manual/" rel="noopener noreferrer nofollow" target="_blank">adding an attribute</a> to our span. 
+The first thing we’d like to do is to differentiate these requests slightly. Currently our user authentication method request doesn’t show the user that’s logging. We can fix this by <a href = "https://opentelemetry.io/docs/instrumentation/python/manual/" rel="noopener noreferrer nofollow" target="_blank">adding an attribute</a> to our span.
 
 ```python
 from opentelemetry import trace
 [...]
-def authenticate_check_db(user) 
+def authenticate_check_db(user)
 	current_span = trace.get_current_span()
 	current_span.set_attribute("user", user)
 ```
@@ -102,9 +101,9 @@ Adding these attributes requires that we start a new span from the tracer object
 with tracer.start_as_current_span("db_operation_span"):
     # Add attributes for db.operation, db.cached, and db.rows_affected
     span = trace.get_current_span()
-    span.set_attribute("db.operation", "SELECT") 
-    span.set_attribute("db.cached", db_return_cached)  
-    span.set_attribute("db.rows_affected", db_return_rows)   
+    span.set_attribute("db.operation", "SELECT")
+    span.set_attribute("db.cached", db_return_cached)
+    span.set_attribute("db.rows_affected", db_return_rows)
 ```
 
 ### Add events to traces for unusual occurences
@@ -137,7 +136,7 @@ with tracer.start_as_current_span("authenticate_check_db"):
                             # do work (faster)
 ```
 
-Now you finally see the code that, in our contrived example, slowed things downed if the user was named ‘eddy.’ With this child span in the problem becomes a *lot* clearer.
+Now you finally see the code that, in our contrived example, slowed things downed if the user was named ‘eddy.’ With this child span in the problem becomes a _lot_ clearer.
 
 <figure data-zoomable align='center'>
 <img src="/img/blog/2023/10/manual-tracing/manual-tracing-python6.webp" alt="a screenshot of the SigNoz top level dashboard"/>

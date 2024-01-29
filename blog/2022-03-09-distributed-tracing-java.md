@@ -17,11 +17,12 @@ keywords:
   - open source
   - signoz
 ---
+
 <head>
   <link rel="canonical" href="https://signoz.io/blog/distributed-tracing-java/"/>
 </head>
 
-Monitoring and troubleshooting distributed systems like those built with microservices is challenging. Traditional monitoring tools struggle with distributed systems as they were made for a single component. Distributed tracing solves this problem by tracking a transaction across components. 
+Monitoring and troubleshooting distributed systems like those built with microservices is challenging. Traditional monitoring tools struggle with distributed systems as they were made for a single component. Distributed tracing solves this problem by tracking a transaction across components.
 
 <!--truncate-->
 
@@ -56,7 +57,7 @@ We will demonstrate implementing distributed tracing in a Java application in tw
 
 ## Running a sample Spring Boot Java application with OpenTelemetry
 
-The sample Spring Boot Java application will have three microservices and a service registry 
+The sample Spring Boot Java application will have three microservices and a service registry
 
 - user-service
 - orders-service
@@ -142,74 +143,73 @@ Below are the steps to run the sample Java application with OpenTelemetry:
 
 1. **Clone the sample Spring Boot app**<br></br>
    We will be using a sample java app at this [GitHub repo](https://github.com/SigNoz/distributed-tracing-java-sample).
-   
+
    ```jsx
    git clone https://github.com/SigNoz/distributed-tracing-java-sample.git
    cd distributed-tracing-java-sample
    ```
 
 2. **Run service discovery with Eureka Server**<br></br>
-    
-    ```java
-    cd discovery-server
-    mvn clean install -Dmaven.test.skip
-    docker build -t discovery-service:1.0.1 .
-    docker run -d --name discovery-service -p 8761:8761 discovery-service:1.0.1
-    ```
-    
-    You can go to  [http://localhost:8761/](http://localhost:8761/) and make sure your discover service registry with Eureka server is up and running.
-    
-    <Screenshot
-    alt="SigNoz dashboard"
-    height={500}
-    src="/img/blog/2022/03/service_discovery_eureka.webp"
-    title="Eureka server is up and running"
-    width={700}
-    />
-    
-    
+
+   ```java
+   cd discovery-server
+   mvn clean install -Dmaven.test.skip
+   docker build -t discovery-service:1.0.1 .
+   docker run -d --name discovery-service -p 8761:8761 discovery-service:1.0.1
+   ```
+
+   You can go to [http://localhost:8761/](http://localhost:8761/) and make sure your discover service registry with Eureka server is up and running.
+
+   <Screenshot
+   alt="SigNoz dashboard"
+   height={500}
+   src="/img/blog/2022/03/service_discovery_eureka.webp"
+   title="Eureka server is up and running"
+   width={700}
+   />
+
 3. **Setting up Opentelemetry agent**<br></br>
    For instrumenting Java applications, OpenTelemetry has a very handy Java JAR agent that can be attached to any Java 8+ application. The JAR agent can detect a number of [popular libraries and frameworks](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/supported-libraries.md) and instrument it right out of the box. You don't need to add any code for that.
-    
-    Download the [latest version](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar) of the Java JAR agent, and copy jar agent file in your application code. We have placed the agent under the folder named `agents`.
 
-    <Screenshot
+   Download the [latest version](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar) of the Java JAR agent, and copy jar agent file in your application code. We have placed the agent under the folder named `agents`.
+
+   <Screenshot
     alt="SigNoz dashboard"
     height={200}
     src="/img/blog/2022/03/opentelemetry_java_jar_agent.webp"
     title="Placed OpenTelemetry Java Jar agent under a folder named agents"
     width={400}
     />
-    
-4. **Setting up SigNoz as the OpenTelemetry backend**<br></br>
-    
-    To set up OpenTelemetry to collect and export telemetry data, you need to specify OTLP (OpenTelemetry Protocol) endpoint. It consists of the IP of the machine where SigNoz is installed and the port number at which SigNoz listens.
-    OTLP endpoint for SigNoz - `<IP of the machine>:4317`
-    
-    If you have installed SigNoz on your local machine, then your endpoint is `127.0.0.1:4317`**.**
-    
-    Create a [start.sh](https://github.com/ganny26/distributed-tracing-java-sample/blob/main/user-service/scripts/start.sh) script with below environment variables and move it to scripts folder. Notice that we have updated the OTLP endpoint under `-Dotel.exporter.otlp.traces.endpoint=http://localhost:4317`.
-    
-    ```java
-    JAVA_OPTS="${JAVA_OPTS} \
-       -Xms${JAVA_XMS} \
-       -Xmx${JAVA_XMX} \
-       -Dapplication.name=user-service-java \
-       -Dotel.traces.exporter=otlp \
-       -Dotel.resource.attributes=service.name=user-service-java \
-       -Dotel.exporter.otlp.traces.endpoint=http://localhost:4317 \
-       -Dotel.service.name=user-service-java \
-       -Dotel.javaagent.debug=false \
-       -javaagent:../agents/opentelemetry-javaagent.jar"
-    ```
 
-    <Screenshot
-    alt="Code in scripts file"
-    height={500}
-    src="/img/blog/2022/03/scripts_sh_file.webp"
-    title="Code in scripts.sh file"
-    width={700}
-    />
+4. **Setting up SigNoz as the OpenTelemetry backend**<br></br>
+
+   To set up OpenTelemetry to collect and export telemetry data, you need to specify OTLP (OpenTelemetry Protocol) endpoint. It consists of the IP of the machine where SigNoz is installed and the port number at which SigNoz listens.
+   OTLP endpoint for SigNoz - `<IP of the machine>:4317`
+
+   If you have installed SigNoz on your local machine, then your endpoint is `127.0.0.1:4317`**.**
+
+   Create a [start.sh](https://github.com/ganny26/distributed-tracing-java-sample/blob/main/user-service/scripts/start.sh) script with below environment variables and move it to scripts folder. Notice that we have updated the OTLP endpoint under `-Dotel.exporter.otlp.traces.endpoint=http://localhost:4317`.
+
+   ```java
+   JAVA_OPTS="${JAVA_OPTS} \
+      -Xms${JAVA_XMS} \
+      -Xmx${JAVA_XMX} \
+      -Dapplication.name=user-service-java \
+      -Dotel.traces.exporter=otlp \
+      -Dotel.resource.attributes=service.name=user-service-java \
+      -Dotel.exporter.otlp.traces.endpoint=http://localhost:4317 \
+      -Dotel.service.name=user-service-java \
+      -Dotel.javaagent.debug=false \
+      -javaagent:../agents/opentelemetry-javaagent.jar"
+   ```
+
+   <Screenshot
+   alt="Code in scripts file"
+   height={500}
+   src="/img/blog/2022/03/scripts_sh_file.webp"
+   title="Code in scripts.sh file"
+   width={700}
+   />
 
 <Screenshot
     alt="Scripts folder"
@@ -218,46 +218,36 @@ Below are the steps to run the sample Java application with OpenTelemetry:
     title="Scritps.sh file under scripts folder"
     width={700}
     />
-    
-    
-    
 
 5. **Run the microservices**<br></br>
    Now you need to run your microservices. Run `users-service`:
-   
    ```
    cd user-service
    mvn clean install -Dmaven.test.skip # Build user-service jar
    cd scripts
    sh ./start.sh # Run user-service with OTEL java agent
    ```
-   
    Open a new tab of your terminal, and run `payment-service`:
-   
    ```java
    cd payment-service
-   mvn clean install -Dmaven.test.skip 
+   mvn clean install -Dmaven.test.skip
    cd scripts
-   sh ./start.sh 
+   sh ./start.sh
    ```
-   
    Open a new tab of your terminal, and run `order-service`:
-   
    ```java
    cd order-service
-   mvn clean install -Dmaven.test.skip 
+   mvn clean install -Dmaven.test.skip
    cd scripts
-   sh ./start.sh 
+   sh ./start.sh
    ```
-<!-- <Screenshot
-alt="Running user service"
-height={500}
-src="/img/blog/2022/03/running_user_service.webp"
-title="Running user service"
-width={700}
-/> -->
-    
-
+   <!-- <Screenshot
+   alt="Running user service"
+   height={500}
+   src="/img/blog/2022/03/running_user_service.webp"
+   title="Running user service"
+   width={700}
+   /> -->
 
 <!-- <Screenshot
 alt="Running all microservices"
@@ -275,11 +265,9 @@ title="Running microservices on different ports using service registry"
 width={700}
 />
 
-
-
 6. **Confirm table creation**<br></br>
    After running the services, check if the tables `ORDERS` and `USERS` are created using the commands below:
-   
+
    ```java
    mysql> use signoz;
    mysql> show tables;
@@ -292,8 +280,6 @@ width={700}
     title="Checking creation of tables after running microservices"
     width={700}
     />
-    
-    
 
 ## Visualizing traces data with SigNoz dashboards
 
@@ -358,7 +344,7 @@ width={700}
 
 2. **Run aggregates on your tracing data**<br></br>
    You can run aggregates like avg, max, min, 50th percentile, 90th percentile on your tracing data to get analyze performance issues in your application.
-    
+
 <Screenshot
     alt="Run aggregates"
     height={500}
@@ -366,13 +352,10 @@ width={700}
     title="Run aggregates using the dropdown on your traces data quickly"
     width={700}
     />
-    
-    
-    
 
 3. **Get more granular details by grouping traces data**<br></br>
    You can also see these aggregates in more granular detail by grouping them by service name, operation, HTTP URL, HTTP method, etc.
-    
+
 <Screenshot
     alt="Group aggregates"
     height={500}
@@ -380,13 +363,12 @@ width={700}
     title="Group aggregates across a list of dimensions"
     width={700}
     />
-    
 
 4. **Identify latency issues with Flamegraphs and Gantt charts**<br></br>
-    
-    You can inspect each span in the table with Flamegraphs and Gantt charts to see a complete breakdown of the request. Establishing a sequential flow of the user request along with info on time taken by each part of the request can help identify latency issues quickly. Let’s see how it works in the case of our sample Spring Boot app.
 
-    Go to operation filter on the left navigation and apply two filters `/payment/transfer/id/{id}/amount/{amount}` and service name `payment-service` . Click on the single event listed in the table as shown below:
+   You can inspect each span in the table with Flamegraphs and Gantt charts to see a complete breakdown of the request. Establishing a sequential flow of the user request along with info on time taken by each part of the request can help identify latency issues quickly. Let’s see how it works in the case of our sample Spring Boot app.
+
+   Go to operation filter on the left navigation and apply two filters `/payment/transfer/id/{id}/amount/{amount}` and service name `payment-service` . Click on the single event listed in the table as shown below:
 
 <Screenshot
 alt="Use filters to inspect spans that you want to investigate further"
@@ -395,9 +377,9 @@ src="/img/blog/2022/03/span_specific_filter.webp"
 title="Use filters to inspect spans that you want to investigate further"
 width={700}
 />
-    
-   You will be able to see the Flamegraph of the selected span which shows how the request traveled between the `payment-service` and the `user-service`. You can also use the Gantt chart to analyze each event in detail.
-    
+
+You will be able to see the Flamegraph of the selected span which shows how the request traveled between the `payment-service` and the `user-service`. You can also use the Gantt chart to analyze each event in detail.
+
 <Screenshot
 alt="Flamegraphs and Gantt charts"
 height={500}
@@ -406,7 +388,6 @@ title="Flamegraph and Gantt chart for the selected event showing payment service
 width={700}
 />
 
-
 <Screenshot
 alt="Database traces"
 height={500}
@@ -414,14 +395,12 @@ src="/img/blog/2022/03/db_traces.webp"
 title="Databases traces which show semantics related to mysql db and query details"
 width={700}
 />
-    
 
 SigNoz also provides a detailed view of common [semantic conventions](https://github.com/open-telemetry/semantic-conventions) like HTTP, network, and other attributes. The end-to-end tracing of user requests can help you to identify latency issues quickly.
-    
 
 ## Conclusion
 
-Distributed tracing is a powerful and critical toolkit for developers creating applications based on microservices architecture. For Java Spring  Boot applications based on microservices architecture, distributed tracing can enable a central overview of how requests are performing across microservices.
+Distributed tracing is a powerful and critical toolkit for developers creating applications based on microservices architecture. For Java Spring Boot applications based on microservices architecture, distributed tracing can enable a central overview of how requests are performing across microservices.
 
 This lets application owners reconstruct the whole path of the request and see how individual components performed as part of the entire user request.
 
@@ -429,12 +408,12 @@ OpenTelemetry and SigNoz provide a great open-source solution to implement distr
 
 [![SigNoz GitHub repo](/img/blog/common/signoz_github.webp)](https://github.com/SigNoz/signoz)
 
-
 If you have any questions or need any help in setting things up, join our slack community and ping us in `#support` channel.
 
 [![SigNoz Slack community](/img/blog/common/join_slack_cta.webp)](https://signoz.io/slack)
 
 ---
+
 Read more about distributed tracing from SigNoz blog 👇
 
 [Implementing distributed tracing in a nodejs application](https://signoz.io/blog/distributed-tracing-nodejs/)

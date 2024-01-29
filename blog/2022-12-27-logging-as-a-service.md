@@ -6,12 +6,13 @@ tags: [Tech Tutorial, Log Management]
 authors: [ankit_anand]
 description: Logging as a service is a type of cloud computing service that allows organizations to store and manage their log data in a central location. This type of service typically includes features such as centralized storage, real-time analytics, and search capabilities, as well as tools for visualizing and analyzing log data...
 image: /img/blog/2022/12/logging_as_a_service_cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - logging as a service
   - laas
   - log management
 ---
+
 <head>
   <link rel="canonical" href="https://signoz.io/blog/logging-as-a-service/"/>
 </head>
@@ -51,22 +52,22 @@ Overall, logging as a service can be a useful option for organizations that want
 There are many things to consider before you choose a tool that provides logging as a service.
 
 1. **Compatibility with your systems**<br></br>
-It's important to choose a tool that is compatible with the systems and technologies you use. This might include compatibility with specific operating systems, programming languages, or application frameworks.
+   It's important to choose a tool that is compatible with the systems and technologies you use. This might include compatibility with specific operating systems, programming languages, or application frameworks.
 
 2. **Scalability**<br></br>
-Consider the size and complexity of your organization's log data, as well as any anticipated growth. Choose a tool that is able to handle the volume of log data you expect to generate, and that can scale as your needs change.
+   Consider the size and complexity of your organization's log data, as well as any anticipated growth. Choose a tool that is able to handle the volume of log data you expect to generate, and that can scale as your needs change.
 
 3. **Ease of use**<br></br>
-Look for a tool that is intuitive and easy to use, especially if you have a team of people who will be using it. This can help to ensure that the tool is adopted and used effectively.
+   Look for a tool that is intuitive and easy to use, especially if you have a team of people who will be using it. This can help to ensure that the tool is adopted and used effectively.
 
 4. **Integration with other tools**<br></br>
-If you use other tools for monitoring, alerting, or visualization, it can be useful to choose a log management tool that integrates with those tools. This can help to streamline your workflows and make it easier to access and analyze your log data.
+   If you use other tools for monitoring, alerting, or visualization, it can be useful to choose a log management tool that integrates with those tools. This can help to streamline your workflows and make it easier to access and analyze your log data.
 
 5. **Cost**<br></br>
-Consider the cost of the tool, as well as any additional costs for features or support. Make sure that the tool fits within your budget and meets your needs.
+   Consider the cost of the tool, as well as any additional costs for features or support. Make sure that the tool fits within your budget and meets your needs.
 
 6. **Support**<br></br>
-Look for a tool that offers good documentation and support in case you run into any issues or have questions.
+   Look for a tool that offers good documentation and support in case you run into any issues or have questions.
 
 Overall, it's important to choose a log management tool that is a good fit for your organization's needs and budget.
 
@@ -78,11 +79,11 @@ Let us look at some of the key features of SigNoz as a log analytics tool.
 
 ### Uses resource-efficient columnar database
 
-SigNoz uses a columnar database - ClickHouse, for storing logs efficiently. Big companies like <a href = "https://www.uber.com/en-IN/blog/logging/" rel="noopener noreferrer nofollow" target="_blank" >Uber</a> and <a href = "https://blog.cloudflare.com/log-analytics-using-clickhouse/" rel="noopener noreferrer nofollow" target="_blank" >Cloudflare</a> have shifted from Elasticsearch to  ClickHouse for storing their log data.
+SigNoz uses a columnar database - ClickHouse, for storing logs efficiently. Big companies like <a href = "https://www.uber.com/en-IN/blog/logging/" rel="noopener noreferrer nofollow" target="_blank" >Uber</a> and <a href = "https://blog.cloudflare.com/log-analytics-using-clickhouse/" rel="noopener noreferrer nofollow" target="_blank" >Cloudflare</a> have shifted from Elasticsearch to ClickHouse for storing their log data.
 
 ### An OpenTelemetry native APM
 
-SigNoz is built to support OpenTelemetry natively. <a href = "https://opentelemetry.io/" rel="noopener noreferrer nofollow" target="_blank" >OpenTelemetry</a> is quietly becoming the world standard for instrumenting cloud-native applications.  OpenTelemetry provides a vendor-agnostic instrumentation layer for all important telemetry signals, including logs, metrics, and traces.
+SigNoz is built to support OpenTelemetry natively. <a href = "https://opentelemetry.io/" rel="noopener noreferrer nofollow" target="_blank" >OpenTelemetry</a> is quietly becoming the world standard for instrumenting cloud-native applications. OpenTelemetry provides a vendor-agnostic instrumentation layer for all important telemetry signals, including logs, metrics, and traces.
 
 OpenTelemetry logs support legacy logging libraries while aiming to integrate logs more strongly with other telemetry signals.
 
@@ -125,7 +126,7 @@ As SigNoz uses OpenTelemetry to collect and parse logs, you can use it to correl
 
 ### Seamless transition from your existing logging pipelines
 
-Shifting your logs pipeline to SigNoz is easy and simple. If you are using FluentBit, FluentD, or Logstash to collect logs, you can easily shift your logs pipeline to SigNoz. Check out the instructions [here](https://signoz.io/docs/userguide/fluentbit_to_signoz/). 
+Shifting your logs pipeline to SigNoz is easy and simple. If you are using FluentBit, FluentD, or Logstash to collect logs, you can easily shift your logs pipeline to SigNoz. Check out the instructions [here](https://signoz.io/docs/userguide/fluentbit_to_signoz/).
 
 ## Getting started with SigNoz
 
@@ -136,6 +137,7 @@ git clone -b main https://github.com/SigNoz/signoz.git
 cd signoz/deploy/
 ./install.sh
 ```
+
 <br></br>
 
 For detailed instructions, you can visit our documentation.

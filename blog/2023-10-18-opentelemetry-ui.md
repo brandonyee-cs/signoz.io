@@ -19,7 +19,7 @@ keywords:
 
 import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 
-OpenTelemetry is a Cloud Native Computing Foundation(CNCF) project aimed at standardizing the way we instrument applications for generating telemetry data(logs, metrics, and traces). However, OpenTelemetry does not provide storage and visualization for the collected telemetry data. For visualizing OpenTelemetry data, you need an OpenTelemetry UI. The data collected by OpenTelemetry can be sent to a backend of your choice, which can then be visualized. 
+OpenTelemetry is a Cloud Native Computing Foundation(CNCF) project aimed at standardizing the way we instrument applications for generating telemetry data(logs, metrics, and traces). However, OpenTelemetry does not provide storage and visualization for the collected telemetry data. For visualizing OpenTelemetry data, you need an OpenTelemetry UI. The data collected by OpenTelemetry can be sent to a backend of your choice, which can then be visualized.
 
 <!--truncate-->
 
@@ -28,17 +28,11 @@ OpenTelemetry is a Cloud Native Computing Foundation(CNCF) project aimed at stan
 OpenTelemetry is quietly becoming the web standard for instrumenting cloud-native applications. For applications based on distributed systems, OpenTelemetry becomes a natural choice for instrumentation. There are a few reasons why OpenTelemetry is the preferred choice for generating telemetry data:
 
 - **Lightweight:**
-    
-    OpenTelemetry APIs are lightweight and are completely decoupled from any implementation. By default, OpenTelemetry APIs are no-op implementations.
-    
+  OpenTelemetry APIs are lightweight and are completely decoupled from any implementation. By default, OpenTelemetry APIs are no-op implementations.
 - **Diverse:**
-    
-    OpenTelemetry provides instrumentation in almost all the major programming languages. It also covers instrumentation for a large number of open-source libraries and frameworks.
-    
+  OpenTelemetry provides instrumentation in almost all the major programming languages. It also covers instrumentation for a large number of open-source libraries and frameworks.
 - **Community:**
-    
-    OpenTelemetry is backed by a huge community and is incubating under CNCF. It is also backed by major cloud vendors. The huge community support makes it a safe choice for future-proofing your instrumentation layer.
-    
+  OpenTelemetry is backed by a huge community and is incubating under CNCF. It is also backed by major cloud vendors. The huge community support makes it a safe choice for future-proofing your instrumentation layer.
 
 Once telemetry data is collected with OpenTelemetry, it needs to be stored and visualized for end-user consumption. A good visualization of telemetry data collected by OpenTelemetry can lead to quicker insights to debug performance issues.
 
@@ -66,7 +60,7 @@ Together, these three signals form the three pillars of observability. OpenTelem
 
 ## Why do we need an OpenTelemetry UI?
 
-OpenTelemetry UI serves as a powerful tool for monitoring, analyzing, and optimizing the performance and behavior of your applications and infrastructure. It provides a user-friendly interface for visualizing and comprehending the performance and behavior of applications and underlying infrastructure. This, in turn, helps in making informed decisions based on real-time and historical data. 
+OpenTelemetry UI serves as a powerful tool for monitoring, analyzing, and optimizing the performance and behavior of your applications and infrastructure. It provides a user-friendly interface for visualizing and comprehending the performance and behavior of applications and underlying infrastructure. This, in turn, helps in making informed decisions based on real-time and historical data.
 
 Here are some key benefits of using an OpenTelemetry UI:
 
@@ -77,7 +71,7 @@ Here are some key benefits of using an OpenTelemetry UI:
 
 ## What kind of visualization should an OpenTelemetry UI include?
 
-An effective OpenTelemetry UI should incorporate a range of visualizations tailored to provide comprehensive insights into the performance and behavior of applications and infrastructure. 
+An effective OpenTelemetry UI should incorporate a range of visualizations tailored to provide comprehensive insights into the performance and behavior of applications and infrastructure.
 
 Here are some key types of visualizations that should be included:
 
@@ -97,7 +91,6 @@ An OpenTelemetry UI should include APM metrics to provide a comprehensive view o
     <figcaption><i>APM charts showing p90, p99 latency, request rate, apdex, etc. in an OpenTelemetry-based UI provided by SigNoz.</i></figcaption>
 </figure>
 
-
 ### Distributed Tracing
 
 Distributed tracing is a powerful observability feature for tracking the journey of a request as it flows through the various components of a distributed system. It provides a comprehensive view of user requests across various services and network boundaries. It can help identify performance bottlenecks and optimize system performance.
@@ -107,7 +100,6 @@ In an OpenTelemetry UI, you should be able to do the following with OpenTelemetr
 **Switch easily from application metrics to corresponding trace data.**
 
 This allows you to investigate trace data around timestamps where APM metrics are not performing well.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/application_metrics_to_traces.webp" alt="You can click on “View Traces” to access traces around that timestamp"/>
@@ -131,12 +123,10 @@ This allows you to sort through spans based on duration. You can also apply filt
 
 This is a powerful visualization available in some OpenTelemetry UI like SigNoz. You can apply aggregates like `avg`, `p90`, `p99`, etc. and group it by things like `service.name`, `http.method`, `status.code` , etc.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/traces_custom_aggregates.webp" alt=""/>
     <figcaption><i></i></figcaption>
 </figure>
-
 
 Visualizations like above in an OpenTelemetry UI helps you dig deeper for application insights and makes debugging easier.
 
@@ -144,18 +134,16 @@ Visualizations like above in an OpenTelemetry UI helps you dig deeper for applic
 
 Flamegraphs and Gantt charts are two powerful visualization features that can be used to analyze OpenTelemetry data. Flamegraphs can be used to visualize the flow of requests in a trace. Gantt charts provide a timeline view of task execution, helping to identify resource contention and bottlenecks.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_flamegraphs.webp" alt="A trace represented with Flamegraph in the upper part and a Gantt Chart in the lower part in SigNoz"/>
     <figcaption><i>A trace represented with Flamegraph in the upper part and a Gantt Chart in the lower part in SigNoz</i></figcaption>
 </figure>
 
-
 ### Trace exploration with queries
 
 Trace exploration with queries refers to the capability within an observability tool, to search and analyze traces (sequences of events) based on specific criteria or conditions.
 
- A good OpenTelemetry UI empowers developers to perform targeted investigations. They can achieve this by applying filters or conditions to the traces, allowing them to narrow down their search. This focused approach enables them to concentrate on specific transactions, requests, or events within a distributed system.
+A good OpenTelemetry UI empowers developers to perform targeted investigations. They can achieve this by applying filters or conditions to the traces, allowing them to narrow down their search. This focused approach enables them to concentrate on specific transactions, requests, or events within a distributed system.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_trace_explorer.webp" alt="Trace explorer provided in an OpenTelemetry UI like SigNoz helps you dig deeper in trace data"/>
@@ -177,7 +165,6 @@ An OpenTelemetry UI should include visualization for a metrics dashboard, like a
 - **Host metrics dashboard**
 
 This dashboard provides a specialized view of performance indicators specific to the underlying host system. It captures crucial data related to the utilization of system resources, including CPU, memory utilization, disk usage, and network activity. These metrics are instrumental in fine-tuning resource allocation and uncovering possible performance constraints.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz-infra-metrics.webp" alt="Hostmetrics dashboard in SigNoz - Data is collected using OpenTelemetry Collecto"/>
@@ -201,18 +188,16 @@ An OpenTelemetry UI should include a logs visualization for the following benefi
 - **Dynamic Filtering and Rapid Search Capabilities:** These capabilities allow developers to efficiently sift through logs, to precisely locate specific information even within large and extensive log datasets.
 - **Visual Data Representation:** Visual representation aids in the identification of trends, patterns, and anomalies within the log data, enabling more detailed analysis.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_logs.webp" alt="Logs Collected using OpenTelemetry and visualized in SigNoz"/>
     <figcaption><i>Logs Collected using OpenTelemetry and visualized in SigNoz</i></figcaption>
 </figure>
 
-
 You can choose any [OpenTelemetry backend](https://signoz.io/blog/opentelemetry-backend/) to send data to. Of course, our choice is [SigNoz](https://signoz.io/) - an observability tool built natively on OpenTelemetry.
 
 ## SigNoz - an open-source APM built natively for OpenTelemetry
 
-[SigNoz](https://signoz.io/) is an open-source full-stack APM tool that provides application metrics, distributed tracing, and logging capabilities, all under a single dashboard. You can also correlate these telemetry signals to debug your application issues quickly. 
+[SigNoz](https://signoz.io/) is an open-source full-stack APM tool that provides application metrics, distributed tracing, and logging capabilities, all under a single dashboard. You can also correlate these telemetry signals to debug your application issues quickly.
 
 SigNoz is built to support **[OpenTelemetry](https://signoz.io/blog/opentelemetry-apm/)** natively, which is quietly becoming the world standard for generating and managing telemetry data.
 
@@ -246,13 +231,12 @@ OpenTelemetry has language-specific instrumentation steps. You can explore our b
 - [Elixir](https://signoz.io/blog/opentelemetry-elixir/)
 - [.NET](https://signoz.io/blog/opentelemetry-dotnet/)
 
-
-
 ## Getting started with SigNoz
 
 <GetStartedSigNoz />
 
 ---
+
 ## Further Reading
 
 [An OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/)

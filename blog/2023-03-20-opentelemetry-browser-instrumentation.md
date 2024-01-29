@@ -18,7 +18,7 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/opentelemetry-browser-instrumentation/"/>
 </head>
 
-Browser instrumentation refers to collecting and analyzing data about a user's interactions with a web browser. This type of instrumentation involves using specialized tools and techniques to gather information about how a website is being used, such as page load times, network requests, and user interactions. 
+Browser instrumentation refers to collecting and analyzing data about a user's interactions with a web browser. This type of instrumentation involves using specialized tools and techniques to gather information about how a website is being used, such as page load times, network requests, and user interactions.
 
 <!--truncate-->
 
@@ -28,13 +28,13 @@ The data collected through browser instrumentation can be used to improve websit
 
 # OpenTelemetry Browser Instrumentation
 
-OpenTelemetry provides libraries that enable the collection of telemetry data from web browsers using the OpenTelemetry API. You can collect performance metrics, traces, and other telemetry data from client-side applications running in the browser. The collected data can be exported to an observability backend like [SigNoz](https://signoz.io/). 
+OpenTelemetry provides libraries that enable the collection of telemetry data from web browsers using the OpenTelemetry API. You can collect performance metrics, traces, and other telemetry data from client-side applications running in the browser. The collected data can be exported to an observability backend like [SigNoz](https://signoz.io/).
 
 By using OpenTelemetry Browser Instrumentation, developers can gain valuable insights into how their web applications are performing and identify opportunities for optimization, leading to a better user experience. OpenTelemetry is backed by CNCF and is continuously evolving to improve observability for software systems.
 
 OpenTelemetry just provides an instrumentation layer, you would need a backend to store and analyze data. In this tutorial, we will use SigNoz - an open source full-stack observability tool to visualize the collected data.
 
-Let’s learn how to instrument a React browser application with OpenTelemetry. 
+Let’s learn how to instrument a React browser application with OpenTelemetry.
 
 ## Browser Instrumentation with OpenTelemetry
 
@@ -105,9 +105,9 @@ Since we already set up the tracing.js file in the sample react app, you can jus
 
 **Step 3: Enable CORS in the OpenTelemetry Collector**
 
-SigNoz installation comes with an OpenTelemetry Collector, which must be configured for receiving traces from the browser application. Enable CORS in the OTel Receiver. 
+SigNoz installation comes with an OpenTelemetry Collector, which must be configured for receiving traces from the browser application. Enable CORS in the OTel Receiver.
 
-Under SigNoz folder,  open the `otel-collector-config.yaml` file. The file is located at `deploy/docker/clickhouse-setup/otel-collector-config.yaml`
+Under SigNoz folder, open the `otel-collector-config.yaml` file. The file is located at `deploy/docker/clickhouse-setup/otel-collector-config.yaml`
 
 You can view the file at <a href = "https://github.com/SigNoz/signoz/blob/develop/deploy/docker/clickhouse-setup/otel-collector-config.yaml" rel="noopener noreferrer nofollow" target="_blank" ><b>SigNoz GitHub repo</b></a>. Inside the file, add the following CORS config:
 
@@ -152,7 +152,7 @@ sudo docker compose -f docker/clickhouse-setup/docker-compose.yaml up
 
 ```
 
-- *Note: The stopped SigNoz cluster should resume and mount to the existing docker volumes.*
+- _Note: The stopped SigNoz cluster should resume and mount to the existing docker volumes._
 
 **Step 6: Start the React app**
 
@@ -207,7 +207,7 @@ You can analyze your tracing data with powerful filters using the `Traces` tab
 
 <br></br>
 
-**Todo 2 got added** 
+**Todo 2 got added**
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/03/to-do-list-2.webp" alt="To Do 2"/>
@@ -227,7 +227,7 @@ You can analyze your tracing data with powerful filters using the `Traces` tab
 
 OpenTelemetry browser instrumentation lets you collect important metrics about performance of browser applications. If you use OpenTelemetry, you also don’t get locked in with any vendor. OpenTelemetry is a one-stop solution for generating and collecting all telemetry signals. You can future-proof your instrumentation by using OpenTelemetry libraries.
 
-OpenTelemetry combined with SigNoz provides a full-stack open source solution. SigNoz provides all three telemetry signals - logs, metrics, and traces under a single pane of glass. 
+OpenTelemetry combined with SigNoz provides a full-stack open source solution. SigNoz provides all three telemetry signals - logs, metrics, and traces under a single pane of glass.
 
 If you have any questions or need any help in setting things up with SigNoz, join our slack community and ping us in `#support` channel.
 

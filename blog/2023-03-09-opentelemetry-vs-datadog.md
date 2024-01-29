@@ -32,16 +32,16 @@ So why do you need to use OpenTelemetry at all? DataDog provides agents to instr
 OpenTelemetry is quietly becoming the world standard for instrumenting cloud-native applications. Here are some reasons why people prefer OpenTelemetry over native vendor agents:
 
 - **Part of the CNCF landscape**<br></br>
-OpenTelemetry is part of the <a href = "https://www.cncf.io/" rel="noopener noreferrer nofollow" target="_blank" >Cloud Native Computing Foundation</a>, so it would work well with other tools in the CNCF landscape. It is the second most active project after Kubernetes.
+  OpenTelemetry is part of the <a href = "https://www.cncf.io/" rel="noopener noreferrer nofollow" target="_blank" >Cloud Native Computing Foundation</a>, so it would work well with other tools in the CNCF landscape. It is the second most active project after Kubernetes.
 
 - **No vendor lock-in**<br></br>
-If you use OpenTelemetry, you can avoid vendor lock-ins with SaaS services. The data collected by OpenTelemetry can be sent to multiple backends. Most observability vendors support the OTLP data format.
+  If you use OpenTelemetry, you can avoid vendor lock-ins with SaaS services. The data collected by OpenTelemetry can be sent to multiple backends. Most observability vendors support the OTLP data format.
 
 - **Future-proof instrumentation**<br></br>
-OpenTelemetry has a wide community working on it to support the instrumentation of a wide range of libraries, frameworks, and languages. If you use an instrumentation SDK from a vendor, you are susceptible to the vendor’s support of emerging technologies.
+  OpenTelemetry has a wide community working on it to support the instrumentation of a wide range of libraries, frameworks, and languages. If you use an instrumentation SDK from a vendor, you are susceptible to the vendor’s support of emerging technologies.
 
 - **Company knowledge base and easy onboarding**<br></br>
-Using OpenTelemetry, you can have a standard observability setup in place at your company. Over time, the knowledge base will improve, and it will be easier to onboard new members of the observability team. In case the team decides to switch the vendor, it is easy to make configuration changes for the backend.
+  Using OpenTelemetry, you can have a standard observability setup in place at your company. Over time, the knowledge base will improve, and it will be easier to onboard new members of the observability team. In case the team decides to switch the vendor, it is easy to make configuration changes for the backend.
 
 In an observability stack, the instrumentation layer is most tightly coupled with your application as it involves code changes. Using OpenTelemetry, you can have peace of mind about having standardized observability set up in place.
 

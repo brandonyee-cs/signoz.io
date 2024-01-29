@@ -6,7 +6,7 @@ tags: [Tech Resources]
 authors: ankit_anand
 description: Looking for an open source APM tool? Latest top open source APM tool list - 1.SigNoz 2.Graphite 3.Pinpoint 4.Prometheus 5.JavaMelody 6.StageMonitor 7.Scouter 8.Zipkin 9.Jaeger 10.Skywalking...
 image: /img/blog/2023/01/open-source-apm-tools-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - Open Source
   - Open Source apm tools
@@ -26,7 +26,7 @@ Choosing the right APM tool is critical. How do you know which is the right one 
 ![Cover Image](/img/blog/2023/01/open-source-apm-tools-cover.webp)
 
 > **What is an open source APM tool?**<br></br>
-> APM stands for Application Performance Monitoring. APM tools help you to monitor your application for any performance issues. When you opt for an open source APM tool, you get the added advantage of having access to the tool's source code. 
+> APM stands for Application Performance Monitoring. APM tools help you to monitor your application for any performance issues. When you opt for an open source APM tool, you get the added advantage of having access to the tool's source code.
 > You can host the tool within your infra to adhere to data governance and privacy regulations.
 
 <!-- Businesses are embracing digital transformation now more than ever. In most cases, the digital channel is the primary driver of revenue and growth. Customers and end-users are going online to fulfill both their daily and long-term needs.
@@ -35,8 +35,7 @@ The digital shift has made the app production environment a critical piece of an
 
 This has led to the birth of a number of application performance monitoring tools. Open source APM tools have added benefits over their SaaS counterparts as the source code is available to your org's developers. -->
 
-Open source APM tools have added benefits over their SaaS counterparts. Open source tools are more transparent as you can verify its source code, and you can use it without going through the pains of taking approvals usually required for using a third-party vendor tool. 
-
+Open source APM tools have added benefits over their SaaS counterparts. Open source tools are more transparent as you can verify its source code, and you can use it without going through the pains of taking approvals usually required for using a third-party vendor tool.
 
 **Benefits of Open Source APM tool over SaaS APM tools:**
 
@@ -70,19 +69,19 @@ A few essential APM benefits in solving performance issues are as follows:
 
 **List of top 13 open source APM tools in 2024**
 
- - [SigNoz](#signoz)
- - [Graphite](#graphite)
- - [Pinpoint](#pinpoint)
- - [Prometheus](#prometheus)
- - [Javamelody](#javamelody)
- - [Stagemonitor](#stagemonitor)
- - [Scouter](#scouter)
- - [Zipkin](#zipkin)
- - [Jaeger](#jaeger)
- - [Apache Skywalking](#apache-skywalking)
- - [Elastic APM](#elastic-apm)
- - [App Metrics](#app-metrics)
- - [Glowroot](#glowroot)
+- [SigNoz](#signoz)
+- [Graphite](#graphite)
+- [Pinpoint](#pinpoint)
+- [Prometheus](#prometheus)
+- [Javamelody](#javamelody)
+- [Stagemonitor](#stagemonitor)
+- [Scouter](#scouter)
+- [Zipkin](#zipkin)
+- [Jaeger](#jaeger)
+- [Apache Skywalking](#apache-skywalking)
+- [Elastic APM](#elastic-apm)
+- [App Metrics](#app-metrics)
+- [Glowroot](#glowroot)
 
 ## Top Open Source APM Tools
 
@@ -100,15 +99,13 @@ Now let's explore the top 13 open source APM tools in 2024.
 - **Alternative to:** Datadog, New Relic, Dynatrace
 - [SigNoz on GitHub](https://github.com/SigNoz/signoz)
 
-[SigNoz](https://signoz.io/) is a full-stack open source APM and observability tool. It provides logs, metrics, and traces under a single pane of glass. It is built to support OpenTelemetry natively, and uses Clickhouse - a powerful OLAP database for faster ingestion and aggregations. 
-
+[SigNoz](https://signoz.io/) is a full-stack open source APM and observability tool. It provides logs, metrics, and traces under a single pane of glass. It is built to support OpenTelemetry natively, and uses Clickhouse - a powerful OLAP database for faster ingestion and aggregations.
 
 <!-- - User requests per second
 - 50th, 90th, and 99th percentile latencies of microservices in your application
 - Error rate of requests to your services
 - Slow endpoints in your application
 - User requests across different microservices using distributed tracing -->
-
 
 import Screenshot from "@theme/Screenshot"
 
@@ -121,14 +118,13 @@ import Screenshot from "@theme/Screenshot"
 
 SigNoz has most features that vendors like Datadog offers. The feature set covers capabilities across the three telemetry signals: logs, metrics, and traces. You can monitor APM metrics like user requests for each of your applications, error rate, app latencies, etc.
 
-Using distributed tracing, you can identify the root cause of performance issues. The logs tab in SigNoz comes with advanced query builder, multiple compact views, and live tail logging. 
+Using distributed tracing, you can identify the root cause of performance issues. The logs tab in SigNoz comes with advanced query builder, multiple compact views, and live tail logging.
 
 #### Open Source license and Cloud Option
 
 SigNoz Open Source is free to use. You can get started with the open source by using Docker, Docker Swarm or Kubernetes. You can find the instructions to self-host SigNoz [here](https://signoz.io/docs/install/).
 
 Signing up for [SigNoz cloud](https://signoz.io/teams/) gives you the most easiest way to get started with SigNoz. The cloud version gives you access to some paid-only features as well as customer support. SigNoz can help you save up to 86% of your Datadog bill. Here's a [pricing comparsion with detailed spreadsheet](https://signoz.io/blog/pricing-comparison-signoz-vs-datadog-vs-newrelic-vs-grafana/).
-
 
 ### Graphite
 

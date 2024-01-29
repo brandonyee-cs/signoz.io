@@ -21,14 +21,16 @@ keywords:
 > C. J. Cherryh
 
 OpenTelemetry is the future of Observability, APM, Monitoring, whatever you want to call ‘the process of knowing what our software is doing.’ It’s becoming common knowledge that your time is better spent gaining experience with an open, standardized system for telemetry than closed-source or otherwise proprietary standard. This truth is so universally acknowledged that all the big players in the market have made announcements of how they’re embracing OpenTelemetry. Often these statements mention how ‘open is the future’ et cetera. But how committed are these teams to OpenTelemetry? In this series, we’ll talk about how native OpenTelemetry tools compare to APM products that have adopted OpenTelemetry only partially. In this article, we will explore how, in both New Relic and Datadog, OpenTelemetry data is a ‘second class citizen.’
+
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/09/firstclass-cover.webp)
 
 ## Data: first and second class
 
-For over a decade, APM companies have loved to add new and exotic kinds of monitoring data to their dashboards. The disconnect has often come in *where* that data appears. Back when Application Performance Monitoring was so connected to web frameworks that it was often referred to as RPM (Rails Performance Monitoring), only the performance of web requests was displayed front-and-center on the application dashboard, with custom metrics, cache metrics, database metrics, and everything else relegated to a secondary menu, or worse still entirely hidden unless you set up a custom dashboard.
+For over a decade, APM companies have loved to add new and exotic kinds of monitoring data to their dashboards. The disconnect has often come in _where_ that data appears. Back when Application Performance Monitoring was so connected to web frameworks that it was often referred to as RPM (Rails Performance Monitoring), only the performance of web requests was displayed front-and-center on the application dashboard, with custom metrics, cache metrics, database metrics, and everything else relegated to a secondary menu, or worse still entirely hidden unless you set up a custom dashboard.
 
-It became standard to discuss as technical debt, the fact that a data type that was beloved by users was still relegated to a backwater in the dashboard. 
+It became standard to discuss as technical debt, the fact that a data type that was beloved by users was still relegated to a backwater in the dashboard.
 
 Another issue is ease of data ingress: The standard APM data gathered by a SaaS company’s monitoring agent can be very very easy to report, while other types require custom configuration, settings, and tool chains that make it more brittle than the default.
 
@@ -43,7 +45,7 @@ Right from the installation stage… something feels amiss when trying to use Op
     <figcaption><i>Nothing here tells you positively that you should use OpenTelemetry</i></figcaption>
 </figure>
 
-Out of all these articles, only one mentions an *actual use case* for OpenTelemetry: AWS’s excellent OpenTelemetry Layer for Lambda. Even that single guide still ends with steering the user to use DataDog’s proprietary Lambda instrumentation instead. Otherwise everything seems to be about reporting OpenTelemetry data that you’ve already set up. The overall message seems to be: if you insist on using OpenTelemetry, we can accept the data. For new services, Datadog never recommends adding OpenTelemetry.
+Out of all these articles, only one mentions an _actual use case_ for OpenTelemetry: AWS’s excellent OpenTelemetry Layer for Lambda. Even that single guide still ends with steering the user to use DataDog’s proprietary Lambda instrumentation instead. Otherwise everything seems to be about reporting OpenTelemetry data that you’ve already set up. The overall message seems to be: if you insist on using OpenTelemetry, we can accept the data. For new services, Datadog never recommends adding OpenTelemetry.
 
 While the message of ‘we will accept OpenTelemetry data but don’t want to encourage OpenTelemetry adoption’ is only implicit in the documentation, in private Datadog [was recently revealed to be acting against the adoption of OpenTelemetry](https://www.theregister.com/2023/02/02/datadog_opentelemetry_tool_dorman/). While Datadog is happy to accept OpenTelemetry data, the org actively acts to prevent Datadog data from being part of an OpenTelemetry ecosystem.
 
@@ -59,7 +61,7 @@ The theme mentioned above holds true in my experience: Datadog accepts OpenTelem
 
 The first roadblock you’ll encounter when trying to report OTel data to Datadog is documentation: fully half of the tutorials on their blog and docs site are outdated and nonfunctional. In Python several still refer to the `opentelemetry-exporter-datadog` package, despite its deprecation some time ago. Another large section of docs refers to the even older OpenTracing, though this at least has a deprecation note.
 
-After several failed attempts to follow documentation, it turned out that it is possible to send data from a python application directly to the Datadog agent. For other frameworks, the only path is to export data from the OpenTelemetry collector directly to the Datadog backend. 
+After several failed attempts to follow documentation, it turned out that it is possible to send data from a python application directly to the Datadog agent. For other frameworks, the only path is to export data from the OpenTelemetry collector directly to the Datadog backend.
 
 Whatever path you take, you’ll find that once your data is in Datadog, the experience is similar to using proprietary Datadog data, but far from identical.
 
@@ -91,7 +93,7 @@ def do_roll():
         res = randint(1, 6)
         current_span = trace.get_current_span()
         current_span.add_event("Gonna try it!")
-        # try some 
+        # try some
         current_span.add_event("Did it!")
         rollspan.set_attribute("roll.value", res)
         return res
@@ -104,13 +106,13 @@ However in all my experiments these span events didn’t show up anywhere in Dat
     <figcaption><i>Notice the matching span name as the snippet above.</i></figcaption>
 </figure>
 
-Not only is this data missing from the trace, no failure is logged in the Datadog trace logging. The closest analogy to span events within Datadog’s tracing standard was a custom span tag, but this showed no information no matter how I checked my OpenTelemetry traces. 
+Not only is this data missing from the trace, no failure is logged in the Datadog trace logging. The closest analogy to span events within Datadog’s tracing standard was a custom span tag, but this showed no information no matter how I checked my OpenTelemetry traces.
 
 This gap exemplifies the drawbacks of Datadog’s attempt to fully integrate OpenTelemetry data: OpenTelemetry is a different standard for monitoring. Where the two standards don’t align, Datadog’s solution seems to be a choice to ‘eat’ the data that doesn’t match.
 
 ### Limitations: a separate path for metrics
 
-One of the central tenets of OpenTelemetry is that, at some point in the near future, the project will achieve a consistent standard for measuring all three observability signals *and correlating them* with a single point of collection such that even metrics can be implicitly tied to particular traces and logs. This vision isn’t perfectly achieved yet, but it is surprisingly easy to report logs, traces, and metrics with consistent tagging to a native OpenTelemetry backend. 
+One of the central tenets of OpenTelemetry is that, at some point in the near future, the project will achieve a consistent standard for measuring all three observability signals _and correlating them_ with a single point of collection such that even metrics can be implicitly tied to particular traces and logs. This vision isn’t perfectly achieved yet, but it is surprisingly easy to report logs, traces, and metrics with consistent tagging to a native OpenTelemetry backend.
 
 In datadog, however, metrics and logging are gathered in a way quite separate from traces.
 
@@ -173,16 +175,16 @@ New relic has a very useful feature to see the query that behind any chart in th
 Query 1: throughput on a New Relic-instrumented app,
 
 ```sql
-SELECT rate(count(apm.service.transaction.duration), 1 minute) as 'Web throughput' 
-FROM Metric WHERE (entity.guid = 'NDExMjc2NXxBUE18QVBQTElDQVRJT058MTA5NjA1MzQ4Ng') 
+SELECT rate(count(apm.service.transaction.duration), 1 minute) as 'Web throughput'
+FROM Metric WHERE (entity.guid = 'NDExMjc2NXxBUE18QVBQTElDQVRJT058MTA5NjA1MzQ4Ng')
 AND (transactionType = 'Web') LIMIT MAX TIMESERIES
 ```
 
 Query 2: throughput on an OpenTelemetry app
 
 ```sql
-SELECT rate(count(%.server.duration), 1 minute) AS 'Throughput' 
-FROM Metric WHERE (entity.guid = 'NDExMjc2NXxFWFR8U0VSVklDRXwtMzM1MzYxNjkxNjU2MzIzNTU3Mg') 
+SELECT rate(count(%.server.duration), 1 minute) AS 'Throughput'
+FROM Metric WHERE (entity.guid = 'NDExMjc2NXxFWFR8U0VSVklDRXwtMzM1MzYxNjkxNjU2MzIzNTU3Mg')
 AND ((http.server.duration IS NOT NULL OR rpc.server.duration IS NOT NULL OR messaging.producer.duration IS NOT NULL)) TIMESERIES
 ```
 
@@ -194,7 +196,7 @@ charts like ‘response time’ have even more divergent query formats and label
 
 Perhaps it’s my fondness for the team at New Relic, but my impression is that their attitude to OpenTelemetry as a whole is significantly better: examples are clear, limitations aren’t obfuscated, and examples are recently updated and functional. I’m keenly aware of the massive data management problem of merging two datasets with different schemas, and all the limitations I listed above seem to be a result of that issue.
 
-Over at Datadog, the story inspires even less confidence. The documentation featured on their support site seems calculated to leave the *impression* that OpenTelemetry is fully supported at Datadog just like any other data source, with little concern with how someone might ever actually report OTel data. Almost as if support of OpenTelemetry is fine as a selling point to close a deal, but there’s no plan to encourage users to actually use the standard. Even once data is reporting, we see real limitations once we ‘zoom in’ and try to annotate traces in depth.
+Over at Datadog, the story inspires even less confidence. The documentation featured on their support site seems calculated to leave the _impression_ that OpenTelemetry is fully supported at Datadog just like any other data source, with little concern with how someone might ever actually report OTel data. Almost as if support of OpenTelemetry is fine as a selling point to close a deal, but there’s no plan to encourage users to actually use the standard. Even once data is reporting, we see real limitations once we ‘zoom in’ and try to annotate traces in depth.
 
 ### The Difficulty of Competing with OpenTelemetry Native Tools
 

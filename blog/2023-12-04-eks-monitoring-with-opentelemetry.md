@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: jaikanth
 description: In this tutorial, we will provide a step-by-step guide to monitoring Amazon EKS nodes and pod-level metrics with OpenTelemetry. OpenTelemetry collector can collect these metrics and send them to a backend of your choice for monitoring and visualization...
 image: /img/blog/2023/12/aws-eks-monitoring-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -18,7 +18,6 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/eks-monitoring-with-opentelemetry/"/>
 </head>
 
-
 Effective EKS monitoring is crucial for maintaining the health and performance of containerized applications deployed in the cluster. In this tutorial, we will set up EKS monitoring with OpenTelemetry. We will build monitoring dashboards for node and pod-level metrics with data collected by OpenTelemetry. We will use SigNoz, an open-source OpenTelemetry-native APM, as a storage and visualization layer for setting up dashboards.
 
 <!--truncate-->
@@ -26,6 +25,7 @@ Effective EKS monitoring is crucial for maintaining the health and performance o
 ![Cover Image](/img/blog/2023/12/aws-eks-monitoring-cover.webp)
 
 In this tutorial, we cover:
+
 - [Why is it important to monitor EKS Clusters](#why-is-it-important-to-monitor-eks-clusters)
 - [Understanding EKS Metrics](#understanding-eks-metrics)
 - [A Brief Overview of OpenTelemetry](#a-brief-overview-of-opentelemetry)
@@ -38,11 +38,9 @@ In this tutorial, we cover:
 - [Conclusion](#conclusion)
 - [Further Reading](#further-reading)
 
-
 If you want to jump straight into implementation, start with this [prerequisites](#prerequisites) section.
 
-
-### A  Brief Overview of Kubernetes and Amazon EKS
+### A Brief Overview of Kubernetes and Amazon EKS
 
 Kubernetes orchestrates computing, networking, and storage for applications, enabling quick deployments, scalable operations, seamless feature rollouts, and smart resource allocation. Amazon EKS is a managed Kubernetes offering that takes full advantage of AWS’s EC2 offerings.
 
@@ -73,7 +71,7 @@ Pod Level Metrics gives insights into the performance and state of the individua
 
 ### Node Level Metrics
 
-A Node can contain one or more Pods: These are aggregated container metrics on node-name. 
+A Node can contain one or more Pods: These are aggregated container metrics on node-name.
 
 Node Level Metrics offer a broader view, focusing on the EKS cluster nodes themselves. These metrics are crucial for understanding the overall health and capacity of the cluster. They encompass node-specific data such as CPU and memory usage, disk capacity, and network I/O.
 
@@ -153,7 +151,7 @@ Now that you understand how OpenTelemetry collects telemetry data, let’s go th
 
 OpenTelemetry can collect a wide range of metrics, which are critical for monitoring the performance and health of EKS clusters. The following are some key metrics that can be captured:
 
-- **CPU Metrics**: Metrics such as `k8s.node.cpu.utilization`,  `k8s.pod.cpu.time`, and `container.cpu.utilization` provide data on CPU usage and time spent by nodes, pods, and containers respectively.
+- **CPU Metrics**: Metrics such as `k8s.node.cpu.utilization`, `k8s.pod.cpu.time`, and `container.cpu.utilization` provide data on CPU usage and time spent by nodes, pods, and containers respectively.
 - **Memory Metrics**: Metrics like `k8s.node.memory.available`, `k8s.pod.memory.usage` and `container.memory.available` reveal the memory available and used by nodes, pods, or containers.
 - **Disk Metrics**: Metrics such as `k8s.node.filesystem.usage`, `container.filesystem.available`, and `k8s.pod.filesystem.available` offer insights into the disk space used and available on nodes, pods, or containers.
 - **Network Metrics**: Metrics like `k8s.node.network.io` and `k8s.pod.network.errors` capture the volume of network I/O and the number of network errors.
@@ -207,7 +205,6 @@ To set up the OpenTelemetry Collector for SigNoz, you'll first need your ingesti
 </figure>
 <br />
 
-
 Once you have your ingestion key and region, use the following commands to add the SigNoz Helm repository and install the OpenTelemetry Collector in your Kubernetes cluster:
 
 ```bash
@@ -218,7 +215,7 @@ helm install -n signoz  --create-namespace kubelet-otel signoz/k8s-infra \
 
 Replace `<ingestionKey>` with the key you obtained from your settings page and `<region>` with the region information.
 
-After running the install command, you should see an output confirming that the Helm chart has been deployed. 
+After running the install command, you should see an output confirming that the Helm chart has been deployed.
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/helm_deployed.webp" alt=""/>
@@ -235,7 +232,6 @@ To check the logs of the OpenTelemetry agent, execute:
 ```yaml
 kubectl logs -f -n signoz -l app.kubernetes.io/component=otel-agent
 ```
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/otel_agent_logs.webp" alt="You will see an output like this"/>
@@ -273,7 +269,6 @@ The following command retrieves the DaemonSet configuration, where you can revie
 kubectl get ds/kubelet-otel-k8s-infra-otel-agent -n signoz -o yaml
 ```
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/daemonset_congfigs.webp" alt=""/>
     <figcaption><i></i></figcaption>
@@ -287,7 +282,6 @@ Review the output for the `OTEL_EXPORTER_OTLP_ENDPOINT`, `SIGNOZ_API_KEY`, and `
 Before proceeding with the vanilla charts, ensure you deeply understand your current infrastructure and OpenTelemetry's configuration requirements. This approach is recommended for advanced users who need to integrate the collector into a multi-faceted observability stack.
 
 Refer to the official documentation for the Helm chart for comprehensive instructions and configuration options: <a href = "https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector" rel="noopener noreferrer nofollow" target="_blank">OpenTelemetry Helm Charts Documentation</a>.
-
 
 To begin the installation, add the OpenTelemetry Helm repository and deploy the collector to your cluster. You will need to create a custom configuration file, such as `advanced-signoz.yaml`, tailored to your specific requirements.
 
@@ -311,18 +305,17 @@ presets:
 config:
   exporters:
     otlp:
-        endpoint: "ingest.<region>.signoz.cloud:443"
-        tls:
-          insecure: false
-        headers:
-          "signoz-access-token": "<ingestionKey>"
+      endpoint: "ingest.<region>.signoz.cloud:443"
+      tls:
+        insecure: false
+      headers:
+        "signoz-access-token": "<ingestionKey>"
   service:
     pipelines:
       metrics:
         exporters:
           - otlp
 ```
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/view_access_token.webp" alt=""/>
@@ -336,7 +329,6 @@ For verification and debugging procedures, follow the same steps provided for th
 
 Once the above setup is done, you will be able to access the collected metrics in the SigNoz dashboard. You can go to the `Dashboards` tab and try adding a new panel. You can learn how to create dashboards in SigNoz [here](https://signoz.io/docs/userguide/manage-dashboards-and-panels/).
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/k8s_metrics.webp" alt="Plotting a metric into a panel in a dashboard"/>
     <figcaption><i>Plotting a metric into a panel in a dashboard</i></figcaption>
@@ -345,14 +337,11 @@ Once the above setup is done, you will be able to access the collected metrics i
 
 You can easily create charts with [query builder](https://signoz.io/docs/userguide/create-a-custom-query/#sample-examples-to-create-custom-query) in SigNoz. Here are the [steps](https://signoz.io/docs/userguide/manage-panels/#steps-to-add-a-panel-to-a-dashboard) to add a new panel to the dashboard.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/node_dashboard.webp" alt="Node Dashboard for EKS cluster"/>
     <figcaption><i>Node Dashboard for EKS cluster</i></figcaption>
 </figure>
 <br/>
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/pod_dashboard.webp" alt="Pod Dashboard for EKS cluster"/>
@@ -376,8 +365,7 @@ Learn how to create variables in Dashboards [here](https://signoz.io/docs/usergu
 
 ### Alerting
 
-You can also create alerts on any metric and send notifications to Slack, Teams, or PagerDuty. Learn how to create alerts [here](https://signoz.io/docs/userguide/alerts-management/). 
-
+You can also create alerts on any metric and send notifications to Slack, Teams, or PagerDuty. Learn how to create alerts [here](https://signoz.io/docs/userguide/alerts-management/).
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/create_alert_k8s.webp" alt="Creating an alert from dashboard"/>
@@ -408,6 +396,5 @@ SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/open
 [Complete Guide on OpenTelemetry Collector](https://signoz.io/blog/opentelemetry-collector-complete-guide/)
 
 [An OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/)
-
 
 ---

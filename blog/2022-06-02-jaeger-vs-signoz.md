@@ -6,7 +6,7 @@ tags: [Tools Comparison, Jaeger, SigNoz]
 authors: ankit_anand
 description: Thinking of using Jaeger for distributed tracing? But wait, there is a much better alternative. SigNoz provides advanced capabilities for distributed tracing along with metrics and ...
 image: /img/blog/2022/06/jaeger_vs_signoz_cover.webp
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - jaeger
   - signoz
@@ -145,7 +145,6 @@ After filtering the traces, you can choose to visualize metrics like calls, dura
     <figcaption><i>See aggregated metrics of filtered traces</i></figcaption>
 </figure>
 
-
 ### Exceptions Monitoring
 
 SigNoz comes with a tab for `Exceptions` monitoring. You can monitor popular exceptions like `SSLError`, `ZeroDivisionError`, `MaxRetryError`, etc., occuring in your application code at one place. We have also empowered our users to dig deeper into why these exceptions are happening.
@@ -185,7 +184,7 @@ SigNoz uses [ClickHouse](https://clickhouse.com/) for storing observability data
     width={700}
 /> -->
 
-ClickHouse is designed to be a <a href = "https://clickhouse.tech/docs/en/faq/general/why-clickhouse-is-so-fast/" rel="noopener noreferrer nofollow" target="_blank" >very fast</a> OLAP database. It is also low resource-intensive. For Jaeger, Cassandra and Elasticsearch are the primary supported storage backends. 
+ClickHouse is designed to be a <a href = "https://clickhouse.tech/docs/en/faq/general/why-clickhouse-is-so-fast/" rel="noopener noreferrer nofollow" target="_blank" >very fast</a> OLAP database. It is also low resource-intensive. For Jaeger, Cassandra and Elasticsearch are the primary supported storage backends.
 
 ### Custom Dashboards
 
@@ -198,7 +197,6 @@ SigNoz provides capabilities to create custom dashboards to monitor important co
 
 <br></br>
 
-
 ### Alerts on metrics that are important for you
 
 Using SigNoz, you can set alerts on metrics that matter to you. You can integrate alerts with popular channels like Slack and PagerDuty.
@@ -209,8 +207,6 @@ Using SigNoz, you can set alerts on metrics that matter to you. You can integrat
 </figure>
 
 <br></br>
-
-
 
 ### Role based access control for better team management
 
@@ -227,7 +223,7 @@ Org management will enable teams using SigNoz to collaborate better. There are t
     <figcaption><i>Organization settings on SigNoz dashboard</i></figcaption>
 </figure>
 
-<br></br> 
+<br></br>
 
 ---
 
@@ -249,6 +245,7 @@ git clone -b main https://github.com/SigNoz/signoz.git
 cd signoz/deploy/
 ./install.sh
 ```
+
 <br></br>
 
 For detailed instructions, you can visit our documentation.

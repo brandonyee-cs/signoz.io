@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: daniel
 description: Steps to monitor Apache Web Server metrics with OpenTelemetry 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect Apache metrics 3. Send collected metrics to SigNoz...
 image: /img/blog/2023/11/opentelemetry-apache-metrics-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -25,8 +25,8 @@ Monitoring Apache web server metrics ensures your web server performs efficientl
 
 ![Cover Image](/img/blog/2023/11/opentelemetry-apache-metrics-cover.webp)
 
-
 We cover:
+
 - [What is Apache?](#what-is-apache)
 - [What is OpenTelemetry](#what-is-opentelemetry)
 - [What is OpenTelemetry Collector?](#what-is-opentelemetry-collector)
@@ -40,7 +40,6 @@ We cover:
 - [Metrics and Resource Attributes for Apache supported by OpenTelemetry](#metrics-and-resource-attributes-for-apache-supported-by-opentelemetry)
 - [Conclusion](#conclusion)
 - [Further Reading](#further-reading)
-
 
 If you want to jump straight into implementation, start with this [prerequisites](#prerequisites) section.
 
@@ -87,7 +86,7 @@ receivers:
         cors:
           allowed_origins:
             - http://test.com
-# Origins can have wildcards with *, use * by itself to match any origin.
+            # Origins can have wildcards with *, use * by itself to match any origin.
             - https://*.example.com
           allowed_headers:
             - Example-Header
@@ -148,7 +147,7 @@ Once you have installed the Apache web server, confirm it is running on the assi
 </figure>
 <br />
 
-Since Apache will be monitored, it has to be configured to expose its metrics. The endpoint at which Apache exposes metrics is [http://localhost:80/server-status?auto](http://localhost/server-status?auto). 
+Since Apache will be monitored, it has to be configured to expose its metrics. The endpoint at which Apache exposes metrics is [http://localhost:80/server-status?auto](http://localhost/server-status?auto).
 
 To expose the metrics, open the Apache configuration file for editing, depending on the environment you are in.
 
@@ -200,7 +199,6 @@ sudo apachectl restart
 
 To view Apache server statistics in your browser, navigate to the domain where Apache is running and add the "/server-status" endpoint to the URL. In this example, since Apache is running on localhost, you can access the statistics by visiting [localhost/server-status](http://localhost/server-status) in your browser.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/apache_server_status.webp" alt="Apache Server Status"/>
     <figcaption><i>Apache Server Status</i></figcaption>
@@ -221,10 +219,10 @@ curl --proto '=https' --tlsv1.2 -fOL https://github.com/open-telemetry/opentelem
 
 Note: For macOS users, download the binary package specific to your system.
 
-| Build | Architecture |
-| --- | --- |
-| M1 Chip | arm64 |
-| Intel | amd64 (x86-64) |
+| Build   | Architecture   |
+| ------- | -------------- |
+| M1 Chip | arm64          |
+| Intel   | amd64 (x86-64) |
 
 ### Extract the package
 
@@ -289,7 +287,6 @@ service:
 
 Replace http://localhost:80 with the correct endpoint where you have Apache running. Also, replace `{region}` with the region for your SigNoz cloud account and `<SIGNOZ_INGESTION_KEY>` with the ingestion key for your account. You can find these settings in the SigNoz dashboard under `Settings > Ingestion Settings`.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/ingestion-key-details.webp" alt="You can find ingestion key details under settings tab of SigNoz"/>
     <figcaption><i>You can find ingestion key details under settings tab of SigNoz</i></figcaption>
@@ -324,17 +321,13 @@ You should receive a similar output to show it has started successfully:
 
 Once the collector service has been started successfully, navigate to your SigNoz Cloud account and access the "Dashboard" tab. Click on the “New Dashboard” button to create a new dashboard.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/new_dashboard.webp" alt=""/>
     <figcaption><i></i></figcaption>
 </figure>
 <br />
 
-
 To give the dashboard a name, click on “Configure.”
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/dashboard_configure.webp" alt=""/>
@@ -342,10 +335,7 @@ To give the dashboard a name, click on “Configure.”
 </figure>
 <br />
 
-
-
 Enter your preferred dashboard name in the "Name" input box and save the changes.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/apache_dashboard_naming.webp" alt="Dashboard Naming"/>
@@ -355,8 +345,6 @@ Enter your preferred dashboard name in the "Name" input box and save the changes
 
 Now, you can create various panels for your dashboard. There are three visualization options to display your data: Time Series, Value, and Table formats. Choose the format that best suits your preferences, depending on the metric you want to monitor. For the initial metric, you can opt for the "Time Series" visualization.
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/apache_dashboard_visualization_options.webp" alt="Dashboard visualization options"/>
     <figcaption><i>Dashboard visualization options</i></figcaption>
@@ -365,8 +353,6 @@ Now, you can create various panels for your dashboard. There are three visualiza
 
 In the "Query Builder" tab, enter "Apache" and you should see various Apache metrics. This confirms that the OpenTelemetry Collector is successfully collecting the Apache metrics and forwarding them to SigNoz for monitoring and visualization.
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/apache_metrics.webp" alt="Collected Apache metrics for visualization"/>
     <figcaption><i>Collected Apache metrics for visualization</i></figcaption>
@@ -374,8 +360,6 @@ In the "Query Builder" tab, enter "Apache" and you should see various Apache met
 <br />
 
 You can query the collected metrics using the query builder and create panels for your dashboard.
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/apache_monitoring.webp" alt="Monitoring dashboard for Apache"/>
@@ -388,8 +372,6 @@ Visit the SigNoz [documentation](https://signoz.io/docs/userguide/manage-dashboa
 Import the copied JSON file into a new dashboard, and it will recreate the same layout and configurations for your convenience.
 
 Besides just setting up dashboards to monitor your Apache metrics, you can create alerts for the different metrics you query. Click on the drop-down of the panel from your dashboard, and then click on “Create Alerts.”
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/apache_alert.webp" alt="Create alerts on important Apache metrics"/>
@@ -416,31 +398,31 @@ These metrics are enabled by default. Collectors provide many metrics that you c
 - **Temporality:** It involves understanding the temporal patterns and fluctuations within the data, providing insights into how the metric evolves over time. Temporality is crucial for analyzing trends, identifying patterns, and making informed decisions based on the temporal behavior of the observed metric.
 - **Monotonic:** The monotonic flag indicates whether the metric value is always increasing or decreasing. A monotonic metric is useful for tracking trends over time, such as the total count of events or occurrences.
 
-| Metrics | Description | Metrics Name | Metric Type | Value Type | Unit | Aggregation Temporality | Monotic |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| CPU Load | CPU load on the Apache server | apache.cpu.load | Gauge | Double | % | N/A | N/A |
-| CPU Time | Cumulative CPU time consumed by Apache processes | apache.cpu.time | Sum | Double | {jiff} | Cumulative | True |
-| Current Connections | Total current connections to the Apache server | apache.current_connections | Sum | Int | {connections} | Cumulative | False |
-| Server Load | Load on the Apache server | apache.load | Gauge | Double | % | N/A | N/A |
-| Request Time | Cumulative time taken to process Apache requests | apache.request.time | Sum | Int | ms | Cumulative | True |
-| Total Requests | Total number of requests handled by the Apache server | apache.requests | Sum | Int | {requests} | Cumulative  | True |
-| Scoreboard Metrics | Cumulative count of workers in different states | apache.scoreboard | Sum | Int | {workers} | Cumulative  | False |
-| Traffic Metrics | Cumulative traffic handled by the Apache server | apache.traffic | Sum | Int | By | Cumulative  | True |
-| Uptime | Total uptime of the Apache server | apache.uptime | Sum | Int | s | Cumulative | True |
-| Workers | Total count of Apache server workers | apache.workers | Sum | Int | {workers} | Cumulative  | False |
+| Metrics             | Description                                           | Metrics Name               | Metric Type | Value Type | Unit          | Aggregation Temporality | Monotic |
+| ------------------- | ----------------------------------------------------- | -------------------------- | ----------- | ---------- | ------------- | ----------------------- | ------- |
+| CPU Load            | CPU load on the Apache server                         | apache.cpu.load            | Gauge       | Double     | %             | N/A                     | N/A     |
+| CPU Time            | Cumulative CPU time consumed by Apache processes      | apache.cpu.time            | Sum         | Double     | {jiff}        | Cumulative              | True    |
+| Current Connections | Total current connections to the Apache server        | apache.current_connections | Sum         | Int        | {connections} | Cumulative              | False   |
+| Server Load         | Load on the Apache server                             | apache.load                | Gauge       | Double     | %             | N/A                     | N/A     |
+| Request Time        | Cumulative time taken to process Apache requests      | apache.request.time        | Sum         | Int        | ms            | Cumulative              | True    |
+| Total Requests      | Total number of requests handled by the Apache server | apache.requests            | Sum         | Int        | {requests}    | Cumulative              | True    |
+| Scoreboard Metrics  | Cumulative count of workers in different states       | apache.scoreboard          | Sum         | Int        | {workers}     | Cumulative              | False   |
+| Traffic Metrics     | Cumulative traffic handled by the Apache server       | apache.traffic             | Sum         | Int        | By            | Cumulative              | True    |
+| Uptime              | Total uptime of the Apache server                     | apache.uptime              | Sum         | Int        | s             | Cumulative              | True    |
+| Workers             | Total count of Apache server workers                  | apache.workers             | Sum         | Int        | {workers}     | Cumulative              | False   |
 
 You can visit the <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/apachereceiver/documentation.md#apache" rel="noopener noreferrer nofollow" target="_blank">Apache receiver</a> GitHub repo to learn more about these metrics.
 
 ### Resource Attributes
 
-Resource attributes are a set of key-value pairs that provide additional context about the source of a metric. They are used to identify and classify metrics, and to associate them with specific resources or entities within a system. 
+Resource attributes are a set of key-value pairs that provide additional context about the source of a metric. They are used to identify and classify metrics, and to associate them with specific resources or entities within a system.
 
 The below attributes are enabled by default for Apache.
 
-| Name | Description | Values | Enabled |
-| --- | --- | --- | --- |
-| apache.server.name | The name of the Apache HTTP server. | Any Str | true |
-| apache.server.port | The port of the Apache HTTP server. | Any Str | true |
+| Name               | Description                         | Values  | Enabled |
+| ------------------ | ----------------------------------- | ------- | ------- |
+| apache.server.name | The name of the Apache HTTP server. | Any Str | true    |
+| apache.server.port | The port of the Apache HTTP server. | Any Str | true    |
 
 You can see these resource attributes in the <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/apachereceiver/documentation.md#resource-attributes" rel="noopener noreferrer nofollow" target="_blank">OpenTelemetry Collector Contrib</a> repo for the Apache receiver.
 
@@ -455,7 +437,6 @@ OpenTelemetry is becoming a global standard for open-source observability, offer
 SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/) that can be used as a single backend for all your observability needs.
 
 ---
-
 
 ## Further Reading
 

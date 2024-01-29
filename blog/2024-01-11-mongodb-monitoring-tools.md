@@ -15,6 +15,7 @@ keywords:
   - observability
   - mongodb
 ---
+
 import { LiteYoutubeEmbed } from "react-lite-yt-embed";
 
 <head>
@@ -23,12 +24,11 @@ import { LiteYoutubeEmbed } from "react-lite-yt-embed";
 
 import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 
-Are you looking for MongoDB monitoring tools? Then you’re at the right place. MongoDB is one of the most popular and powerful NoSQL databases out there. The fact that it’s a document-based database makes it blazing fast. 
+Are you looking for MongoDB monitoring tools? Then you’re at the right place. MongoDB is one of the most popular and powerful NoSQL databases out there. The fact that it’s a document-based database makes it blazing fast.
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2024/01/mongodb-monitoring-tools-cover.webp)
-
 
 With all the features that MongoDB comes with, you need to keep an eye on your MongoDB's health and performance - especially as it directly deals with your data.
 
@@ -36,24 +36,23 @@ There are many monitoring tools out there, and choosing the right one can be con
 
 ## Top 11 MongoDB Monitoring Tools at a glance
 
-|  | Best For | Standout Feature | Pricing |
-| --- | --- | --- | --- |
-|[SigNoz (open-source)](#signoz) | OpenTelemetry native monitoring, and creating a wide range of MongoDB metric visualizations. | Open-source. Lets you track MELT under a single pane of glass. | Free community edition. $199/month for cloud. Custom price for enterprises. |
-| [MongoDB Commands](#mongodb-commands) | Checking stats of the current time instant. | Can be used directly from the command line. | Free, as comes with MongoDB. |
-| [MongoDB Cloud Manager](#mongodb-cloud-manager) | Monitoring and managing MongoDB from a single tool. | Performance advisory functionality that suggests schema improvements. | Free edition, $39 for a standard edition, and customized premium edition. |
-| [MongoDB Atlas](#mongodb-atlas) | Proactive performance optimization with actionable insights like index suggestions and automatic scaling. | JSON-like document data model enables you to evolve with your data structures. | Free edition for free clusters, serverless edition from $0.10/million reads, and dedicated from $57/month. |
-| [Datadog](#datadog) | Full-stack visibility of metrics, logs, and events from 450+ technologies. | Managing downtime with responsive customer service. | Free edition for core collection and visualization, Pro edition starts at $15 per host per month. |
-| [Grafana + Prometheus](#grafana--prometheus) | Grafana’s best for reporting data, whereas Prometheus is ideal for collecting data. | Both are open-source. Pre-built dashboards of Grafana and robust and customizable alerting features of Prometheus. | Grafana has a free edition with cloud features, and the advanced premium bundle starts at $299. Prometheus is entirely free. |
-| [New Relic](#new-relic-mongodb-integration) | SCRAM authentication and full contextual log information. | Viewing app performance insights without logging in to DB instances. | Free edition with 30+ capabilities and custom pricing for standard, pro, and enterprise. |
-| [SolarWinds Database Performance Monitor](#solarwinds-database-performance-monitor) | Retrieving data about queries, databases, and infrastructure automatically and with a global view. | Automated profiling analysis for a centralized view of latency and throughput errors in real-time. | Free trial for 30 days with customized pricing. |
-| [Site 24×7 MongoDB Monitoring Tool](#site-247-mongodb-monitoring-tool) | Preventing alert fatigue and monitoring several settings concurrently. | Alerting engine, which has an advanced rules system to take corrective measures. | Free trial for 30 days, with pro edition at $ |
-| [ManageEngine Applications Manager MongoDB Monitoring](#manageengine-applications-manager-mongodb-monitoring) | On-premise monitoring of different applications and granular traffic analysis. | Applications’ dependency map for identifying resource shortages. | Free edition, with customized enterprise solutions. |
-| [Sematext MongoDB Integration](#sematext-mongodb-integration) | Cluster and container environments, thanks to its auto-discovery capabilities of new service instances. | Anomaly detection in alerting systems. | Free 14-day trial with prices starting at — log management at $40/month, monitoring at $3.24/month, experience at $8/month, and synthetics at $4.5/month annually. |
-
+|                                                                                                               | Best For                                                                                                  | Standout Feature                                                                                                   | Pricing                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [SigNoz (open-source)](#signoz)                                                                               | OpenTelemetry native monitoring, and creating a wide range of MongoDB metric visualizations.              | Open-source. Lets you track MELT under a single pane of glass.                                                     | Free community edition. $199/month for cloud. Custom price for enterprises.                                                                                        |
+| [MongoDB Commands](#mongodb-commands)                                                                         | Checking stats of the current time instant.                                                               | Can be used directly from the command line.                                                                        | Free, as comes with MongoDB.                                                                                                                                       |
+| [MongoDB Cloud Manager](#mongodb-cloud-manager)                                                               | Monitoring and managing MongoDB from a single tool.                                                       | Performance advisory functionality that suggests schema improvements.                                              | Free edition, $39 for a standard edition, and customized premium edition.                                                                                          |
+| [MongoDB Atlas](#mongodb-atlas)                                                                               | Proactive performance optimization with actionable insights like index suggestions and automatic scaling. | JSON-like document data model enables you to evolve with your data structures.                                     | Free edition for free clusters, serverless edition from $0.10/million reads, and dedicated from $57/month.                                                         |
+| [Datadog](#datadog)                                                                                           | Full-stack visibility of metrics, logs, and events from 450+ technologies.                                | Managing downtime with responsive customer service.                                                                | Free edition for core collection and visualization, Pro edition starts at $15 per host per month.                                                                  |
+| [Grafana + Prometheus](#grafana--prometheus)                                                                  | Grafana’s best for reporting data, whereas Prometheus is ideal for collecting data.                       | Both are open-source. Pre-built dashboards of Grafana and robust and customizable alerting features of Prometheus. | Grafana has a free edition with cloud features, and the advanced premium bundle starts at $299. Prometheus is entirely free.                                       |
+| [New Relic](#new-relic-mongodb-integration)                                                                   | SCRAM authentication and full contextual log information.                                                 | Viewing app performance insights without logging in to DB instances.                                               | Free edition with 30+ capabilities and custom pricing for standard, pro, and enterprise.                                                                           |
+| [SolarWinds Database Performance Monitor](#solarwinds-database-performance-monitor)                           | Retrieving data about queries, databases, and infrastructure automatically and with a global view.        | Automated profiling analysis for a centralized view of latency and throughput errors in real-time.                 | Free trial for 30 days with customized pricing.                                                                                                                    |
+| [Site 24×7 MongoDB Monitoring Tool](#site-247-mongodb-monitoring-tool)                                        | Preventing alert fatigue and monitoring several settings concurrently.                                    | Alerting engine, which has an advanced rules system to take corrective measures.                                   | Free trial for 30 days, with pro edition at $                                                                                                                      |
+| [ManageEngine Applications Manager MongoDB Monitoring](#manageengine-applications-manager-mongodb-monitoring) | On-premise monitoring of different applications and granular traffic analysis.                            | Applications’ dependency map for identifying resource shortages.                                                   | Free edition, with customized enterprise solutions.                                                                                                                |
+| [Sematext MongoDB Integration](#sematext-mongodb-integration)                                                 | Cluster and container environments, thanks to its auto-discovery capabilities of new service instances.   | Anomaly detection in alerting systems.                                                                             | Free 14-day trial with prices starting at — log management at $40/month, monitoring at $3.24/month, experience at $8/month, and synthetics at $4.5/month annually. |
 
 ## Why is MongoDB Monitoring Important?
 
-Here are the benefits of MongoDB monitoring: 
+Here are the benefits of MongoDB monitoring:
 
 1. It helps you identify performance issues and bottlenecks for optimized database performance.
 2. When you track resource usage, you’re able to allocate and manage resources more effectively.
@@ -69,16 +68,14 @@ Here are the benefits of MongoDB monitoring:
 </figure>
 <br/>
 
-
-
 SigNoz is an OpenTelemetry native APM platform. What this means for you is that you can monitor any application that can generate monitoring signals. And MongoDB is no exception. Along with SigNoz, all you need is an OpenTelemetry collector. On one end, this collector will connect with your MongoDB and ingest metrics. On the other end, it will feed the metrics to your SigNoz deployment, whether on the cloud or on-premises.
 
 **Features of SigNoz**
 
 1. It’s <a href = "https://github.com/signoz/signoz" rel="noopener noreferrer nofollow" target="_blank" >open source</a>. You don’t have to worry about your data being misused.
 1. There is a [free community edition](https://signoz.io/docs/install/). Use it without a license cost.
-2. OpenTelemetry native nature lets you future-proof your application instrumentations, and the collector lets you collect telemetry data from a wide range of sources.
-3. You can create your custom visualizations using the feature-rich dashboard.
+1. OpenTelemetry native nature lets you future-proof your application instrumentations, and the collector lets you collect telemetry data from a wide range of sources.
+1. You can create your custom visualizations using the feature-rich dashboard.
 
 You can read more about [how to set up your MongoDB monitoring with SigNoz](https://signoz.io/blog/mongodb-metrics-monitoring-with-opentelemetry).
 
@@ -89,14 +86,11 @@ The MongoDB installation comes with its set of command-line utilities. Two of th
 - **mongotop** — Track the current read/write activity of your MongoDB instance on a per-collection basis.
 - **mongostat** — See a count of the number of database operations by type (insert, query, update, delete, etc.).
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/mongodb-monitoring-tools-command1.webp" alt="MongoDB monitoring tool - MongoDB Commands"/>
     <figcaption><i>mongotop command on a local database</i></figcaption>
 </figure>
 <br/>
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/mongodb-monitoring-tools-command2.webp" alt="MongoDB monitoring tool - MongoDB Commands"/>
@@ -104,14 +98,13 @@ The MongoDB installation comes with its set of command-line utilities. Two of th
 </figure>
 <br/>
 
-
 Together, these commands give you a picture of the current load on the database. When you run the command from your terminal, it will show you the latest statistics per second.
 
-| Pros | Cons |
-| --- | --- |
-| These tools come as a part of your MongoDB installation. | They show you the stats of the current time instant. |
-| Easy to use directly from your command line. | You have to write custom scripts to derive continued meaning from the output. |
-|  | No option for visualizing the values. |
+| Pros                                                     | Cons                                                                          |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| These tools come as a part of your MongoDB installation. | They show you the stats of the current time instant.                          |
+| Easy to use directly from your command line.             | You have to write custom scripts to derive continued meaning from the output. |
+|                                                          | No option for visualizing the values.                                         |
 
 ## MongoDB Cloud Manager
 
@@ -123,11 +116,11 @@ Are you looking for an official tool to monitor MongoDB deployments on your own 
 2. It comes with a view of live workload characteristics and performance improvement suggestions.
 3. Its performance advisory functionality is ideal for identifying slow-running queries and suggesting schema improvements.
 
-| Pros | Cons |
-| --- | --- |
-| You can control monitoring and management from a single tool.  | Rigid settings for server hostnames can seem limiting. |
-| Supports easy performance resolution solutions. | Can be expensive. |
-| Has built-in administrative tools to automate tasks and help you scale. | Limited view of instance metrics of MongoDB. |
+| Pros                                                                    | Cons                                                   |
+| ----------------------------------------------------------------------- | ------------------------------------------------------ |
+| You can control monitoring and management from a single tool.           | Rigid settings for server hostnames can seem limiting. |
+| Supports easy performance resolution solutions.                         | Can be expensive.                                      |
+| Has built-in administrative tools to automate tasks and help you scale. | Limited view of instance metrics of MongoDB.           |
 
 ## MongoDB Atlas
 
@@ -137,23 +130,21 @@ Are you looking for an official tool to monitor MongoDB deployments on your own 
 </figure>
 <br/>
 
-
-
 <a href = "https://www.mongodb.com/cloud/atlas/register" rel="noopener noreferrer nofollow" target="_blank" >MongoDB Atlas</a> is a multi-cloud-based solution built by the makers of MongoDB. It’s an ideal database monitoring and management solution for companies that don’t have the resources to manage infrastructure. In fact, with MongoDB Atlas, you can have clusters functioning in minutes without having to focus on running or managing a database. It’s fully managed and can handle deploying, managing, healing, and scaling deployments on any cloud like AWS or Azure.
 
 You’ll have to create a MongoDB account and a MongoDB Atlas cluster to get started. Next, enable network access and create a MongoDB database user. You might also need to install a driver, depending on your application, and connect to your cluster.
 
 ### Features of MongoDB Atlas
 
-1. MongoDB Atlas has a CLI, which makes the interface very intuitive. 
+1. MongoDB Atlas has a CLI, which makes the interface very intuitive.
 2. It provides efficient segmentation of different projects to manage them well.
-3. It lets you store data in adaptable documents similar to JSON as opposed to limiting databases. 
+3. It lets you store data in adaptable documents similar to JSON as opposed to limiting databases.
 
-| Pros | Cons |
-| --- | --- |
+| Pros                                                                         | Cons                                                     |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------- |
 | Remarkable backup facility to allow you to pick up right where you left off. | Pay-per-model use can be expensive for higher workloads. |
-| Has a CLI, which makes the experience so much better. | Clusters shared with other users aren’t efficient. |
-| Extremely easy to scale up or down according to your needs. |  |
+| Has a CLI, which makes the experience so much better.                        | Clusters shared with other users aren’t efficient.       |
+| Extremely easy to scale up or down according to your needs.                  |                                                          |
 
 ## Datadog
 
@@ -163,22 +154,21 @@ You’ll have to create a MongoDB account and a MongoDB Atlas cluster to get sta
 </figure>
 <br/>
 
-
-<a href = "https://www.datadoghq.com" rel="noopener noreferrer nofollow" target="_blank" >Datadog</a> is a cloud-based deep database monitoring solution that helps you view query metrics, get granular insights, and analyze and explain plans for optimized performance. All accessible from a single dashboard, Datadog allows you to unify metrics, logs, and events from 450+ technologies. 
+<a href = "https://www.datadoghq.com" rel="noopener noreferrer nofollow" target="_blank" >Datadog</a> is a cloud-based deep database monitoring solution that helps you view query metrics, get granular insights, and analyze and explain plans for optimized performance. All accessible from a single dashboard, Datadog allows you to unify metrics, logs, and events from 450+ technologies.
 
 In fact, perfect for full-stack visibility, Datadog starts monitoring MongoDB right from installation, without any necessary add-ons. It simplifies the network administration process and provides alerting templates, detailed visualizations, and comprehensive automation solutions. The default dashboard already has important metrics to help you monitor MongoDB with the rest of your infrastructure.
 
 ### Features of Datadog
 
-1. It has a direct Datadog agent for MongoDB that collects and reports metrics. 
+1. It has a direct Datadog agent for MongoDB that collects and reports metrics.
 2. MongoDB Atlas has a direct Datadog integration on M10+ clusters to publish metrics. All you need is a Datadog account and an API key.
 3. It supports query and host metric correlation to better understand the impact of resource constraints.
 
-| Pros | Cons |
-| --- | --- |
-| Centralized database with easy customization. | Steep learning curve for beginners. |
-| Seamless MongoDB and MongoDB Atlas integration. | Lack of proper documentation. |
-| Managing downtime is easy with responsive customer support. | Higher cost involved. |
+| Pros                                                        | Cons                                |
+| ----------------------------------------------------------- | ----------------------------------- |
+| Centralized database with easy customization.               | Steep learning curve for beginners. |
+| Seamless MongoDB and MongoDB Atlas integration.             | Lack of proper documentation.       |
+| Managing downtime is easy with responsive customer support. | Higher cost involved.               |
 
 ## Grafana + Prometheus
 
@@ -188,22 +178,21 @@ In fact, perfect for full-stack visibility, Datadog starts monitoring MongoDB ri
 </figure>
 <br/>
 
-
 You can use a combination of Grafana and Prometheus to monitor MongoDB and reduce time loss and performance errors. Prometheus is a time-series database that can collect and store metrics, whereas Grafana can help you visualize your Prometheus data in unified dashboards.
 
-You’ll need to configure MongoDB as a Prometheus target by installing the MongoDB exporter to allow Prometheus to collect MongoDB data. Moreover, Prometheus is excellent for exposing and capturing standard and custom metrics and can visualize individual metrics as graphs. However, it doesn’t have the same flexibility Grafana offers in visualizing multiple metrics across application stacks. Combined, they’re a powerful MongoDB monitoring tool for data collection, visualization, and alerting. 
+You’ll need to configure MongoDB as a Prometheus target by installing the MongoDB exporter to allow Prometheus to collect MongoDB data. Moreover, Prometheus is excellent for exposing and capturing standard and custom metrics and can visualize individual metrics as graphs. However, it doesn’t have the same flexibility Grafana offers in visualizing multiple metrics across application stacks. Combined, they’re a powerful MongoDB monitoring tool for data collection, visualization, and alerting.
 
 ### Features of Grafana + Prometheus
 
 1. Both Prometheus and Grafana are built around time-series data, but Prometheus focuses on collecting data, whereas Grafana is best at reporting data.
-2. Both are open-source and can be used for organizations of all sizes. 
-3. Grafana has a MongoDB plugin to query and visualize data without having to migrate it. 
+2. Both are open-source and can be used for organizations of all sizes.
+3. Grafana has a MongoDB plugin to query and visualize data without having to migrate it.
 
-| Pros | Cons |
-| --- | --- |
-| They are both compatible with most data types | Lack of complex alerting logic available in commercial offerings |
+| Pros                                                      | Cons                                                                                               |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| They are both compatible with most data types             | Lack of complex alerting logic available in commercial offerings                                   |
 | A Grafana + Prometheus set-up is easy to run and maintain | A high level of expertise is required, unlike observability SaaS solutions with premade dashboards |
-| More affordable with rich community support | Setup can be configuration-intensive  |
+| More affordable with rich community support               | Setup can be configuration-intensive                                                               |
 
 ## New Relic MongoDB Integration
 
@@ -213,22 +202,21 @@ You’ll need to configure MongoDB as a Prometheus target by installing the Mong
 </figure>
 <br/>
 
+See how your MongoDB instances are performing with New Relic MongoDB integration. It’s based on Prometheus and is on-host, which means no third-party software is required for installation. In fact, you can use the New Relic MongoDB integration to collect and send dimensional metrics from MongoDB and then view and analyze them in premade dashboards.
 
-See how your MongoDB instances are performing with New Relic MongoDB integration. It’s based on Prometheus and is on-host, which means no third-party software is required for installation. In fact, you can use the New Relic MongoDB integration to collect and send dimensional metrics from MongoDB and then view and analyze them in premade dashboards. 
-
-Not only that, but you can also configure custom queries, charts, and alert policies. You can use it to monitor the health of your MongoDB infrastructure and enjoy deeper visibility, near-instant search, and full contextual log information. 
+Not only that, but you can also configure custom queries, charts, and alert policies. You can use it to monitor the health of your MongoDB infrastructure and enjoy deeper visibility, near-instant search, and full contextual log information.
 
 ### Features of New Relic MongoDB Integration
 
 1. You can obtain app performance insights without logging in to DB instances.
 2. It accelerates time to value by letting you filter and analyze configuration data metrics.
-3. It provides support for the entire entity-driven New Relic experience, including MongoDB instances, databases, and collections. 
+3. It provides support for the entire entity-driven New Relic experience, including MongoDB instances, databases, and collections.
 
-| Pros | Cons |
-| --- | --- |
-| Compatible with most versions of MongoDB, including MongoDB v5-v6, Percona servers, Atlas M10, and others. | Unresponsive support with long wait times. |
-| Supports SCRAM authentication. | A steep learning curve due to constantly changing interface. |
-| Ensures improved data governance capabilities with easier installation. | Outdated documentation with dead links. |
+| Pros                                                                                                       | Cons                                                         |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Compatible with most versions of MongoDB, including MongoDB v5-v6, Percona servers, Atlas M10, and others. | Unresponsive support with long wait times.                   |
+| Supports SCRAM authentication.                                                                             | A steep learning curve due to constantly changing interface. |
+| Ensures improved data governance capabilities with easier installation.                                    | Outdated documentation with dead links.                      |
 
 ## SolarWinds Database Performance Monitor
 
@@ -238,7 +226,7 @@ Not only that, but you can also configure custom queries, charts, and alert poli
 
 <p>&nbsp;</p>
 
-All thanks to automated profiling analysis, <a href = "https://www.solarwinds.com/solarwinds-observability/integrations/mongodb-monitoring" rel="noopener noreferrer nofollow" target="_blank" >SolarWinds Database Performance Monitor</a> tracks performance metrics in real-time for cross-functional teams. It collects data and makes it visible and accessible through premade, intuitive dashboards that can also be customized. 
+All thanks to automated profiling analysis, <a href = "https://www.solarwinds.com/solarwinds-observability/integrations/mongodb-monitoring" rel="noopener noreferrer nofollow" target="_blank" >SolarWinds Database Performance Monitor</a> tracks performance metrics in real-time for cross-functional teams. It collects data and makes it visible and accessible through premade, intuitive dashboards that can also be customized.
 
 SolarWinds Database Performance Monitor uses a robust discovery feature to retrieve data about queries, databases, and infrastructure automatically. This SaaS-based solution reduces resolution times by offering a global performance view that can also be drilled into individual server metrics at any given moment. It’s perfect if your MongoDB cluster is expected to grow more complex with time!
 
@@ -248,14 +236,13 @@ SolarWinds Database Performance Monitor uses a robust discovery feature to retri
 2. SolarWinds has a web-based, intuitive user interface to optimize your MongoDB performance and reduce downtime.
 3. Its patented Adaptive Fault Detection technology can help identify potential faults and stop serious damage from happening.
 
-| Pros | Cons |
-| --- | --- |
-| 24×7 support with MongoDB monitoring for any run-time environment | No clear information on the pricing |
-| Includes security checks to ensure MongoDB configuration aligns with best practices | UI can be improved, especially for the logs section |
-| Offers expert advice based on your workloads and user history for optimal performance |  |
+| Pros                                                                                  | Cons                                                |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| 24×7 support with MongoDB monitoring for any run-time environment                     | No clear information on the pricing                 |
+| Includes security checks to ensure MongoDB configuration aligns with best practices   | UI can be improved, especially for the logs section |
+| Offers expert advice based on your workloads and user history for optimal performance |                                                     |
 
 ## Site 24×7 MongoDB Monitoring Tool
-
 
 <a href = "https://www.site24x7.com/plugins/mongodb-monitoring.html" rel="noopener noreferrer nofollow" target="_blank" >Site 24×7 MongoDB monitoring tool</a> is an all-in-one monitoring tool that offers monitoring of 50 different technologies, including MongoDB clusters and instances. Besides, Site 24×7 also has a ready-to-install MongoDB monitoring plugin to check health and performance in real-time for increased database productivity.
 
@@ -267,12 +254,13 @@ In addition to gaining visibility, you can stay updated with instant alerts to t
 2. It can monitor several settings concurrently and gets detailed insights into active connections, heap usage, available connections, and other metrics.
 3. You can also create custom dashboards with personalized charts and drag-and-drop widgets.
 
-| Pros | Cons |
-| --- | --- |
+| Pros                                                                            | Cons                                          |
+| ------------------------------------------------------------------------------- | --------------------------------------------- |
 | Quick and easy installation for real-time and historical MongoDB data analysis. | Advanced monitoring plugins can be expensive. |
-| 
+
+|
 Clean website interface with good accuracy and less learning curve. | Outage analysis reports aren’t useful. |
-| Alerts can be automated as phone calls, messages, or emails and supports external monitoring in case you’re unavailable. |  |
+| Alerts can be automated as phone calls, messages, or emails and supports external monitoring in case you’re unavailable. | |
 
 ## ManageEngine Applications Manager MongoDB Monitoring
 
@@ -282,9 +270,7 @@ Clean website interface with good accuracy and less learning curve. | Outage ana
 </figure>
 <br/>
 
-
-
-<a href = "https://www.manageengine.com/products/applications_manager/mongodb-monitoring.html" rel="noopener noreferrer nofollow" target="_blank" >ManageEngine Applications Manager MongoDB Monitoring</a> is an on-premise monitoring software for a variety of database management systems similar to MongoDB. 
+<a href = "https://www.manageengine.com/products/applications_manager/mongodb-monitoring.html" rel="noopener noreferrer nofollow" target="_blank" >ManageEngine Applications Manager MongoDB Monitoring</a> is an on-premise monitoring software for a variety of database management systems similar to MongoDB.
 
 As it’s not limited, it monitors activity on all available servers and cloud-based resources. This enables it to have a wider viewpoint and a better understanding of MongoDB’s performance issues. Is MongoDB the real reason for user applications running slow, or are there other resource shortages you might need to look at? ManageEngine helps you pinpoint MongoDB performance issues and is great for scaling in large organizations.
 
@@ -292,13 +278,13 @@ As it’s not limited, it monitors activity on all available servers and cloud-b
 
 1. It can create an applications’ dependency map by discovering applications or server resources, hence it’s best for identifying resource shortages as they happen.
 2. ManageEngine Applications Manager for MongoDB tracks snapshots, server stats, replica stats, operations details, cache details, and configurations for sending prompt alert notifications.
-3. Using the list view, you can perform bulk admin configurations on monitors and assign custom fields. 
+3. Using the list view, you can perform bulk admin configurations on monitors and assign custom fields.
 
-| Pros | Cons |
-| --- | --- |
-| It doesn’t just monitor its own host, so can identify resource shortages on all servers. | The free edition is too small for most companies. |
-| Supports granular traffic analysis with a per-hop basis view of traffic. | Configuring the tool to meet your specific needs can be challenging initially. |
-| Automatically shows network outliers and performance problems. |  |
+| Pros                                                                                     | Cons                                                                           |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| It doesn’t just monitor its own host, so can identify resource shortages on all servers. | The free edition is too small for most companies.                              |
+| Supports granular traffic analysis with a per-hop basis view of traffic.                 | Configuring the tool to meet your specific needs can be challenging initially. |
+| Automatically shows network outliers and performance problems.                           |                                                                                |
 
 ## Sematext MongoDB Integration
 
@@ -308,27 +294,25 @@ As it’s not limited, it monitors activity on all available servers and cloud-b
 </figure>
 <br/>
 
-
-
 <a href = "https://sematext.com/integrations/mongodb/" rel="noopener noreferrer nofollow" target="_blank" >Sematext's</a> simple and easy-to-install MongoDB integration can help you monitor metrics and logs while also collecting events to ensure the optimal health and performance of MongoDB. You get to have detailed MongoDB metric insights about CPU, disk I/O, and network usage on a per-container basis. Not only that, you can correlate host-specific metrics, group data, parse out-of-the-box logs, set anomaly detection, and take advantage of prebuilt dashboards to reduce troubleshooting times.
 
-You can also compare two or more reports in a single dashboard view with a split reason for easy correlation. 
+You can also compare two or more reports in a single dashboard view with a split reason for easy correlation.
 
 ### Features of Sematext MongoDB Integration
 
-1. Its anomaly-detection-powered alerting system helps identify when MongoDB metrics change. 
+1. Its anomaly-detection-powered alerting system helps identify when MongoDB metrics change.
 2. It has pre-built dashboards that don’t need a lot of configuration to help you map all necessary metrics, logs, and infrastructure elements.
 3. Sematext, as a full observability platform, has auto-discovery capabilities for newly added service instances and is ideal for cluster and container environments.
 
-| Pros | Cons |
-| --- | --- |
-| Easy to deploy across environments like Kubernetes and Linux. | Limited support for transaction tracing makes its capabilities limited. |
-| Support for logging and monitoring is well-known. | Can be expensive for a MongoDB monitoring integration. |
-| Powerful alerting system with anomaly detection and choice of notification channel. |  |
+| Pros                                                                                | Cons                                                                    |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Easy to deploy across environments like Kubernetes and Linux.                       | Limited support for transaction tracing makes its capabilities limited. |
+| Support for logging and monitoring is well-known.                                   | Can be expensive for a MongoDB monitoring integration.                  |
+| Powerful alerting system with anomaly detection and choice of notification channel. |                                                                         |
 
 ## Choosing the right MongoDB monitoring tool
 
-Let’s take a look at the top factors you should consider while choosing the right MongoDB monitoring tool: 
+Let’s take a look at the top factors you should consider while choosing the right MongoDB monitoring tool:
 
 1. **Metrics captured -** It should collect all the necessary metrics, including instance health, operations and connection status, query performance, and index usage.
 2. **Deployment -** You should be able to deploy the tool with ease, and it should have minimal impact on your database performance.
@@ -338,9 +322,9 @@ Let’s take a look at the top factors you should consider while choosing the ri
 
 ## Conclusion
 
-MongoDB monitoring is crucial to preventing costly downtime, maintaining user satisfaction, and ensuring optimal performance. The top 11 tools, ranging from Signoz to Grafana + Prometheus to SolarWinds, offer a variety of benefits. When choosing the right tool for your application, consider functionality, pricing, ease of use, interface, and scaling for future expansions. Each tool has specific standout features to help you navigate bottlenecks and make informed decisions. 
+MongoDB monitoring is crucial to preventing costly downtime, maintaining user satisfaction, and ensuring optimal performance. The top 11 tools, ranging from Signoz to Grafana + Prometheus to SolarWinds, offer a variety of benefits. When choosing the right tool for your application, consider functionality, pricing, ease of use, interface, and scaling for future expansions. Each tool has specific standout features to help you navigate bottlenecks and make informed decisions.
 
-If you’re looking for an all-in-one solution that’s easy-to-use and open-source, consider Signoz. Being a full-stack APM, it's ideal for metrics monitoring, distributed tracing, and log management. 
+If you’re looking for an all-in-one solution that’s easy-to-use and open-source, consider Signoz. Being a full-stack APM, it's ideal for metrics monitoring, distributed tracing, and log management.
 
 ---
 

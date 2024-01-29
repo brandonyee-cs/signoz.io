@@ -35,8 +35,7 @@ Nodejs is a dynamically typed single-threaded programming language. There is a l
 
 But it’s not enough to monitor your nodejs web servers only. You need to monitor your entire application stack for robust application performance. In this tutorial, the sample application that we will monitor is built using the MEVN stack.
 
-> Learn how to build a CRUD application using Vue 3, Node, Express, and MongoDB.<br></br>
-> [Complete MEVN stack tutorial](https://signoz.io/blog/mevn-stack-tutorial/)
+> Learn how to build a CRUD application using Vue 3, Node, Express, and MongoDB.<br></br> > [Complete MEVN stack tutorial](https://signoz.io/blog/mevn-stack-tutorial/)
 
 Nodejs performance monitoring is essential to maintain and improve the application’s performance to meet increasing users’ expectations. When a user clicks on an application’s interface, the request travels from the frontend to the web servers initiating any database calls if required.
 
@@ -70,9 +69,9 @@ The first step is to instrument your application with OpenTelemetry client libra
 We will divide the tutorial into two parts:
 
 - Instrumenting the sample nodejs app
-    - Instrumenting the frontend application made with Vuejs
-    - Instrumenting node/express server
-    - Instrumenting MongoDB database calls
+  - Instrumenting the frontend application made with Vuejs
+  - Instrumenting node/express server
+  - Instrumenting MongoDB database calls
 - Monitor nodejs performance with SigNoz dashboards
 
 ## Installing SigNoz
@@ -114,7 +113,7 @@ You can find the application code instrumented with OpenTelemetry and ready to b
 git clone https://github.com/SigNoz/mevn-opentelemetry-example.git
 ```
 
-In the sample app repo, the SigNoz folder is also included. You can keep your SigNoz folder anywhere you want. The section below explains how to go about setting up the MEVN application for monitoring. 
+In the sample app repo, the SigNoz folder is also included. You can keep your SigNoz folder anywhere you want. The section below explains how to go about setting up the MEVN application for monitoring.
 
 Note: The GitHub sample app is already instrumented with OpenTelemetry.
 
@@ -146,7 +145,7 @@ const resource = new Resource({ "service.name": serviceName });
 const provider = new WebTracerProvider({ resource });
 
 const collector = new CollectorTraceExporter({
-    url: "http://localhost:4318/v1/traces",
+  url: "http://localhost:4318/v1/traces",
 });
 
 provider.addSpanProcessor(new SimpleSpanProcessor(collector));
@@ -156,69 +155,58 @@ const webTracerWithZone = provider.getTracer(serviceName);
 
 var bindingSpan;
 
-window.startBindingSpan = (
-    traceId,
-    spanId,
-    traceFlags,
-) => {
-    bindingSpan = webTracerWithZone.startSpan("");
-    bindingSpan.spanContext().traceId = traceId;
-    bindingSpan.spanContext().spanId = spanId;
-    bindingSpan.spanContext().traceFlags = traceFlags;
+window.startBindingSpan = (traceId, spanId, traceFlags) => {
+  bindingSpan = webTracerWithZone.startSpan("");
+  bindingSpan.spanContext().traceId = traceId;
+  bindingSpan.spanContext().spanId = spanId;
+  bindingSpan.spanContext().traceFlags = traceFlags;
 };
 
 registerInstrumentations({
-    instrumentations: [
-        new FetchInstrumentation({
-            propagateTraceHeaderCorsUrls: ["/.*/g"],
-            clearTimingResources: true,
-            applyCustomAttributesOnSpan: (
-                span,
-                request,
-                result,
-            ) => {
-                const attributes = span.attributes;
-                if (attributes.component === "fetch") {
-                    span.updateName(
-                        `${attributes["http.method"]} ${attributes["http.url"]}`
-                    );
-                }
-                if (result instanceof Error) {
-                    span.setStatus({
-                        code: SpanStatusCode.ERROR,
-                        message: result.message,
-                    });
-                    span.recordException(result.stack || result.name);
-                }
-            },
-        }),
-    ],
+  instrumentations: [
+    new FetchInstrumentation({
+      propagateTraceHeaderCorsUrls: ["/.*/g"],
+      clearTimingResources: true,
+      applyCustomAttributesOnSpan: (span, request, result) => {
+        const attributes = span.attributes;
+        if (attributes.component === "fetch") {
+          span.updateName(
+            `${attributes["http.method"]} ${attributes["http.url"]}`
+          );
+        }
+        if (result instanceof Error) {
+          span.setStatus({
+            code: SpanStatusCode.ERROR,
+            message: result.message,
+          });
+          span.recordException(result.stack || result.name);
+        }
+      },
+    }),
+  ],
 });
 
 // This is the function that we will be using to trace function calls
-export function traceSpan(
-    name,
-    func
-) {
-    var singleSpan;
-    if (bindingSpan) {
-        const ctx = trace.setSpan(context.active(), bindingSpan);
-        singleSpan = webTracerWithZone.startSpan(name, undefined, ctx);
-        bindingSpan = undefined;
-    } else {
-        singleSpan = webTracerWithZone.startSpan(name);
+export function traceSpan(name, func) {
+  var singleSpan;
+  if (bindingSpan) {
+    const ctx = trace.setSpan(context.active(), bindingSpan);
+    singleSpan = webTracerWithZone.startSpan(name, undefined, ctx);
+    bindingSpan = undefined;
+  } else {
+    singleSpan = webTracerWithZone.startSpan(name);
+  }
+  return context.with(trace.setSpan(context.active(), singleSpan), () => {
+    try {
+      const result = func();
+      singleSpan.end();
+      return result;
+    } catch (error) {
+      singleSpan.setStatus({ code: SpanStatusCode.ERROR });
+      singleSpan.end();
+      throw error;
     }
-    return context.with(trace.setSpan(context.active(), singleSpan), () => {
-        try {
-            const result = func();
-            singleSpan.end();
-            return result;
-        } catch (error) {
-            singleSpan.setStatus({ code: SpanStatusCode.ERROR });
-            singleSpan.end();
-            throw error;
-        }
-    });
+  });
 }
 ```
 
@@ -257,7 +245,7 @@ methods: {
   }
 ```
 
-Inside the `<template>` section in `App.vue`,  remove `addTodo()` & `removeTodo`  and use `handleAddTodo()` & `handleRemoveTodo()`:
+Inside the `<template>` section in `App.vue`, remove `addTodo()` & `removeTodo` and use `handleAddTodo()` & `handleRemoveTodo()`:
 
 ```jsx
 <template>
@@ -318,10 +306,10 @@ Here’s a snapshot from the GitHub repo. You can find the file [here](https://g
 After adding the changes, you need to restart the SigNoz Docker containers.
 
 **To stop the running SigNoz cluster:**
+
 ```
 sudo docker compose -f docker/clickhouse-setup/docker-compose.yaml stop
 ```
-
 
 **To start/resume the running SigNoz cluster:**
 
@@ -329,8 +317,7 @@ sudo docker compose -f docker/clickhouse-setup/docker-compose.yaml stop
 sudo docker compose -f docker/clickhouse-setup/docker-compose.yaml start
 ```
 
-
-**Note: The stopped SigNoz cluster should resume and mount to the existing docker volumes.*
+\*_Note: The stopped SigNoz cluster should resume and mount to the existing docker volumes._
 
 And congratulations, your frontend application made with Vuejs is now instrumented with OpenTelemetry.
 
@@ -352,32 +339,38 @@ Instantiate tracing by creating a `tracing.js` file and using the below code:
 
 ```jsx
 // tracing.js
-'use strict'
-const process = require('process');
-const opentelemetry = require('@opentelemetry/sdk-node');
-const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
-const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+"use strict";
+const process = require("process");
+const opentelemetry = require("@opentelemetry/sdk-node");
+const {
+  getNodeAutoInstrumentations,
+} = require("@opentelemetry/auto-instrumentations-node");
+const {
+  OTLPTraceExporter,
+} = require("@opentelemetry/exporter-trace-otlp-http");
 
 // configure the SDK to export telemetry data to the console
 // enable all auto-instrumentations from the meta package
 const traceExporter = new OTLPTraceExporter();
 const sdk = new opentelemetry.NodeSDK({
-    traceExporter,
-    instrumentations: [getNodeAutoInstrumentations()],
+  traceExporter,
+  instrumentations: [getNodeAutoInstrumentations()],
 });
 
 // initialize the SDK and register with the OpenTelemetry API
 // this enables the API to record telemetry
-sdk.start()
-    .then(() => console.log('Tracing initialized'))
-    .catch((error) => console.log('Error initializing tracing', error));
+sdk
+  .start()
+  .then(() => console.log("Tracing initialized"))
+  .catch((error) => console.log("Error initializing tracing", error));
 
 // gracefully shut down the SDK on process exit
-process.on('SIGTERM', () => {
-    sdk.shutdown()
-        .then(() => console.log('Tracing terminated'))
-        .catch((error) => console.log('Error terminating tracing', error))
-        .finally(() => process.exit(0));
+process.on("SIGTERM", () => {
+  sdk
+    .shutdown()
+    .then(() => console.log("Tracing terminated"))
+    .catch((error) => console.log("Error terminating tracing", error))
+    .finally(() => process.exit(0));
 });
 ```
 

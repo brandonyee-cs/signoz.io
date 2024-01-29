@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: daniel
 description: Steps to monitor Kubernetes cluster metrics with OpenTelemetry 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect Kubernetes cluster metrics 3. Send collected metrics to SigNoz for monitoring and visualization...
 image: /img/blog/2023/12/otel-k8s-cluster-metrics-monitoring-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -19,7 +19,6 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/opentelemetry-kubernetes-cluster-metrics-monitoring/"/>
 </head>
 
-
 Monitoring Kubernetes cluster metrics ensures your containerized infrastructure operates as it should. By tracking essential indicators like CPU utilization, memory consumption, and pod/node statuses, you gain insights to proactively address issues, optimize resources, and maintain overall health. In this tutorial, you will configure OpenTelemetry Collector to collect Kubernetes cluster metrics and send them to SigNoz for monitoring and visualization.
 
 <!--truncate-->
@@ -27,6 +26,7 @@ Monitoring Kubernetes cluster metrics ensures your containerized infrastructure 
 ![Cover Image](/img/blog/2023/12/otel-k8s-cluster-metrics-monitoring-cover.webp)
 
 In this tutorial, we cover:
+
 - [What is a Kubernetes cluster?](#what-is-a-kubernetes-cluster)
 - [What is OpenTelemetry](#what-is-opentelemetry)
 - [What is OpenTelemetry Collector?](#what-is-opentelemetry-collector)
@@ -38,9 +38,7 @@ In this tutorial, we cover:
 - [Reference: Metrics and Attributes for Kubernetes Cluster supported by OpenTelemetry](#reference-metrics-and-attributes-for-kubernetes-cluster-supported-by-opentelemetry)
 - [Conclusion](#conclusion)
 
-
 If you want to jump straight into implementation, start with this [prerequisites](#prerequisites) section.
-
 
 ## What is a Kubernetes cluster?
 
@@ -83,7 +81,7 @@ receivers:
         cors:
           allowed_origins:
             - http://test.com
-# Origins can have wildcards with *, use * by itself to match any origin.
+            # Origins can have wildcards with *, use * by itself to match any origin.
             - https://*.example.com
           allowed_headers:
             - Example-Header
@@ -191,7 +189,6 @@ Replace `{region}` with the region for your SigNoz cloud account and `<SIGNOZ_IN
 </figure>
 <br />
 
-
 Create the configmap:
 
 ```jsx
@@ -205,12 +202,10 @@ A ServiceAccount is a Kubernetes object that provides an identity for processes 
 In your terminal, create a `serviceaccount.yml` file and paste the below content:
 
 ```jsx
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  labels:
-    app: otelcontribcol
-  name: otelcontribcol
+apiVersion: v1;
+kind: ServiceAccount;
+metadata: labels: app: otelcontribcol;
+name: otelcontribcol;
 ```
 
 The above configuration defines a ServiceAccount named "otelcontribcol" which provides an identity for pods or processes running within the cluster and can be referenced by other Kubernetes objects, such as Deployments or Pods, to define the set of permissions and access scope for those objects.
@@ -397,23 +392,19 @@ You can find more information on OpenTelemetry Kubernetes receiver <a href = "ht
 
 Once the collector service has been started successfully, navigate to your SigNoz Cloud account and access the "Dashboard" tab. Click on the “New Dashboard” button to create a new dashboard.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/k8s_dashboard.webp" alt="SigNoz dashboard"/>
     <figcaption><i>SigNoz dashboard</i></figcaption>
 </figure>
 <br/>
 
-
 To give the dashboard a name, click on “Configure.”
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/k8s_dashboard_config.webp" alt="Configuring dashboard"/>
     <figcaption><i>Configuring dashboard</i></figcaption>
 </figure>
 <br/>
-
 
 Enter your preferred dashboard name in the "Name" input box and save the changes.
 
@@ -423,7 +414,6 @@ Enter your preferred dashboard name in the "Name" input box and save the changes
 </figure>
 <br/>
 
-
 Now, you can create various panels for your dashboard. There are three visualization options to display your data: Time Series, Value, and Table formats. Choose the format that best suits your preferences, depending on the metric you want to monitor. You can opt for the "Time Series" visualization for the initial metric.
 
 <figure data-zoomable align='center'>
@@ -431,7 +421,6 @@ Now, you can create various panels for your dashboard. There are three visualiza
     <figcaption><i>Dashboard visualization options</i></figcaption>
 </figure>
 <br/>
-
 
 In the "Query Builder" tab, enter "k8s," and you should see various Kubernetes metrics. This confirms that the OpenTelemetry Collector is successfully collecting the Kubernetes cluster metrics and forwarding them to SigNoz for monitoring and visualization.
 
@@ -441,7 +430,6 @@ In the "Query Builder" tab, enter "k8s," and you should see various Kubernetes m
 </figure>
 <br/>
 
-
 You can query the collected metrics using the query builder and create panels for your dashboard.
 
 <figure data-zoomable align='center'>
@@ -449,7 +437,6 @@ You can query the collected metrics using the query builder and create panels fo
     <figcaption><i>Monitoring dashboard for the Kubernetes cluster</i></figcaption>
 </figure>
 <br/>
-
 
 Visit the SigNoz [documentation](https://signoz.io/docs/userguide/manage-dashboards-and-panels/) to learn more about creating dashboards and running queries.
 
@@ -460,7 +447,6 @@ Besides just setting up dashboards to monitor your Kubernetes cluster metrics, y
     <figcaption><i>Create alerts on important Kubernetes cluster</i></figcaption>
 </figure>
 <br/>
-
 
 It will take you to the alerts page; from there, you can create the alerts.
 
@@ -479,88 +465,88 @@ These metrics are enabled by default. Collectors provide many metrics that you c
 - **Value Type:** The value type indicates the type of data that is used to represent the value of the metric. Some common value types are integer and double.
 - **Unit:** The unit specifies the measurement unit associated with the metric. It helps in interpreting and comparing metric values, including Bytes, NONE, etc.
 
-| Metrics | Description | Metrics Name | Metric Type | Value Type | Unit |
-| --- | --- | --- | --- | --- | --- |
-| Container CPU Limit | Maximum CPU limit assigned to a container | k8s.container.cpu_limit | Gauge | Double | {cpu} |
-| Container CPU Request | CPU resources requested by a container | k8s.container.cpu_request | Gauge | Double | {cpu} |
-| Container Ephemeral Storage Limit | Maximum ephemeral storage limit for a container | k8s.container.ephemeralstorage_limit | Gauge | Int | By |
-| Container Ephemeral Storage Request | Ephemeral storage requested by a container | k8s.container.ephemeralstorage_request | Gauge | Int | By |
-| Container Memory Limit | Maximum memory limit assigned to a container | k8s.container.memory_limit | Gauge | Int | By |
-| Container Memory Request | Memory resources requested by a container | k8s.container.memory_request | Gauge | Int | By |
-| Container Ready | Indicates if a container is ready | k8s.container.ready | Gauge | Int |  |
-| Container Restarts | Number of restarts for a container | k8s.container.restarts | Gauge | Int | {restart} |
-| Container Storage Limit | Maximum storage limit for a container | k8s.container.storage_limit | Gauge | Int | By |
-| Container Storage Request | Storage resources requested by a container | k8s.container.storage_request | Gauge | Int | By |
-| CronJob Active Jobs | Number of active jobs for a CronJob | k8s.cronjob.active_jobs | Gauge | Int | {job} |
-| DaemonSet Current Scheduled Nodes | Number of nodes currently scheduled by a DaemonSet | k8s.daemonset.current_scheduled_nodes | Gauge | Int | {node} |
-| DaemonSet Desired Scheduled Nodes | Desired number of nodes to be scheduled by a DaemonSet | k8s.daemonset.desired_scheduled_nodes | Gauge | Int | {node} |
-| DaemonSet Misscheduled Nodes | Number of nodes misscheduled by a DaemonSet | k8s.daemonset.misscheduled_nodes | Gauge | Int | {node} |
-| DaemonSet Ready Nodes | Number of nodes ready in a DaemonSet | k8s.daemonset.ready_nodes | Gauge | Int | {node} |
-| Deployment Available | Number of available pods in a Deployment | k8s.deployment.available | Gauge | Int | {pod} |
-| Deployment Desired | Desired number of pods in a Deployment | k8s.deployment.desired | Gauge | Int | {pod} |
-| Horizontal Pod Autoscaler (HPA) Current Replica | Current number of replicas in an HPA | k8s.hpa.current_replicas | Gauge | Int | {pod} |
-| HPA Desired Replicas | Desired number of replicas in an HPA | k8s.hpa.desired_replicas | Gauge | Int | {pod} |
-| HPA Max Replicas | Maximum number of replicas in an HPA | k8s.hpa.max_replicas | Gauge | Int | {pod} |
-| HPA Min Replicas | Minimum number of replicas in an HPA | k8s.hpa.min_replicas | Gauge | Int | {pod} |
-| Job Active Pods | Number of active pods for a Job | k8s.job.active_pods | Gauge | Int | {pod} |
-| Job Desired Successful Pods | Desired number of successfully completed pods for a Job | k8s.job.desired_successful_pods | Gauge | Int | {pod} |
-| Job Failed Pods | Number of failed pods for a Job | k8s.job.failed_pods | Gauge | Int | {pod} |
-| Job Max Parallel Pods | Maximum parallel pods for a Job | k8s.job.max_parallel_pods | Gauge | Int | {pod} |
-| Job Successful Pods | Number of successfully completed pods for a Job | k8s.job.successful_pods | Gauge | Int | {pod} |
-| Namespace Phase | Phase of the Kubernetes namespace | k8s.namespace.phase | Gauge | Int |  |
-| Pod Phase | Phase of a Kubernetes pod | k8s.pod.phase | Gauge | Int |  |
-| ReplicaSet Available | Number of available pods in a ReplicaSet | k8s.replicaset.available | Gauge | Int | {pod} |
-| ReplicaSet Desired | Desired number of pods in a ReplicaSet | k8s.replicaset.desired | Gauge | Int | {pod} |
-| Replication Controller Available | Number of available pods in a Replication Controller | k8s.replication_controller.available | Gauge | Int | {pod} |
-| Replication Controller Desired | Desired number of pods in a Replication Controller | k8s.replication_controller.desired | Gauge | Int | {pod} |
-| Resource Quota Hard Limit | Hard resource limit defined in a Resource Quota | k8s.resource_quota.hard_limit | Gauge | Int | {resource} |
-| Resource Quota Used | Used resource in a Resource Quota | k8s.resource_quota.used | Gauge | Int | {resource} |
-| StatefulSet Current Pods | Number of current pods in a StatefulSet | k8s.statefulset.current_pods | Gauge | Int | {pod} |
-| StatefulSet Desired Pods | Desired number of pods in a StatefulSet | k8s.statefulset.desired_pods | Gauge | Int | {pod} |
-| StatefulSet Ready Pods | Number of ready pods in a StatefulSet | k8s.statefulset.ready_pods | Gauge | Int | {pod} |
-| StatefulSet Updated Pod | Number of updated pods in a StatefulSet | k8s.statefulset.updated_pods | Gauge | Int | {pod} |
+| Metrics                                         | Description                                             | Metrics Name                           | Metric Type | Value Type | Unit       |
+| ----------------------------------------------- | ------------------------------------------------------- | -------------------------------------- | ----------- | ---------- | ---------- |
+| Container CPU Limit                             | Maximum CPU limit assigned to a container               | k8s.container.cpu_limit                | Gauge       | Double     | {cpu}      |
+| Container CPU Request                           | CPU resources requested by a container                  | k8s.container.cpu_request              | Gauge       | Double     | {cpu}      |
+| Container Ephemeral Storage Limit               | Maximum ephemeral storage limit for a container         | k8s.container.ephemeralstorage_limit   | Gauge       | Int        | By         |
+| Container Ephemeral Storage Request             | Ephemeral storage requested by a container              | k8s.container.ephemeralstorage_request | Gauge       | Int        | By         |
+| Container Memory Limit                          | Maximum memory limit assigned to a container            | k8s.container.memory_limit             | Gauge       | Int        | By         |
+| Container Memory Request                        | Memory resources requested by a container               | k8s.container.memory_request           | Gauge       | Int        | By         |
+| Container Ready                                 | Indicates if a container is ready                       | k8s.container.ready                    | Gauge       | Int        |            |
+| Container Restarts                              | Number of restarts for a container                      | k8s.container.restarts                 | Gauge       | Int        | {restart}  |
+| Container Storage Limit                         | Maximum storage limit for a container                   | k8s.container.storage_limit            | Gauge       | Int        | By         |
+| Container Storage Request                       | Storage resources requested by a container              | k8s.container.storage_request          | Gauge       | Int        | By         |
+| CronJob Active Jobs                             | Number of active jobs for a CronJob                     | k8s.cronjob.active_jobs                | Gauge       | Int        | {job}      |
+| DaemonSet Current Scheduled Nodes               | Number of nodes currently scheduled by a DaemonSet      | k8s.daemonset.current_scheduled_nodes  | Gauge       | Int        | {node}     |
+| DaemonSet Desired Scheduled Nodes               | Desired number of nodes to be scheduled by a DaemonSet  | k8s.daemonset.desired_scheduled_nodes  | Gauge       | Int        | {node}     |
+| DaemonSet Misscheduled Nodes                    | Number of nodes misscheduled by a DaemonSet             | k8s.daemonset.misscheduled_nodes       | Gauge       | Int        | {node}     |
+| DaemonSet Ready Nodes                           | Number of nodes ready in a DaemonSet                    | k8s.daemonset.ready_nodes              | Gauge       | Int        | {node}     |
+| Deployment Available                            | Number of available pods in a Deployment                | k8s.deployment.available               | Gauge       | Int        | {pod}      |
+| Deployment Desired                              | Desired number of pods in a Deployment                  | k8s.deployment.desired                 | Gauge       | Int        | {pod}      |
+| Horizontal Pod Autoscaler (HPA) Current Replica | Current number of replicas in an HPA                    | k8s.hpa.current_replicas               | Gauge       | Int        | {pod}      |
+| HPA Desired Replicas                            | Desired number of replicas in an HPA                    | k8s.hpa.desired_replicas               | Gauge       | Int        | {pod}      |
+| HPA Max Replicas                                | Maximum number of replicas in an HPA                    | k8s.hpa.max_replicas                   | Gauge       | Int        | {pod}      |
+| HPA Min Replicas                                | Minimum number of replicas in an HPA                    | k8s.hpa.min_replicas                   | Gauge       | Int        | {pod}      |
+| Job Active Pods                                 | Number of active pods for a Job                         | k8s.job.active_pods                    | Gauge       | Int        | {pod}      |
+| Job Desired Successful Pods                     | Desired number of successfully completed pods for a Job | k8s.job.desired_successful_pods        | Gauge       | Int        | {pod}      |
+| Job Failed Pods                                 | Number of failed pods for a Job                         | k8s.job.failed_pods                    | Gauge       | Int        | {pod}      |
+| Job Max Parallel Pods                           | Maximum parallel pods for a Job                         | k8s.job.max_parallel_pods              | Gauge       | Int        | {pod}      |
+| Job Successful Pods                             | Number of successfully completed pods for a Job         | k8s.job.successful_pods                | Gauge       | Int        | {pod}      |
+| Namespace Phase                                 | Phase of the Kubernetes namespace                       | k8s.namespace.phase                    | Gauge       | Int        |            |
+| Pod Phase                                       | Phase of a Kubernetes pod                               | k8s.pod.phase                          | Gauge       | Int        |            |
+| ReplicaSet Available                            | Number of available pods in a ReplicaSet                | k8s.replicaset.available               | Gauge       | Int        | {pod}      |
+| ReplicaSet Desired                              | Desired number of pods in a ReplicaSet                  | k8s.replicaset.desired                 | Gauge       | Int        | {pod}      |
+| Replication Controller Available                | Number of available pods in a Replication Controller    | k8s.replication_controller.available   | Gauge       | Int        | {pod}      |
+| Replication Controller Desired                  | Desired number of pods in a Replication Controller      | k8s.replication_controller.desired     | Gauge       | Int        | {pod}      |
+| Resource Quota Hard Limit                       | Hard resource limit defined in a Resource Quota         | k8s.resource_quota.hard_limit          | Gauge       | Int        | {resource} |
+| Resource Quota Used                             | Used resource in a Resource Quota                       | k8s.resource_quota.used                | Gauge       | Int        | {resource} |
+| StatefulSet Current Pods                        | Number of current pods in a StatefulSet                 | k8s.statefulset.current_pods           | Gauge       | Int        | {pod}      |
+| StatefulSet Desired Pods                        | Desired number of pods in a StatefulSet                 | k8s.statefulset.desired_pods           | Gauge       | Int        | {pod}      |
+| StatefulSet Ready Pods                          | Number of ready pods in a StatefulSet                   | k8s.statefulset.ready_pods             | Gauge       | Int        | {pod}      |
+| StatefulSet Updated Pod                         | Number of updated pods in a StatefulSet                 | k8s.statefulset.updated_pods           | Gauge       | Int        | {pod}      |
 
 You can visit the <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sclusterreceiver/documentation.md" rel="noopener noreferrer nofollow" target="_blank" >Kubernetes cluster receiver</a> GitHub repo to learn more about these metrics.
 
 ### Resource Attributes
 
-Resource attributes are a set of key-value pairs that provide additional context about the source of a metric. They are used to identify and classify metrics, and to associate them with specific resources or entities within a system. 
+Resource attributes are a set of key-value pairs that provide additional context about the source of a metric. They are used to identify and classify metrics, and to associate them with specific resources or entities within a system.
 
 The below attributes are enabled by default for a Kubernetes cluster.
 
-| Name | Description | Values | Enabled |
-| --- | --- | --- | --- |
-| container.id | The container id. | Any Str | true |
-| container.image.name | The container image name | Any Str | true |
-| container.image.tag | The container image tag | Any Str | true |
-| k8s.container.name | The k8s container name | Any Str | true |
-| k8s.cronjob.name | The k8s CronJob name | Any Str | true |
-| k8s.cronjob.uid | The k8s CronJob uid. | Any Str | true |
-| k8s.daemonset.name | The k8s daemonset name. | Any Str | true |
-| k8s.daemonset.uid | The k8s daemonset uid. | Any Str | true |
-| k8s.deployment.name | The name of the Deployment. | Any Str | true |
-| k8s.deployment.uid | The UID of the Deployment. | Any Str | true |
-| k8s.hpa.name | The k8s hpa name. | Any Str | true |
-| k8s.hpa.uid | The k8s hpa uid. | Any Str | true |
-| k8s.job.name | The k8s pod name. | Any Str | true |
-| k8s.job.uid | The k8s job uid. | Any Str | true |
-| k8s.kubelet.version | The version of Kubelet running on the node. | Any Str | false |
-| k8s.kubeproxy.version | The version of Kube Proxy running on the node. | Any Str | false |
-| k8s.namespace.name | The k8s namespace name. | Any Str | true |
-| k8s.namespace.uid | The k8s namespace uid. | Any Str | true |
-| k8s.node.name | The k8s node name. | Any Str | true |
-| k8s.node.uid | The k8s node uid. | Any Str | true |
-| k8s.pod.name | The k8s pod name. | Any Str | true |
-| k8s.pod.qos_class | The k8s pod qos class name. One of Guaranteed, Burstable, BestEffort. | Any Str | false |
-| k8s.pod.uid | The k8s pod uid. | Any Str | true |
-| k8s.replicaset.name | The k8s replicaset name | Any Str | true |
-| k8s.replicaset.uid | The k8s replicaset uid | Any Str | true |
-| k8s.replicationcontroller.name | The k8s replicationcontroller name. | Any Str | true |
-| k8s.replicationcontroller.uid | The k8s replicationcontroller uid. | Any Str | true |
-| k8s.resourcequota.name | The k8s resourcequota name. | Any Str | true |
-| k8s.resourcequota.uid | The k8s resourcequota uid. | Any Str | true |
-| k8s.statefulset.name | The k8s statefulset name. | Any Str | true |
-| k8s.statefulset.uid | The k8s statefulset uid. | Any Str | true |
+| Name                           | Description                                                           | Values  | Enabled |
+| ------------------------------ | --------------------------------------------------------------------- | ------- | ------- |
+| container.id                   | The container id.                                                     | Any Str | true    |
+| container.image.name           | The container image name                                              | Any Str | true    |
+| container.image.tag            | The container image tag                                               | Any Str | true    |
+| k8s.container.name             | The k8s container name                                                | Any Str | true    |
+| k8s.cronjob.name               | The k8s CronJob name                                                  | Any Str | true    |
+| k8s.cronjob.uid                | The k8s CronJob uid.                                                  | Any Str | true    |
+| k8s.daemonset.name             | The k8s daemonset name.                                               | Any Str | true    |
+| k8s.daemonset.uid              | The k8s daemonset uid.                                                | Any Str | true    |
+| k8s.deployment.name            | The name of the Deployment.                                           | Any Str | true    |
+| k8s.deployment.uid             | The UID of the Deployment.                                            | Any Str | true    |
+| k8s.hpa.name                   | The k8s hpa name.                                                     | Any Str | true    |
+| k8s.hpa.uid                    | The k8s hpa uid.                                                      | Any Str | true    |
+| k8s.job.name                   | The k8s pod name.                                                     | Any Str | true    |
+| k8s.job.uid                    | The k8s job uid.                                                      | Any Str | true    |
+| k8s.kubelet.version            | The version of Kubelet running on the node.                           | Any Str | false   |
+| k8s.kubeproxy.version          | The version of Kube Proxy running on the node.                        | Any Str | false   |
+| k8s.namespace.name             | The k8s namespace name.                                               | Any Str | true    |
+| k8s.namespace.uid              | The k8s namespace uid.                                                | Any Str | true    |
+| k8s.node.name                  | The k8s node name.                                                    | Any Str | true    |
+| k8s.node.uid                   | The k8s node uid.                                                     | Any Str | true    |
+| k8s.pod.name                   | The k8s pod name.                                                     | Any Str | true    |
+| k8s.pod.qos_class              | The k8s pod qos class name. One of Guaranteed, Burstable, BestEffort. | Any Str | false   |
+| k8s.pod.uid                    | The k8s pod uid.                                                      | Any Str | true    |
+| k8s.replicaset.name            | The k8s replicaset name                                               | Any Str | true    |
+| k8s.replicaset.uid             | The k8s replicaset uid                                                | Any Str | true    |
+| k8s.replicationcontroller.name | The k8s replicationcontroller name.                                   | Any Str | true    |
+| k8s.replicationcontroller.uid  | The k8s replicationcontroller uid.                                    | Any Str | true    |
+| k8s.resourcequota.name         | The k8s resourcequota name.                                           | Any Str | true    |
+| k8s.resourcequota.uid          | The k8s resourcequota uid.                                            | Any Str | true    |
+| k8s.statefulset.name           | The k8s statefulset name.                                             | Any Str | true    |
+| k8s.statefulset.uid            | The k8s statefulset uid.                                              | Any Str | true    |
 
 You can see these resource attributes in the <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sclusterreceiver/documentation.md#resource-attributes" rel="noopener noreferrer nofollow" target="_blank" >OpenTelemetry Collector Contrib</a> repo for the Kubernetes cluster receiver.
 
@@ -574,7 +560,6 @@ OpenTelemetry is becoming a global standard for open-source observability, offer
 
 SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/) that can be used as a single backend for all your observability needs.
 
-
 ---
 
 ## Further Reading
@@ -584,4 +569,3 @@ SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opent
 - [An OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/)
 
 ---
-

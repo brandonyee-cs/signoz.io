@@ -25,6 +25,7 @@ import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 Are you looking for a New Relic alternative? Then you have come to the right place. New Relic is a comprehensive observability tool. But it might be too complex for your use case, or you might have been bugged by its complex pricing policies like user seats-based pricing. We have made a list of top 11 New Relic alternatives that you might want to consider.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/12/new-relic-alternatives-cover.webp)
 
 New Relic provides an array of tools for monitoring and observability. But it’s not meant for everyone. New Relic’s user pricing can go up to $549/user. Even for teams with 10-15 devs, the cost becomes significant. At scale, the cost of adding users can go up to 66% of the total bill. ([Learn more](https://signoz.io/blog/pricing-comparison-signoz-vs-datadog-vs-newrelic-vs-grafana/#no-user-based-pricing-collaborate-seamlessly-with-signoz))
@@ -37,31 +38,28 @@ In this article, we'll explore the top 11 alternatives & competitors to New Reli
 
 ## Top 11 New Relic Alternatives & Competitors at a glance
 
-| Tool | Best For | Standout Feature | Pricing |
-| --- | --- | --- | --- |
-| [SigNoz](#signoz-open-source) | Most advanced OpenTelemetry-native APM that provides logs, metrics, and traces under a single pane of glass. | Correlation between signals, exceptions correlated with Traces, ClickHouse for storage, Logs ingestion pipeline to parse unstructured logs easily | Simple usage-based pricing. Can save [up to 60%](https://signoz.io/blog/pricing-comparison-signoz-vs-datadog-vs-newrelic-vs-grafana/) of your New Relic Bill. [["]](https://signoz.io/pricing/) |
-| [Grafana](#grafana---loki-tempo-mimir) | Integration with various data sources, visualizing time-series data. | Highly customizable dashboards | Cloud Pro plan starts at $29 plus usage. $0.5 per GB for Logs and Traces and $8 per 1k metrics active series. Charges for user-seats. <a href = "https://grafana.com/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-| [Appdynamics](#appdynamics) | Large IT teams who need a comprehensive platform that includes APM, network & security monitoring | Can build dashboards for key business transactions | Enterprise edition starts at $50 per month per CPU core. <a href = "https://www.appdynamics.com/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-| [Dynatrace](#dynatrace) | Enterprise teams that need a wide array of tools for app and infra-observability | An AI agent called Davis AI that helps with data insights | Min. annual spend commitment + hourly pricing for various services. <a href = "https://www.dynatrace.com/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-| [Datadog](#datadog) | Cloud monitoring that integrates APM, logs management, and infra monitoring. | Easy onboarding, lots of integrations. | SKU-based pricing. APM starts at $40 per host per month for 150 GB spans and then $0.1/GB. <a href = "https://www.datadoghq.com/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-| [IBM Instana](#instana) | Automatic service discovery to monitor all components of your tech stack. | A lightweight agent on each host discovers all components. | Starts at $75 per APM host with min. 12-month service term. For 100 hosts, it is $6450 per month in a 12-month contract. <a href = "https://www.ibm.com/products/instana/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-| [Appoptics](#appoptics-solarwinds) | Cloud-based application performance monitoring (APM) and infrastructure monitoring solutions. | Identify outliers at a glance with transaction heatmaps. | Infrastructure + APM starts at $24.99 per host per month and is sold in packs of 10 hosts and 100 containers. <a href = "https://www.solarwinds.com/appoptics" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-| [Sematext](#sematext) | Managed ELK service, infrastructure monitoring, and tracing. | Real user monitoring with details about page loads, HTTP requests, etc. | Log monitoring starts at $50 per month for 1GB/day and a retention period of 7 days. <a href = "https://sematext.com/pricing/" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-| [Elastic APM](#elastic-apm) | Log monitoring powered by Elasticsearch | Anomaly detection for your services and databases. | Offers several pricing tiers starting with $95 per month to $175 per month for 120GB storage/2 zones. <a href = "https://www.elastic.co/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-| [Sentry](#sentry) | Best known for real-time error tracking, which helps to identify, diagnose, and fix crashes in applications. | Allows session replays of users before and after they encounter an issue. | The team plan starts at $29 per month + usage beyond 50k monthly errors. <a href = "https://sentry.io/pricing/" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-| [Honeycomb](#honeycomb) | Ability to handle high-dimensional data to provide insights for debugging applications. | BubbleUp feature to identify and investigate anomalies in system performance. | Pro plan starts at $130 per month with 100M events volume. <a href = "https://www.honeycomb.io/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
-
+| Tool                                   | Best For                                                                                                     | Standout Feature                                                                                                                                  | Pricing                                                                                                                                                                                                                                       |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [SigNoz](#signoz-open-source)          | Most advanced OpenTelemetry-native APM that provides logs, metrics, and traces under a single pane of glass. | Correlation between signals, exceptions correlated with Traces, ClickHouse for storage, Logs ingestion pipeline to parse unstructured logs easily | Simple usage-based pricing. Can save [up to 60%](https://signoz.io/blog/pricing-comparison-signoz-vs-datadog-vs-newrelic-vs-grafana/) of your New Relic Bill. [["]](https://signoz.io/pricing/)                                               |
+| [Grafana](#grafana---loki-tempo-mimir) | Integration with various data sources, visualizing time-series data.                                         | Highly customizable dashboards                                                                                                                    | Cloud Pro plan starts at $29 plus usage. $0.5 per GB for Logs and Traces and $8 per 1k metrics active series. Charges for user-seats. <a href = "https://grafana.com/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a>     |
+| [Appdynamics](#appdynamics)            | Large IT teams who need a comprehensive platform that includes APM, network & security monitoring            | Can build dashboards for key business transactions                                                                                                | Enterprise edition starts at $50 per month per CPU core. <a href = "https://www.appdynamics.com/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a>                                                                          |
+| [Dynatrace](#dynatrace)                | Enterprise teams that need a wide array of tools for app and infra-observability                             | An AI agent called Davis AI that helps with data insights                                                                                         | Min. annual spend commitment + hourly pricing for various services. <a href = "https://www.dynatrace.com/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a>                                                                 |
+| [Datadog](#datadog)                    | Cloud monitoring that integrates APM, logs management, and infra monitoring.                                 | Easy onboarding, lots of integrations.                                                                                                            | SKU-based pricing. APM starts at $40 per host per month for 150 GB spans and then $0.1/GB. <a href = "https://www.datadoghq.com/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a>                                          |
+| [IBM Instana](#instana)                | Automatic service discovery to monitor all components of your tech stack.                                    | A lightweight agent on each host discovers all components.                                                                                        | Starts at $75 per APM host with min. 12-month service term. For 100 hosts, it is $6450 per month in a 12-month contract. <a href = "https://www.ibm.com/products/instana/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a> |
+| [Appoptics](#appoptics-solarwinds)     | Cloud-based application performance monitoring (APM) and infrastructure monitoring solutions.                | Identify outliers at a glance with transaction heatmaps.                                                                                          | Infrastructure + APM starts at $24.99 per host per month and is sold in packs of 10 hosts and 100 containers. <a href = "https://www.solarwinds.com/appoptics" rel="noopener noreferrer nofollow" target="_blank" >["]</a>                    |
+| [Sematext](#sematext)                  | Managed ELK service, infrastructure monitoring, and tracing.                                                 | Real user monitoring with details about page loads, HTTP requests, etc.                                                                           | Log monitoring starts at $50 per month for 1GB/day and a retention period of 7 days. <a href = "https://sematext.com/pricing/" rel="noopener noreferrer nofollow" target="_blank" >["]</a>                                                    |
+| [Elastic APM](#elastic-apm)            | Log monitoring powered by Elasticsearch                                                                      | Anomaly detection for your services and databases.                                                                                                | Offers several pricing tiers starting with $95 per month to $175 per month for 120GB storage/2 zones. <a href = "https://www.elastic.co/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a>                                  |
+| [Sentry](#sentry)                      | Best known for real-time error tracking, which helps to identify, diagnose, and fix crashes in applications. | Allows session replays of users before and after they encounter an issue.                                                                         | The team plan starts at $29 per month + usage beyond 50k monthly errors. <a href = "https://sentry.io/pricing/" rel="noopener noreferrer nofollow" target="_blank" >["]</a>                                                                   |
+| [Honeycomb](#honeycomb)                | Ability to handle high-dimensional data to provide insights for debugging applications.                      | BubbleUp feature to identify and investigate anomalies in system performance.                                                                     | Pro plan starts at $130 per month with 100M events volume. <a href = "https://www.honeycomb.io/pricing" rel="noopener noreferrer nofollow" target="_blank" >["]</a>                                                                           |
 
 ## SigNoz (Open-Source)
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_flamegraphs.webp" alt="New Relic Alternative - SigNoz"/>
     <figcaption><i></i></figcaption>
 </figure>
 
-
-[SigNoz](https://signoz.io/) is a great New Relic alternative that is open-source and provides three signals in a single pane of glass. You can monitor logs, metrics, and traces and correlate signals for better insights into application performance. 
+[SigNoz](https://signoz.io/) is a great New Relic alternative that is open-source and provides three signals in a single pane of glass. You can monitor logs, metrics, and traces and correlate signals for better insights into application performance.
 
 One of the biggest benefits of using SigNoz over New Relic is adding as many team members as you like to improve collaboration. ([Learn more](https://signoz.io/comparisons/signoz-vs-newrelic/).)
 
@@ -80,7 +78,7 @@ With SigNoz, you can do the following:
 
 SigNoz is a great fit for engineering teams looking for an open-source alternative to New Relic. SigNoz also offers cloud and enterprise plans. This makes it a great choice for teams that want the flexibility of having their dev and staging environment on open-source and their prod services monitored by SigNoz cloud.
 
-SigNoz is also a [great choice](https://signoz.io/blog/opentelemetry-apm/) for engineering teams that want to shift their observability stack to OpenTelemetry. OpenTelemetry is quietly becoming the open-source standard for cloud-native application instrumentation for observability. It provides many benefits like no vendor lock-in, future-proof instrumentation, and covers a lot of use-cases. 
+SigNoz is also a [great choice](https://signoz.io/blog/opentelemetry-apm/) for engineering teams that want to shift their observability stack to OpenTelemetry. OpenTelemetry is quietly becoming the open-source standard for cloud-native application instrumentation for observability. It provides many benefits like no vendor lock-in, future-proof instrumentation, and covers a lot of use-cases.
 
 SigNoz is built to support OpenTelemetry natively. OpenTelemetry is <a href = "https://www.cncf.io/projects/opentelemetry/" rel="noopener noreferrer nofollow" target="_blank" >backed</a> by Cloud Native Computing Foundation and is the second most active project after Kubernetes in the CNCF landscape. OpenTelemetry frees you from vendor lock-in and offers a host of other benefits.
 
@@ -92,7 +90,6 @@ The pricing of SigNoz is usage-based. The cloud plan starts at $199 per month, w
 
 You can find more details on pricing [here](https://signoz.io/pricing/).
 
-
 ## Grafana - Loki, Tempo, Mimir
 
 <figure data-zoomable align='center'>
@@ -100,7 +97,6 @@ You can find more details on pricing [here](https://signoz.io/pricing/).
     <figcaption><i></i></figcaption>
 </figure>
 <br/>
-
 
 ### What is Grafana?
 
@@ -150,22 +146,22 @@ Some of the key features of the AppDynamics APM tool includes:
 
 ### Who is Appdynamics for?
 
-AppDynamics is an ideal Application Performance Monitoring (APM) tool for large enterprises with complex, multi-layered architectures, especially those aligning IT performance with business metrics. 
+AppDynamics is an ideal Application Performance Monitoring (APM) tool for large enterprises with complex, multi-layered architectures, especially those aligning IT performance with business metrics.
 
 Its AI-powered automated root cause analysis and customizable dashboards make it a perfect fit for organizations in cloud-native or hybrid environments, as well as for DevOps and Agile teams. Offering comprehensive insights into application performance and user experience, AppDynamics is tailored for companies seeking a robust, adaptable APM solution to optimize both technical and business outcomes.
 
 ### Pricing
 
-Here's a summarized table to understand AppDynamics' pricing structure for the   US region(at the time of writing this article):
+Here's a summarized table to understand AppDynamics' pricing structure for the US region(at the time of writing this article):
 
-| Edition | Pricing (per CPU Core per month) | Additional Notes |
-| --- | --- | --- |
-| Infrastructure Monitoring | $6 | - |
-| Premium | $33 | - |
-| Enterprise | $50 | - |
-| Enterprise for SAP | $95 | Specialized SAP Solutions |
-| Real User Monitoring | $0.06 per 1,000 tokens | - |
-| Cisco Secure Application | $13.75 | - |
+| Edition                   | Pricing (per CPU Core per month) | Additional Notes          |
+| ------------------------- | -------------------------------- | ------------------------- |
+| Infrastructure Monitoring | $6                               | -                         |
+| Premium                   | $33                              | -                         |
+| Enterprise                | $50                              | -                         |
+| Enterprise for SAP        | $95                              | Specialized SAP Solutions |
+| Real User Monitoring      | $0.06 per 1,000 tokens           | -                         |
+| Cisco Secure Application  | $13.75                           | -                         |
 
 More details on the <a href = "https://www.appdynamics.com/pricing" rel="noopener noreferrer nofollow" target="_blank" >Appdynamics pricing</a> page.
 
@@ -176,7 +172,6 @@ More details on the <a href = "https://www.appdynamics.com/pricing" rel="noopene
     <figcaption><i>Dynatrace application observability dashboard (Source: Dynatrace website)</i></figcaption>
 </figure>
 <br/>
-
 
 ### What is Dynatrace?
 
@@ -229,7 +224,6 @@ More details on <a href = "https://www.dynatrace.com/pricing" rel="noopener nore
 </figure>
 <br/>
 
-
 ### What is Datadog?
 
 <a href = "https://www.datadoghq.com" rel="noopener noreferrer nofollow" target="_blank" >Datadog</a> is a comprehensive monitoring and observability platform, that gives insights into the performance of IT infrastructure, applications, and services, utilizing metrics, traces, and logs for in-depth insights and proactive issue resolution.
@@ -242,7 +236,7 @@ It offers a wide range of capabilities encompassing infrastructure monitoring, l
 
 ### Who is Datadog for?
 
-Datadog is a great product for end-to-end application observability. But if you’re moving out of New Relic due to price, then Datadog is not an option as it can be [more expensive](https://signoz.io/blog/pricing-comparison-signoz-vs-datadog-vs-newrelic-vs-grafana/). 
+Datadog is a great product for end-to-end application observability. But if you’re moving out of New Relic due to price, then Datadog is not an option as it can be [more expensive](https://signoz.io/blog/pricing-comparison-signoz-vs-datadog-vs-newrelic-vs-grafana/).
 
 Based on the G2 reviews, Datadog is best suited for:
 
@@ -275,7 +269,6 @@ More details on <a href = "https://www.datadoghq.com/pricing" rel="noopener nore
 </figure>
 <br/>
 
-
 ### What is IBM Instana?
 
 IBM Instana is an Application Performance Monitoring (APM) solution designed for managing the performance of modern cloud-native applications. It provides real-time observability and automatic application discovery, enabling teams to detect and resolve issues rapidly.
@@ -283,8 +276,8 @@ IBM Instana is an Application Performance Monitoring (APM) solution designed for
 Its key features include:
 
 - **Automatic Application Discovery:** Instana automatically detects and maps all services, their dependencies, and configuration changes in real-time.
-- **Smart alerts and remediation:**  It provides automatic identification of likely root cause of incidents to improve mean time to resolution.
-- **Rich Integrations:**  Instana supports more than 300 integrations to get you started quickly.
+- **Smart alerts and remediation:** It provides automatic identification of likely root cause of incidents to improve mean time to resolution.
+- **Rich Integrations:** Instana supports more than 300 integrations to get you started quickly.
 
 ### Who is IBM Instana for?
 
@@ -308,7 +301,6 @@ IBM Instana pricing starts at $75 per APM host with a minimum of 12-month servic
     <figcaption><i>Appoptics Dashboard (Source: Appoptics Website)</i></figcaption>
 </figure>
 <br/>
-
 
 ### What is Appoptics?
 
@@ -349,7 +341,6 @@ For more detailed pricing information, you can visit <a href = "https://www.sola
 </figure>
 <br/>
 
-
 ### What is Sematext?
 
 Sematext is an all-in-one monitoring and logging service that delivers critical insights into the performance of applications and infrastructure. It can be used as a New Relic alternative, but it focuses more on log monitoring.
@@ -375,14 +366,14 @@ According to G2 reviews, Sematext is well-suited for the below use cases:
 Sematext offers several pricing plans for its services:
 
 1. **Logs Management**:
-    - Starts at $50 per month (or $40.50 per month when billed annually).
-    - Basic Plan: Free, with 7 days retention and 500 MB/day log volume.
+   - Starts at $50 per month (or $40.50 per month when billed annually).
+   - Basic Plan: Free, with 7 days retention and 500 MB/day log volume.
 2. **Infrastructure Monitoring**:
-    - Starts at $3.6 per host per month (or $3.24 per host per month when billed annually).
+   - Starts at $3.6 per host per month (or $3.24 per host per month when billed annually).
 3. **Experience (Real User Monitoring)**:
-    - Starts at $9 per month (or $8.1 per month when billed annually).
+   - Starts at $9 per month (or $8.1 per month when billed annually).
 4. **Synthetics (Website & API Monitoring)**:
-    - Starts at $2 per monitor per month.
+   - Starts at $2 per monitor per month.
 
 All plans come with a 14-day free trial. More details on the <a href = "https://sematext.com/pricing/" rel="noopener noreferrer nofollow" target="_blank" >Sematext Pricing Page</a>.
 
@@ -393,7 +384,6 @@ All plans come with a 14-day free trial. More details on the <a href = "https://
     <figcaption><i>Elastic APM dashboard (Source: Elastic Website)</i></figcaption>
 </figure>
 <br/>
-
 
 ### What is Elastic APM?
 
@@ -415,7 +405,7 @@ Compared to New Relic, Elastic APM can be preferred for its open-source foundati
 
 ### Pricing
 
-Elastic APM is part of the Elastic Cloud offerings. Pricing for Elastic Cloud starts at $95 per month for the Standard plan, $109 per month for the Gold plan, $125 per month for the Platinum plan, and $175 per month for the Enterprise plan. 
+Elastic APM is part of the Elastic Cloud offerings. Pricing for Elastic Cloud starts at $95 per month for the Standard plan, $109 per month for the Gold plan, $125 per month for the Platinum plan, and $175 per month for the Enterprise plan.
 
 Each tier offers progressively more features and capabilities. The Standard plan includes core Elastic Stack features, while higher tiers add advanced security, machine learning, and support options. Specific pricing may vary based on configuration and usage.
 
@@ -423,13 +413,11 @@ More details on the <a href = "https://www.elastic.co/pricing" rel="noopener nor
 
 ## Honeycomb
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/new-relic-alternatives-honeycomb.webp" alt="New Relic Alternative - Honeycomb"/>
     <figcaption><i>Honeycomb Dashboard (Source: Honeycomb website)</i></figcaption>
 </figure>
 <br/>
-
 
 ### What is Honeycomb?
 
@@ -439,7 +427,7 @@ When compared to New Relic, Honeycomb excels in handling high-dimensional data a
 
 ### Who is Honeycomb for?
 
-Honeycomb is designed for modern software engineers, DevOps teams, and SREs (Site Reliability Engineers) who manage complex, distributed systems. It's especially useful for teams that need to quickly diagnose and address performance issues in production environments. 
+Honeycomb is designed for modern software engineers, DevOps teams, and SREs (Site Reliability Engineers) who manage complex, distributed systems. It's especially useful for teams that need to quickly diagnose and address performance issues in production environments.
 
 Honeycomb's ability to analyze high-dimensional data makes it well-suited for organizations adopting microservices architectures or those needing detailed insights into how their applications behave under various conditions.
 
@@ -460,7 +448,6 @@ More details on the <a href = "https://www.honeycomb.io/pricing" rel="noopener n
     <figcaption><i></i></figcaption>
 </figure>
 <br/>
-
 
 ### What is Sentry?
 
@@ -484,7 +471,6 @@ Each plan offers a different level of event volume and features, catering to the
 
 More details on the <a href = "https://sentry.io/pricing/" rel="noopener noreferrer nofollow" target="_blank" >Sentry pricing</a> page.
 
-
 ## How to choose between so many New Relic Alternatives?
 
 Monitoring and observability are essential for applications in a production environment, and selecting the right tool for proactive action is crucial. Despite New Relic's capabilities, its challenges include legacy documentation, complex pricing, and a complicated user interface.
@@ -502,7 +488,6 @@ The suggested alternatives to New Relic could effectively meet your monitoring n
 - **Data Security and Compliance:** The tool must comply with data privacy and security standards, particularly for sensitive information.
 
 - **Trial Period and Transition Ease:** A trial period and support for a smooth transition from New Relic are important considerations.
-
 
 A tool like [SigNoz](https://signoz.io/comparisons/signoz-vs-newrelic/)(that's us) can be a great alternative to New Relic with its comprehensive features and transparent pricing policies.
 

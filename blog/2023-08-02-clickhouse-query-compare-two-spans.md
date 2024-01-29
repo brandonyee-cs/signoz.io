@@ -6,10 +6,10 @@ tags: [OpenTelemetry, Product]
 authors: nicamellifera
 description: Sharing a query that lets you compare the time between two spans in different traces, even across two different services.
 image: /img/blog/2023/08/clickhouse_query_cover-min.jpg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
- - OpenTelemetry
- - Dev community
+  - OpenTelemetry
+  - Dev community
 ---
 
 <head>
@@ -18,7 +18,7 @@ keywords:
 
 In a recent conversation on our <a href = "https://signoz.io/slack" rel="noopener noreferrer nofollow" target="_blank" >SigNoz community Slack</a>, a user shared their query that asks a deceptively simple question: **what is the average time between two spans in a trace?**
 
-The usefulness of this answer is evident if you think about how often the total trace time does not highlight the time you care about most. This could mean any number of things: that the total trace time of handling a web request might include lots of spans *after* a satisfying response was sent to the user. Or the time to handle a critical transaction might happen inside a larger trace.
+The usefulness of this answer is evident if you think about how often the total trace time does not highlight the time you care about most. This could mean any number of things: that the total trace time of handling a web request might include lots of spans _after_ a satisfying response was sent to the user. Or the time to handle a critical transaction might happen inside a larger trace.
 
 <!--truncate-->
 
@@ -64,7 +64,7 @@ ORDER BY interval ASC;
 
 ```
 
-The resulting graph gives us a track of the time between these spans, which may be a better indicator of performance than any span created by default.  
+The resulting graph gives us a track of the time between these spans, which may be a better indicator of performance than any span created by default.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/08/time-gap.webp" alt="image of the SigNoz dashboard"/>

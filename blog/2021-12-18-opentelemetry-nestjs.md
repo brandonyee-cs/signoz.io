@@ -4,9 +4,9 @@ slug: opentelemetry-nestjs
 date: 2023-03-24
 tags: [OpenTelemetry Instrumentation, JavaScript]
 authors: [ankit_anand, vishal]
-description: Setting up OpenTelemetry instrumentation for a Nestjs application. Step 1. Install required dependencies Step 2. Create a tracer.js file Step 3. Import the tracer module Step 4. Start the tracer... 
+description: Setting up OpenTelemetry instrumentation for a Nestjs application. Step 1. Install required dependencies Step 2. Create a tracer.js file Step 3. Import the tracer module Step 4. Start the tracer...
 image: /img/blog/2023/01/opentelemetry_nestjs_cover-min.jpg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - opentelemetry nestjs
@@ -37,16 +37,18 @@ OpenTelemetry is the leading open-source standard for instrumenting your code to
 
 OpenTelemetry is a set of tools, APIs, and SDKs used to instrument applications to create and manage telemetry data(Logs, metrics, and traces). It aims to make telemetry data(logs, metrics, and traces) a built-in feature of cloud-native software applications.
 
- One of the biggest advantages of using OpenTelemetry is that it is vendor-agnostic. It can export data in multiple formats, which you can send to a backend of your choice.
+One of the biggest advantages of using OpenTelemetry is that it is vendor-agnostic. It can export data in multiple formats, which you can send to a backend of your choice.
 
 In this article, we will use [SigNoz](https://signoz.io/) as a backend. SigNoz is an open-source APM tool that can be used for both metrics and distributed tracing.
 
 Let's get started and see how to use OpenTelemetry for a Nestjs application.
 
 ## Running a Nestjs application with OpenTelemetry
+
 First, you need to install SigNoz. Data collected by OpenTelemetry will be sent to SigNoz for storage and visualization.
 
 ### Installing SigNoz
+
 You can get started with SigNoz using just three commands at your terminal.
 
 ```jsx
@@ -54,6 +56,7 @@ git clone -b main https://github.com/SigNoz/signoz.git
 cd signoz/deploy/
 ./install.sh
 ```
+
 For detailed instructions, you can visit our documentation.
 
 [![Deployment Docs](/img/blog/common/deploy_docker_documentation.webp)](https://signoz.io/docs/install/)
@@ -70,6 +73,7 @@ The application list shown in the dashboard is from a sample app called HOT R.O.
 <br></br>
 
 ### Instrumenting a sample Nestjs application with OpenTelemetry
+
 For instrumenting a Nestjs application with OpenTelemetry, you need to install the required OpenTelemetry packages first. Steps involved in instrumenting a Nestjs application with OpenTelemetry are as follows:
 
 1. **Install below dependencies<br></br>**
@@ -87,23 +91,23 @@ npm install --save @opentelemetry/semantic-conventions
 <br></br>
 
 2. **Create a `tracer.ts` file**
-<br></br>
+   <br></br>
 
 The `IP of SIgNoz` will be localhost if you are running SigNoz on local.
-   
-```jsx
-'use strict';
 
-import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
-import { Resource } from '@opentelemetry/resources';
-import * as opentelemetry from '@opentelemetry/sdk-node';
-import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
+```jsx
+"use strict";
+
+import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
+import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
+import { Resource } from "@opentelemetry/resources";
+import * as opentelemetry from "@opentelemetry/sdk-node";
+import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions";
 
 // Configure the SDK to export telemetry data to the console
 // Enable all auto-instrumentations from the meta package
 const exporterOptions = {
-  url: 'http://localhost:4318/v1/traces',
+  url: "http://localhost:4318/v1/traces",
 };
 
 const traceExporter = new OTLPTraceExporter(exporterOptions);
@@ -111,7 +115,7 @@ const sdk = new opentelemetry.NodeSDK({
   traceExporter,
   instrumentations: [getNodeAutoInstrumentations()],
   resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'sampleNestJsApp',
+    [SemanticResourceAttributes.SERVICE_NAME]: "sampleNestJsApp",
   }),
 });
 
@@ -120,11 +124,11 @@ const sdk = new opentelemetry.NodeSDK({
 sdk.start();
 
 // gracefully shut down the SDK on process exit
-process.on('SIGTERM', () => {
+process.on("SIGTERM", () => {
   sdk
     .shutdown()
-    .then(() => console.log('Tracing terminated'))
-    .catch((error) => console.log('Error terminating tracing', error))
+    .then(() => console.log("Tracing terminated"))
+    .catch((error) => console.log("Error terminating tracing", error))
     .finally(() => process.exit(0));
 });
 
@@ -150,28 +154,28 @@ Remember to allow incoming requests to port 4318 of machine where SigNoz backend
 3. **Import the tracer module where your app starts**<br></br>
    On `main.ts` file or file where your app starts import tracer using below command.
    :::info
-    The below import should be the first line in the main file of your application (Ex -> `main.ts`)
+   The below import should be the first line in the main file of your application (Ex -> `main.ts`)
    :::
-   
+
    ```jsx
-   import tracer from './tracer';
+   import tracer from "./tracer";
    ```
-   
+
    Here's a sample main application importing `tracer.ts`:
-   
+
    ```jsx
-   import tracer from './tracer';
-   import { NestFactory } from '@nestjs/core';
-   import { AppModule } from './app.module';
-   
+   import tracer from "./tracer";
+   import { NestFactory } from "@nestjs/core";
+   import { AppModule } from "./app.module";
+
    // All of your application code and any imports that should leverage
    // OpenTelemetry automatic instrumentation must go here.
-   
+
    async function bootstrap() {
-    await tracer.start();
-    
-    const app = await NestFactory.create(AppModule);
-    await app.listen(3001);
+     await tracer.start();
+
+     const app = await NestFactory.create(AppModule);
+     await app.listen(3001);
    }
    bootstrap();
    ```
@@ -201,6 +205,7 @@ If you run this app, you can find a `SampleNestJsApp` in the list of application
 <br></br>
 
 ## Open-source tool to visualize telemetry data
+
 SigNoz makes it easy to visualize metrics and traces captured through OpenTelemetry instrumentation.
 
 SigNoz comes with out of box RED metrics charts and visualization. RED metrics stands for:
@@ -243,8 +248,8 @@ You can also build custom metrics dashboard for your infrastructure.
 
 <br></br>
 
-
 ## Conclusion
+
 OpenTelemetry makes it very convenient to instrument your Nestjs application. You can then use an open-source APM tool like SigNoz to analyze the performance of your app. As SigNoz offers a full-stack observability tool, you don't have to use multiple tools for your monitoring needs.
 
 You can try out SigNoz by visiting its GitHub repo 👇
@@ -269,4 +274,3 @@ If you want to read more about SigNoz 👇
 [Golang Aplication Monitoring with OpenTelemetry and SigNoz](https://signoz.io/opentelemetry/go/)
 
 [OpenTelemetry collector - complete guide](https://signoz.io/blog/opentelemetry-collector-complete-guide/)
-

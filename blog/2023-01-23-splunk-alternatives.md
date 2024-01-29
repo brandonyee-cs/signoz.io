@@ -10,20 +10,17 @@ image: /img/blog/2023/01/splunk-alternatives-cover.jpeg
 keywords:
   - splunk
   - splunk alternatives
-
 ---
+
 <head>
   <link rel="canonical" href="https://signoz.io/blog/splunk-alternatives/"/>
 </head>
-
-import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 
 Splunk is a powerful unified security and observability tool that analyzes data and logs. Splunk allows you to monitor and visualize data in real-time. It analyzes machine-generated data and logs through a web interface. It was recently acquired by Cisco in a $28 billion deal. While Splunk is a powerful platform, it might not suit your needs. In this post, we discuss 11 top Splunk alternatives that you can consider.
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2023/01/splunk-alternatives-cover.webp)
-
 
 Splunk provides a wide range of tools for analyzing and visualizing your data fast and at scale. This way, you identify patterns, detect anomalies and make informed decisions. At its core, Splunk provides capabilities such as:
 
@@ -33,7 +30,6 @@ Splunk provides a wide range of tools for analyzing and visualizing your data fa
 - Alerting and reporting
 
 Based on these capabilities, Splunk is a versatile platform. It can be used for a wide range of use cases.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/splunk_splunk_alternative.webp" alt="Splunk active alerts for the services monitoring in application performance monitoring (APM)"/>
@@ -46,17 +42,14 @@ Based on these capabilities, Splunk is a versatile platform. It can be used for 
 
 Let's briefly discuss these use cases:
 
-- **Log Management**<br></br>
- As a log management tool, it collects and indexes logs from your application. This way, you can quickly search, analyze, and visualize log data in real time. The major importance of Splunk logs is to enable you to identify patterns, insights, and trends and troubleshoot issues faster.
-
-- **Security Analysis**<br></br>
-Splunk monitors and analyze security-related data. This mainly includes analyzing network traffic and system logs to detect and respond to potential security threats. This helps organizations meet compliance requirements by providing visibility into security-related data and tracking user activity.
-
-- **Application Performance**<br></br>
-Traffic data allows Splunk to monitor the performance of applications. Splunk collects traffic, page load times, and user engagement data. This allows you to identify performance bottlenecks and improves the user experience where needed.
-
-- **Network infrastructure monitoring**<br></br>
-Splunk monitors network-related issues such as network traffic, device performance, and availability. This allows you to identify and diagnose issues within your network infrastructure.
+- **Log Management**
+  As a log management tool, it collects and indexes logs from your application. This way, you can quickly search, analyze, and visualize log data in real time. The major importance of Splunk logs is to enable you to identify patterns, insights, and trends and troubleshoot issues faster.
+- **Security Analysis**
+  Splunk monitors and analyze security-related data. This mainly includes analyzing network traffic and system logs to detect and respond to potential security threats. This helps organizations meet compliance requirements by providing visibility into security-related data and tracking user activity.
+- **Application Performance**
+  Traffic data allows Splunk to monitor the performance of applications. Splunk collects traffic, page load times, and user engagement data. This allows you to identify performance bottlenecks and improves the user experience where needed.
+- **Network infrastructure monitoring
+  S**plunk monitors network-related issues such as network traffic, device performance, and availability. This allows you to identify and diagnose issues within your network infrastructure.
 
 Splunk has many use cases. However, there are some situations where you might consider using Splunk alternatives.
 
@@ -86,8 +79,6 @@ Here are the best 11 Splunk alternatives that you can use:
 - [Mezmo](#mezmo)
 - [Loggly](#loggly)
 
-
-
 ## Top Splunk Alternatives
 
 ### SigNoz
@@ -116,14 +107,12 @@ The key features of SigNoz include:
 
 ### Logstash
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/logstash_splunk_alternative.webp" alt="Elastic agent host overview dashboard to view performance metrics from your host system"/>
     <figcaption><i>Elastic agent host overview dashboard to view performance metrics from your host system</i></figcaption>
 </figure>
 
 <br></br>
-
 
 <a href = "https://www.elastic.co/logstash/" rel="noopener noreferrer nofollow" target="_blank" >Logstash</a> is an open-source data collection tool with real-time capabilities. It provides an easy-to-build pipeline for collecting data from different sources.
 
@@ -148,7 +137,6 @@ However, they have key differences in terms of their functionality and architect
 
 <br></br>
 
-
 <a href = "https://www.fluentd.org/" rel="noopener noreferrer nofollow" target="_blank" >Fluentd</a> is an open-source log management and data collection tool. Just like Logstash, Fluentd uses a pipeline-based architecture. This allows it to collect data from various sources and network traffic and forward it to various destinations.
 
 Fluentd excels in real-time data processing and forwarding. Its main advantages include:
@@ -166,7 +154,6 @@ Fluentd excels in real-time data processing and forwarding. Its main advantages
 </figure>
 
 <br></br>
-
 
 <a href = "https://www.datadoghq.com/" rel="noopener noreferrer nofollow" target="_blank" >Datadog</a> is a cloud-based monitoring and analytics tool designed for infrastructures, cloud-scale applications, and logs. It offers a monitoring and security platform for cloud applications. Datadog provides integrations with other tools and services to make it easier to collect and analyze data from different sources.
 
@@ -194,11 +181,9 @@ Logz.io is geared toward utilizing the most open-source tools for monitoring an
 - The log metric analytics are powered by Prometheus.
 - It uses OpenTelemetry and Jaeger for trace analytics.
 
-
 Logz.io offers a free trial for its platform. Its cost-effective plan allows you to only pay depending on the scale and usage of the volume of data you ingest. It also natively supports cloud-based platforms, allowing you to analyze data instantly without needing installation, configuration, or maintenance.
 
 ### Graylog
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/graylog_splunk_alternative.webp" alt="Graylog dashboard widgets overview for your application"/>
@@ -206,7 +191,6 @@ Logz.io offers a free trial for its platform. Its cost-effective plan allows yo
 </figure>
 
 <br></br>
-
 
 <a href = "https://www.graylog.org/" rel="noopener noreferrer nofollow" target="_blank" >Graylog</a> is an open-source centralized log management and analytics tool. It collects, enhances, correlates, searches, and visualizes all your log data in one location to uncover patterns and trends for application and IT infrastructure.
 
@@ -220,8 +204,6 @@ Graylog provides similar capabilities to Splunk. However, unlike Splunk, it is o
 </figure>
 
 <br></br>
-
-
 
 <a href = "https://newrelic.com/" rel="noopener noreferrer nofollow" target="_blank" >New Relic</a> is a performance monitoring and analytics platform. It provides capabilities such as
 
@@ -243,7 +225,6 @@ New Relic provides about 470+ integrations for seamless integration with other 
 </figure>
 
 <br></br>
-
 
 <a href = "https://www.dynatrace.com/" rel="noopener noreferrer nofollow" target="_blank" >Dynatrace</a> is an AI-powered data platform. It uses AI-based technologies throughout your technology stack. This makes cloud processes more efficient, automates DevSecOps, and enables organizations to do more with less in the cloud.
 
@@ -279,7 +260,7 @@ It also provides multi-cloud support. AppDynamics Cloud provides visibility wi
 
 <br></br>
 
-<a href = "https://www.mezmo.com/" rel="noopener noreferrer nofollow" target="_blank" >Mezmo</a> is an observability pipeline platform for log analysis. It collects data from various sources, process it in real-time, and distributes it to multiple. 
+<a href = "https://www.mezmo.com/" rel="noopener noreferrer nofollow" target="_blank" >Mezmo</a> is an observability pipeline platform for log analysis. It collects data from various sources, process it in real-time, and distributes it to multiple.
 
 Its context utilizes real-time data enrichment and correlation to gain valuable insights and take action quickly. It then uses real-time alerts and access top-notch log analysis tools to let you take meaningful action on time.
 
@@ -292,7 +273,6 @@ Its context utilizes real-time data enrichment and correlation to gain valuable 
 
 <br></br>
 
-
 <a href = "https://www.loggly.com/" rel="noopener noreferrer nofollow" target="_blank" >Loggly</a> is a cloud-based log analysis management tool. It provides full-stack observability to help you aggregate and analyze logs over massive volumes of data from different log sources. Loggly includes features such as:
 
 - Log management to collect, store, and analyze log data from various sources.
@@ -302,15 +282,29 @@ Its context utilizes real-time data enrichment and correlation to gain valuable 
 
 ## Conclusion
 
-The above tools help you centralize your application monitoring and observability practices. These Splunk alternatives can be used for your monitoring prerequisites. If you’re looking for a comprehensive tool that can serve all your observability needs, then you can choose SigNoz. 
+The above tools help you centralize your application monitoring and observability practices. These Splunk alternatives can be used for your monitoring prerequisites. If you’re looking for a comprehensive tool that can serve all your observability needs, then you can choose SigNoz.
 
 As SigNoz is a full-stack APM, it can act as a one-stop solution for metrics monitoring, distributed tracing, and log management. It is also based on OpenTelemetry, which frees you from any vendor lock-in.
 
-
-
 ## Getting Started with SigNoz
 
-<GetStartedSigNoz />
+SigNoz can be installed on macOS or Linux computers in just three steps by using a simple install script.
+
+The install script automatically installs Docker Engine on Linux. However, on macOS, you must manually install <a href = "https://docs.docker.com/engine/install/" rel="noopener noreferrer nofollow" target="_blank" >Docker Engine</a> before running the install script.
+
+```bash
+git clone -b main https://github.com/SigNoz/signoz.git
+cd signoz/deploy/
+./install.sh
+```
+
+You can visit our documentation for instructions on how to install SigNoz using Docker Swarm and Helm Charts.
+
+[![Deployment Docs](/img/blog/common/deploy_docker_documentation.webp)](https://signoz.io/docs/install/)
+
+If you liked what you read, then check out our GitHub repo 👇
+
+[![SigNoz GitHub repo](/img/blog/common/signoz_github.webp)](https://github.com/SigNoz/signoz)
 
 ---
 

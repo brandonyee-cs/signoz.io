@@ -32,9 +32,9 @@ In this article, we will implement distributed tracing for a Golang application 
 
 ## What is distributed tracing?
 
-Modern application architecture using cloud-native, containerization, and microservices is a very complex distributed system. A typical web-search example will illustrate some of the challenges such a system needs to address. 
+Modern application architecture using cloud-native, containerization, and microservices is a very complex distributed system. A typical web-search example will illustrate some of the challenges such a system needs to address.
 
-A front-end service may distribute a web query to many hundreds of query servers. The query may also be sent to a number of other sub-systems that may process advertisements or look for specialized results like images, news, etc. This might involve database access, cache lookup, network call, etc. In total, thousands of machines and many different services might be needed to process one search query. 
+A front-end service may distribute a web query to many hundreds of query servers. The query may also be sent to a number of other sub-systems that may process advertisements or look for specialized results like images, news, etc. This might involve database access, cache lookup, network call, etc. In total, thousands of machines and many different services might be needed to process one search query.
 
 Moreover, web-search users are sensitive to delays, which can be caused by poor performance in any sub-system. An engineer looking only at the overall latency may know there is a problem but may not be able to guess which service is at fault nor why it is behaving poorly. And such services are also not written and managed by a single team. Also, day by day, new components might get added to the system. Distributed tracing provides insights into the inner workings of such a complex system. Tracing such complex systems enables engineering teams to set up an observability framework.
 
@@ -65,10 +65,10 @@ We will demonstrate implementing distributed tracing in a Golang application in 
 ## Prerequisites
 
 - Go (version ≥ 1.16)
-    - For installation see [getting started](https://go.dev/doc/install)
+  - For installation see [getting started](https://go.dev/doc/install)
 - MySQL 8
-    - Download the MySQL community version from [here](https://dev.mysql.com/downloads/mysql/)
-    - If your MySQL is configured with a password, update it here:
+  - Download the MySQL community version from [here](https://dev.mysql.com/downloads/mysql/)
+  - If your MySQL is configured with a password, update it here:
     [https://github.com/SigNoz/distributed-tracing-golang-sample/blob/master/.env](https://github.com/SigNoz/distributed-tracing-golang-sample/blob/master/.env)
 - `serve` for frontend. For installation see: [https://www.npmjs.com/package/serve](https://www.npmjs.com/package/serve)
 - SigNoz - For instructions, please refer to [Installing SigNoz](#installing-signoz) section.
@@ -167,37 +167,33 @@ We also initialized the `tracer` which is later used to create custom spans.
 Let’s now understand what does `Init` function in `config/config.go` does.
 
 1. **Initialize exporter:**<br></br>
-   The exporter in SDK is responsible for exporting the telemetry signal (trace) out of the application to a remote backend, logging to a file, etc. 
+   The exporter in SDK is responsible for exporting the telemetry signal (trace) out of the application to a remote backend, logging to a file, etc.
    In this demo, we are creating a gRPC exporter to send out traces to an OpenTelemetry Collector backend running at collectorURL (SigNoz). It also supports TLS and application auth using headers.
-    
-    ```go
-    secureOption := otlptracegrpc.WithTLSCredentials(credentials.NewClientTLSFromCert(nil, "")) // config can be passed to configure TLS
-    if len(insecure) > 0 {
-    	secureOption = otlptracegrpc.WithInsecure()
-    }
-    exporter, err := otlptrace.New(
-    	context.Background(),
-    	otlptracegrpc.NewClient(
-    		secureOption,
-    		otlptracegrpc.WithEndpoint(collectorURL),
-    		otlptracegrpc.WithHeaders(headers),
-    	),
-    )
-    ```
-    
+   ```go
+   secureOption := otlptracegrpc.WithTLSCredentials(credentials.NewClientTLSFromCert(nil, "")) // config can be passed to configure TLS
+   if len(insecure) > 0 {
+   	secureOption = otlptracegrpc.WithInsecure()
+   }
+   exporter, err := otlptrace.New(
+   	context.Background(),
+   	otlptracegrpc.NewClient(
+   		secureOption,
+   		otlptracegrpc.WithEndpoint(collectorURL),
+   		otlptracegrpc.WithHeaders(headers),
+   	),
+   )
+   ```
 2. **Construct trace provider:**<br></br>
    TracerProvider provides access to instrumentation Tracers. We configure it to sample all the traces and send the traces in batches to the collector. The resource describes the object that generated the telemetry signals. Essentially, it must be the name of the service or application. We set it to `serviceName`:
-    
-    ```go
-    traceProvider := sdktrace.NewTracerProvider(
-    	sdktrace.WithSampler(sdktrace.AlwaysSample()),
-    	sdktrace.WithSpanProcessor(sdktrace.NewBatchSpanProcessor(exporter)),
-    	sdktrace.WithResource(resource.NewWithAttributes(semconv.SchemaURL, semconv.ServiceNameKey.String(serviceName))),
-    )
-    ```
-    
+   ```go
+   traceProvider := sdktrace.NewTracerProvider(
+   	sdktrace.WithSampler(sdktrace.AlwaysSample()),
+   	sdktrace.WithSpanProcessor(sdktrace.NewBatchSpanProcessor(exporter)),
+   	sdktrace.WithResource(resource.NewWithAttributes(semconv.SchemaURL, semconv.ServiceNameKey.String(serviceName))),
+   )
+   ```
 
-Now, we are ready to configure various components in our application. 
+Now, we are ready to configure various components in our application.
 
 **Step 4:** **Instrument HTTP handler with OpenTelemetry**
 
@@ -267,13 +263,11 @@ If you have installed SigNoz on your local machine, then your endpoint is `127.
 
 If you have installed SigNoz on some domain, then your endpoint is `test.com:4317`
 
-
 :::info
 
-Do not use `http` or `https` in the IP address. 
+Do not use `http` or `https` in the IP address.
 
 :::
-
 
 Configuration for the following can be set up in `.env`
 
@@ -293,8 +287,6 @@ SQL_DB=signoz
 OTEL_EXPORTER_OTLP_ENDPOINT=localhost:4317
 INSECURE_MODE=true
 ```
-
-
 
 **Step 2: Run the microservices**
 
@@ -348,7 +340,6 @@ Now go to the app frontend running at [localhost:5000](http://localhost:5000). P
     <img src="/img/blog/2022/05/dt_golang_transfer_fund.webp" alt="Transfer Funds using UI"/>
     </figure>
     <br></br>
-    
 
 3. Place an order:<br></br>
    Place an order by selecting a product from the dropdown.
@@ -357,7 +348,6 @@ Now go to the app frontend running at [localhost:5000](http://localhost:5000). P
     <img src="/img/blog/2022/05/dt_golang_place_order.webp" alt="Place orders using UI"/>
     </figure>
     <br></br>
-    
 
 Now go to the SigNoz dashboard (running on [http://localhost:3301/](http://localhost:3301/) by default), wait for some time, and refresh the dashboard. You will notice the list of service names that we configured:
 

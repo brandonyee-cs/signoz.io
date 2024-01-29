@@ -13,6 +13,7 @@ keywords:
   - prometheus vs influxdb
   - metrics monitoring
 ---
+
 <head>
   <link rel="canonical" href="https://signoz.io/blog/prometheus-vs-influxdb/"/>
 </head>
@@ -66,7 +67,7 @@ Currently, data streams from the instrumentation of Prometheus' various <a href 
 
 <br></br>
 
-Available as an open-source tool, alongside a paid distribution of the same, InfluxDB provides a time-series data platform. InfluxDB is a capable time-series engine with a wide range of application areas.  It’s designed to ingest and process multiple data points ingesting anything from metrics, traces, logs, and events.
+Available as an open-source tool, alongside a paid distribution of the same, InfluxDB provides a time-series data platform. InfluxDB is a capable time-series engine with a wide range of application areas. It’s designed to ingest and process multiple data points ingesting anything from metrics, traces, logs, and events.
 
 InfluxDB was penned in Go, backed by the Y Combinator accelerator initiative, and officially deployed for public access in 2013 by then Errplane (now InfluxData).
 

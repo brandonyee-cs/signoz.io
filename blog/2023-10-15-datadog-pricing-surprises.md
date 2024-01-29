@@ -19,6 +19,7 @@ keywords:
 Datadog has a huge product footprint with a sophisticated user experience, but any discussion of its usefulness must include a consideration of its significant costs. Datadog pricing is complex and has a lot of SKUs that a customer needs to understand. If you're not careful, you might end up blowing your Datadog bill.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/10/datadog-pricing-cover.webp)
 It’s likely that your business isn’t at the scale that it will generate a <a href = "https://twitter.com/TurnerNovak/status/1654577231937544192" rel="noopener noreferrer nofollow" target="_blank">$65 million bill</a>, but it is possible to generate bills that <a href = "https://twitter.com/kellabyte/status/1704949192957874190" rel="noopener noreferrer nofollow" target="_blank">rival your operations bills</a>.
 
@@ -32,7 +33,7 @@ This piece explores two ways that Datadog’s pricing is often much larger than 
 
 ## Datadog's Per host Pricing and its discontents
 
-Datadog's pricing is  tied directly to the number of hosts monitored. In dynamic environments, especially those with microservices, the amount of data can fluctuate significantly. This makes it challenging to predict costs. Datadog's per-host pricing model can be particularly challenging for architectures that rely heavily on microservices. Here's why:
+Datadog's pricing is tied directly to the number of hosts monitored. In dynamic environments, especially those with microservices, the amount of data can fluctuate significantly. This makes it challenging to predict costs. Datadog's per-host pricing model can be particularly challenging for architectures that rely heavily on microservices. Here's why:
 
 ### Tiny hosts? Inactive hosts? They all cost under Datadog
 
@@ -84,11 +85,11 @@ Finally, cloud integrations with AWS can also send custom metrics. It’s hard t
 
 In a theoretical example with custom metrics, we often start with a single call generated a large number of metrics due to having a large space for possible keys. In reality, the situation is much worse if you have a modern microservice architecture. We’ve discussed previously how host-based pricing penalizes smaller, lighter containers. Here with custom metrics, we get another nasty shock: custom metrics are counted by unique keys, values, and tags. One of the most basic tags is the host, so every single container that generates custom metrics is creating unique metrics and will quickly impact your budget.
 
-You may want to sample your metrics at the cost of sending more metrics. It would be tempting to try sampling your data and sending distribution metrics instead. But since Datadog charges not by the number of metric values but rather by their keys, sending distribution metrics *increases the number of metrics used five-fold.* As each metric now also includes count, sum, min, max, and avg.
+You may want to sample your metrics at the cost of sending more metrics. It would be tempting to try sampling your data and sending distribution metrics instead. But since Datadog charges not by the number of metric values but rather by their keys, sending distribution metrics _increases the number of metrics used five-fold._ As each metric now also includes count, sum, min, max, and avg.
 
 ### Doing the math on Datadog’s Custom metrics
 
-The Datadog documentation site is quick to point out that you will only be charged for custom metrics if you purchase the appropriate SKU, and without that SKU you can send 300 metrics for free (well, included in the cost of your other products but still, no additional cost). Let’s review a  scenario to see how a single latency metric can use up all 300 of those metrics:
+The Datadog documentation site is quick to point out that you will only be charged for custom metrics if you purchase the appropriate SKU, and without that SKU you can send 300 metrics for free (well, included in the cost of your other products but still, no additional cost). Let’s review a scenario to see how a single latency metric can use up all 300 of those metrics:
 
 ---
 
@@ -102,21 +103,21 @@ latency:20}
 
 You group up route and log in so the actual metric is `{user.login-status.200-latency:20}` a nice, compact metric. There are only ten different endpoints, so you know things will be well clamped. For safety’s sake and in case some reports are dropped, you report distribution and percentile metrics as well. You add the few lines of code to report your metrics, and head off for the weekend. When you come in on Monday there’s three voicemails from Datadog, saying you need to add a SKU because you reported over 300 metrics in the last day. What happened?
 
-All Datadog custom metrics are tagged by host. So  you were actually reporting `{hostA-user.login-status.200-latency:20}` . You have five services that are instrumented with Datadog, so instead of reporting 10 metrics for each of your endpoints, you’re actually reporting 50 metrics, ten for each host. And since you responsibly reported distribution values to make your life easier, you’re also reporting `p50`, `p75`, `p90`, `p95`, and `p99` AND `count`, `sum`, `min`, `max`, and `avg` for every combination of host and endpoint. Your single added metric is now 10 endpoints, times 5 hosts, times 10 summary metrics or 500 metrics. Without Datadog’s custom metrics SKU you just exhausted all 300 custom metrics at once.
+All Datadog custom metrics are tagged by host. So you were actually reporting `{hostA-user.login-status.200-latency:20}` . You have five services that are instrumented with Datadog, so instead of reporting 10 metrics for each of your endpoints, you’re actually reporting 50 metrics, ten for each host. And since you responsibly reported distribution values to make your life easier, you’re also reporting `p50`, `p75`, `p90`, `p95`, and `p99` AND `count`, `sum`, `min`, `max`, and `avg` for every combination of host and endpoint. Your single added metric is now 10 endpoints, times 5 hosts, times 10 summary metrics or 500 metrics. Without Datadog’s custom metrics SKU you just exhausted all 300 custom metrics at once.
 
 Do you have more than five hosts running your code? In this example, we always returned a status code of `200`, just a few more status codes would multiply the problem further.
 
 What would that math look like if you had just a moderately complex application, served on a few hosts? For example, we have a simple application that returns a status code of `200` or `500` depending on the request, on 25 routes, with 6 hosts in 2 regions. We want to store distribution values for these routes as well. The result for costs in a single month:
 
-25 routes * 6 hosts * 2 regions * 10 metrics * 5 possible status codes = 15000 metrics, meaning you'll pay $15 in just the first few days of metrics collection.
+25 routes _ 6 hosts _ 2 regions _ 10 metrics _ 5 possible status codes = 15000 metrics, meaning you'll pay $15 in just the first few days of metrics collection.
 
-The story gets worse from there, the documented prices are just for *collecting* metrics, not for *indexing* them, so you can't query these metrics, and the cost of metrics indexing varies by contract and isn't published by datadog.
+The story gets worse from there, the documented prices are just for _collecting_ metrics, not for _indexing_ them, so you can't query these metrics, and the cost of metrics indexing varies by contract and isn't published by datadog.
 
 ### Why are Datadog custom metrics so expensive?
 
 There are a variety of possible reasons why the pricing for Datadog’s custom metrics are so high. It may be that their data backend struggles with high cardinality keys. However, a slightly more sinister explanation has to do with vendor lock in. While integrations and other plug ins can produce custom metrics, the primary way these metrics are created are by inserting custom calls into your application code to send metrics to the Datadog agent.
 
-These custom metrics calls within your code do not use any open standard or library, and as such they can only ever report data  to the Datadog agent. As such, when you start reporting custom metrics you are signaling to Datadog that you’re ‘locked in’ and planning to stay with Datadog as your observability platform in the long term. This makes your organization less sensitive to price increases.
+These custom metrics calls within your code do not use any open standard or library, and as such they can only ever report data to the Datadog agent. As such, when you start reporting custom metrics you are signaling to Datadog that you’re ‘locked in’ and planning to stay with Datadog as your observability platform in the long term. This makes your organization less sensitive to price increases.
 
 ## You can do better than Datadog, OpenTelemetry can help
 

@@ -26,11 +26,9 @@ OpenTelemetry can help you monitor CouchDB performance metrics with the help of 
 
 ![Cover Image](/img/blog/2024/01/opentelemetry-couchdb-cover.webp)
 
-
 Before that, let’s have a brief overview of CouchDB.
 
 If you want to jump straight into implementation, start with this [Prerequisites](#prerequisites) section.
-
 
 ## A Brief Overview of CouchDB
 
@@ -70,7 +68,6 @@ receivers:
     protocols:
       grpc:
       http:
-
 ```
 
 An OTLP receiver can receive data via gRPC or HTTP using the <a href = "https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md" rel="noopener noreferrer nofollow" target="_blank" >OTLP</a> format. There are advanced configurations that you can enable via the YAML file.
@@ -86,12 +83,11 @@ receivers:
         cors:
           allowed_origins:
             - http://test.com
-# Origins can have wildcards with *, use * by itself to match any origin.
+            # Origins can have wildcards with *, use * by itself to match any origin.
             - https://*.example.com
           allowed_headers:
             - Example-Header
           max_age: 7200
-
 ```
 
 You can find more details on advanced configurations <a href = "https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md" rel="noopener noreferrer nofollow" target="_blank" >here</a>.
@@ -110,7 +106,6 @@ service:
       receivers: [otlp, jaeger]
       processors: [batch]
       exporters: [otlp, zipkin]
-
 ```
 
 Now that you understand how OpenTelemetry collector collects data, let’s see how you can collect CouchDB metrics with OpenTelemetry.
@@ -119,7 +114,7 @@ Now that you understand how OpenTelemetry collector collects data, let’s see h
 
 **User for OpenTelemetry -** The OpenTelemetry Collector for CouchDB requires select permissions to interact with the database and get stats out of it.
 
-**Open TCP port 5984 -** 
+**Open TCP port 5984 -**
 
 In this article, we assume that your CouchDB server and the OpenTelemetry Collector will reside on the same server. If this isn't the case, an additional step is required to open your CouchDB service port, traditionally using port 5984.
 
@@ -249,14 +244,11 @@ You would need to replace the following details for the config to work properly:
 - Username & Password of the new user were created in prerequisite steps by replacing COUCHDB_USERNAME & COUCHDB_PASSWORD
 - Under exporters, configure the `endpoint` for SigNoz cloud along with the ingestion key under `signoz-access-token`. You can find these settings in the SigNoz dashboard.
 
-
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/ingestion-key-details.webp" alt="You can find ingestion details in the SigNoz dashboard"/>
     <figcaption><i>You can find ingestion details in the SigNoz dashboard</i></figcaption>
 </figure>
 <br/>
-
 
 Also, note how we have set up the pipeline in the `service` section of the config. We have added `couchdb` in the receiver section of metrics and set the exporter to `otlp`.
 
@@ -310,18 +302,15 @@ Once the above setup is done, you will be able to access the metrics in the SigN
 </figure>
 <br/>
 
-
 ### Dashboard JSON
 
 For basic metrics, we’ve created a <a href = "https://github.com/SigNoz/dashboards/blob/main/couchdb/couchdb.json" rel="noopener noreferrer nofollow" target="_blank" >JSON file</a> that you can upload to create a dashboard with basic metrics like this:
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/opentelemetry-couchdb-dashboard.webp" alt="CouchDB Dashboard on Signoz"/>
     <figcaption><i>CouchDB Dashboard on Signoz</i></figcaption>
 </figure>
 <br/>
-
 
 ## Metrics & Attributes for CouchDB supported by OpenTelemetry
 
@@ -331,26 +320,26 @@ The following metrics and resource attributes for CouchDB can be collected by th
 
 These metrics are enabled by default. Collectors provide many metrics that you can use to monitor how your CouchCB server is performing or if something is not right.
 
-| Metric | Description | Name | Type | Value Type | Unit | Temporality | Monotonic |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Average request time | The average duration of a served request. | couchdb.average_request_time | GAUGE | DOUBLE | MilliSeconds (ms) | N/A | false |
-| Bulk Requests Count | The number of bulk requests. | couchdb.httpd.bulk_requests | SUM | INT | NONE | Cumulative | true |
-| HTTP Requests Count | The number of HTTP requests by method. | couchdb.httpd.requests | SUM | INT | NONE | Cumulative | true |
-| HTTP Status Code Responses Count | The number of each HTTP status code. | couchdb.httpd.responses | SUM | INT | NONE | Cumulative | true |
-| HTTP Views Count | The number of views read. | couchdb.httpd.views | SUM | INT | NONE | Cumulative | true |
-| Opened Databases | The number of open databases. | couchdb.database.open | SUM | INT | NONE | Cumulative | false |
-| Open File Descriptors Count | The number of open file descriptors. | couchdb.file_descriptor.open | SUM | INT | NONE | Cumulative | false |
-| Database Operations | The number of database operations. | couchdb.database.operations | SUM | INT | NONE | Cumulative | true |
+| Metric                           | Description                               | Name                         | Type  | Value Type | Unit              | Temporality | Monotonic |
+| -------------------------------- | ----------------------------------------- | ---------------------------- | ----- | ---------- | ----------------- | ----------- | --------- |
+| Average request time             | The average duration of a served request. | couchdb.average_request_time | GAUGE | DOUBLE     | MilliSeconds (ms) | N/A         | false     |
+| Bulk Requests Count              | The number of bulk requests.              | couchdb.httpd.bulk_requests  | SUM   | INT        | NONE              | Cumulative  | true      |
+| HTTP Requests Count              | The number of HTTP requests by method.    | couchdb.httpd.requests       | SUM   | INT        | NONE              | Cumulative  | true      |
+| HTTP Status Code Responses Count | The number of each HTTP status code.      | couchdb.httpd.responses      | SUM   | INT        | NONE              | Cumulative  | true      |
+| HTTP Views Count                 | The number of views read.                 | couchdb.httpd.views          | SUM   | INT        | NONE              | Cumulative  | true      |
+| Opened Databases                 | The number of open databases.             | couchdb.database.open        | SUM   | INT        | NONE              | Cumulative  | false     |
+| Open File Descriptors Count      | The number of open file descriptors.      | couchdb.file_descriptor.open | SUM   | INT        | NONE              | Cumulative  | false     |
+| Database Operations              | The number of database operations.        | couchdb.database.operations  | SUM   | INT        | NONE              | Cumulative  | true      |
 
 ### Attributes
 
-| Metric | Attribute | Description | Value Type | Values |
-| --- | --- | --- | --- | --- |
-| HTTP Requests Count | http.method | An HTTP request method. | STRING | COPY, DELETE, GET, HEAD, OPTIONS, POST, PUT |
-| HTTP Status Code Responses Count | http.status_code | An HTTP status code. | STRING |  |
-| HTTP Views Count | view | The view type. | STRING | temporary_view_reads, view_reads |
-| Database Operations | operation | The operation type. | STRING | writes, reads |
-| Host Metrics | couchdb.node.name | The name of the node. | STRING |  |
+| Metric                           | Attribute         | Description             | Value Type | Values                                      |
+| -------------------------------- | ----------------- | ----------------------- | ---------- | ------------------------------------------- |
+| HTTP Requests Count              | http.method       | An HTTP request method. | STRING     | COPY, DELETE, GET, HEAD, OPTIONS, POST, PUT |
+| HTTP Status Code Responses Count | http.status_code  | An HTTP status code.    | STRING     |                                             |
+| HTTP Views Count                 | view              | The view type.          | STRING     | temporary_view_reads, view_reads            |
+| Database Operations              | operation         | The operation type.     | STRING     | writes, reads                               |
+| Host Metrics                     | couchdb.node.name | The name of the node.   | STRING     |                                             |
 
 **Key Terms for Metrics & Attributes**
 

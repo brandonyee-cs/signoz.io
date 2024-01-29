@@ -22,6 +22,7 @@ import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 In this post, we will talk about OpenTelemetry exporters. OpenTelemetry exporters help in exporting the telemetry data collected by OpenTelemetry. OpenTelemetry frees you from any kind of vendor lock-in by letting you export the collected telemetry data to any backend of your choice.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/10/opentelemetry-exporters-cover.webp)
 
 In modern distributed systems, efficiently collecting, transmitting, and analyzing telemetry data from diverse sources poses a significant challenge. The sheer complexity and scale of these environments require a streamlined solution that can collect and export data from various components seamlessly.
@@ -45,6 +46,7 @@ The specification is designed into distinct types of telemetry known as signals.
 Together, these three signals form the three pillars of observability. OpenTelemetry is the bedrock for setting up an observability framework. The application code is instrumented using OpenTelemetry client libraries, which enables the generation of telemetry data. Once the telemetry data is generated and collected, you need to configure the OpenTelemetry exporter to send data to a backed analysis tool like [SigNoz](https://signoz.io/).
 
 ## Why do we need OpenTelemetry Exporters?
+
 OpenTelemetry plays a crucial role in the data collection process, offering invaluable insights into the behavior and performance of applications. However, once this data is acquired, it's important to note that it remains within the application environment and isn't readily available for immediate analysis or further processing.
 
 OpenTelemetry provides exporters, which serve as the conduits for transferring collected data to an OpenTelemetry Collector or a specified backend. This ensures that the data can be effectively utilized for comprehensive analysis, monitoring, and optimization of the application's performance and behavior.
@@ -68,32 +70,33 @@ In this section, we'll look at different types of OpenTelemetry Exporters and th
 
 ### OpenTelemetry Protocol (OTLP)
 
-OTLP, the native protocol for OpenTelemetry, serves as a library facilitating the standardized transmission of tracing data to an OTLP collector. This lightweight solution seamlessly sends telemetry data to OpenTelemetry-compatible backends. The protocol encompasses encoding, transport, and delivery mechanisms for data exchange between telemetry sources, collectors, and backends. 
+OTLP, the native protocol for OpenTelemetry, serves as a library facilitating the standardized transmission of tracing data to an OTLP collector. This lightweight solution seamlessly sends telemetry data to OpenTelemetry-compatible backends. The protocol encompasses encoding, transport, and delivery mechanisms for data exchange between telemetry sources, collectors, and backends.
 
-OTLP employs protocol buffers for efficient telemetry data serialization, utilizing either gRPC or HTTP for transmission. This protocol operates across all nodes in the telemetry data flow, encompassing clients, observability platforms, services, agents, collectors, and forwarders. Its primary objective is to establish a serialization schema aligned with data models, addressing known issues in existing telemetry protocols. 
+OTLP employs protocol buffers for efficient telemetry data serialization, utilizing either gRPC or HTTP for transmission. This protocol operates across all nodes in the telemetry data flow, encompassing clients, observability platforms, services, agents, collectors, and forwarders. Its primary objective is to establish a serialization schema aligned with data models, addressing known issues in existing telemetry protocols.
 
 Additionally, it outlines guidelines for implementing both client and server components, covering serialization, data transmission, and response handling.
 
 It is recommended to use the OTLP exporter for any OpenTelemetry setup.
 
 ### Zipkin
-<a href = "https://zipkin.io/" rel="noopener noreferrer nofollow" target="_blank" >Zipkin</a>  is a distributed tracing system used for tracking and analyzing how requests move through complex systems, especially in setups with many interconnected services, known as microservices. 
+
+<a href = "https://zipkin.io/" rel="noopener noreferrer nofollow" target="_blank" >Zipkin</a> is a distributed tracing system used for tracking and analyzing how requests move through complex systems, especially in setups with many interconnected services, known as microservices.
 
 OpenTelemetry seamlessly integrates with Zipkin, offering two exporters for integrating trace data collected by OpenTelemetry into Zipkin: the OpenTelemetry Zipkin JSON Exporter and the OpenTelemetry Zipkin Protobuf Exporter.
 
-The <a href = "https://opentelemetry-python.readthedocs.io/en/latest/exporter/zipkin/zipkin.html#opentelemetry-zipkin-json-exporter/" rel="noopener noreferrer nofollow" target="_blank" >OpenTelemetry Zipkin JSON Exporter</a>  simplifies the process of sending OpenTelemetry traces to Zipkin by packaging it in JSON format over HTTP to the designated Zipkin collector endpoint. This exporter supports multiple versions (v1 and v2), giving you more flexibility in how you manage and analyze your traces.
+The <a href = "https://opentelemetry-python.readthedocs.io/en/latest/exporter/zipkin/zipkin.html#opentelemetry-zipkin-json-exporter/" rel="noopener noreferrer nofollow" target="_blank" >OpenTelemetry Zipkin JSON Exporter</a> simplifies the process of sending OpenTelemetry traces to Zipkin by packaging it in JSON format over HTTP to the designated Zipkin collector endpoint. This exporter supports multiple versions (v1 and v2), giving you more flexibility in how you manage and analyze your traces.
 
 Additionally, the <a href = "https://opentelemetry-python.readthedocs.io/en/latest/exporter/zipkin/zipkin.html#opentelemetry-zipkin-protobuf-exporter/" rel="noopener noreferrer nofollow" target="_blank" >OpenTelemetry Zipkin Protobuf Exporter</a> efficiently sends traces to Zipkin by transmitting the traces to the designated Zipkin collector endpoint via HTTP, and it supports the efficient v2 protobuf format for trace data.
 
 ### Jaeger
 
-<a href = "https://www.jaegertracing.io/" rel="noopener noreferrer nofollow" target="_blank" >Jaeger</a>  is an open-source, distributed tracing system that monitors and troubleshoots the flow of requests through complex, microservices-based applications, providing a comprehensive view of system interactions. 
+<a href = "https://www.jaegertracing.io/" rel="noopener noreferrer nofollow" target="_blank" >Jaeger</a> is an open-source, distributed tracing system that monitors and troubleshoots the flow of requests through complex, microservices-based applications, providing a comprehensive view of system interactions.
 
 OpenTelemetry integrates with Jaeger, providing two exporters for sending telemetry data to collected by OpenTelemetry into Jaeger: OpenTelemetry Jaeger Thrift Exporter and OpenTelemetry Jaeger Protobuf Exporter.
 
 The <a href = "https://opentelemetry-python.readthedocs.io/en/latest/exporter/jaeger/jaeger.html#opentelemetry-jaeger-thrift-exporter/" rel="noopener noreferrer nofollow" target="_blank" >OpenTelemetry Jaeger Thrift Exporter</a> efficiently transmits traces to the designated agent via the Thrift compact protocol over UDP. In cases where deploying the Jaeger Agent alongside an application proves challenging, as in the case of Lambda functions, a collector can be set up to relay spans using Thrift over HTTP. If both the agent and collector are in use, the exporter will exclusively route traces to the collector, avoiding any redundant entries.
 
-The <a href = "https://opentelemetry-python.readthedocs.io/en/latest/exporter/jaeger/jaeger.html#opentelemetry-jaeger-protobuf-exporter/" rel="noopener noreferrer nofollow" target="_blank" >OpenTelemetry Jaeger Protobuf Exporter</a> operates by sending traces to the designated agent through the efficient Protobuf serialization format facilitated by the high-performance gRPC communication protocol. For instance, in a microservices-based application, if one service makes an API call to another, the Jaeger Protobuf Exporter captures this interaction, converts it into Protobuf format, and sends it via gRPC to the configured agent for further processing and analysis. This ensures rapid and reliable transmission of trace data. 
+The <a href = "https://opentelemetry-python.readthedocs.io/en/latest/exporter/jaeger/jaeger.html#opentelemetry-jaeger-protobuf-exporter/" rel="noopener noreferrer nofollow" target="_blank" >OpenTelemetry Jaeger Protobuf Exporter</a> operates by sending traces to the designated agent through the efficient Protobuf serialization format facilitated by the high-performance gRPC communication protocol. For instance, in a microservices-based application, if one service makes an API call to another, the Jaeger Protobuf Exporter captures this interaction, converts it into Protobuf format, and sends it via gRPC to the configured agent for further processing and analysis. This ensures rapid and reliable transmission of trace data.
 
 ### OpenCensus
 
@@ -181,7 +184,7 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 Finally, update your exporter endpoint if you’re specifying it in code:
 
 ```jsx
-OTLPSpanExporter(endpoint="<traces-endpoint>/v1/traces")
+OTLPSpanExporter((endpoint = "<traces-endpoint>/v1/traces"));
 ```
 
 Note that there is not currently an OTLP/HTTP metric exporter.
@@ -196,21 +199,17 @@ OpenTelemetry provides a vendor-agnostic way of collecting and managing telemetr
 
 SigNoz can be used to visualize metrics and traces with charts that can enable quick insights for your teams.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_charts_application_metrics.webp" alt="SigNoz UI showing application overview metrics like RPS, 50th/90th/99th Percentile latencies, and Error Rate"/>
     <figcaption><i>SigNoz UI showing application overview metrics like RPS, 50th/90th/99th Percentile latencies, and Error Rate</i></figcaption>
 </figure>
 
-
 The tracing signal from OpenTelemetry instrumentation helps you correlate events across services. With SigNoz, you can visualize your tracing data using Flamegraphs and Gantt charts. It shows you a complete breakdown of the request along with every bit of data collected with OpenTelemetry semantic conventions.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_flamegraphs.webp" alt="Tracing data collected by OpenTelemetry can be visualized with the help of Flamegraphs and Gantt charts on the SigNoz dashboard"/>
     <figcaption><i>Tracing data collected by OpenTelemetry can be visualized with the help of Flamegraphs and Gantt charts on the SigNoz dashboard</i></figcaption>
 </figure>
-
 
 ### Getting started with SigNoz
 

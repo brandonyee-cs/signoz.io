@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: deepam
 description: Steps to monitor Memcached metrics with OpenTelemetry 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect Memcached metrics 3. Send collected metrics to SigNoz...
 image: /img/blog/2023/11/opentelemetry-memcached-metrics-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -19,17 +19,16 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/memcached-monitoring-with-opentelemetry/"/>
 </head>
 
-
 Let's dive deep into the realm of Memcached, where we'll uncover the power of monitoring with OpenTelemetry and SigNoz. This isn't just about caching data; it's about watching over Memcached like a vigilant guardian, ensuring it performs at its best, and optimizing your application's speed.
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2023/11/opentelemetry-memcached-metrics-cover.webp)
 
-
 In this tutorial, you will install OpenTelemetry Collector to collect Memcached metrics that should be monitored for performance and then send the collected data to SigNoz for visualization and alerts.
 
 We will cover:
+
 - [A Brief Overview of Memcached](#a-brief-overview-of-memcached)
 - [A Brief Overview of OpenTelemetry](#a-brief-overview-of-opentelemetry)
 - [What is OpenTelemetry Collector?](#what-is-opentelemetry-collector)
@@ -42,9 +41,7 @@ We will cover:
 - [Conclusion](#conclusion)
 - [Further Reading](#further-reading)
 
-
 If you want to jump straight into implementation, start with this [prerequisites](#prerequisites) section.
-
 
 ## A Brief Overview of Memcached
 
@@ -91,7 +88,6 @@ receivers:
     protocols:
       grpc:
       http:
-
 ```
 
 An OTLP receiver can receive data via gRPC or HTTP using the <a href = "https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md" rel="noopener noreferrer nofollow" target="_blank">OTLP</a> format. There are advanced configurations that you can enable via the YAML file.
@@ -107,12 +103,11 @@ receivers:
         cors:
           allowed_origins:
             - http://test.com
-# Origins can have wildcards with *, use * by itself to match any origin.
+            # Origins can have wildcards with *, use * by itself to match any origin.
             - https://*.example.com
           allowed_headers:
             - Example-Header
           max_age: 7200
-
 ```
 
 You can find more details on advanced configurations <a href = "https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md" rel="noopener noreferrer nofollow" target="_blank">here</a>.
@@ -131,7 +126,6 @@ service:
       receivers: [otlp, jaeger]
       processors: [batch]
       exporters: [otlp, zipkin]
-
 ```
 
 Now that you understand how OpenTelemetry collector collects data let’s see how you can collect Memcached metrics with OpenTelemetry.
@@ -267,13 +261,11 @@ You would need to replace the following details for the config to work properly:
 - Endpoint for your Memcached instance. In place of MEMCACHED_URL and port in place of MEMCACHED_PORT
 - Under exporters, configure the `endpoint` for SigNoz cloud along with the ingestion key under `signoz-access-token`. You can find these settings in the SigNoz dashboard.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/ingestion-key-details.webp" alt="You can find ingestion details in the SigNoz dashboard"/>
     <figcaption><i>You can find ingestion details in the SigNoz dashboard</i></figcaption>
 </figure>
 <br />
-
 
 Also note how we have set up the pipeline in the `service` section of the config. We have added `memcached` in the receiver section of metrics and set the exporter to `otlp`.
 
@@ -321,7 +313,6 @@ Once the above setup is done, you will be able to access the metrics in the SigN
 
 **Memcached Metrics**
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/memcached_metrics.webp" alt="Collected Memcached metrics for visualization"/>
     <figcaption><i>Collected Memcached metrics for visualization</i></figcaption>
@@ -340,7 +331,6 @@ Once the above setup is done, you will be able to access the metrics in the SigN
 
 If you want to get started quickly with Memcached monitoring, you can <a href = "https://github.com/SigNoz/dashboards/blob/main/memcached/memcached.json" rel="noopener noreferrer nofollow" target="_blank">load</a> this JSON in SigNoz dashboard and get started.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/memcached_dashboard.webp" alt="Memcached Monitoring Dashboard in SigNoz"/>
     <figcaption><i>Memcached Monitoring Dashboard in SigNoz</i></figcaption>
@@ -355,30 +345,30 @@ The following metrics and resource attributes for Memcached can be collected by 
 
 These metrics are enabled by default. Collectors provide many metrics that you can use to monitor how your Memcached server is performing or if something is not right.
 
-| Metric | Description | Name | Type | Value Type | Unit | Temporality | Monotonic |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Current Stored Bytes | Current number of bytes used by this server to store items | memcached.bytes | GAUGE | INT | Bytes | N/A | false |
-| Commands executed | Commands executed history | memcached.commands | SUM | INT | NONE | Cumulative | true |
-| Open Connections Count | The current number of open connections | memcached.connections.current | SUM | INT | NONE | Cumulative | false |
-| Total Connections Opened | Total number of connections opened since the server started running | memcached.connections.total | SUM | INT | NONE | Cumulative | true |
-| CPU Usage | Accumulated user and system time | memcached.cpu.usage | SUM | DOUBLE | Seconds | Cumulative | true |
-| Currently Items Stored Count | Number of items currently stored in the cache | memcached.current_items | SUM | INT | NONE | Cumulative | false |
-| Evictions Count | Cache item evictions | memcached.evictions | SUM | INT | NONE | Cumulative | true |
-| Network Bytes transferred | Bytes transferred over the network | memcached.network | SUM | INT | Bytes | Cumulative | true |
-| Operations Hit Ratio | Hit ratio for operations, expressed as a percentage value between 0.0 and 100.0 | memcached.operation_hit_ratio | GAUGE | DOUBLE | Percentage | N/A | false |
-| Operation Counts | Operation counts | memcached.operations | SUM | INT | NONE | Cumulative | true |
-| Threads Used Count | Number of threads used by the memcached instance | memcached.threads | SUM | INT | NONE | Cumulative | false |
+| Metric                       | Description                                                                     | Name                          | Type  | Value Type | Unit       | Temporality | Monotonic |
+| ---------------------------- | ------------------------------------------------------------------------------- | ----------------------------- | ----- | ---------- | ---------- | ----------- | --------- |
+| Current Stored Bytes         | Current number of bytes used by this server to store items                      | memcached.bytes               | GAUGE | INT        | Bytes      | N/A         | false     |
+| Commands executed            | Commands executed history                                                       | memcached.commands            | SUM   | INT        | NONE       | Cumulative  | true      |
+| Open Connections Count       | The current number of open connections                                          | memcached.connections.current | SUM   | INT        | NONE       | Cumulative  | false     |
+| Total Connections Opened     | Total number of connections opened since the server started running             | memcached.connections.total   | SUM   | INT        | NONE       | Cumulative  | true      |
+| CPU Usage                    | Accumulated user and system time                                                | memcached.cpu.usage           | SUM   | DOUBLE     | Seconds    | Cumulative  | true      |
+| Currently Items Stored Count | Number of items currently stored in the cache                                   | memcached.current_items       | SUM   | INT        | NONE       | Cumulative  | false     |
+| Evictions Count              | Cache item evictions                                                            | memcached.evictions           | SUM   | INT        | NONE       | Cumulative  | true      |
+| Network Bytes transferred    | Bytes transferred over the network                                              | memcached.network             | SUM   | INT        | Bytes      | Cumulative  | true      |
+| Operations Hit Ratio         | Hit ratio for operations, expressed as a percentage value between 0.0 and 100.0 | memcached.operation_hit_ratio | GAUGE | DOUBLE     | Percentage | N/A         | false     |
+| Operation Counts             | Operation counts                                                                | memcached.operations          | SUM   | INT        | NONE       | Cumulative  | true      |
+| Threads Used Count           | Number of threads used by the memcached instance                                | memcached.threads             | SUM   | INT        | NONE       | Cumulative  | false     |
 
 ### Attributes
 
-| Metric | Attribute | Description | Value Type | Values |
-| --- | --- | --- | --- | --- |
-| Commands executed | command | The type of command. | STRING | get, set, flush, touch |
-| CPU Usage | state | The type of CPU usage. | STRING | system, user |
-| Network Bytes transferred | direction | Direction of data flow. | STRING | sent, received |
-| Operations Hit Ratio | operation | The type of operation. | STRING | increment, decrement, get |
-| Operation Counts | type | Result of cache request. | STRING | hit, miss |
-| Operation Counts | operation | The type of operation. | STRING | increment, decrement, get |
+| Metric                    | Attribute | Description              | Value Type | Values                    |
+| ------------------------- | --------- | ------------------------ | ---------- | ------------------------- |
+| Commands executed         | command   | The type of command.     | STRING     | get, set, flush, touch    |
+| CPU Usage                 | state     | The type of CPU usage.   | STRING     | system, user              |
+| Network Bytes transferred | direction | Direction of data flow.  | STRING     | sent, received            |
+| Operations Hit Ratio      | operation | The type of operation.   | STRING     | increment, decrement, get |
+| Operation Counts          | type      | Result of cache request. | STRING     | hit, miss                 |
+| Operation Counts          | operation | The type of operation.   | STRING     | increment, decrement, get |
 
 **Key Terms for Metrics & Attributes**
 

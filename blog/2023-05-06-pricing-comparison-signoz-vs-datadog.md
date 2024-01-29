@@ -45,7 +45,6 @@ Here are some key takeaways from our cost analysis:
 
 Below is the snapshot of our full stack observability cost comparison. You can have a look at our complete <a href = "https://docs.google.com/spreadsheets/d/1EEw48D7SmC-DHKanT5hoiShT-AZcIfZDc9HQiVYdZBY/edit#gid=0" rel="noopener noreferrer nofollow" target="_blank" ><b>cost comparison analysis</b></a>.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/07/full-stack-observability-cost-comparison.webp" alt="full-stack observability cost comparison"/>
     <figcaption><i>SigNoz provides the best in class value for money as compared to other observability tools</i></figcaption>
@@ -72,7 +71,6 @@ A lot of users also pointed out how the sales team of Datadog relentlessly pursu
 
 Datadog’s pricing for custom metrics is also insane. We deep dive into it later in the blog.
 
-
 ## Cost comparison of SigNoz with Datadog, New Relic, and Grafana
 
 Depending on the size of the engineering team, we have done cost benchmarking of three hypothetical scenarios.
@@ -85,59 +83,58 @@ Datadog has a very complex SKU-based pricing structure. New Relic charges based 
 
 ## Small engineering team comparison
 
-Observability should be set up from day one. For small engineering teams, getting the most value for their money is critical. Below is a breakdown of full-stack observability cost comparison for a team of 25 engineers. 
+Observability should be set up from day one. For small engineering teams, getting the most value for their money is critical. Below is a breakdown of full-stack observability cost comparison for a team of 25 engineers.
 
 We have assumed 20 APM hosts, 50 infra hosts, and 2500 GB ingested logs.
 
 You can find the assumptions we have taken in this <a href = "https://docs.google.com/spreadsheets/d/1EEw48D7SmC-DHKanT5hoiShT-AZcIfZDc9HQiVYdZBY" rel="noopener noreferrer nofollow" target="_blank" ><b>sheet</b></a>.
 
-|  | SigNoz | Grafana | New Relic | Datadog |
-| --- | --- | --- | --- | --- |
-| **APM** <br></br>20 APM hosts, 50 M indexed spans |  |  |  | $671 |
-| **Infra** <br></br>50 infra hosts, 750k container hours, 75k custom metrics |  |  |  | $5,600 |
-| **Logs** <br></br>2500 GB ingested, 1560 million log events |  |  |  | $4,150 |
-| **Logs** <br></br>2500 GB ingested | $750 | $1,200 |  |  |
-| **Metrics** <br></br>13 million samples per infra host (1) | $65 | $124 |  |  |
-| **Traces** <br></br>43.8 GB per APM host | $263 | $388 |  |  |
-| **Data Ingest** |  |  | $1,178 |  |
-| **Users** |  | $200 | $2,333 |  |
-| Total | **$1,078** | **$1,912** | **$3,511** | **$10,421** |
-| Up to **9.7x more value for money** with SigNoz |  |  |  |  |
-
+|                                                                             | SigNoz     | Grafana    | New Relic  | Datadog     |
+| --------------------------------------------------------------------------- | ---------- | ---------- | ---------- | ----------- |
+| **APM** <br></br>20 APM hosts, 50 M indexed spans                           |            |            |            | $671        |
+| **Infra** <br></br>50 infra hosts, 750k container hours, 75k custom metrics |            |            |            | $5,600      |
+| **Logs** <br></br>2500 GB ingested, 1560 million log events                 |            |            |            | $4,150      |
+| **Logs** <br></br>2500 GB ingested                                          | $750       | $1,200     |            |             |
+| **Metrics** <br></br>13 million samples per infra host (1)                  | $65        | $124       |            |             |
+| **Traces** <br></br>43.8 GB per APM host                                    | $263       | $388       |            |             |
+| **Data Ingest**                                                             |            |            | $1,178     |             |
+| **Users**                                                                   |            | $200       | $2,333     |             |
+| Total                                                                       | **$1,078** | **$1,912** | **$3,511** | **$10,421** |
+| Up to **9.7x more value for money** with SigNoz                             |            |            |            |             |
 
 ## Midsize engineering team comparison
 
 As your business grows, the engineering team needs to scale too. Here’s a cost comparison for a hypothetical team of 100 engineers. The tech stack consists of 125 APM hosts, 200 infra hosts, and 10,000 GB ingested logs.
 
-|  | SigNoz | Grafana | New Relic | Datadog |
-| --- | --- | --- | --- | --- |
-| **APM** <br></br>125 APM hosts, 500 M indexed spans |  |  |  | $4,513 |
-| **Infra** <br></br>200 infra hosts, 1.5 M container hours, 250k custom metrics |  |  |  | $17,200 |
-| **Logs** <br></br>10,000 GB ingested, 3000 million log events |  |  |  | $8,500 |
-| **Logs** <br></br>10,000 GB ingested | $3,000 | $4,950 |  |  |
-| **Metrics** <br></br>13 million samples per infra host (1) | $260 | $494 |  |  |
-| **Traces** <br></br>43.8 GB per APM host | $1,643 | $2,688 |  |  |
-| **Data Ingest** |  |  | $5,393 |  |
-| **Users** |  | $800 | $9,430 |  |
-| Total | $4,903 | $8,932 | $14,823 | $30,213 |
-| Up to **6.2x more value for money** with SigNoz |  |  |  |  |
+|                                                                                | SigNoz | Grafana | New Relic | Datadog |
+| ------------------------------------------------------------------------------ | ------ | ------- | --------- | ------- |
+| **APM** <br></br>125 APM hosts, 500 M indexed spans                            |        |         |           | $4,513  |
+| **Infra** <br></br>200 infra hosts, 1.5 M container hours, 250k custom metrics |        |         |           | $17,200 |
+| **Logs** <br></br>10,000 GB ingested, 3000 million log events                  |        |         |           | $8,500  |
+| **Logs** <br></br>10,000 GB ingested                                           | $3,000 | $4,950  |           |         |
+| **Metrics** <br></br>13 million samples per infra host (1)                     | $260   | $494    |           |         |
+| **Traces** <br></br>43.8 GB per APM host                                       | $1,643 | $2,688  |           |         |
+| **Data Ingest**                                                                |        |         | $5,393    |         |
+| **Users**                                                                      |        | $800    | $9,430    |         |
+| Total                                                                          | $4,903 | $8,932  | $14,823   | $30,213 |
+| Up to **6.2x more value for money** with SigNoz                                |        |         |           |         |
 
 ## Large engineering team comparison
 
 Large businesses need observability at scale. Here’s a cost comparison for a hypothetical team of 200 engineers. The tech stack consists of 225 APM hosts, 350 infra hosts, and 20,000 GB ingested logs.
 
-|  | SigNoz | Grafana | New Relic | Datadog |
-| --- | --- | --- | --- | --- |
-| **APM** <br></br>225 APM hosts, 2 Billion indexed spans |  |  |  | $9,993 |
-| **Infra** <br></br>350 infra hosts, 2.5 M container hours, 250k custom metrics |  |  |  | $45,500 |
-| **Logs** <br></br>20,000 GB ingested, 4,500 million log events |  |  |  | $13,250 |
-| **Logs** <br></br>20,000 GB ingested | $6,000 | $9,950 |  |  |
-| **Metrics** <br></br>13 million samples per infra host (1) | $455 | $865 |  |  |
-| **Traces** <br></br>43.8 GB per APM host | $2,957 | $4,878 |  |  |
-| **Data Ingest** |  |  | $10,292 |  |
-| **Users** |  | $1,600 | $18,860 |  |
-| Total | $9,412 | $17,292 | $29,152 | $68,743 |
-| Up to **7.3x more value for money** with SigNoz |  |  |  |  |
+|                                                                                | SigNoz | Grafana | New Relic | Datadog |
+| ------------------------------------------------------------------------------ | ------ | ------- | --------- | ------- |
+| **APM** <br></br>225 APM hosts, 2 Billion indexed spans                        |        |         |           | $9,993  |
+| **Infra** <br></br>350 infra hosts, 2.5 M container hours, 250k custom metrics |        |         |           | $45,500 |
+| **Logs** <br></br>20,000 GB ingested, 4,500 million log events                 |        |         |           | $13,250 |
+| **Logs** <br></br>20,000 GB ingested                                           | $6,000 | $9,950  |           |         |
+| **Metrics** <br></br>13 million samples per infra host (1)                     | $455   | $865    |           |         |
+| **Traces** <br></br>43.8 GB per APM host                                       | $2,957 | $4,878  |           |         |
+| **Data Ingest**                                                                |        |         | $10,292   |         |
+| **Users**                                                                      |        | $1,600  | $18,860   |         |
+| Total                                                                          | $9,412 | $17,292 | $29,152   | $68,743 |
+| Up to **7.3x more value for money** with SigNoz                                |        |         |           |         |
 
 ## No limits on custom metrics with SigNoz
 
@@ -165,7 +162,7 @@ SigNoz does not treat custom metrics any differently. The charges remain $0.1 pe
 
 ## No user-based pricing, collaborate seamlessly with SigNoz
 
-User-based pricing is outdated. An observability tool is used for debugging performance issues, and you never know which engineer might need it. At SigNoz, we don’t charge based on user seats. 
+User-based pricing is outdated. An observability tool is used for debugging performance issues, and you never know which engineer might need it. At SigNoz, we don’t charge based on user seats.
 
 New Relic’s <a href = "https://newrelic.com/pricing" rel="noopener noreferrer nofollow" target="_blank" ><b>user pricing</b></a> can go up to $549/user. At scale, the cost of adding users can go up to 66% of the total bill.
 
@@ -185,11 +182,11 @@ We believe in transparent and flexible pricing. As we meet with developers, engi
 
 We are working tirelessly to improve our offering and value to our users. After careful examination, we identified the following issues with other tools.
 
-| Tool | Issue |
-| --- | --- |
-| Datadog | Has the most complex pricing structure. You will never know what you might end up paying. The internet is full of many such horror stories. |
-| New Relic | High user-based pricing limits collaboration. As teams become more diverse and cross-functional, you need to collaborate seamlessly. |
-| Grafana | It does not have a seamless three signals (logs, metrics, traces) in a single pane experience.  |
+| Tool      | Issue                                                                                                                                       |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Datadog   | Has the most complex pricing structure. You will never know what you might end up paying. The internet is full of many such horror stories. |
+| New Relic | High user-based pricing limits collaboration. As teams become more diverse and cross-functional, you need to collaborate seamlessly.        |
+| Grafana   | It does not have a seamless three signals (logs, metrics, traces) in a single pane experience.                                              |
 
 At SigNoz, we strive to provide the most value for your money. We are also open source, and transparency is one of our core beliefs. Using SigNoz can enable your engineering teams to do much more with their data while providing more value for the same cost as compared to other observability tools.
 

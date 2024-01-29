@@ -32,16 +32,14 @@ Flamegraphs, a brainchild of Brendan Gregg, has emerged as an important visualiz
 
 ## What is Flamegraph?
 
-A Flamegraph is a visualization of hierarchical data created by Brendan Gregg, primarily used for performance profiling analysis of software applications by representing telemetry data of service latency, error causing those latencies, and pinpointing the service causing error. 
+A Flamegraph is a visualization of hierarchical data created by Brendan Gregg, primarily used for performance profiling analysis of software applications by representing telemetry data of service latency, error causing those latencies, and pinpointing the service causing error.
 
-It provides an in-depth representation of stack traces, their respective resource consumption, and microservice latency(s) and is particularly useful for identifying performance bottlenecks in software systems. It's a really handy visualization from a developer's point of view. 
-
+It provides an in-depth representation of stack traces, their respective resource consumption, and microservice latency(s) and is particularly useful for identifying performance bottlenecks in software systems. It's a really handy visualization from a developer's point of view.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/10/flamegraph-typical.webp" alt="A typical flame graph."/>
     <figcaption><i>A typical flame graph (source: https://www.brendangregg.com/flamegraphs.html).</i></figcaption>
 </figure>
-
 
 Now that we are done with the introduction let us see how they work!
 
@@ -49,20 +47,18 @@ Now that we are done with the introduction let us see how they work!
 
 A Flamegraph is basically composed of a series of horizontally oriented blocks or rectangles, which are stacked vertically. Each block represents a function call or a portion of the code execution stack.
 
-The x-axis of the graph corresponds to the stack depth, whereas the y-axis represents the  time used by each function/function call/service request.
+The x-axis of the graph corresponds to the stack depth, whereas the y-axis represents the time used by each function/function call/service request.
 
 Here's a simple textual example of a Flamegraph:
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/10/flamegraph-interpretation.webp" alt=""/>
     <figcaption><i></i></figcaption>
 </figure>
 
-
 In this example, "main()" called "function1()", which in turn called "function2()", and so on. The width of each block reflects the time taken by that function and its children's functions.
 
-Each bar or span in a flame graph typically represents a function or method call rather than individual units of work like API calls or database queries. 
+Each bar or span in a flame graph typically represents a function or method call rather than individual units of work like API calls or database queries.
 
 ## Why are Flamegraphs important?
 
@@ -76,7 +72,7 @@ By focusing on these hotspots, you can make targeted optimizations to improve yo
 
 **Example**: Imagine you have a Python script that generates reports. By generating a Flamegraph, you can quickly identify that a specific data processing function is consuming a significant portion of the execution time.
 
-Now, if you find that one (or many) function(s) that causes the most delay, you can optimize them. 
+Now, if you find that one (or many) function(s) that causes the most delay, you can optimize them.
 
 ### 2. Prioritize Optimization Efforts:
 
@@ -86,14 +82,12 @@ These functions are the most time-consuming and offer the most significant poten
 
 **Example**: In a Java application, you discover that a method responsible for database queries takes up a large portion of the Flamegraph. You can concentrate your optimization efforts on this method to reduce database query time.
 
-In the image below, you find out the longest trace is of **redis** and its a **redis timeout**, now that you know the cause for latency, you go back to your code and optimise it. 
-
+In the image below, you find out the longest trace is of **redis** and its a **redis timeout**, now that you know the cause for latency, you go back to your code and optimise it.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/10/db-error.webp" alt="Flamegraphs as represented for a distributed trace in SigNoz."/>
     <figcaption><i>Flamegraphs as represented for a distributed trace in SigNoz.</i></figcaption>
 </figure>
-
 
 ### 3. Detect Unintended Consequences:
 
@@ -117,7 +111,7 @@ Finally, in the context of distributed systems, Flamegraphs can help trace reque
 
 Distributed tracing is a crucial technique for monitoring and diagnosing the performance of complex, microservices-based applications.
 
-Flamegraphs, originally designed for profiling single applications, have been adapted to visualize distributed tracing data, offering many deep insights into how requests propagate across our multiple services and microservices. 
+Flamegraphs, originally designed for profiling single applications, have been adapted to visualize distributed tracing data, offering many deep insights into how requests propagate across our multiple services and microservices.
 
 Here's a detailed explanation of how Flamegraphs are used in the context of distributed tracing:
 
@@ -132,12 +126,11 @@ Each horizontal bar in a Flamegraph represents a function or a service, and the 
     <figcaption><i>Each horizontal bar in a Flamegraph represents a function or a service and the width of the bar reflects the amount of time spent.</i></figcaption>
 </figure>
 
-
 By examining Flamegraphs, you can identify bottlenecks, latency issues, and service dependencies.
 
 ### Generating Traces
 
-You can use OpenTelemetry to generate traces from your application. OpenTelemetry is an open-source standard for generating telemetry data like logs, metrics, and traces. 
+You can use OpenTelemetry to generate traces from your application. OpenTelemetry is an open-source standard for generating telemetry data like logs, metrics, and traces.
 
 For distributed tracing, you can check out these [docs](https://signoz.io/docs/instrumentation/) to implement it in different programming languages.
 
@@ -151,7 +144,6 @@ Once you have captured trace data from your services, you can feed it into a too
     <img src="/img/blog/2023/10/signoz_trace_details.webp" alt="Flamegraph for a trace as represented in SigNoz dashboard."/>
     <figcaption><i>Flamegraph for a trace as represented in SigNoz dashboard.</i></figcaption>
 </figure>
-
 
 ## Getting started with Flamegraphs for traces
 
@@ -170,12 +162,10 @@ Once you've instrumented your code, you can configure your SDK or OpenTelemetry 
 - Run your application and perform actions or generate load to capture traces.
 - In SigNoz, navigate to the trace data section and select the span you want to analyze. Spans are fundamental building blocks of distributed tracing. A single trace in distributed tracing consists of a series of tagged time intervals known as spans.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/10/signoz_traces.webp" alt="Trace Explorer page in SigNoz."/>
     <figcaption><i>Trace Explorer page in SigNoz.</i></figcaption>
 </figure>
-
 
 ### 3. Analyze Flamegraphs:
 
@@ -187,7 +177,6 @@ The following illustration shows the Span Details page:
     <img src="/img/blog/2023/10/signoz_flamegraphs.webp" alt=""/>
     <figcaption><i></i></figcaption>
 </figure>
-
 
 **Legend**:
 
@@ -208,4 +197,3 @@ The following illustration shows the Span Details page:
 
 - [Why is Distributed Tracing in Microservices needed?](https://signoz.io/blog/distributed-tracing-in-microservices/)
 - [An open source OpenTelemetry APM | SigNoz](https://signoz.io/blog/opentelemetry-apm/)
-

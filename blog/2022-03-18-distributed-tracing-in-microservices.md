@@ -15,6 +15,7 @@ keywords:
   - open source
   - signoz
 ---
+
 <head>
   <link rel="canonical" href="https://signoz.io/blog/distributed-tracing-in-microservices/"/>
 </head>

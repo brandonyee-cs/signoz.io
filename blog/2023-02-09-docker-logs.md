@@ -6,7 +6,7 @@ tags: [Tech Tutorial, Log Management]
 authors: daniel
 description: Docker logs play a critical role in the management and maintenance of containerized applications. They provide valuable information about the performance and behavior of Docker containers...
 image: /img/blog/2023/02/docker_logs_cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - logs
   - logging
@@ -26,7 +26,6 @@ Docker logs play a critical role in the management and maintenance of containeri
 
 ![Cover Image](/img/blog/2023/02/docker_logs_cover.webp)
 
-
 In this article, we will explore the concept of Docker logs, the types, and how they can be accessed and effectively managed for optimal use in a containerized environment.
 
 Table of contents:
@@ -35,11 +34,10 @@ Table of contents:
 [What are Docker Logs?](#what-are-docker-logs)<br></br>
 [Types of Docker Logs](#types-of-docker-logs)<br></br>
 [Methods of Accessing Docker Logs](#methods-of-accessing-docker-logs)<br></br>
-[Best Practices for  Managing Docker Logs](#best-practices-for--managing-docker-logs)<br></br>
+[Best Practices for Managing Docker Logs](#best-practices-for--managing-docker-logs)<br></br>
 [Docker Logs Analysis with SigNoz](#docker-logs-analysis-with-signoz)<br></br>
 [Getting Started with SigNoz](#getting-started-with-signoz)<br></br>
 [Conclusion](#conclusion)<br></br>
-
 
 Before diving into what Docker logs are, we need to first understand the concept of Docker and containers.
 
@@ -158,7 +156,7 @@ Log analytics tools provide a way to collect, process, and store logs generated 
 
 Log analytics tools can be used in combination with the Docker API and logging drivers to provide a complete logging solution for Docker containers. For example, logs from containers can be sent to an external log server using a logging driver, and then analyzed and visualized using a logging solution like [SigNoz](https://signoz.io/).
 
-## Best Practices for  Managing Docker Logs
+## Best Practices for Managing Docker Logs
 
 Efficient log management is key to ensuring the performance and reliability of containerized applications. In this section, we will explore various strategies for managing Docker logs. They are:
 
@@ -188,7 +186,7 @@ It is important to follow a well-defined archiving process that includes regular
 
 Proactive monitoring of logs is a key aspect in ensuring the stability and efficiency of containerized applications. Through regular inspection of logs, potential problems can be detected early, allowing for prompt resolution.
 
- This can be accomplished by utilizing the Docker CLI, the Docker API, or leveraging external logging solutions. By implementing a consistent log monitoring process, the reliability and performance of containerized applications can be greatly improved.
+This can be accomplished by utilizing the Docker CLI, the Docker API, or leveraging external logging solutions. By implementing a consistent log monitoring process, the reliability and performance of containerized applications can be greatly improved.
 
 ## Docker Logs Analysis with SigNoz
 
@@ -207,8 +205,6 @@ The logs tab in SigNoz is packed with advanced features that streamline the proc
 
 <br></br>
 
-
-
 SigNoz offers real-time analysis of logs, enabling you to search, filter, and visualize them as they are generated. This can assist in identifying patterns, trends, and problems in the logs and resolving issues efficiently.
 
 <figure data-zoomable align='center'>
@@ -217,8 +213,6 @@ SigNoz offers real-time analysis of logs, enabling you to search, filter, and vi
 </figure>
 
 <br></br>
-
-
 
 With the advanced Log Query Builder, you can filter out logs quickly with a mix and match of fields.
 
@@ -241,9 +235,7 @@ cd signoz/deploy/
 ./install.sh
 ```
 
-
 You can visit our documentation for instructions on how to install SigNoz using Docker Swarm and Helm Charts.
-
 
 [![Deployment Docs](/img/blog/common/deploy_docker_documentation.webp)](https://signoz.io/docs/install/)
 
@@ -251,12 +243,11 @@ If you liked what you read, then check out our GitHub repo 👇
 
 [![SigNoz GitHub repo](/img/blog/common/signoz_github.webp)](https://github.com/SigNoz/signoz)
 
-
 ## Conclusion
 
 Docker logs are critical components of managing and maintaining the health of Docker containers and their applications. By leveraging the power of Docker logs, organizations can optimize their container-based infrastructure and improve their ability to troubleshoot, analyze, and monitor the performance of their applications.
 
-It is important to have a robust and efficient log management strategy in place, as it helps to ensure that logs are captured, stored, and analyzed effectively.  Adopting a dedicated log management tool, instead of relying solely on the native methods of accessing and managing Docker logs, can provide a range of advanced features and greater flexibility for analyzing and processing logs from your containers.
+It is important to have a robust and efficient log management strategy in place, as it helps to ensure that logs are captured, stored, and analyzed effectively. Adopting a dedicated log management tool, instead of relying solely on the native methods of accessing and managing Docker logs, can provide a range of advanced features and greater flexibility for analyzing and processing logs from your containers.
 
 Log management tools like SigNoz can enhance the capability to handle logs generated by Docker containers. It offers a comprehensive and scalable approach to log analytics that can cater to specific needs and requirements, which might not be met by the native Docker logging options like logging drivers or the Docker API. For instance, advanced log parsing, filtering, or transforming functions that are not feasible using just the logging drivers or the Docker API can be carried out with SigNoz.
 

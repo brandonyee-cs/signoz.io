@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: deepam
 description: Steps to monitor RabbitMQ metrics with OpenTelemetry 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect RabbitMQ metrics 3. Send collected metrics to SigNoz...
 image: /img/blog/2023/11/rabbitmq-metrics-monitoring-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -19,7 +19,6 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/opentelemetry-rabbitmq-metrics-monitoring/"/>
 </head>
 
-
 RabbitMQ metrics monitoring is important to ensure that RabbitMQ is performing as expected and to identify and resolve problems quickly. In this tutorial, you will install OpenTelemetry Collector to collect RabbitMQ metrics and then send the collected data to SigNoz for monitoring and visualization.
 
 <!--truncate-->
@@ -27,6 +26,7 @@ RabbitMQ metrics monitoring is important to ensure that RabbitMQ is performing a
 ![Cover Image](/img/blog/2023/11/rabbitmq-metrics-monitoring-cover.webp)
 
 In this tutorial, we cover:
+
 - [A Brief Overview of RabbitMQ](#a-brief-overview-of-rabbitmq)
 - [A Brief Overview of OpenTelemetry](#a-brief-overview-of-opentelemetry)
 - [What is OpenTelemetry Collector?](#what-is-opentelemetry-collector)
@@ -40,7 +40,7 @@ In this tutorial, we cover:
 
 ## A Brief Overview of RabbitMQ
 
-RabbitMQ is a critical component of many modern architectures. It is used to decouple applications and provide reliable messaging between them. In this [article](https://signoz.io/blog/rabbitmq-monitoring/), we’ve discussed in detail how RabbitMQ is monitored using the built-in tools. We recommend checking out that article to get a hold of the basics of RabbitMQ monitoring, why it is so important, and how to do basic monitoring using built-in tools. 
+RabbitMQ is a critical component of many modern architectures. It is used to decouple applications and provide reliable messaging between them. In this [article](https://signoz.io/blog/rabbitmq-monitoring/), we’ve discussed in detail how RabbitMQ is monitored using the built-in tools. We recommend checking out that article to get a hold of the basics of RabbitMQ monitoring, why it is so important, and how to do basic monitoring using built-in tools.
 
 In a nutshell, RabbitMQ is a message broker. It acts as an intermediary between applications that send messages and applications that receive messages. It ensures that messages are delivered reliably and efficiently.
 
@@ -120,16 +120,16 @@ The following metrics and resource attributes for RabbitMQ can be collected by O
 
 ### Metrics
 
-Collectors provide many metrics that you can use to monitor how your RabbitMQ server is performing. Currently, all metrics types are ‘Sum’ with value type ‘Integer,’ which essentially means it comes in the cumulative sum instead of the raw data of each message separately. 
+Collectors provide many metrics that you can use to monitor how your RabbitMQ server is performing. Currently, all metrics types are ‘Sum’ with value type ‘Integer,’ which essentially means it comes in the cumulative sum instead of the raw data of each message separately.
 
-| Metric | Description | Metric Name |
-| --- | --- | --- |
-| Consumer Count | The number of consumers currently reading from the queue. | rabbitmq.consumer.count |
-| Messages Published |  The number of messages published to a queue. | rabbitmq.message.published |
-| Messages Delivered | The number of messages delivered to consumers. | rabbitmq.message.delivered |
-| Messages Dropped | The number of messages dropped as unroutable. | rabbitmq.message.dropped |
-| Messages Acknowledged | The number of messages acknowledged by consumers. | rabbitmq.message.acknowledged |
-| Messages Current | The total number of messages currently in the queue. | rabbitmq.message.current |
+| Metric                | Description                                               | Metric Name                   |
+| --------------------- | --------------------------------------------------------- | ----------------------------- |
+| Consumer Count        | The number of consumers currently reading from the queue. | rabbitmq.consumer.count       |
+| Messages Published    | The number of messages published to a queue.              | rabbitmq.message.published    |
+| Messages Delivered    | The number of messages delivered to consumers.            | rabbitmq.message.delivered    |
+| Messages Dropped      | The number of messages dropped as unroutable.             | rabbitmq.message.dropped      |
+| Messages Acknowledged | The number of messages acknowledged by consumers.         | rabbitmq.message.acknowledged |
+| Messages Current      | The total number of messages currently in the queue.      | rabbitmq.message.current      |
 
 You can find the list of supported metrics <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/rabbitmqreceiver/documentation.md#rabbitmqconsumercount" rel="noopener noreferrer nofollow" target="_blank" >here</a>.
 
@@ -139,11 +139,11 @@ Resource attributes help you identify and filter RabbitMQ metrics based on a par
 
 These resource attributes are enabled by default:
 
-| Name | Description | Values | Enabled |
-| --- | --- | --- | --- |
-| rabbitmq.node.name | The name of the RabbitMQ node. | Any Str | true |
-| rabbitmq.queue.name | The name of the RabbitMQ queue. | Any Str | true |
-| rabbitmq.vhost.name | The name of the RabbitMQ vHost. | Any Str | true |
+| Name                | Description                     | Values  | Enabled |
+| ------------------- | ------------------------------- | ------- | ------- |
+| rabbitmq.node.name  | The name of the RabbitMQ node.  | Any Str | true    |
+| rabbitmq.queue.name | The name of the RabbitMQ queue. | Any Str | true    |
+| rabbitmq.vhost.name | The name of the RabbitMQ vHost. | Any Str | true    |
 
 Now, let’s go through the steps for collecting these metrics with OpenTelemetry.
 
@@ -165,8 +165,7 @@ rabbitmq-plugins enable rabbitmq_management
 
 **Step 2:** **Add a user for monitoring**
 
-The OpenTelemetry Collector needs to have permission to access the RabbitMQ management plugin. You can create a dedicated user for OpenTelemetry and grant it the necessary permissions based on your requirements. To create a user for OpenTelemetry, you can use the RabbitMQ management UI at ****`http://*{node-hostname}*:15672/`**.**
-
+The OpenTelemetry Collector needs to have permission to access the RabbitMQ management plugin. You can create a dedicated user for OpenTelemetry and grant it the necessary permissions based on your requirements. To create a user for OpenTelemetry, you can use the RabbitMQ management UI at \***_`http://_{node-hostname}\*:15672/`**.\*\*
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/add-user-rabbitmq.webp" alt="Add a user for monitoring"/>
@@ -185,11 +184,11 @@ It is strongly advised not to open this port to the public. You can open it for 
 
 :::
 
-**Open TCP port 15672** 
+**Open TCP port 15672**
 
-This step is needed if your RabbitMQ and OpenTelemetry service are not on the same server. The OpenTelemetry SDK for RabbitMQ communicates with the RabbitMQ management plugin over TCP port 15672. Therefore, you need to open this port on all of the RabbitMQ nodes in your cluster. 
+This step is needed if your RabbitMQ and OpenTelemetry service are not on the same server. The OpenTelemetry SDK for RabbitMQ communicates with the RabbitMQ management plugin over TCP port 15672. Therefore, you need to open this port on all of the RabbitMQ nodes in your cluster.
 
- To open TCP port 15672 on a Linux server, you can use the following command:
+To open TCP port 15672 on a Linux server, you can use the following command:
 
 ```bash
 sudo ufw allow 15672/tc
@@ -310,10 +309,10 @@ service:
 You would need to replace the following details for the config to work properly:
 
 - Endpoint for your RabbitMQ instance. For this tutorial:
-endpoint: http://localhost:15672
+  endpoint: http://localhost:15672
 - Details of username that can be used for monitoring. (set in prerequisites section)
-username: <RABBITMQ_USERNAME>
-password: <RABBITMQ_PASSWORD>
+  username: <RABBITMQ_USERNAME>
+  password: <RABBITMQ_PASSWORD>
 - Under exporters, configure the `endpoint` for SigNoz cloud along with the ingestion key under `signoz-access-token`. You can find these settings in the SigNoz dashboard.
 
 Also note how we have set up the pipeline in the `service` section of the config. We have added `rabbitmq` in the receiver section of metrics and set the exporter to `otlp`.
@@ -354,39 +353,31 @@ kill "$(< otel-pid)"
 
 Once the above setup is done, you will be able to access the metrics in the SigNoz dashboard. You can go to the `Dashboards` tab and try adding a new panel. You can learn how to create dashboards in SigNoz [here](https://signoz.io/docs/userguide/manage-dashboards-and-panels/).
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/rabbitmq-metrics-signoz.webp" alt="RabbitMQ metrics collected by OTel Collector and sent to SigNoz"/>
     <figcaption><i>RabbitMQ metrics collected by OTel Collector and sent to SigNoz</i></figcaption>
 </figure>
 
-
 You can easily create charts with [query builder](https://signoz.io/docs/userguide/create-a-custom-query/#sample-examples-to-create-custom-query) in SigNoz. Here are the [steps](https://signoz.io/docs/userguide/manage-panels/#steps-to-add-a-panel-to-a-dashboard) to add a new panel to the dashboard.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/published-message-query-chart.webp" alt="Building a chart for published messages with Query Builder in SigNoz"/>
     <figcaption><i>Building a chart for published messages with Query Builder in SigNoz</i></figcaption>
 </figure>
 
-
 You can write queries to create charts on the RabbitMQ metrics data and add it to a dashboard.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/rabbitmq-dashboard-signoz.webp" alt="RabbitMQ dashboard in SigNoz"/>
     <figcaption><i>RabbitMQ dashboard in SigNoz</i></figcaption>
 </figure>
 
-
 You can also create alerts on any metric. Learn how to create alerts [here](https://signoz.io/docs/userguide/alerts-management/).
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/create-alerts-signoz.webp" alt=""/>
     <figcaption><i></i></figcaption>
 </figure>
-
 
 If you want to get started quickly with RabbitMQ monitoring, you can load this <a href = "https://github.com/SigNoz/dashboards/blob/main/rabbitmq/rabbitmq.json" rel="noopener noreferrer nofollow" target="_blank" >Rabbitmq JSON</a> in SigNoz dashboard and get started.
 
@@ -399,6 +390,7 @@ Visit our [complete guide](https://signoz.io/blog/opentelemetry-collector-comple
 SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/) that can be used as a single backend for all your observability needs.
 
 ---
+
 ## Further Reading
 
 [Complete Guide on OpenTelemetry Collector](https://signoz.io/blog/opentelemetry-collector-complete-guide/)

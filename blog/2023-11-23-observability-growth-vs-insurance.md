@@ -6,7 +6,7 @@ tags: [observability, OpenTelemetry]
 authors: pranay
 description: When you think about observability? Do you just think of it as an insurance? Or do you think of it as a growth driver? In this article, we will discuss how observability can be a growth driver for your business.
 image: /img/blog/2023/11/insurance-growth.jpg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -19,7 +19,6 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/observability-growth-vs-insurance/"/>
 </head>
 
-
 When you think about observability? Do you just think of it as an insurance? Or do you think it can also drive growth for the business?
 
 Working with many customers and users trying to get better at Observability, there are two mindsets I see:
@@ -30,19 +29,17 @@ Working with many customers and users trying to get better at Observability, the
 
 1. People who see Observability as an insurance
 
-  e.g. Trying to find the root cause when something goes wrong
+e.g. Trying to find the root cause when something goes wrong
 
 2. People who see observability as a growth driver
 
-  e.g Trying to solve a business issue which improves usage, monetization. 
-
+e.g Trying to solve a business issue which improves usage, monetization.
 
 Let’s explore
 
 ### Observability as a Insurance
 
 <br></br>
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/memory.webp" alt="Memory usage"/>
@@ -73,7 +70,6 @@ You can also use observability to try to identify tech debt.
 
 For example, you can monitor p95 latencies of set of APIs and prioritise improving those APIs which have the worst latency and is called the most number of time. This is a good framework to prioritise how you can improve customer experience.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/key-operations.webp" alt="Key Operations List"/>
     <figcaption><i>Key Operations based on Latency and number of calls</i></figcaption>
@@ -83,7 +79,6 @@ For example, you can monitor p95 latencies of set of APIs and prioritise improvi
 
 Having an observability tool also helps you understand which part of your request calls is taking most time and hence a very good indicator of where to focus your energies first.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/trace-detail.webp" alt="Trace Detail graph"/>
     <figcaption><i>Trace detail graph which shows which part of the request is taking most time</i></figcaption>
@@ -91,17 +86,15 @@ Having an observability tool also helps you understand which part of your reques
 
 <br></br>
 
+_In this trace graph, the SQL statement seems to be the cause of the most time taken_
 
-*In this trace graph, the SQL statement seems to be the cause of the most time taken*
+The second set is much smaller today, but lot more powerful. Users and customers in this category come up with so many interesting use cases.
 
-The second set is much smaller today, but lot more powerful. Users and customers in this category  come up with so many interesting use cases.
-
-So, next time your business leader asks you - why are we paying so much for this tool? What is the business value for it? *( I know, those are always the tough ones)*
+So, next time your business leader asks you - why are we paying so much for this tool? What is the business value for it? _( I know, those are always the tough ones)_
 
 Don’t hide behind your desks. May be make a list of use cases like above and send an email. Their eyes may well light up 🙂
 
 I think this is where the future of Observability tools lie: driving business growth.
-
 
 ---
 

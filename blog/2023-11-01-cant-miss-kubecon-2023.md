@@ -20,6 +20,7 @@ keywords:
 Kubecon North America 2023 is coming up in just a week in Chicago. For engnineers concerned with observability, there are a number of talks you can't miss. I wrote up this guide to the talks I'm most looking forward to.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/11/kubecon-23-cover.webp)
 
 ## The talks I can't wait to see at Kubecon 2023

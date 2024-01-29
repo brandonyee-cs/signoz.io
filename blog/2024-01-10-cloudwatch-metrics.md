@@ -22,13 +22,11 @@ keywords:
 
 import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 
-
 CloudWatch metrics play a critical role in monitoring AWS resources and facilitating effective troubleshooting during system failures. It allows for continuous monitoring of AWS resources like EC2 instances, Lambda functions, and RDS databases. Using Cloudwatch metrics, DevOps teams can monitor and manage their AWS infrastructure easily.
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2024/01/cloudwatch-metrics-cover.webp)
-
 
 Amazon CloudWatch is a comprehensive monitoring and observability service provided by Amazon Web Services (AWS). It facilitates the collection and tracking of metrics, logging management, and setting alarms to ensure optimal performance and health of AWS resources.
 
@@ -86,9 +84,7 @@ Built-in Metrics refer to the default, predefined performance indicators or out-
 CloudWatch organizes the collected metrics for clarity and ease of use. Metrics are grouped into 3 different levels, which ensures a straightforward and efficient system for users to manage and understand their metrics. These levels are:
 
 1. **Namespace Level:**
-At the highest level of organization, metrics are grouped by namespaces. Namespaces are containers for CloudWatch metrics. They are used to group related metrics together. This provides a way to avoid naming conflicts by segregating metrics from various sources. Each AWS service has its namespace to distinguish its set of metrics. For example, all metrics related to Amazon EC2 instances are grouped under the "AWS/EC2" namespace. 
-    
-   
+   At the highest level of organization, metrics are grouped by namespaces. Namespaces are containers for CloudWatch metrics. They are used to group related metrics together. This provides a way to avoid naming conflicts by segregating metrics from various sources. Each AWS service has its namespace to distinguish its set of metrics. For example, all metrics related to Amazon EC2 instances are grouped under the "AWS/EC2" namespace.
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/cloudwatch-metrics-namespace.webp" alt="Namespaces in Cloudwatch metrics monitoring"/>
@@ -96,11 +92,8 @@ At the highest level of organization, metrics are grouped by namespaces. Namespa
 </figure>
 <br/>
 
-    
 2. **Dimension Level:**
-Within the "AWS/EC2" namespace, metrics can further be organized based on dimensions. Dimensions are attributes that provide additional context to metrics. They are like tags that help organize and specify metrics. When you add a trait like "Instance ID", "Instance Type" or "Auto Scaling Group" to a metric, you're creating a distinct version of that metric. For instance, an EC2 instance may have dimensions such as "Instance ID" and "Image ID." This makes it easier to filter and understand your metrics based on these dimensions.
-    
-   
+   Within the "AWS/EC2" namespace, metrics can further be organized based on dimensions. Dimensions are attributes that provide additional context to metrics. They are like tags that help organize and specify metrics. When you add a trait like "Instance ID", "Instance Type" or "Auto Scaling Group" to a metric, you're creating a distinct version of that metric. For instance, an EC2 instance may have dimensions such as "Instance ID" and "Image ID." This makes it easier to filter and understand your metrics based on these dimensions.
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/cloudwatch-metrics-dimensions.webp" alt="Dimensions in Cloudwatch metrics"/>
@@ -108,19 +101,14 @@ Within the "AWS/EC2" namespace, metrics can further be organized based on dimens
 </figure>
 <br/>
 
-    
 3. **Metric Data:**
-At the most detailed level, metrics are the specific data points that capture the performance of your AWS resources—like monitoring CPU usage, disk space, disk activity, network traffic and more. Each combination of namespace, dimensions, and specific metric type provides a unique set of data for analysis. 
-    
-   
+   At the most detailed level, metrics are the specific data points that capture the performance of your AWS resources—like monitoring CPU usage, disk space, disk activity, network traffic and more. Each combination of namespace, dimensions, and specific metric type provides a unique set of data for analysis.
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/cloudwatch-metrics-data.webp" alt="Metrics data in Amazon Cloudwatch"/>
     <figcaption><i>Metrics data in Amazon Cloudwatch</i></figcaption>
 </figure>
 <br/>
-
-    
 
 You can visit the <a href = "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html" rel="noopener noreferrer nofollow" target="_blank" >official documentation</a> to learn more about these organizations.
 
@@ -224,30 +212,30 @@ If you're running an application on an EC2 instance, you can use the CloudWatch 
 With the CloudWatch agent, you add custom dimensions to metrics collected by the CloudWatch agent. To custom dimensions like tags in the metrics gathered by the agent, include the "append_dimensions" field in the agent configuration file section that enumerates those metrics. As illustrated below, the provided configuration file snippet introduces a custom dimension named "stackName" with a value of "Prod" for the CPU and disk metrics captured by the agent.
 
 ```jsx
-"cpu":{  
-  "resources":[  
+"cpu":{
+  "resources":[
     "*"
   ],
-  "measurement":[  
+  "measurement":[
     "cpu_usage_guest",
     "cpu_usage_nice",
     "cpu_usage_idle"
   ],
   "totalcpu":false,
-  "append_dimensions":{  
+  "append_dimensions":{
     "stackName":"Prod"
   }
 },
-"disk":{  
-  "resources":[  
+"disk":{
+  "resources":[
     "/",
     "/tmp"
   ],
-  "measurement":[  
+  "measurement":[
     "total",
     "used"
   ],
-  "append_dimensions":{  
+  "append_dimensions":{
     "stackName":"Prod"
   }
 }
@@ -269,21 +257,17 @@ Check out the <a href = "https://docs.aws.amazon.com/AmazonCloudWatch/latest/mon
 
 While CloudWatch offers valuable monitoring services, some users express concerns about the associated costs, often attributed to a high volume of API requests. This issue has been a topic of discussion on platforms like Reddit, where users share their experiences and challenges with CloudWatch expenses.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/cloudwatch-metrics-high-cost.webp" alt="Users discussing high costs with Cloudwatch"/>
     <figcaption><i>Users discussing high costs with Cloudwatch</i></figcaption>
 </figure>
 <br/>
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/cloudwatch-metrics-cost-unpredictable.webp" alt="Sometimes CloudWatch costs can be unpredictable"/>
     <figcaption><i>Sometimes CloudWatch costs can be unpredictable</i></figcaption>
 </figure>
 <br/>
-
 
 Cloudwatch UX is also limited if you want to have a robust monitoring setup. If Cloudwatch doesn’t fulfill all your requirements, then you can use one of these [Cloudwatch alternatives](https://signoz.io/blog/cloudwatch-alternatives/).
 
@@ -322,14 +306,11 @@ Key architecture features of SigNoz:
 - Record exceptions automatically in Python, Java, Ruby, and Javascript
 - Easy to set alerts with DIY query builder
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_flamegraphs.webp" alt="Flamegraphs showing exact duration taken by each spans - a concept of distributed tracing"/>
     <figcaption><i>Flamegraphs showing exact duration taken by each spans - a concept of distributed tracing</i></figcaption>
 </figure>
 <br/>
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/cloudwatch-metrics-dashboard.webp" alt="Metrics dashboard in SigNoz"/>
@@ -337,12 +318,9 @@ Key architecture features of SigNoz:
 </figure>
 <br/>
 
-
 ## Getting started with SigNoz
 
 <GetStartedSigNoz />
-
-
 
 ---
 

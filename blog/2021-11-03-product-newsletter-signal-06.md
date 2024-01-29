@@ -6,11 +6,12 @@ tags: [Product Updates]
 authors: ankit_anand
 description: It's time for the monthly product update of SigNoz - a full-stack open-source and observability tool. Find out what we've been upto at SigNoz during October, 2021.
 image: /img/blog/2021/11/signal_06_cover.webp
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
- - SigNoz Product Update
- - Dev community
+  - SigNoz Product Update
+  - Dev community
 ---
+
 <head>
   <link rel="canonical" href="https://signoz.io/blog/community-update-06/"/>
 </head>
@@ -26,6 +27,7 @@ Also, we crossed 5000+ GitHub stars this month 🚀😎
 Let's dive in to see what humans of SigNoz have been up to in October.
 
 ## What we shipped?
+
 We made two major releases last month:
 
 [Release v0.4.3](https://github.com/SigNoz/signoz/releases/tag/v0.4.3)
@@ -136,7 +138,7 @@ We also got featured in **[Observability Trends 2021](https://www.civo.com/blog/
 
 ## Learn
 
-Excited to share that we are working on a new initiative to help our community learn more about DevOps and specifically about the observability & monitoring domain.  Few ideas that we have in mind, and would love to implement:
+Excited to share that we are working on a new initiative to help our community learn more about DevOps and specifically about the observability & monitoring domain. Few ideas that we have in mind, and would love to implement:
 
 - A curation of common issues faced by users when starting out with OpenTelemetry(open-source instrumentation standard)
 - List of tools to supercharge your K8s workflow

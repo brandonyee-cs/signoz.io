@@ -18,6 +18,7 @@ keywords:
   - open source
   - signoz
 ---
+
 <head>
   <link rel="canonical" href="https://signoz.io/blog/apm-vs-distributed-tracing/"/>
 </head>
@@ -34,7 +35,6 @@ The goal of both APM and distributed tracing tools should thus be to help you un
 
 > **APM vs. Distributed Tracing** <br></br>
 > APM vs. Distributed Tracing is not a meaningful comparison. Most applications have some kind of APM tool in place. APM tools have a number of features that help developers track application performance. Distributed tracing is a specific technology to track how user requests are performing in a distributed system like a microservices-based application.
-
 
 Let’s have a brief overview of APM and distributed tracing.
 
@@ -112,7 +112,7 @@ Once you access the tracing data, you can identify the exact events that caused 
     width={700}
 />
 
-For microservices-based applications, it is critical for application owners to see how a specific event fits in the scheme of its entire user request. Tracing data in the form of Flamegraphs and Gantt charts can give you that picture. 
+For microservices-based applications, it is critical for application owners to see how a specific event fits in the scheme of its entire user request. Tracing data in the form of Flamegraphs and Gantt charts can give you that picture.
 
 APM gives you application metrics that when combined with distributed tracing can empower engineering teams to troubleshoot complex issues quickly.
 

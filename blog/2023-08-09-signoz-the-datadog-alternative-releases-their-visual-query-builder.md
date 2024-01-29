@@ -6,10 +6,10 @@ tags: [OpenTelemetry, Product]
 authors: nicamellifera
 description: The team at SigNoz would like to share recent developments released this month that greatly enhance the ability to dynamically query your trace and log data. With these tools anyone can explore complex OpenTelemetry data and gain insight into their stack.
 image: /img/blog/2023/08/query-builder/query-builder-cover.jpg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
- - OpenTelemetry
- - Clickhouse
+  - OpenTelemetry
+  - Clickhouse
 ---
 
 <head>
@@ -30,13 +30,12 @@ We've talked recently about how ClickHouse, the datastore that SigNoz uses, [all
 While ClickHouse queries are written in SQL and should be familiar to many many developers, the goal of DevOps is, after all, a sharing of operational and dev knowledge as far as possible. Requiring everyone to write queries will always have limits, creating one group who create dashboards and another who just view them.
 
 **You often have to know what data is present to work with it**<br></br>
-I'll say that as a die-hard SQL user, you absolutely *can* explore your data just using queries. But it's immensely helpful in this query builder that completions for your queries, both with attribute names *and* attribute values. For example, I wanted to look at log lines only for a single container ID. Instead of having to query and pick an ID, the explorer suggests some frequent values.
+I'll say that as a die-hard SQL user, you absolutely _can_ explore your data just using queries. But it's immensely helpful in this query builder that completions for your queries, both with attribute names _and_ attribute values. For example, I wanted to look at log lines only for a single container ID. Instead of having to query and pick an ID, the explorer suggests some frequent values.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/08/query-builder/suggestion-values.webp" alt="The newly shipped logs explorer will help you create powerful queries on your logs data"/>
     <figcaption><i>Attributes, comparators, and values all get auto-suggested</i></figcaption>
 </figure>
-
 
 Let's talk about what else the new Explorer pages enable:
 
@@ -70,6 +69,7 @@ or a table view that aggregates results together:
 It may be that time correlation isn't the goal, you can still add lists and table views to your dashboards!
 
 ### 3. Alerts based on your queries
+
 Directly from results you can add the query to a dashboard and set up an alert. For logs, this makes the timeseries view especially useful, as you can now create an alert when a certain event is logged beyond a certain rate.
 
 <figure data-zoomable align='center'>
@@ -78,6 +78,7 @@ Directly from results you can add the query to a dashboard and set up an alert. 
 </figure>
 
 ## Conclusion
+
 In the ever-evolving landscape of observability tools, SigNoz continues to make significant strides towards providing an open-source alternative to proprietary solutions.
 
 By addressing the inherent limitations of query-based exploration, SigNoz has broken down barriers that often restrict meaningful engagement with observability data. Our new query builder for logs and traces allows teams to bring in SRE's and Operations Engineers to the process of querying their observability data.

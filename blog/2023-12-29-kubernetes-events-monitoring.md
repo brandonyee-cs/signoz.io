@@ -6,7 +6,7 @@ tags: [OpenTelemetry, Kubernetes]
 authors: dejan-lukic
 description: Events in Kubernetes are objects that provide insights into the state changes within the Kubernetes cluster. Kubernetes events monitoring is critical to provide real-time insights into the operational state of a Kubernetes cluster...
 image: /img/blog/2023/12/kubernetes-events-monitoring-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -20,7 +20,6 @@ keywords:
 </head>
 
 Events in Kubernetes are objects that provide insights into the state changes within the Kubernetes cluster. Kubernetes events monitoring is critical to provide real-time insights into the operational state of a Kubernetes cluster. It enables administrators to quickly identify and respond to issues, optimize resource allocation, and ensure the smooth and efficient functioning of their containerized applications.
-
 
 <!--truncate-->
 
@@ -37,7 +36,6 @@ In this tutorial, we cover:
 - [Setting up the OpenTelemetry Collector](#setting-up-the-opentelemetry-collector)
 - [Monitoring with Signoz Dashboard](#monitoring-with-signoz-dashboard)
 - [Conclusion](#conclusion)
-
 
 If you want to jump straight into implementation, start with this [Prerequisites](#prerequisites) section.
 
@@ -63,19 +61,19 @@ Types of Kubernetes Events:
 
 ## Why Is Kubernetes Events Monitoring Important?
 
-Kubernetes events monitoring is crucial for maintaining real-time awareness of your cluster’s activities. These events serve as a detailed log, flagging changes, pod lifecycle events, and errors. By monitoring these events, you stay informed about the state and activities within your cluster. 
+Kubernetes events monitoring is crucial for maintaining real-time awareness of your cluster’s activities. These events serve as a detailed log, flagging changes, pod lifecycle events, and errors. By monitoring these events, you stay informed about the state and activities within your cluster.
 
 Monitoring Kubernetes events is essential for several key reasons:
 
 - **Operational Reliability**: It provides real-time insights into the health and performance of containerized applications, ensuring smooth operations.
-    - Detects failed deployments and resource allocation issues.
-    - Reduces downtime through proactive issue resolution.
+  - Detects failed deployments and resource allocation issues.
+  - Reduces downtime through proactive issue resolution.
 - **Security and Compliance**: Event monitoring is crucial for identifying security breaches and maintaining compliance with regulatory standards.
-    - Offers real-time detection of suspicious activities.
-    - Generates audit trails for regulatory compliance.
+  - Offers real-time detection of suspicious activities.
+  - Generates audit trails for regulatory compliance.
 - **Strategic Decision Making**: Analyzing event patterns over time aids in resource optimization and scaling decisions.
-    - Improves user experience by preempting performance bottlenecks.
-    - Facilitates informed decisions about resource management and scaling.
+  - Improves user experience by preempting performance bottlenecks.
+  - Facilitates informed decisions about resource management and scaling.
 
 ## Collecting Kubernetes Events with OpenTelemetry
 
@@ -83,7 +81,7 @@ OpenTelemetry is a set of APIs, SDKs, libraries, and integrations aiming to stan
 
 The data you collect with OpenTelemetry is vendor-agnostic and can be sent to any backend of your choice. In this tutorial, we will send Kubernetes events to [SigNoz](https://signoz.io/), an OpenTelemetry-native APM.
 
-OpenTelemetry acts like a middleman gathering data on pod activities, errors, and resource use. This collected information helps you understand what's happening inside your cluster, making it easier to troubleshoot problems and keep your system running smoothly. 
+OpenTelemetry acts like a middleman gathering data on pod activities, errors, and resource use. This collected information helps you understand what's happening inside your cluster, making it easier to troubleshoot problems and keep your system running smoothly.
 
 OpenTelemetry provides an OpenTelemetry Collector that can be used as a telemetry-processing system with a lot of flexible configurations to collect and manage telemetry data. We will use an OpenTelemetry Collector to collect Kubernetes events and send them to SigNoz.
 
@@ -102,7 +100,6 @@ receivers:
 ```
 
 An OTLP receiver can receive data via gRPC or HTTP using the <a href = "https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md" rel="noopener noreferrer nofollow" target="_blank" >OTLP</a> format. There are advanced configurations that you can enable via the YAML file.
-
 
 Here’s a sample configuration for an otlp receiver.
 
@@ -148,27 +145,27 @@ Each OpenTelemetry receiver collects its subset of metrics, logs and/or traces. 
 
 The event data collected by the receiver:
 
-| Metric | Description | Metric Name |
-| --- | --- | --- |
-| Event Reason | The reason for the event | k8s.event.reason |
-| Event Action | The given event action | k8s.event.action |
-| Event Start Time | The start time of an event | k8s.event.start_time |
-| Event Name | The name of the event | k8s.event.name |
-| Event Unique Identifier | The event’s unique identifier | k8s.event.uid |
-| Event Count | The total count of events | k8s.event.count |
+| Metric                  | Description                   | Metric Name          |
+| ----------------------- | ----------------------------- | -------------------- |
+| Event Reason            | The reason for the event      | k8s.event.reason     |
+| Event Action            | The given event action        | k8s.event.action     |
+| Event Start Time        | The start time of an event    | k8s.event.start_time |
+| Event Name              | The name of the event         | k8s.event.name       |
+| Event Unique Identifier | The event’s unique identifier | k8s.event.uid        |
+| Event Count             | The total count of events     | k8s.event.count      |
 
 ## Objects
 
 The object data collected by the receiver:
 
-| Metric Name | Description | Metric |
-| --- | --- | --- |
-| Object Kind | The kind (type) of an K8s object | k8s.object.kind |
-| Object Name | The name of the object | k8s.object.name |
-| Object Unique Identifier | The object’s unique identifier | k8s.object.uid |
-| Object Fieldpath | The object’s fieldpath | k8s.object.fieldpath |
-| Object API Version | The object’s API version | k8s.object.api_version |
-| Object Resource Version | The object’s resource version | k8s.object.resource_version |
+| Metric Name              | Description                      | Metric                      |
+| ------------------------ | -------------------------------- | --------------------------- |
+| Object Kind              | The kind (type) of an K8s object | k8s.object.kind             |
+| Object Name              | The name of the object           | k8s.object.name             |
+| Object Unique Identifier | The object’s unique identifier   | k8s.object.uid              |
+| Object Fieldpath         | The object’s fieldpath           | k8s.object.fieldpath        |
+| Object API Version       | The object’s API version         | k8s.object.api_version      |
+| Object Resource Version  | The object’s resource version    | k8s.object.resource_version |
 
 ## Prerequisites
 
@@ -253,62 +250,62 @@ metadata:
   labels:
     app: otelcontribcol
 rules:
-- apiGroups:
-  - ""
-  resources:
-  - events
-  - namespaces
-  - namespaces/status
-  - nodes
-  - nodes/spec
-  - pods
-  - pods/status
-  - replicationcontrollers
-  - replicationcontrollers/status
-  - resourcequotas
-  - services
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - apps
-  resources:
-  - daemonsets
-  - deployments
-  - replicasets
-  - statefulsets
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - extensions
-  resources:
-  - daemonsets
-  - deployments
-  - replicasets
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - batch
-  resources:
-  - jobs
-  - cronjobs
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-    - autoscaling
-  resources:
-    - horizontalpodautoscalers
-  verbs:
-    - get
-    - list
-    - watch
+  - apiGroups:
+      - ""
+    resources:
+      - events
+      - namespaces
+      - namespaces/status
+      - nodes
+      - nodes/spec
+      - pods
+      - pods/status
+      - replicationcontrollers
+      - replicationcontrollers/status
+      - resourcequotas
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - daemonsets
+      - deployments
+      - replicasets
+      - statefulsets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - daemonsets
+      - deployments
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+      - cronjobs
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - autoscaling
+    resources:
+      - horizontalpodautoscalers
+    verbs:
+      - get
+      - list
+      - watch
 ```
 
 Apply the cluster role to the cluster by running the following command:
@@ -340,13 +337,13 @@ spec:
     spec:
       serviceAccountName: otelcontribcol
       containers:
-      - name: otelcontribcol
-        image: signoz/otelcontribcol:latest
-        args: ["--config", "/etc/config/config.yaml"]
-        volumeMounts:
-        - name: config
-          mountPath: /etc/config
-        imagePullPolicy: IfNotPresent
+        - name: otelcontribcol
+          image: signoz/otelcontribcol:latest
+          args: ["--config", "/etc/config/config.yaml"]
+          volumeMounts:
+            - name: config
+              mountPath: /etc/config
+          imagePullPolicy: IfNotPresent
       volumes:
         - name: config
           configMap:

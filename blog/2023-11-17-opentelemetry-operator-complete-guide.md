@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: daniel
 description: An OpenTelemetry Operator is a Kubernetes Operator that manages OpenTelemetry Collectors and auto-instrumentation of workloads. Learn how to use OpenTelemetry operator to deploy OpenTelemetry Collectors and auto-instrument a sample Java application...
 image: /img/blog/2023/11/opentelemetry-operator-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -26,11 +26,9 @@ Manually deploying and managing OpenTelemetry components in a Kubernetes environ
 
 ![Cover Image](/img/blog/2023/11/opentelemetry-operator-cover.webp)
 
-
 OpenTelemetry Operators provide a solution to this problem by automating the deployment, configuration, and management of OpenTelemetry components in Kubernetes clusters, making it easier for operation teams to implement observability in their applications.
 
 In this tutorial, we will cover:
-
 
 - [What is OpenTelemetry?](#what-is-opentelemetry)
 - [What is a Kubernetes Operator?](#what-is-a-kubernetes-operator)
@@ -47,7 +45,6 @@ In this tutorial, we will cover:
 - [Getting started with SigNoz](#getting-started-with-signoz)
 - [Further Reading](#further-reading)
 
-
 ## What is OpenTelemetry?
 
 <a href = "https://opentelemetry.io" rel="noopener noreferrer nofollow" target="_blank">OpenTelemetry</a> is an open-source project under the Cloud Native Computing Foundation (<a href = "https://www.cncf.io" rel="noopener noreferrer nofollow" target="_blank">CNCF</a>) that aims to standardize the generation and collection of telemetry data. Telemetry data includes logs, metrics, and traces.
@@ -59,14 +56,10 @@ The biggest advantage of using OpenTelemetry is that you have the freedom to cho
 > Which backend analysis tool to choose? <br />
 > You can try [SigNoz](https://signoz.io/), a full stack open-source APM built natively on OpenTelemetry.
 
-
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/otel-signoz-arch.webp" alt="Architecture - How OpenTelemetry fits in an application architecture. OTel collector refers to OpenTelemetry Collector"/>
     <figcaption><i>Architecture - How OpenTelemetry fits in an application architecture. OTel collector refers to OpenTelemetry Collector</i></figcaption>
 </figure>
-
-
 
 ## What is a Kubernetes Operator?
 
@@ -83,7 +76,7 @@ The OpenTelemetry Operator provides two Custom Resource Definitions (CRDs):
 - `OpenTelemetryCollector`
 - `Instrumentation`
 
-The `OpenTelemetryCollector` CRD allows you to deploy and manage OpenTelemetry Collectors in your Kubernetes cluster. 
+The `OpenTelemetryCollector` CRD allows you to deploy and manage OpenTelemetry Collectors in your Kubernetes cluster.
 
 The `Instrumentation` CRD allows you to configure and inject OpenTelemetry auto-instrumentation libraries into your workloads.
 
@@ -131,14 +124,12 @@ cd spring-petclinic
 java -jar target/*.jar
 ```
 
-You can then access the running application at [localhost:8090](http://localhost:8090) 
-
+You can then access the running application at [localhost:8090](http://localhost:8090)
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/petclinic-welcome.webp" alt="petclinic welcome screen"/>
     <figcaption><i></i></figcaption>
 </figure>
-
 
 ### Setting up the OpenTelemetry Operator
 
@@ -232,12 +223,11 @@ spec:
 EOF
 ```
 
-This above configuration sets up the OpenTelemetry Operator to automatically instrument applications written in Java, Node.js, Python, and .NET. It defines settings for the exporter, context propagation, and sampling strategies. 
+This above configuration sets up the OpenTelemetry Operator to automatically instrument applications written in Java, Node.js, Python, and .NET. It defines settings for the exporter, context propagation, and sampling strategies.
 
 In essence, once you deploy an application in the specified languages, the OpenTelemetry Operator will apply the necessary instrumentation code to collect telemetry data from that application.
 
 > Replace the {region} with the region you selected when creating the SigNoz cloud account, and replace `<signoz-access-token>` with the ingestion token sent to your email.
-
 
 You can find the ingestion details in the SigNoz dashboard under the `Settings` tab.
 
@@ -246,14 +236,13 @@ You can find the ingestion details in the SigNoz dashboard under the `Settings` 
     <figcaption><i></i></figcaption>
 </figure>
 
-
 ### Auto-instrument your Java app with OpenTelemetry
 
 Applications can be instrumented through both manual instrumentation and auto-instrumentation. Manual instrumentation offers granular control and customization of instrumentation code but may be time-consuming and require existing code modification. Alternatively, auto-instrumentation automates this process without code modifications, saving time and effort. In this case, auto-instrumentation will be utilized for simplicity.
 
 There are different ways to set up auto-instrumentation for your applications using the OpenTelemetry Operator, which you can look at [here](https://signoz.io/docs/tutorial/opentelemetry-operator-usage/#opentelemetry-auto-instrumentation-injection).
 
-The sample Java application that was set up earlier is to be auto-instrumented with OpenTelemetry. It has already been packaged into a docker image and is being referenced in the below Kubernetes manifest. Once the deployment is created, the image will be pulled into your cluster from the GitHub Container Registry, where it is hosted. Auto instrumentation has been set up for the application using the “Auto-instrumentation without Sidecar” method in the below manifest. 
+The sample Java application that was set up earlier is to be auto-instrumented with OpenTelemetry. It has already been packaged into a docker image and is being referenced in the below Kubernetes manifest. Once the deployment is created, the image will be pulled into your cluster from the GitHub Container Registry, where it is hosted. Auto instrumentation has been set up for the application using the “Auto-instrumentation without Sidecar” method in the below manifest.
 
 Run the below to create the deployment:
 
@@ -281,8 +270,7 @@ spec:
 EOF
 ```
 
-> The pod annotation `instrumentation.opentelemetry.io/inject-java: "true"`  signals to the OpenTelemetry Operator that this specific pod should be auto-instrumented for Java.
-
+> The pod annotation `instrumentation.opentelemetry.io/inject-java: "true"` signals to the OpenTelemetry Operator that this specific pod should be auto-instrumented for Java.
 
 The OpenTelemetry Operator will be responsible for injecting and configuring OpenTelemetry auto-instrumentation libraries into the spring-petclinic application without you needing to set up OpenTelemetry and its components for the application yourself.
 
@@ -323,7 +311,6 @@ Now, telemetry data needs to be generated for the application. This telemetry da
 
 Once telemetry data has been generated, open your SigNoz cloud account, and you should see the spring-petclinic application under the Services tab.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/petclinic-service-app.webp" alt="SigNoz UI showing spring-petclinic application"/>
     <figcaption><i>SigNoz UI showing spring-petclinic application</i></figcaption>
@@ -331,7 +318,6 @@ Once telemetry data has been generated, open your SigNoz cloud account, and you 
 <br />
 
 You can change the duration in case the application doesn’t show up depending on the time the telemetry data was generated.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/duration-options.webp" alt="Duration options"/>
@@ -341,8 +327,6 @@ You can change the duration in case the application doesn’t show up depending 
 
 When you click on the 'Spring-Pet-Clinic' application in the 'Services' tab, you will find an overview of your application in the 'Overview' tab containing information on the Latency, Rate, Apdex, Key Operations, and Error Rate. You can also see the tabs for DB Call Metrics and External Metrics. You can select each of the charts to get more insights.
 
-
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/service-list-tab.webp" alt="List of services in Services tab"/>
     <figcaption><i>List of services in Services tab</i></figcaption>
@@ -351,18 +335,13 @@ When you click on the 'Spring-Pet-Clinic' application in the 'Services' tab, you
 
 By selecting and viewing the Latency chart, you gain access to crucial percentiles – p99, p90, and p50. These metrics offer valuable insights into the distribution of response times.
 
-
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/latency-chart.webp" alt="Latency chart showing p99, p90 and p50 percentiles"/>
     <figcaption><i>Latency chart showing p99, p90 and p50 percentiles</i></figcaption>
 </figure>
 <br />
 
-
 Beneath, you can observe the Apdex (Application Performance Index) is at 0, and the Error percentage chart has no data. This is because there was no failure in the requests sent to the application, resulting in no data for the error percentage. The Key Operations chart, on the other hand, shows all the requests made and activities carried out in the application.
-
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/key-operation-chart.webp" alt=""/>
@@ -371,7 +350,6 @@ Beneath, you can observe the Apdex (Application Performance Index) is at 0, and 
 <br />
 
 In the Traces tab, you can utilize the ‘Trace Explorer’ to filter traces by tags, choose specific services, set desired duration and status filters, and perform additional actions for refined trace viewing.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/trace-explorer-chart.webp" alt="Trace Explorer tab"/>
@@ -392,12 +370,12 @@ Switching over to the new Traces Explorer UI, you can query metrics using the Qu
 
 The OpenTelemetry Operator proves to be a crucial asset in streamlining observability within a Kubernetes cluster. By simplifying the deployment of OpenTelemetry components, it facilitates the seamless collection of telemetry data. This data can then be efficiently forwarded to SigNoz, a comprehensive open-source backend solution, enabling robust visualization and monitoring capabilities for enhanced operational insights.
 
-
 ## Getting started with SigNoz
 
 <GetStartedSigNoz />
 
 ---
+
 ## Further Reading
 
 [Using SigNoz to monitor your Kubernetes cluster](https://signoz.io/blog/using-signoz-to-monitor-your-kubernetes-cluster/)

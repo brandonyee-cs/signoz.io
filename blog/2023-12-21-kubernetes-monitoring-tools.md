@@ -21,14 +21,13 @@ keywords:
 
 import { LiteYoutubeEmbed } from "react-lite-yt-embed";
 
-
-Are you looking for Kubernetes monitoring tools? Then you have come to the right place. Kubernetes has grown to become the container orchestration platform of choice. It simplifies managing your containerized workloads. You get the power of automating deployments, scaling resources, and keeping your applications running smoothly. But with great power comes added responsibility. And like any complex system, Kubernetes needs monitoring. 
+Are you looking for Kubernetes monitoring tools? Then you have come to the right place. Kubernetes has grown to become the container orchestration platform of choice. It simplifies managing your containerized workloads. You get the power of automating deployments, scaling resources, and keeping your applications running smoothly. But with great power comes added responsibility. And like any complex system, Kubernetes needs monitoring.
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2023/12/k8s-monitoring-tools-cover.webp)
 
-Kubernetes monitoring tools provide insights into resource usage, container health, and application performance. This enables you to optimize your workload and proactively prevent problems. 
+Kubernetes monitoring tools provide insights into resource usage, container health, and application performance. This enables you to optimize your workload and proactively prevent problems.
 
 This article lists the top 11 monitoring tools - ranging from open-source to SaaS solutions.
 
@@ -45,7 +44,7 @@ List of top 11 Kubernetes monitoring tools:
 - [Dynatrace](#dynatrace)
 - [Datadog](#datadog)
 - [Sematext](#sematext)
-  
+
 SigNoz and Grafana can be self-hosted for free where you will only have to pay for infra and maintenance costs.
 
 ## Why is Kubernetes Monitoring Important?
@@ -61,19 +60,19 @@ Here are the top benefits of Kubernetes monitoring:
 
 ## Top Kubernetes Monitoring Tools at a glance
 
-|  | Best For | Standout Feature | Pricing |
-| --- | --- | --- | --- |
-| SigNoz | OpenTelemetry native monitoring, 3 signals in a single pane, ClickHouse-based storage. | Open-source. Track MELT under a single pane of glass. Correlation between signals. | Free community edition. $199/month for cloud. Custom price for enterprises. |
-| Prometheus | Storing time-series metrics. | PromQL — A powerful and flexible query language. | Free to use. |
-| Grafana | Integrations with multiple data sources. | Rich dashboard with different plotting options. | Free tier. Pay as you go tier. $299/month for advanced bundle. |
-| Kubernetes Dashboard | Simple monitoring for small clusters. | It’s natively part of Kubernetes. | Free to use. |
-| cAdvisor | Auto-discovery and support for REST endpoints. | Open-source. | Free to use. |
-| Sentry | Detailed monitoring across services and transactions. | Comprehensive tracking and deep insights. | Free tier with limited features. Team starts at $26/month (billed annually) |
-| EFK | Log monitoring and analysis. | Multiple data sources can be connected. | Free to use. |
-| New Relic | All-in-one monitoring with heavy integrations. | AI assistant - New Relic Grok. | Free tier with 100GB/month data ingest. Custom pricing with the pay-as-you-go model. |
-| Dynatrace | Automatic out-of-the-box alerting. | Dynatrace operator for Kubernetes. | Free trial. Usage-based pricing. |
-| Datadog | Cloud-based APM solution. | Datadog agent to run in Kubernetes cluster. | Starts at $15 per-month per-host (billed annually) |
-| Sematext | Provides integration for Kubernetes monitoring | Sematext agent collects important logs & metrics | Infra monitoring starts at $3.6 per host per month for 5 containers per host. |
+|                      | Best For                                                                               | Standout Feature                                                                   | Pricing                                                                              |
+| -------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| SigNoz               | OpenTelemetry native monitoring, 3 signals in a single pane, ClickHouse-based storage. | Open-source. Track MELT under a single pane of glass. Correlation between signals. | Free community edition. $199/month for cloud. Custom price for enterprises.          |
+| Prometheus           | Storing time-series metrics.                                                           | PromQL — A powerful and flexible query language.                                   | Free to use.                                                                         |
+| Grafana              | Integrations with multiple data sources.                                               | Rich dashboard with different plotting options.                                    | Free tier. Pay as you go tier. $299/month for advanced bundle.                       |
+| Kubernetes Dashboard | Simple monitoring for small clusters.                                                  | It’s natively part of Kubernetes.                                                  | Free to use.                                                                         |
+| cAdvisor             | Auto-discovery and support for REST endpoints.                                         | Open-source.                                                                       | Free to use.                                                                         |
+| Sentry               | Detailed monitoring across services and transactions.                                  | Comprehensive tracking and deep insights.                                          | Free tier with limited features. Team starts at $26/month (billed annually)          |
+| EFK                  | Log monitoring and analysis.                                                           | Multiple data sources can be connected.                                            | Free to use.                                                                         |
+| New Relic            | All-in-one monitoring with heavy integrations.                                         | AI assistant - New Relic Grok.                                                     | Free tier with 100GB/month data ingest. Custom pricing with the pay-as-you-go model. |
+| Dynatrace            | Automatic out-of-the-box alerting.                                                     | Dynatrace operator for Kubernetes.                                                 | Free trial. Usage-based pricing.                                                     |
+| Datadog              | Cloud-based APM solution.                                                              | Datadog agent to run in Kubernetes cluster.                                        | Starts at $15 per-month per-host (billed annually)                                   |
+| Sematext             | Provides integration for Kubernetes monitoring                                         | Sematext agent collects important logs & metrics                                   | Infra monitoring starts at $3.6 per host per month for 5 containers per host.        |
 
 ## Top Kubernetes Monitoring Tools
 
@@ -86,7 +85,6 @@ Here are the top benefits of Kubernetes monitoring:
 <p>&nbsp;</p>
 
 [Signoz](https://signoz.io/) is an Application Performance Monitoring (APM) tool that provides the added benefits of logs, metrics, exceptions, and alerts. What sets Signoz apart is that it’s OpenTelemetry-Native. Why does OpenTelemetry matter? Let’s take a glance:
-
 
 1. It’s <a href = "https://github.com/signoz/signoz" rel="noopener noreferrer nofollow" target="_blank" >open-source</a> and standardized. You are free from vendor lock-ins.
 2. Installation and integration are simple, with little to no code.
@@ -112,7 +110,6 @@ The [community edition](https://signoz.io/docs/install/) is free for use if you�
 </figure>
 <br/>
 
-
 Developed by SoundCloud, and now a part of the CNCF (Cloud-Native Computing Foundation), <a href = "https://prometheus.io/" rel="noopener noreferrer nofollow" target="_blank" >Prometheus</a> is the next tool on our list. At its core, Prometheus is a time-series database. What sets it apart is its flexible query language - PromQL.
 
 For monitoring via Prometheus, your applications running on Kubernetes need to expose metrics at the `/metrics` endpoint. While manual configuration is an option, the <a href = "https://prometheus-operator.dev" rel="noopener noreferrer nofollow" target="_blank" >Prometheus Operator</a> makes your life easy.
@@ -124,11 +121,11 @@ For monitoring via Prometheus, your applications running on Kubernetes need to e
 3. Built-in expression browser for quick visualization.
 4. Strong community support.
 
-| Pros | Cons |
-| --- | --- |
-| Flexible query language - PromQL | Aggregated metrics might not reveal actual numbers |
-| Allows third-party integrations | Only supports metrics; no support for logs or traces |
-| Highly dimensional data model based on key-value pairs | Built-in visualization is limited |
+| Pros                                                   | Cons                                                 |
+| ------------------------------------------------------ | ---------------------------------------------------- |
+| Flexible query language - PromQL                       | Aggregated metrics might not reveal actual numbers   |
+| Allows third-party integrations                        | Only supports metrics; no support for logs or traces |
+| Highly dimensional data model based on key-value pairs | Built-in visualization is limited                    |
 
 ### Grafana
 
@@ -137,7 +134,6 @@ For monitoring via Prometheus, your applications running on Kubernetes need to e
     <figcaption><i>Grafana dashboard (source: Grafana Website)</i></figcaption>
 </figure>
 <br/>
-
 
 You cannot talk about Prometheus without mentioning <a href = "https://grafana.com" rel="noopener noreferrer nofollow" target="_blank" >Grafana</a>. Grafana comes with its own stack called LGTM - **L**ogs (Grafana Loki), **G**rafana (Dashboard visualization), **T**races (Grafana Tempo), and Metrics (Grafana Mimir and Prometheus).
 
@@ -149,14 +145,13 @@ While Prometheus is a popular choice for monitoring Kubernetes, the Grafana dash
 2. Powerful visualization support, which is highly customizable.
 3. Full Kubernetes monitoring using Grafana Cloud - from Clusters to individual Pods.
 
-| Pros | Cons |
-| ---  | --- |
-| Support for multiple data sources | Large number of queries might slow down the dashboard load time |
-| Extensive visualization with support for alerts | Learning curve for different data sources |
-| Highly dimensional data model based on key-value pairs | Limited out-of-the-box support for Kubernetes |
+| Pros                                                   | Cons                                                            |
+| ------------------------------------------------------ | --------------------------------------------------------------- |
+| Support for multiple data sources                      | Large number of queries might slow down the dashboard load time |
+| Extensive visualization with support for alerts        | Learning curve for different data sources                       |
+| Highly dimensional data model based on key-value pairs | Limited out-of-the-box support for Kubernetes                   |
 
 ### Kubernetes Dashboard
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/kubernetes-monitoring-tools-k8s-dashboard.webp" alt="Kubernetes monitoring tool - Kubernetes Dashboard"/>
@@ -164,21 +159,20 @@ While Prometheus is a popular choice for monitoring Kubernetes, the Grafana dash
 </figure>
 <br/>
 
+If you're looking for a simple UI for monitoring your Kubernetes workload, then the <a href = "https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" rel="noopener noreferrer nofollow" target="_blank" >Kubernetes Dashboard</a> might be the choice for you. You can deploy, manage, and troubleshoot your cluster resources.
 
-If you're looking for a simple UI for monitoring your Kubernetes workload, then the <a href = "https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" rel="noopener noreferrer nofollow" target="_blank" >Kubernetes Dashboard</a> might be the choice for you. You can deploy, manage, and troubleshoot your cluster resources. 
-
-Kubernetes Dashboard is perfect for small clusters or if you're just starting out with Kubernetes and want to explore monitoring. 
+Kubernetes Dashboard is perfect for small clusters or if you're just starting out with Kubernetes and want to explore monitoring.
 
 **Features of Kubernetes Dashboard**
 
 1. It’s a part of Kubernetes, and deploying is easy with the `kubectl` command
 2. Monitor CPU and memory utilization, along with health statistics across all nodes
 
-| Pros | Cons |
-| --- | --- |
-| Part of Kubernetes, making it easy to install | Limited functionality |
-| Provides CPU, Memory, and Health Statistics | Does not scale with a large cluster |
-| Allows deployment and troubleshooting | No support for logs and traces |
+| Pros                                          | Cons                                |
+| --------------------------------------------- | ----------------------------------- |
+| Part of Kubernetes, making it easy to install | Limited functionality               |
+| Provides CPU, Memory, and Health Statistics   | Does not scale with a large cluster |
+| Allows deployment and troubleshooting         | No support for logs and traces      |
 
 ### cAdvisor
 
@@ -193,11 +187,11 @@ With native support for Docker containers, you can run cAdvisor as a <a href = "
 3. Has a Web UI and exposes REST endpoints.
 4. Supports exporting data in different formats such as for ElasticSearch.
 
-| Pros | Cons |
-| --- | --- |
-| Uses https://github.com/kubernetes-sigs/kustomize for Kubernetes daemonset | No long-term storage or analysis capabilities |
-| Provides CPU, Memory, and Health Statistics | Does not collect application-specific metrics or logs |
-| Allows deployment and troubleshooting | Increased complexity as it requires additional tools |
+| Pros                                                                       | Cons                                                  |
+| -------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Uses https://github.com/kubernetes-sigs/kustomize for Kubernetes daemonset | No long-term storage or analysis capabilities         |
+| Provides CPU, Memory, and Health Statistics                                | Does not collect application-specific metrics or logs |
+| Allows deployment and troubleshooting                                      | Increased complexity as it requires additional tools  |
 
 ### Sentry.io
 
@@ -206,7 +200,6 @@ With native support for Docker containers, you can run cAdvisor as a <a href = "
     <figcaption><i>Sentry dashboard (source: Sentry website)</i></figcaption>
 </figure>
 <br/>
-
 
 Beyond basic metrics and logs, <a href = "https://sentry.io/welcome" rel="noopener noreferrer nofollow" target="_blank" >Sentry.io</a> offers comprehensive error tracking and performance monitoring coupled with deep insights into your cluster's health.
 
@@ -220,11 +213,11 @@ It comes with <a href = "https://github.com/getsentry/sentry-kubernetes" rel="no
 2. Analyzes application performance across services and transactions.
 3. Provides actionable data on errors - including stack traces, user information, and affected versions.
 
-| Pros | Cons |
-| --- | --- |
+| Pros                                                                                    | Cons                                                                       |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | Capture and analyze all errors, including application exceptions and Kubernetes events. | Requires additional configuration to utilize Kubernetes-specific features. |
-| Monitor across services, transactions, and individual operations | Learning curve for complex deployments |
-| Access detailed information on errors | Free-tier has limited error and performance monitoring |
+| Monitor across services, transactions, and individual operations                        | Learning curve for complex deployments                                     |
+| Access detailed information on errors                                                   | Free-tier has limited error and performance monitoring                     |
 
 ### EFK Stack
 
@@ -234,8 +227,7 @@ It comes with <a href = "https://github.com/getsentry/sentry-kubernetes" rel="no
 </figure>
 <br/>
 
-
-Are you looking to put more focus on log monitoring and analysis for your Kubernetes cluster? EFK might fit your needs. EFK stands for <a href = "https://www.elastic.co/elasticsearch" rel="noopener noreferrer nofollow" target="_blank" >**E**lasticSearch</a> (central storage for logs), <a href = "https://www.fluentd.org" rel="noopener noreferrer nofollow" target="_blank" >**F**luentd</a> (log collector), and <a href = "https://www.elastic.co/kibana" rel="noopener noreferrer nofollow" target="_blank" >**K**ibana</a>(visualization layer). 
+Are you looking to put more focus on log monitoring and analysis for your Kubernetes cluster? EFK might fit your needs. EFK stands for <a href = "https://www.elastic.co/elasticsearch" rel="noopener noreferrer nofollow" target="_blank" >**E**lasticSearch</a> (central storage for logs), <a href = "https://www.fluentd.org" rel="noopener noreferrer nofollow" target="_blank" >**F**luentd</a> (log collector), and <a href = "https://www.elastic.co/kibana" rel="noopener noreferrer nofollow" target="_blank" >**K**ibana</a>(visualization layer).
 
 ElasticSearch is deployed as statefulset as it holds the log data, while Fluentd is deployed as daemonset, which collects container logs from each node.
 
@@ -245,11 +237,11 @@ ElasticSearch is deployed as statefulset as it holds the log data, while Fluentd
 2. Scales horizontally, making it ideal for large-scale deployments and high-volume log data.
 3. EFK is free to use and benefits from a large and active community.
 
-| Pros | Cons |
-| --- | --- |
-| Provides near real-time log visibility across all containers | Can be complex to set up individual components to run |
-| Allows you to configure alerts based on events | Often becomes resource-intensive to run on the same cluster |
-| Scales out easily as you add pods | Needs additional security measures to be added |
+| Pros                                                         | Cons                                                        |
+| ------------------------------------------------------------ | ----------------------------------------------------------- |
+| Provides near real-time log visibility across all containers | Can be complex to set up individual components to run       |
+| Allows you to configure alerts based on events               | Often becomes resource-intensive to run on the same cluster |
+| Scales out easily as you add pods                            | Needs additional security measures to be added              |
 
 ### New Relic + Pixie
 
@@ -259,9 +251,7 @@ ElasticSearch is deployed as statefulset as it holds the log data, while Fluentd
 </figure>
 <br/>
 
-
 <a href = "https://newrelic.com" rel="noopener noreferrer nofollow" target="_blank" >New Relic</a> is an All-In-One observability platform offering 700+ external integrations. New Relic has its own Kubernetes integration that makes it easy for you to monitor your Kubernetes workloads. It has a dedicated UI navigator for this built on top of the <a href = "https://docs.newrelic.com/docs/new-relic-solutions/new-relic-one/core-concepts/new-relic-explorer-view-performance-across-apps-services-hosts/#view-navigator" rel="noopener noreferrer nofollow" target="_blank" >New Relic Navigator</a>.
-
 
 You also get integration with Pixie to step up your monitoring needs. With this, you get Pixie’s advanced Kubernetes observability alongside incident correlation, intelligent alerting, and long-term retention.
 
@@ -271,11 +261,11 @@ You also get integration with Pixie to step up your monitoring needs. With this,
 2. Pixie is language-agnostic - no instrumentation expertise is needed.
 3. Provides a rich and curated UI that simplifies complex environments.
 
-| Pros | Cons |
-| --- | --- |
-| Auto-telemetry with Pixie that collects MELT from cluster, applications, OS, and network | Paid subscription for all features |
-| No need for manual code change for monitoring | This can lead to vendor lock-in |
-| The benefit of having AI assistant - New Relic Grok | Interface and features can be complex for users unfamiliar with the platform |
+| Pros                                                                                     | Cons                                                                         |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Auto-telemetry with Pixie that collects MELT from cluster, applications, OS, and network | Paid subscription for all features                                           |
+| No need for manual code change for monitoring                                            | This can lead to vendor lock-in                                              |
+| The benefit of having AI assistant - New Relic Grok                                      | Interface and features can be complex for users unfamiliar with the platform |
 
 ### Dynatrace
 
@@ -284,8 +274,6 @@ You also get integration with Pixie to step up your monitoring needs. With this,
     <figcaption><i>Dynatrace dashboard (source: Dynatrace website)</i></figcaption>
 </figure>
 <br/>
-
-
 
 <a href = "https://www.dynatrace.com" rel="noopener noreferrer nofollow" target="_blank" >Dynatrace</a> offers a unified observability and security platform for cloud workloads. Be it infrastructure, application monitoring, or security analysis, Dynatrace has a solution.
 
@@ -297,11 +285,11 @@ For your Kubernetes monitoring needs, it offers a Dynatrace Operator that allows
 2. Continuous discovery and monitoring of nodes and pods
 3. Unified view for metrics, events, and logs
 
-| Pros | Cons |
-| --- | --- |
-| AI-powered anomaly detection and root cause analysis | Paid subscription for all features used |
+| Pros                                                                        | Cons                                           |
+| --------------------------------------------------------------------------- | ---------------------------------------------- |
+| AI-powered anomaly detection and root cause analysis                        | Paid subscription for all features used        |
 | Monitor cluster resource utilization and reallocate resources based on need | Resource heavy for clusters exceeding 50 nodes |
-| Continuous discovery and monitoring with log analytics | Limited customization with open-source tools |
+| Continuous discovery and monitoring with log analytics                      | Limited customization with open-source tools   |
 
 ### Datadog
 
@@ -311,7 +299,6 @@ For your Kubernetes monitoring needs, it offers a Dynatrace Operator that allows
 </figure>
 <br/>
 
-
 <a href = "https://www.datadoghq.com" rel="noopener noreferrer nofollow" target="_blank" >Datadog</a> is a cloud-based APM solution that allows you to monitor logs, metrics, events, and service states from Kubernetes in real-time. Datadog provides you with its own Datadog Agent that you can run in your Kubernetes cluster. It will start collecting the application and cluster metrics.
 
 **Features of Datadog**
@@ -320,11 +307,11 @@ For your Kubernetes monitoring needs, it offers a Dynatrace Operator that allows
 2. Provides transaction-level insight into your applications.
 3. Has pre-built dashboards and monitors for Kubernetes resources.
 
-| Pros | Cons |
-| --- | --- |
+| Pros                           | Cons                                                  |
+| ------------------------------ | ----------------------------------------------------- |
 | Easy to install as a daemonset | UI might be complex and doesn't provide deep insights |
-| Built-in Kubernetes dashboard | Needs root access for agent installation |
-|  | Costly for smaller teams and workloads |
+| Built-in Kubernetes dashboard  | Needs root access for agent installation              |
+|                                | Costly for smaller teams and workloads                |
 
 ### Sematext
 
@@ -342,12 +329,12 @@ Sematext offers a comprehensive solution for Kubernetes monitoring, with a focus
 2. **Real-Time Insights and Dashboards**: It features real-time monitoring and customizable pre-built dashboards, enabling quick insights and analysis of Kubernetes environments.
 3. **Advanced Log Management**: Sematext's log management automatically structures container and pod logs, facilitating efficient troubleshooting and error log correlation with metric spikes.
 
-| Pros | Cons |
-| --- | --- |
-| Offers detailed oversight of Kubernetes clusters. | Requires acclimation to advanced features. |
-| Provides immediate monitoring feedback with adaptable dashboards. | Potentially expensive for smaller teams. |
-| Efficient log structuring and analysis. | May be complex to integrate with various tools. |
-| Suitable for varying sizes of Kubernetes environments. | Extra effort to tailor alerts and dashboards. |
+| Pros                                                              | Cons                                            |
+| ----------------------------------------------------------------- | ----------------------------------------------- |
+| Offers detailed oversight of Kubernetes clusters.                 | Requires acclimation to advanced features.      |
+| Provides immediate monitoring feedback with adaptable dashboards. | Potentially expensive for smaller teams.        |
+| Efficient log structuring and analysis.                           | May be complex to integrate with various tools. |
+| Suitable for varying sizes of Kubernetes environments.            | Extra effort to tailor alerts and dashboards.   |
 
 ## Factors To Consider When Choosing a Kubernetes Monitoring Tool
 

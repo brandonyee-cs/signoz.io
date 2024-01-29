@@ -6,7 +6,7 @@ tags: [Cloud]
 authors: sayanta
 description: In this post, we will go through the steps that are essential for planning a successful cloud strategy. As organizations contemplate the move to the cloud or are in the midst of migration, a well-defined cloud strategy becomes paramount...
 image: /img/blog/2023/10/cloud-strategy-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - signoz
   - cloud
@@ -31,9 +31,9 @@ Throughout this article, we will understand, in detail, what a cloud strategy is
 
 ## What is a cloud strategy?
 
-Cloud strategy is a comprehensive plan that gives an outline of how you can plan the transition, use certain tools and services, and follow the best practices while adopting a cloud solution to achieve your business goals and objectives. A proper cloud strategy helps a business optimize its cloud adoption and smoothen its operation.  
+Cloud strategy is a comprehensive plan that gives an outline of how you can plan the transition, use certain tools and services, and follow the best practices while adopting a cloud solution to achieve your business goals and objectives. A proper cloud strategy helps a business optimize its cloud adoption and smoothen its operation.
 
-You can create a cloud strategy with most types of cloud deployments, be it public, private, hybrid, or multi-cloud. A well-defined cloud strategy helps you get the most from your cloud journey because of the fact that the cloud solution requirements for every company vary based on their needs. While providing a laid-out path to leverage the benefits of cloud computing, it also saves your business from unwanted costs and pitfalls throughout the cloud journey. 
+You can create a cloud strategy with most types of cloud deployments, be it public, private, hybrid, or multi-cloud. A well-defined cloud strategy helps you get the most from your cloud journey because of the fact that the cloud solution requirements for every company vary based on their needs. While providing a laid-out path to leverage the benefits of cloud computing, it also saves your business from unwanted costs and pitfalls throughout the cloud journey.
 
 ## Why is cloud strategy important?
 
@@ -61,27 +61,27 @@ Creating a successful cloud strategy involves a lot of steps. Here are seven imp
 
 ### 1. Understanding the requirements and objectives of your business
 
-While creating a cloud strategy, the first step will be to identify the broader future goals of your business and how cloud adoption can help you achieve those. A detailed analysis will be essential to determine which of your applications can be optimized by using the cloud. Also, identifying the key stakeholders and their requirements, like customer demands, industry, location factors, etc., can help you map a cloud strategy to your liking. 
+While creating a cloud strategy, the first step will be to identify the broader future goals of your business and how cloud adoption can help you achieve those. A detailed analysis will be essential to determine which of your applications can be optimized by using the cloud. Also, identifying the key stakeholders and their requirements, like customer demands, industry, location factors, etc., can help you map a cloud strategy to your liking.
 
-### 2. Assessing  your current state
+### 2. Assessing your current state
 
 Forming a cloud strategy needs an evaluation of your existing IT strategy. This can include the management of your IT infrastructure, applications, and data. For example, applications with heavy workloads can be moved to the cloud whereas high security applications can stay on-premise. A cloud strategy will also consider the sensitivity of your application data, compliance requirements, and how ready your system is to be integrated with the cloud.
 
 ### 3. Defining and choosing cloud service and deployment models
 
-To prepare a cloud strategy, you need a proper understanding of the cloud service and deployment models. There are three cloud service models: 
+To prepare a cloud strategy, you need a proper understanding of the cloud service and deployment models. There are three cloud service models:
 
 - IaaS or Infrastructure-as-a-Service, which provides you with virtualized computing resources over the internet on a pay-as-you-go basis, eliminating the need to maintain physical hardware and infrastructure,
 - PaaS or Platform-as-a-Service, which offers software, hardware, and infrastructure and lets you develop and manage applications easily and
 - SaaS or Software-as-a-Service, which lets you use cloud-based applications over the Internet on a subscription model.
 
-You need to determine which cloud service model will fit your business model and align with your objective and resources. Apart from this, you have to select an appropriate cloud deployment model while keeping the security and scalability requirements of your organization in mind. 
+You need to determine which cloud service model will fit your business model and align with your objective and resources. Apart from this, you have to select an appropriate cloud deployment model while keeping the security and scalability requirements of your organization in mind.
 
-Cloud deployment models consist of public cloud, private cloud, hybrid cloud, and multi-cloud, and you have to choose the one that works best for your business. 
+Cloud deployment models consist of public cloud, private cloud, hybrid cloud, and multi-cloud, and you have to choose the one that works best for your business.
 
-Public cloud can be best used if you want to host web applications, websites, and web services. It also helps in developing and staging applications. Also, you can use it if you have an unpredictable demand for resources of workloads, and the scaling of those resources is based on that. 
+Public cloud can be best used if you want to host web applications, websites, and web services. It also helps in developing and staging applications. Also, you can use it if you have an unpredictable demand for resources of workloads, and the scaling of those resources is based on that.
 
-Similarly, if you want to protect sensitive data and need more privacy, you can use a private cloud. It allows you to tailor the cloud environment according to your needs and provides you with enhanced disaster recovery and predictable performance. 
+Similarly, if you want to protect sensitive data and need more privacy, you can use a private cloud. It allows you to tailor the cloud environment according to your needs and provides you with enhanced disaster recovery and predictable performance.
 
 But, if you want to use a combination of both public and private clouds for your organization, then hybrid cloud or multi-cloud strategies will be best for your business.
 
@@ -89,15 +89,15 @@ But, if you want to use a combination of both public and private clouds for your
 
 While developing a cloud strategy, you have to consider security as one of the most important steps. A proper compliance strategy and comprehensive security for the cloud are essential before the migration. Your security arrangements should directly comply with the compliance requirements and provide data encryption and access controls.
 
- It should also adhere to the relevant regulations applicable to your business. Depending on your cloud service and deployment model, you have to look out for any specific security consideration that suits the best for your business. 
+It should also adhere to the relevant regulations applicable to your business. Depending on your cloud service and deployment model, you have to look out for any specific security consideration that suits the best for your business.
 
 ### 5. Plan for Costs
 
-Developing a cloud strategy requires a budget, and optimizing that using best practices is essential for keeping the cloud costs down to an extent. You can use certain monitoring tools that can help reduce downtime for your application, which in turn will regulate your overall spending. Implementing important and effective policies can also control your spending in the cloud. A cloud cost strategy like keeping reserve instances, which will make your system fault tolerant, will help in cost savings.   
+Developing a cloud strategy requires a budget, and optimizing that using best practices is essential for keeping the cloud costs down to an extent. You can use certain monitoring tools that can help reduce downtime for your application, which in turn will regulate your overall spending. Implementing important and effective policies can also control your spending in the cloud. A cloud cost strategy like keeping reserve instances, which will make your system fault tolerant, will help in cost savings.
 
 ### 6. Migration and implementation
 
-In your cloud strategy, migration of your existing application workload and data will play a vital role. A proper plan is required, and you should prioritize the applications and existing workloads that need migration. It should be done in a schedule consisting of a timeline using tools and technologies that will ease the transition. Additionally, rigorous and thorough testing of the migration process is required. 
+In your cloud strategy, migration of your existing application workload and data will play a vital role. A proper plan is required, and you should prioritize the applications and existing workloads that need migration. It should be done in a schedule consisting of a timeline using tools and technologies that will ease the transition. Additionally, rigorous and thorough testing of the migration process is required.
 
 After completion of migration, effective cloud management, like monitoring of resources, application performance optimization, regular security updates, etc., is necessary.
 
@@ -109,7 +109,7 @@ Moving to the cloud is not just a technological shift but also a cultural one. I
 
 Cloud governance mechanisms and policies are essential for a successful cloud strategy. They help in keeping track of whether resources are being used in accordance with the future objectives of your business. Proper governance mechanisms include the division of roles and responsibilities among teams, access controls, and policies to allocate and de-provision resources based on needs.
 
-Cloud is dynamic like weather and, hence, evolves at a rapid pace. You have to make sure that your cloud strategy is up-to-date with the latest cloud technologies. Performance monitoring, review of costs, and security policies are highly required to adjust your cloud strategy. 
+Cloud is dynamic like weather and, hence, evolves at a rapid pace. You have to make sure that your cloud strategy is up-to-date with the latest cloud technologies. Performance monitoring, review of costs, and security policies are highly required to adjust your cloud strategy.
 
 ## Challenges in cloud strategy
 
@@ -117,7 +117,7 @@ Adoption of cloud technology with the help of a cloud strategy is not an easy ta
 
 ### Security and Compliance
 
-Moving to the cloud always provides a security and compliance risk. Data protection and ensuring its safety must be a top priority on your list of actions. Encryptions should be used along with vast access control and identity and access management solutions to authenticate and define roles. 
+Moving to the cloud always provides a security and compliance risk. Data protection and ensuring its safety must be a top priority on your list of actions. Encryptions should be used along with vast access control and identity and access management solutions to authenticate and define roles.
 
 Compliance can be at risk if you fail to meet regulatory requirements and standards. Meeting regulatory requirements like HIPAA, GDPR, or other industry-specific standards is complex. However, complying with these standards is essential for cloud operations.
 
@@ -149,7 +149,7 @@ Although cloud providers like AWS provide monitoring tools like Cloudwatch, it i
 
 ### What is an example of a cloud strategy?
 
-Suppose you are modernizing your IT project and decided your existing workflows to be converted to AWS Software-as-a-Service tools. In that case, you need to form a proper strategy for how you will be able to make the transition to the cloud, which is called cloud strategy.  This can include scouting the AWS environments, studying their deployment models and offered services, etc.
+Suppose you are modernizing your IT project and decided your existing workflows to be converted to AWS Software-as-a-Service tools. In that case, you need to form a proper strategy for how you will be able to make the transition to the cloud, which is called cloud strategy. This can include scouting the AWS environments, studying their deployment models and offered services, etc.
 
 ### How do you develop a cloud strategy?
 
@@ -160,7 +160,7 @@ In this article, we have discussed 8 steps with which you can develop a cloud st
 The purpose of a cloud strategy is to form a proper plan or mechanism that helps an organization have a smooth migration to the cloud. This plan includes gaining knowledge on cloud models to make optimization strategies and security best practices to reduce costs and ensure data and infrastructural safety, respectively.
 
 ---
+
 ## Further Reading
 
 - [SigNoz - An Open Source Observability Platform](https://signoz.io/blog/open-source-observability/)
-

@@ -25,7 +25,7 @@ OpenTelemetry can be used for generating and collecting telemetry signals like l
 
 ![Cover Image](/img/blog/2023/10/otel-use-cases-cover.webp)
 
-OpenTelemetry is an open-source project which has emerged as the standard for achieving comprehensive observability in modern applications. It is a vendor-agnostic instrumentation library providing a set of tools, APIs, and SDKs to create and manage telemetry data(logs, metrics, and traces). 
+OpenTelemetry is an open-source project which has emerged as the standard for achieving comprehensive observability in modern applications. It is a vendor-agnostic instrumentation library providing a set of tools, APIs, and SDKs to create and manage telemetry data(logs, metrics, and traces).
 
 The top use cases of OpenTelemetry are:
 
@@ -63,7 +63,7 @@ Let's explore some of the top OpenTelemetry use cases in detail:
 
 ### Distributed Tracing
 
-Distributed tracing is one of OpenTelemetry's core capabilities. It allows you to track the flow of requests as they move through various services in a distributed system. This is particularly crucial in microservices architectures, where a single user request might trigger a cascade of interactions across multiple services. 
+Distributed tracing is one of OpenTelemetry's core capabilities. It allows you to track the flow of requests as they move through various services in a distributed system. This is particularly crucial in microservices architectures, where a single user request might trigger a cascade of interactions across multiple services.
 
 OpenTelemetry provides tracing SDKs for most programming languages like [Java](https://signoz.io/docs/instrumentation/java/), [Python](https://signoz.io/docs/instrumentation/python/), [Javascript](https://signoz.io/docs/instrumentation/javascript/), [Golang](https://signoz.io/docs/instrumentation/golang/), etc.
 
@@ -78,20 +78,18 @@ Trace data enables you to visualize and understand the path of a request, making
 
 OpenTelemetry-native backends like SigNoz generate [application performance monitoring charts](https://signoz.io/docs/userguide/metrics/#what-are-application-metrics) from the trace data. You can get out-of-the-box charts for latency, request rates, error rates, etc.
 
-OpenTelemetry also lets you create custom metrics for application-specific insights. 
+OpenTelemetry also lets you create custom metrics for application-specific insights.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_charts_application_metrics.webp" alt="APM charts showing p90, p99 latency, request rate, apdex, etc. in an OpenTelemetry-native backend, SigNoz"/>
     <figcaption><i>APM charts showing p90, p99 latency, request rate, apdex, etc. in an OpenTelemetry-native backend, SigNoz</i></figcaption>
 </figure>
 
-
 ### Metrics Monitoring
 
-OpenTelemetry provides a standalone service which is called OpenTelemetry Collector(OTel collector). You can use the OTel collector to collect different types of metrics like hostmetrics, metrics about your database instances, k8s infra metrics, etc. 
+OpenTelemetry provides a standalone service which is called OpenTelemetry Collector(OTel collector). You can use the OTel collector to collect different types of metrics like hostmetrics, metrics about your database instances, k8s infra metrics, etc.
 
 You can configure different kinds of [receivers](https://signoz.io/blog/opentelemetry-collector-complete-guide/#configuring-receivers) in the OTel collector to collect different kinds of metrics.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz-infra-metrics.webp" alt="Hostmetrics Dashboard in SigNoz where metrics is collected by OTel Collector"/>
@@ -126,7 +124,7 @@ Using OpenTelemetry trace data you can monitor exceptions happening in your appl
 
 ### Service Dependency Analysis
 
-An OpenTelemetry-native backend like [SigNoz](https://signoz.io/)  enables you to understand the dependencies between various services in your application. By visualizing the interactions between components, you can identify critical paths, potential bottlenecks, and opportunities for optimization.
+An OpenTelemetry-native backend like [SigNoz](https://signoz.io/) enables you to understand the dependencies between various services in your application. By visualizing the interactions between components, you can identify critical paths, potential bottlenecks, and opportunities for optimization.
 
 ## OpenTelemetry vs Vendor-based Agents for Application Instrumentation
 
@@ -145,13 +143,11 @@ It is easy to get started with OpenTelemetry. You can check out instrumentation 
 
 SigNoz is a full-stack open-source APM that you can use as your OpenTelemetry backend. It provides logs, metrics, and traces under a single pane of glass with intelligent correlation between the telemetry signals.
 
-
 ## Getting started with SigNoz
 
 <GetStartedSigNoz />
 
 ---
-
 
 ## Further Reading
 

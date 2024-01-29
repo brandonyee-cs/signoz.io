@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: daniel
 description: OpenTelemetry Collector can collect Prometheus metrics and send them to a backend of your choice. In this tutorial, you will configure an OpenTelemetry Collector to scrape Prometheus metrics from a Flask application...
 image: /img/blog/2023/11/opentelemetry-collector-prometheus-metrics-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -25,10 +25,10 @@ OpenTelemetry provides a component called OpenTelemetry Collector, which can be 
 
 ![Cover Image](/img/blog/2023/11/opentelemetry-collector-prometheus-metrics-cover.webp)
 
-
 In this tutorial, you will configure an OpenTelemetry Collector to scrape Prometheus metrics from a sample Flask application and send it to SigNoz for monitoring and visualization.
 
 We cover:
+
 - [What is Prometheus?](#what-is-prometheus)
 - [What is OpenTelemetry](#what-is-opentelemetry)
 - [What is OpenTelemetry Collector?](#what-is-opentelemetry-collector)
@@ -51,7 +51,6 @@ Prometheus is an open-source metrics monitoring tool. It collects and stores met
 
 > What are metrics? <br />
 > Metrics are measurements taken from an application or IT infrastructure that change over time. Examples could be error responses, service requests, response latency, CPU usage, memory usage, etc.
-
 
 Prometheus is a great fit for generating and collecting time-series data, but it is limited to metrics. Whereas OpenTelemetry can help generate logs, metrics, and traces, providing a one-stop solution of all your observability data needs.
 
@@ -94,12 +93,11 @@ receivers:
         cors:
           allowed_origins:
             - http://test.com
-# Origins can have wildcards with *, use * by itself to match any origin.
+            # Origins can have wildcards with *, use * by itself to match any origin.
             - https://*.example.com
           allowed_headers:
             - Example-Header
           max_age: 7200
-
 ```
 
 You can find more details on advanced configurations <a href = "https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md" rel="noopener noreferrer nofollow" target="_blank">here</a>.
@@ -136,11 +134,11 @@ Monitoring metrics from your Flask applications is crucial for gaining insights 
 
 Below are some of the metrics that can be collected or monitored from your Flask applications in Prometheus format.
 
-| Metric | Description | Metric Name |
-| --- | --- | --- |
-| HTTP request duration | Measures the number of HTTP requests hitting your Flask application, providing insights into request latency. | flask_http_request_duration_seconds_count |
-| HTTP request sum | Tracks the total time spent processing all HTTP requests, giving an aggregate measure of the server's workload. | flask_http_request_duration_seconds_sum |
-| HTTP requests total | Designed to analyze the distribution of request durations by categorizing them into specific time ranges or buckets. Useful for identifying performance outliers and understanding the spread of request durations. | flask_http_request_duration_seconds_bucket | 
+| Metric                | Description                                                                                                                                                                                                         | Metric Name                                |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| HTTP request duration | Measures the number of HTTP requests hitting your Flask application, providing insights into request latency.                                                                                                       | flask_http_request_duration_seconds_count  |
+| HTTP request sum      | Tracks the total time spent processing all HTTP requests, giving an aggregate measure of the server's workload.                                                                                                     | flask_http_request_duration_seconds_sum    |
+| HTTP requests total   | Designed to analyze the distribution of request durations by categorizing them into specific time ranges or buckets. Useful for identifying performance outliers and understanding the spread of request durations. | flask_http_request_duration_seconds_bucket |
 
 You can find more information <a href = "https://github.com/rycus86/prometheus_flask_exporter/tree/master/examples/sample-signals#requests-per-second" rel="noopener noreferrer nofollow" target="_blank">here</a> on the type of Flask metrics in Prometheus format that can be collected.
 
@@ -155,8 +153,7 @@ In this section, you will set up the OpenTelemetry collector to collect metrics 
 
 ## Set up the Flask application
 
-A simple Flask application has been provided, you can access it <a href = "https://github.com/SigNoz/opentelemetry-collector-prometheus-receiver-example" rel="noopener noreferrer nofollow" target="_blank">here</a>. The provided Flask application has been configured to export metrics in Prometheus format using the “prometheus_flask_exporter” library. 
-
+A simple Flask application has been provided, you can access it <a href = "https://github.com/SigNoz/opentelemetry-collector-prometheus-receiver-example" rel="noopener noreferrer nofollow" target="_blank">here</a>. The provided Flask application has been configured to export metrics in Prometheus format using the “prometheus_flask_exporter” library.
 
 <a href = "https://github.com/SigNoz/opentelemetry-collector-prometheus-receiver-example" rel="noopener noreferrer nofollow" target="_blank">Sample Flask Application</a>
 
@@ -191,10 +188,10 @@ curl --proto '=https' --tlsv1.2 -fOL https://github.com/open-telemetry/opentelem
 
 Note: For macOS users, download the binary package specific to your system.
 
-| Build | Architecture |
-| --- | --- |
-| M1 Chip | arm64 |
-| Intel | amd64 (x86-64) |
+| Build   | Architecture   |
+| ------- | -------------- |
+| M1 Chip | arm64          |
+| Intel   | amd64 (x86-64) |
 
 ### Extract the package
 
@@ -264,7 +261,6 @@ service:
 
 Replace `{region}` with the region for your SigNoz cloud account and `<SIGNOZ_INGESTION_KEY>` with the ingestion key for your account. You can find these settings in the SigNoz dashboard under `Settings > Ingestion Settings`.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/ingestion-key-details.webp" alt="You can find ingestion key details under settings tab of SigNoz"/>
     <figcaption><i>You can find ingestion key details under settings tab of SigNoz</i></figcaption>
@@ -316,8 +312,6 @@ To give the dashboard a name, click on “Configure.”
 </figure>
 <br />
 
-
-
 Enter your preferred name in the "Name" input box and save the changes.
 
 <figure data-zoomable align='center'>
@@ -359,7 +353,6 @@ It should look as the below image:
 </figure>
 <br />
 
-
 Click on the “Stage and Run Query” button to run the query, navigate up, and you will find the "Save" button to save your changes.
 
 You can also query metrics using PromQL. Add a new panel and switch over to the PromQL tab. Set the below values in PromQL:
@@ -377,21 +370,17 @@ It should look as the below image:
 </figure>
 <br />
 
-
 This query leverages the `histogram_quantile` function to determine the 90th percentile of the request duration for successful (status code 200) Flask HTTP requests over the last 30 seconds. The 'Legend Format' helps label the data points with the corresponding path information.
 
 Click on the "Stage and Run Query" button, and then save the panel.
 
 You can repeat the same steps for different metrics you would like to visualize. After creating different panels for various metrics, click on the "Save Layout" button, which enables you to save the current arrangement and configuration of your panels. This ensures that your customized dashboard layout and visualizations are saved for future reference and monitoring.
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/flask_monitoring_dashboard.webp" alt="Flask Monitoring Dashboard built in SigNoz"/>
     <figcaption><i>Flask Monitoring Dashboard built in SigNoz</i></figcaption>
 </figure>
 <br />
-
 
 If you would like to replicate the above dashboard, you can easily do so by copying the JSON file available in this <a href = "https://github.com/SigNoz/dashboards/tree/main/flask-monitoring" rel="noopener noreferrer nofollow" target="_blank">GitHub repo</a>. Import the copied JSON file into a new dashboard, and it will recreate the same layout and configurations for your convenience.
 

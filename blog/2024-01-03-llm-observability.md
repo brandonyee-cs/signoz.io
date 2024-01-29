@@ -6,7 +6,7 @@ tags: [OpenTelemetry, LLM]
 authors: jaikanth
 description: Unlock the secrets of LLM observability - Follow this guide to seamlessly integrate OpenTelemetry with your LLM application and elevate observability with SigNoz....
 image: /img/blog/2024/01/llm-observability-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -18,14 +18,13 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/llm-observability/"/>
 </head>
 
-In the rapidly evolving world of Large Language Models (LLMs), ensuring peak performance and reliability is more critical than ever. This is where the concept of 'LLM Observability' comes into play. It's not just about monitoring outputs; it's about gaining deep insights into the internal workings of these complex systems. 
+In the rapidly evolving world of Large Language Models (LLMs), ensuring peak performance and reliability is more critical than ever. This is where the concept of 'LLM Observability' comes into play. It's not just about monitoring outputs; it's about gaining deep insights into the internal workings of these complex systems.
 
 Large Language Models (LLMs) represent a transformative advancement in artificial intelligence, offering a wide range of capabilities for solving problems through sophisticated language understanding and generation.
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2024/01/llm-observability-cover.webp)
-
 
 Langchain is one of the popular frameworks for building LLM Apps, which has integrations with popular LLM Model APIs like OpenAI’s GPT-4, Google’s Gemini, Meta’s Llama2 or Anthropic’s Claude, etc. It also integrates with Vector Databases and provides a nice chain abstraction to make agent-like implementations.
 
@@ -34,6 +33,7 @@ Speaking of cost-effective monitoring solutions, embedding high cardinality cust
 OpenTelemetry, paired with solutions like SigNoz, offers an attractive and economical alternative for incorporating these granular insights. Costs for [high cardinality custom metrics can go out of control](https://signoz.io/blog/datadog-pricing/#datadogs-custom-metrics-pricing-can-get-out-of-control-quickly) in tools like Datadog. OpenTelemetry and SigNoz makes a perfect combo for setting up robust LLM observability.
 
 In this post, we cover:
+
 - [Why do we need LLM Observability?](#why-do-we-need-llm-observability)
 - [OpenTelemetry For LLM Observability](#opentelemetry-for-llm-observability)
 - [OpenTelemetry & SigNoz - The Perfect Combo for LLM Observability](#opentelemetry--signoz---the-perfect-combo-for-llm-observability)
@@ -122,13 +122,11 @@ export OTEL_EXPORTER_OTLP_HEADERS="signoz-access-token=<SIGNOZ_INGESTION_KEY>"
 
 You can get the ingestion details for your SigNoz cloud account under settings —> ingestion settings.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/ingestion-key-details.webp" alt="Ingestion details in SigNoz"/>
     <figcaption><i>Ingestion details in SigNoz.</i></figcaption>
 </figure>
 <br/>
-
 
 **Integration**: Once you have the SDK, you'll need to incorporate the OpenTelemetry libraries into your app's codebase. This involves creating traces and spans that represent the operations your app performs. Here's a snippet demonstrating how to create a span around an API request to the OpenAI service:
 
@@ -157,14 +155,14 @@ While manual instrumentation provides fine-grained control, it can be time-consu
 pip install traceloop-sdk
 ```
 
-**Setup**: Set the following environment variables or add them to a dotenv file. 
+**Setup**: Set the following environment variables or add them to a dotenv file.
 
 ```bash
 export TRACELOOP_BASE_URL=ingest.{region}.signoz.cloud
 export TRACELOOP_HEADERS="signoz-access-token=<SIGNOZ_INGESTION_KEY>"
 ```
 
-Initialize the SDK at the start of your application entry point. 
+Initialize the SDK at the start of your application entry point.
 
 ```python
 from traceloop import Traceloop
@@ -179,7 +177,7 @@ import uuid
 from traceloop import Traceloop
 
 @app.post('/chat')
-async def ask(question: str, user: User): 
+async def ask(question: str, user: User):
 	Traceloop.set_association_properties({
 	    "user_id": user.username,
 	    "chat_id": str(uuid.uuid4()),
@@ -231,7 +229,7 @@ for queryroot in queries:
         print(output)
 ```
 
-For more information and to enrich the workflow with names other than the function name, refer to <a href = "https://www.traceloop.com/docs/openllmetry/tracing/annotations" rel="noopener noreferrer nofollow" target="_blank" >OpenLLMetry documentation</a>. 
+For more information and to enrich the workflow with names other than the function name, refer to <a href = "https://www.traceloop.com/docs/openllmetry/tracing/annotations" rel="noopener noreferrer nofollow" target="_blank" >OpenLLMetry documentation</a>.
 
 ## Monitoring with SigNoz Dashboard
 
@@ -239,16 +237,13 @@ Once the above setup is done, you will be able to access the metrics in the SigN
 
 You can easily create charts with [query builder](https://signoz.io/docs/userguide/create-a-custom-query/#sample-examples-to-create-custom-query) in SigNoz. Here are the [steps](https://signoz.io/docs/userguide/manage-panels/#steps-to-add-a-panel-to-a-dashboard) to add a new panel to the dashboard.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/llm-observability-performance-dashboard.webp" alt="LLM observability setup with SigNoz"/>
     <figcaption><i>A dashboard set up to measure the performance of the Langchain app showing important metrics like total LLM calls, latency, token throughput, etc.</i></figcaption>
 </figure>
 <br/>
 
-
 You can also create dashboards to monitor the cost of running the Langchain application.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/llm-observability-cost-monitor-dashboard.webp" alt="LLM observability dashboard for cost"/>
@@ -256,14 +251,11 @@ You can also create dashboards to monitor the cost of running the Langchain appl
 </figure>
 <br/>
 
-
 ### Dynamic Dashboard Views with Variables
 
 To accommodate the needs of diverse teams, SigNoz supports dynamic dashboard views through the use of dashboard variables. For instance, the application team might need to see metrics specific to a 'service' or ‘user’.
 
 To utilize this feature, you can create variables and corresponding options (see [Manage Variables](https://signoz.io/docs/userguide/manage-variables/)). The sample Dashboard JSONs attached to this article have good examples as well.
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/llm-observability-dynamic-filter-dashboard.webp" alt="Dynamic dashboard in SigNoz where you can filter for specific service or user"/>
@@ -271,13 +263,11 @@ To utilize this feature, you can create variables and corresponding options (see
 </figure>
 <br/>
 
-
 Learn how to create variables in Dashboards [here](https://signoz.io/docs/userguide/manage-variables/)
 
 ### Thresholds
 
 To help operators quickly identify critical points, you can set threshold values on your visualizations within the SigNoz dashboard. These thresholds can serve as benchmarks for acceptable performance levels or as warnings for potential issues.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/llm-observability-threshold.webp" alt="Set thresholds to serve as benchmarks for acceptable performance levels"/>
@@ -285,11 +275,9 @@ To help operators quickly identify critical points, you can set threshold values
 </figure>
 <br/>
 
-
 ### Alerting
 
 Enhance your monitoring by creating alerts for any metric. SigNoz enables you to send notifications through various channels like Slack, Teams, or PagerDuty, ensuring rapid response times to critical conditions. Learn the process of setting up alerts in the comprehensive guide [here](https://signoz.io/docs/userguide/alerts-management/).
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/llm-observability-alerts.webp" alt="Set alerts on important metrics to get notified in your preferred notification channel."/>
@@ -297,10 +285,9 @@ Enhance your monitoring by creating alerts for any metric. SigNoz enables you to
 </figure>
 <br/>
 
-
 ### Pre-built Dashboards
 
-If you want to get started quickly with monitoring your Langchain app, you can use SigNoz's two pre-built dashboards: *Performance Dashboard* and *Cost Dashboard*.  You can load SigNoz dashboard using the Import JSON button and get started.
+If you want to get started quickly with monitoring your Langchain app, you can use SigNoz's two pre-built dashboards: _Performance Dashboard_ and _Cost Dashboard_. You can load SigNoz dashboard using the Import JSON button and get started.
 
 <a href = "https://github.com/SigNoz/dashboards/blob/main/llm-observability/sample-chatpdf-performance-metrics.json" rel="noopener noreferrer nofollow" target="_blank" >JSON for Langchain App Performance Dashboard</a>
 <br/>
@@ -308,8 +295,7 @@ If you want to get started quickly with monitoring your Langchain app, you can u
 
 <br/>
 
-
-**Note**: *Performance dashboard* works with any Langchain App. The *Cost dashboard*’s 'Cost by User' panel works only when the `user_id` property is transmitted. For more details, refer to the example app or sample code on how to set associated properties.
+**Note**: _Performance dashboard_ works with any Langchain App. The _Cost dashboard_’s 'Cost by User' panel works only when the `user_id` property is transmitted. For more details, refer to the example app or sample code on how to set associated properties.
 
 ## Conclusion
 

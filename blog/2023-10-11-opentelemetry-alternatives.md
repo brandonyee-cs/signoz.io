@@ -22,6 +22,7 @@ import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 Are you looking for an OpenTelemetry alternative? Then you've come to the right place. There are no good alternatives to OpenTelemetry if your use case involves generating different types of telemetry signals like logs, metrics, and traces and their collection. In certain use cases, like monitoring only metrics or time-series data, you can use a tool like Prometheus.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/10/opentelemetry-alternatives-cover.webp)
 
 If you’re sure you want an OpenTelemetry alternative, then let me point you to these three here. You can use any of these tools as an alternative to OpenTelemetry based on your use-case. Remember, use-case is the keyword here:
@@ -59,22 +60,26 @@ Together, these three signals form the three pillars of observability. OpenTelem
 OpenTelemetry can be applied in various scenarios across software development and operations. Here are some prominent use cases:
 
 - #### Distributed Tracing:
-    OpenTelemetry can be used to generate trace data that tracks a request across a distributed system, enabling developers to understand the end-to-end flow of a request and identify bottlenecks or errors. 
-    
-    For example, if a user complains about slow response times, you can use OpenTelemetry tracing data to trace the request through all the services and identify the service that is causing the delay. You will need to instrument your application with OpenTelemetry client libraries to generate traces.
+
+  OpenTelemetry can be used to generate trace data that tracks a request across a distributed system, enabling developers to understand the end-to-end flow of a request and identify bottlenecks or errors.
+
+  For example, if a user complains about slow response times, you can use OpenTelemetry tracing data to trace the request through all the services and identify the service that is causing the delay. You will need to instrument your application with OpenTelemetry client libraries to generate traces.
 
 - #### Performance Monitoring: 
-    You can collect metrics from applications and infrastructure, such as CPU usage, memory usage, network traffic, and response times. This data can be used to monitor the performance of an application or infrastructure, identify performance bottlenecks, and optimize resource usage.
+
+  You can collect metrics from applications and infrastructure, such as CPU usage, memory usage, network traffic, and response times. This data can be used to monitor the performance of an application or infrastructure, identify performance bottlenecks, and optimize resource usage.
 
 - #### Logging: 
-    OpenTelemetry can be used to [generate and collect logs](https://signoz.io/docs/userguide/logs/) from applications and infrastructure, enabling developers to debug issues and troubleshoot errors. If you’re already using a logging library or collectors like [Flluentbit](https://signoz.io/docs/userguide/fluentbit_to_signoz/), [FluentD](https://signoz.io/docs/userguide/fluentd_to_signoz/), etc., you can use the OpenTelemetry Collector to collect the logs and forward them to an observability tool.
+
+  OpenTelemetry can be used to [generate and collect logs](https://signoz.io/docs/userguide/logs/) from applications and infrastructure, enabling developers to debug issues and troubleshoot errors. If you’re already using a logging library or collectors like [Flluentbit](https://signoz.io/docs/userguide/fluentbit_to_signoz/), [FluentD](https://signoz.io/docs/userguide/fluentd_to_signoz/), etc., you can use the OpenTelemetry Collector to collect the logs and forward them to an observability tool.
 
 - #### Cloud Monitoring:
-    It can be used to monitor cloud infrastructure, such as Kubernetes clusters, AWS services, or Google Cloud Platform services. This data can be used to optimize resource usage, identify security issues, and troubleshoot issues.
 
-- #### Resource Utilization Monitoring: 
-    OpenTelemetry allows for tracking the usage of resources like CPU, memory, and network, enabling optimization of resource allocation and identification of potential bottlenecks.
-  
+  It can be used to monitor cloud infrastructure, such as Kubernetes clusters, AWS services, or Google Cloud Platform services. This data can be used to optimize resource usage, identify security issues, and troubleshoot issues.
+
+- #### Resource Utilization Monitoring:
+  OpenTelemetry allows for tracking the usage of resources like CPU, memory, and network, enabling optimization of resource allocation and identification of potential bottlenecks.
+
 Basically, you can use OpenTelemetry to fulfill any use case that involves the generation and collection of telemetry signals - logs, metrics, and traces. Even if you want to do a single signal, you can use OpenTelemetry. It will save you rework in case you want to expand the scope of your monitoring capabilities.
 
 Now let us go through some of the OpenTelemetry alternatives that we mentioned earlier.
@@ -88,6 +93,7 @@ In this section, we will look at some of the alternatives to OpenTelemetry. They
 - Jaeger
 
 ### Prometheus
+
 <a href = "https://prometheus.io" rel="noopener noreferrer nofollow" target="_blank">Prometheus</a> is an open-source monitoring tool that specializes in collecting and analyzing metrics from various systems, particularly those involving time-series data — metrics that evolve over time, like requests per second on an endpoint.
 
 Prometheus is an efficient metrics monitoring tool. But that shouldn’t stop you from using OpenTelemetry. You can actually use Prometheus and OpenTelemetry in combination. You can use OpenTelemetry Collector to pull Prometheus metrics and export them to an [OpenTelemetry backend](https://signoz.io/blog/opentelemetry-backend/) like SigNoz.
@@ -99,6 +105,7 @@ Zipkin is an open-source distributed tracing system designed to monitor and trou
 Zipkin provides <a href = "https://zipkin.io/pages/tracers_instrumentation.html" rel="noopener noreferrer nofollow" target="_blank">client libraries</a> to instrument applications for traces. You can either use these client libraries to instrument your application for traces, or you can also use OpenTelemetry tracing libraries. OpenTelemetry provides a Zipkin JSON Exporter. It can process, package trace data, and send it to the designated Zipkin collector endpoint using JSON over HTTP.
 
 ### Jaeger
+
 <a href = "https://www.jaegertracing.io/docs/1.49/getting-started" rel="noopener noreferrer nofollow" target="_blank">Jaeger</a> is an open-source distributed tracing system used for monitoring and troubleshooting the performance of applications, especially in complex, distributed systems. Jaeger provides insights into the timing and dependencies of operations within a system, allowing for in-depth analysis and optimization.
 
 In its earlier iterations, Jaeger was equipped with its own set of SDKs, including tracers and client libraries, designed to facilitate tracing through the OpenTracing API. However, a significant shift occurred in 2022 when Jaeger announced the discontinuation of support for these SDKs. Instead, it now strongly advocates the adoption of OpenTelemetry for seamless and advanced tracing capabilities in conjunction with Jaeger.
@@ -132,7 +139,6 @@ These visualizations provide valuable insights into the performance and behavior
     <img src="/img/blog/common/signoz_flamegraphs.webp" alt="Spans of a trace visualized with the help of flamegraphs and gantt charts in SigNoz dashboard"/>
     <figcaption><i>Spans of a trace visualized with the help of flamegraphs and gantt charts in SigNoz dashboard</i></figcaption>
 </figure>
-
 
 ## Getting started with SigNoz
 

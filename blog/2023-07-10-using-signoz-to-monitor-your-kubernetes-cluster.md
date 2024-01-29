@@ -24,13 +24,13 @@ keywords:
 
 Kubernetes and OpenTelemetry are both CNCF projects, and both are closely associated with modern microservice architecture. Despite their connection, there isn’t a single cohesive solution to monitoring your Kubernetes cluster with OpenTelemetry.
 
-Large teams that use complex clusters in production have generally ended up building their own tools for monitoring both their infrastructure and application code. See Intuit’s talk from the <a href = "https://www.youtube.com/watch?v=e5TZE9e2KPo" rel="noopener noreferrer nofollow" target="_blank" >recent Open Source Summit</a> on how they built tools to easily summarize  golden signals.
+Large teams that use complex clusters in production have generally ended up building their own tools for monitoring both their infrastructure and application code. See Intuit’s talk from the <a href = "https://www.youtube.com/watch?v=e5TZE9e2KPo" rel="noopener noreferrer nofollow" target="_blank" >recent Open Source Summit</a> on how they built tools to easily summarize golden signals.
 
 <!--truncate-->
 
 ![cover image](/img/blog/2023/07/signoz_k8s_monitoring_cover.webp)
 
-Building a system to collect, tabulate, manage, and display your observability data from scratch doesn’t make much sense for a mid sized team, or one that doesn’t have a dedicated developer experience and operations team. SigNoz is an open source tool to do just that. This piece is a complete guide on using SigNoz on your Kubernetes cluster. This includes: 
+Building a system to collect, tabulate, manage, and display your observability data from scratch doesn’t make much sense for a mid sized team, or one that doesn’t have a dedicated developer experience and operations team. SigNoz is an open source tool to do just that. This piece is a complete guide on using SigNoz on your Kubernetes cluster. This includes:
 
 - running SigNoz as a service within your own cluster [→](https://signoz.io/docs/operate/kubernetes/)
 - monitoring your applications running on your cluster [→](https://signoz.io/docs/operate/kubernetes/)
@@ -58,7 +58,7 @@ You should see the following listed:
 
 `signoz	[https://charts.signoz.io](https://charts.signoz.io/)`
 
-If you have a large number of helm charts installed, use `helm repo list | grep signoz` 
+If you have a large number of helm charts installed, use `helm repo list | grep signoz`
 
 Use the `kubectl create ns` command to create a new namespace. We’ll use `platform` for your new namespace.
 
@@ -74,22 +74,21 @@ helm --namespace platform install my-release signoz/signoz
 
 - Expected output
 
-    ```bash
-    NAME: my-release
-    LAST DEPLOYED: Mon May 23 20:34:55 2022
-    NAMESPACE: platform
-    STATUS: deployed
-    REVISION: 1
-    NOTES:
-    1. You have just deployed SigNoz cluster:
-    
-    - frontend version: '0.8.0'
-    - query-service version: '0.8.0'
-    - alertmanager version: '0.23.0-0.1'
-    - otel-collector version: '0.43.0-0.1'
-    - otel-collector-metrics version: '0.43.0-0.1'
-    ```
+  ```bash
+  NAME: my-release
+  LAST DEPLOYED: Mon May 23 20:34:55 2022
+  NAMESPACE: platform
+  STATUS: deployed
+  REVISION: 1
+  NOTES:
+  1. You have just deployed SigNoz cluster:
 
+  - frontend version: '0.8.0'
+  - query-service version: '0.8.0'
+  - alertmanager version: '0.23.0-0.1'
+  - otel-collector version: '0.43.0-0.1'
+  - otel-collector-metrics version: '0.43.0-0.1'
+  ```
 
 If you use `kubectl -n platform get pods` you will see a list like this one
 
@@ -111,7 +110,7 @@ If you want to start reporting sample data right away, you can follow these [ins
 
 To send data about your application to SigNoz, you can just use the Otel collector as an opentelemetry endpoint, and follow the OpenTelemetry guides for your language to report data. This will involve a good deal of configuration, and probably only makes sense if you’re already using OpenTelemetry and just want to use SigNoz as a replacement for your previous endpoint.
 
-For most users, you’ll want to use the SigNoz Kubernetes Operator to both send infrastructure metrics and automatically instrument your installed application. 
+For most users, you’ll want to use the SigNoz Kubernetes Operator to both send infrastructure metrics and automatically instrument your installed application.
 
 Make sure that your SigNoz cluster is up and running
 Install `cert-manager` with `kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml`
@@ -125,11 +124,11 @@ Once the opentelemetry-operator deployment is ready, we can proceed with creatio
 
 ### A note on language confusion: what is a collector
 
-When first using OpenTelemetry, it’s possible to get a bit hung up on the language of a collector. The term is intentionally indeterminate, since a collector may exist on the same server as the data being generated or very close to where the data is being received. In the OpenTelemetry project a collector can receive, process, or export data. 
+When first using OpenTelemetry, it’s possible to get a bit hung up on the language of a collector. The term is intentionally indeterminate, since a collector may exist on the same server as the data being generated or very close to where the data is being received. In the OpenTelemetry project a collector can receive, process, or export data.
 
 ![A collector diagram](https://opentelemetry.io/docs/collector/img/otel-collector.svg)
 
-*From the OpenTelemetry documentation, showing just how much the collector can do*
+_From the OpenTelemetry documentation, showing just how much the collector can do_
 
 For our purposes, we’ll have a SigNoz collector gathering data within our cluster. If we’re not just reporting data within our own cluster, it would be good to use a first collector to filter, batch, and compress our data before it’s sent to our SigNoz instance.
 
@@ -168,7 +167,7 @@ There are other methods for deploying the collector, including a sidecar version
 
 ### Auto-Instrumenting your Application
 
-With the Kubernetes Operator running you can apply an annotation to your pods to enable automatic instrumentation for Java, NodeJS, Python, and .Net. 
+With the Kubernetes Operator running you can apply an annotation to your pods to enable automatic instrumentation for Java, NodeJS, Python, and .Net.
 
 First, you’ll need to create an instance of `Instrumentation` which sends OTLP data to SigNoz endpoint:
 
@@ -207,7 +206,7 @@ EOF
 - Language properties i.e. `java`, `nodejs`, `python` and `dotnet` - custom images to be used for auto-instrumentation with respect to the languages as set in the pod annotation.
 
 Next you’ll just need to add an annotation to the pod to add instrumentation. For example:
- `instrumentation.opentelemetry.io/inject-java: "true"` — for Java
+`instrumentation.opentelemetry.io/inject-java: "true"` — for Java
 
 See the state of [OpenTelmetry language libraries](https://opentelemetry.io/docs/instrumentation/) to keep track of which languages may soon add more auto-instrumentation features.
 
@@ -221,7 +220,7 @@ For reporting data within your cluster, you can use the DNS name for the collect
 
 ## Part 3 - Kubernetes Infrastructure Metrics
 
-Along with application metrics, it’s also vital to keep tack of infrastructure statistics for your cluster. The k8s-infra chart was installed along with our SigNoz instance in Step 1, but if you’ve skipped this step or are trying to monitor a second cluster, use 
+Along with application metrics, it’s also vital to keep tack of infrastructure statistics for your cluster. The k8s-infra chart was installed along with our SigNoz instance in Step 1, but if you’ve skipped this step or are trying to monitor a second cluster, use
 
 ```bash
 helm install my-release signoz/k8s-infra  \
@@ -243,9 +242,8 @@ Kubernetes infrastructure information won’t show up on the default dashboards 
 
 ![image of a custom SigNoz dashboard](/img/blog/2023/07/screenshot2.webp)
 
-*don’t forget to select a namespace to view!*
+_don’t forget to select a namespace to view!_
 
 ## Wrapping up
 
 Now that you've got basic metrics flowing both from your cluster infrastructure and your application on your Kubernetes cluster, you can go further with our <a href="https://signoz.io/docs/operate/kubernetes/" rel="noopener noreferrer nofollow" target="_blank" >operating kubernetes guide</a>. If you're excited about SigNoz and want to go deeper, <a href="https://signoz-community.slack.com/join/shared_invite/zt-1v5ms4lg2-uupFbX9_qFIWNeVXbMszkw#/shared-invite/email"  rel="noopener noreferrer nofollow" target="_blank" >join the SigNoz slack</a> to be part of this awesome open source community!
-

@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: leigh-finch
 description: Spring Boot is one of the most popular frameworks for building micro-services in Java. In this tutorial, we will learn how to monitor a Spring Boot application with SigNoz and OpenTelemetry...
 image: /img/blog/2023/12/spring-boot-monitoring-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -19,7 +19,6 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/spring-boot-monitoring/"/>
 </head>
 
-
 Spring Boot Monitoring aims to provide real-time insights into various aspects of a Spring Boot application. Spring Boot provides useful libraries like the Spring Boot Actuator and Micrometer to aid in monitoring. But in order to set up effective monitoring, you need to use a tool where you can send the monitoring data for storage and visualization.
 
 <!--truncate-->
@@ -27,6 +26,7 @@ Spring Boot Monitoring aims to provide real-time insights into various aspects o
 ![Cover Image](/img/blog/2023/12/spring-boot-monitoring-cover.webp)
 
 In this tutorial, we cover:
+
 - [A Brief Overview of Spring Boot](#a-brief-overview-of-spring-boot)
 - [A Brief Overview of OpenTelemetry and SigNoz](#a-brief-overview-of-opentelemetry-and-signoz)
 - [5 things you must know about monitoring Spring Boot with SigNoz](#5-things-you-must-know-about-monitoring-spring-boot-with-signoz)
@@ -38,12 +38,11 @@ In this tutorial, we cover:
 - [Conclusion](#conclusion)
 - [Further Reading](#further-reading)
 
-
 In this tutorial, you will learn how to monitor a Spring Boot application with SigNoz and OpenTelemetry. You will learn how to use three signals - metrics, traces, and logs for a robust monitoring setup.
 
 ## A Brief Overview of Spring Boot
 
-Spring Boot has become one of the most popular frameworks for building micro-services in Java due to the focus on building business code and allowing the developers to focus less on building the supporting application server.  Additionally, the ease of integrating with Docker and other container frameworks such as PodMan and Containerd makes Spring Boot a popular choice for containerized micro-services.
+Spring Boot has become one of the most popular frameworks for building micro-services in Java due to the focus on building business code and allowing the developers to focus less on building the supporting application server. Additionally, the ease of integrating with Docker and other container frameworks such as PodMan and Containerd makes Spring Boot a popular choice for containerized micro-services.
 
 Instrumenting Spring Boot with the OpenTelemetry Java Agent requires some minor changes to your application to add the OpenTelemetry Java dependencies and logging configuration to ensure that we have the best telemetry possible coming from your Spring Boot application.
 
@@ -71,8 +70,6 @@ Signals are the data sources that we can use to observe applications and service
 
 Metrics are typically point-in-time values we can gather from systems that give us utilization and saturation data. Metrics are typically numerical values or status that would be collected via an agent, SNMP, WMI, or APIs. You can download the dashboard below <a href = "https://github.com/SigNoz/dashboards/blob/main/JVM%20Metrics.json" rel="noopener noreferrer nofollow" target="_blank">here</a>.
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/jvm_metrics.webp" alt="JVM Metrics dashboard in SigNoz"/>
     <figcaption><i>JVM Metrics dashboard in SigNoz</i></figcaption>
@@ -83,7 +80,6 @@ Metrics are typically point-in-time values we can gather from systems that give 
 
 Traces provide a contextual stream of events that have a defined beginning and end. Examples of traces include APM (Application Performance Management) traces (like below) that show an individual end-user transaction with the call stack and contextual attributes such as SQL query text and exception details.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/jvm_trace_explorer.webp" alt="Trace Explorer"/>
     <figcaption><i>Trace Explorer</i></figcaption>
@@ -93,7 +89,6 @@ Traces provide a contextual stream of events that have a defined beginning and e
 ### Logs
 
 Logs provide a stream of text, typically in an unstructured format, that contains events at a point in time. The logs below have added SPAN and Trace attributes to allow us to associate traces and logs together. See the [Logback configuration file](#configuring-for-traces-and-logs) in this article on how to achieve this.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/jvm_logs.webp" alt="Logs Relating to a trace"/>
@@ -285,8 +280,6 @@ Maven is a build system for Spring Boot (Gradle can also be used) and handles th
 
 We need to create a new Logback configuration file to tell Logback to add the Trace and SPAN attributes to log lines so that SigNoz can correlate logs and traces.
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/jvm_trace_details.webp" alt="Trace Details with *Go to Related logs*"/>
     <figcaption><i>Trace Details with *Go to Related logs*</i></figcaption>
@@ -331,7 +324,7 @@ Example:
 ```bash
 leigh@SigNoz-Client:~/spring-petclinic$ ./mvnw package
 ...
-# Lines skipped for brevity 
+# Lines skipped for brevity
 ...
 [INFO] --- spring-boot:3.2.0:repackage (repackage) @ spring-petclinic ---
 [INFO] Replacing main artifact /home/leigh/spring-petclinic/target/spring-petclinic-3.2.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
@@ -347,7 +340,7 @@ leigh@SigNoz-Client:~/spring-petclinic$
 
 **Download the OpenTelemetry Java Agent:**
 
-The OpenTelemetry Java Agent is a code profiler that allows us to get the method-level code execution details and provides the traces for the OpenTelemetry collector to send upstream for analysis by SigNoz. We can download the java agent for the Otel website using *wget.* I like to put the agent in the /opt directory for shared use.
+The OpenTelemetry Java Agent is a code profiler that allows us to get the method-level code execution details and provides the traces for the OpenTelemetry collector to send upstream for analysis by SigNoz. We can download the java agent for the Otel website using _wget._ I like to put the agent in the /opt directory for shared use.
 
 ```bash
 wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
@@ -359,13 +352,13 @@ In order to start our Spring boot application, we will need to set some environm
 OTEL_LOGS_EXPORTER=otlp OTEL_RESOURCE_ATTRIBUTES=service.name=name OTEL_EXPORTER_OTLP_ENDPOINT="http://<IP of the OTEL collector or SigNoz>:4317" java -javaagent:agent_path -jar path_to_target
 ```
 
-| Option | Description | Example Values |
-| --- | --- | --- |
-| OTEL_LOGS_EXPORTER | Tells the java agent which protocol to use for logs. | otlp |
-| OTEL_RESOURCE_ATTRIBUTES | Tells the java agent about any resource attributes such as the service name. | service.name=spring-boot-petclinic |
-| OTEL_EXPORTER_OTLP_ENDPOINT | Tells the agent where to send OTLP export such as a collector on http://localhost, or directly to your SigNoz instance. | localhost:4317 |
-| javaagent | Where the java agent library is located. | opentelemetry-javaagent.jar |
-| jar | Which Jar file to load | spring-petclinic/target/spring-petclinic-3.2.0-SNAPSHOT.jar |
+| Option                      | Description                                                                                                             | Example Values                                              |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| OTEL_LOGS_EXPORTER          | Tells the java agent which protocol to use for logs.                                                                    | otlp                                                        |
+| OTEL_RESOURCE_ATTRIBUTES    | Tells the java agent about any resource attributes such as the service name.                                            | service.name=spring-boot-petclinic                          |
+| OTEL_EXPORTER_OTLP_ENDPOINT | Tells the agent where to send OTLP export such as a collector on http://localhost, or directly to your SigNoz instance. | localhost:4317                                              |
+| javaagent                   | Where the java agent library is located.                                                                                | opentelemetry-javaagent.jar                                 |
+| jar                         | Which Jar file to load                                                                                                  | spring-petclinic/target/spring-petclinic-3.2.0-SNAPSHOT.jar |
 
 Here is the example I used in the pet clinic example for this article.
 
@@ -377,9 +370,7 @@ OTEL_LOGS_EXPORTER=otlp OTEL_RESOURCE_ATTRIBUTES=service.name=spring-boot-petcli
 
 **Step 1 - Generate Load:**
 
-Traces are created when the application is accessed. Therefore, we need to generate some load on the application using either automated tools like <a href = "https://en.wikipedia.org/wiki/ApacheBench" rel="noopener noreferrer nofollow" target="_blank">Apache Bench</a>, or by using a browser to access the application. The default port for Spring Boot is TCP/8080. 
-
-
+Traces are created when the application is accessed. Therefore, we need to generate some load on the application using either automated tools like <a href = "https://en.wikipedia.org/wiki/ApacheBench" rel="noopener noreferrer nofollow" target="_blank">Apache Bench</a>, or by using a browser to access the application. The default port for Spring Boot is TCP/8080.
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/jvm_petclinic_app.webp" alt="Pet-clinic test application"/>
@@ -391,14 +382,11 @@ Traces are created when the application is accessed. Therefore, we need to gener
 
 This section showcases some of the key views in SigNoz for monitoring Spring Boot Applications.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/petclinic_services.webp" alt="All Services"/>
     <figcaption><i>All Services</i></figcaption>
 </figure>
 <br/>
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/petclinic_service_overview.webp" alt="Service Overview"/>
@@ -406,21 +394,17 @@ This section showcases some of the key views in SigNoz for monitoring Spring Boo
 </figure>
 <br/>
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/petclinic_database_services.webp" alt="Database Metrics"/>
     <figcaption><i>Database Metrics</i></figcaption>
 </figure>
 <br/>
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/petclinic_sample_trace.webp" alt="Sample Trace"/>
     <figcaption><i>Sample Trace</i></figcaption>
 </figure>
 <br/>
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/petclinic_sample_exception.webp" alt="Sample Exception"/>
@@ -439,29 +423,28 @@ Manual instrumentation should **not** be needed for most Spring Boot use cases.
 When running Spring Boot micro-services, it is critical to understand the following metrics to ensure a smooth running application.
 
 1. **Root duration:** <br/>
-Root duration is the server response time (AKA Server delay) for a transaction. This is the amount of time the server takes to begin streaming data back to the client without taking into account time spent on the network. This metric should be used as an SLI (Service Level Indicator).
+   Root duration is the server response time (AKA Server delay) for a transaction. This is the amount of time the server takes to begin streaming data back to the client without taking into account time spent on the network. This metric should be used as an SLI (Service Level Indicator).
 
 2. **Memory allocations:**<br/>
-Java uses a heap for memory management split up into multiple areas, including Eden, Survivor, and Old Generation. During the application lifecycle, if an object in memory is needed for a long period of time, it will progress from Eden → Survivor → Old Generation.
+   Java uses a heap for memory management split up into multiple areas, including Eden, Survivor, and Old Generation. During the application lifecycle, if an object in memory is needed for a long period of time, it will progress from Eden → Survivor → Old Generation.
 
 3. **Garbage Collection rates:** <br/><a href = "http://en.wikipedia.org/wiki/Garbage_collection_%28computer_science%29" rel="noopener noreferrer nofollow" target="_blank">Garbage collection</a> is a feature of modern languages that cleans up unused memory over time to ensure that memory is available for new objects and other applications running on the same system.
-Stop-The-World garbage collection freezes the execution of the application to clear unused memory. Higher percentages of Stop-The-World GC will result in higher CPU utilization and higher response times. If this happens frequently, you may need to optimize your JVM settings.
+   Stop-The-World garbage collection freezes the execution of the application to clear unused memory. Higher percentages of Stop-The-World GC will result in higher CPU utilization and higher response times. If this happens frequently, you may need to optimize your JVM settings.
 
 4. **Available worker threads:**<br/>
-Worker threads are the way the application server processes requests. When a request comes in, it is allocated to a worker thread to return the response to the user. Having too few worker threads will result in a head-of-line blocking delay. Conversely, having too many worker threads will result in high resource consumption on the host and CPU scheduling delays.
+   Worker threads are the way the application server processes requests. When a request comes in, it is allocated to a worker thread to return the response to the user. Having too few worker threads will result in a head-of-line blocking delay. Conversely, having too many worker threads will result in high resource consumption on the host and CPU scheduling delays.
 
 5. **CPU utilization:**<br/>
-CPU utilization tells us how busy the system is. If we are seeing consistently high CPU utilization for an application it may degrade the performance of the application as threads wait for CPU availability. In virtual environments, watch out for CPU Steal, which is CPU contention at the hypervisor level.
+   CPU utilization tells us how busy the system is. If we are seeing consistently high CPU utilization for an application it may degrade the performance of the application as threads wait for CPU availability. In virtual environments, watch out for CPU Steal, which is CPU contention at the hypervisor level.
 
 6. **Exceptions:**<br/>
-Exceptions are thrown when an application encounters an error that has not been accounted for, such as dividing by zero or trying to open a file that doesn’t exist. Exceptions should be something that we look at to understand the health of the application, as they may trigger user-facing errors. Some exceptions may be acceptable if the code can be recovered. If in doubt, ask your developer.
+   Exceptions are thrown when an application encounters an error that has not been accounted for, such as dividing by zero or trying to open a file that doesn’t exist. Exceptions should be something that we look at to understand the health of the application, as they may trigger user-facing errors. Some exceptions may be acceptable if the code can be recovered. If in doubt, ask your developer.
 
 ## Conclusion
 
 In this article, we used OpenTelemetry to instrument a sample Spring Boot application by collecting all three signals: metrics, traces, and logs. This configuration gives us a full view of the Spring Boot application and the ability to track down application or performance problems. We also looked at the advantages of automatic instrumentation and metrics that can be used to inform Service Level Objectives and how they impact the end user.
 
 Now that you have instrumented your Spring Boot Application, your next step can be to package your service into a container. This can be done using Docker Compose or using an orchestration platform like Kubernetes.
-
 
 ---
 
@@ -470,6 +453,5 @@ Now that you have instrumented your Spring Boot Application, your next step can 
 [More on OpenTelemetry Java Jar Agent](https://signoz.io/opentelemetry/java-agent/)
 
 [An OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/)
-
 
 ---

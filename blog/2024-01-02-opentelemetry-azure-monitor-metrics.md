@@ -6,7 +6,7 @@ tags: [OpenTelemetry, Kubernetes]
 authors: jaikanth
 description: Steps to collect and export Azure Monitor metrics with OpenTelemetry 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect Azure Monitor metrics 3. Send collected metrics to SigNoz...
 image: /img/blog/2024/01/opentelemetry-azure-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -26,6 +26,7 @@ Using OpenTelemetry Collector, you can collect metrics from Azure monitor and ex
 ![Cover Image](/img/blog/2024/01/opentelemetry-azure-cover.webp)
 
 In this tutorial, we cover:
+
 - [Understanding Azure Monitor Metrics](#understanding-azure-monitor-metrics)
 - [Extending Observability by exporting Azure Monitor Metrics](#extending-observability-by-exporting-azure-monitor-metrics)
 - [A Brief Overview of OpenTelemetry](#a-brief-overview-of-opentelemetry)
@@ -34,7 +35,6 @@ In this tutorial, we cover:
 - [Setting Up the OpenTelemetry Collector](#setting-up-the-opentelemetry-collector)
 - [Monitoring with SigNoz Dashboard](#monitoring-with-signoz-dashboard)
 - [Conclusion](#conclusion)
-
 
 If you want to jump straight into implementation, start with this [Prerequisites](#prerequisites) section.
 
@@ -57,7 +57,7 @@ Please refer to Microsoft Learn on <a href = "https://learn.microsoft.com/en-us/
 
 ## Extending Observability by exporting Azure Monitor Metrics
 
-Exporting Azure Monitor metrics is pivotal for achieving extended observability, providing a comprehensive view beyond native tools to analyze performance issues and system health in-depth. 
+Exporting Azure Monitor metrics is pivotal for achieving extended observability, providing a comprehensive view beyond native tools to analyze performance issues and system health in-depth.
 
 Azure Monitor excels in capturing a diverse array of metrics across applications, virtual machines, containers, and more, regardless of their environment. Whether it's performance data, security insights, or network health, these metrics enriched through exportation to platforms like SigNoz can drive nuanced understanding and proactive management of your systems across any scale.
 
@@ -150,7 +150,7 @@ helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm
 
 **Step 2.** **Prepare the `otel-collector-values.yaml` Configuration**
 
-Your configuration file should include the necessary details for your setup. This includes updating placeholders such as `<ingestion-key>`, `<region>`, and connection-specific credentials for your observability backend. 
+Your configuration file should include the necessary details for your setup. This includes updating placeholders such as `<ingestion-key>`, `<region>`, and connection-specific credentials for your observability backend.
 
 Make sure to replace the placeholders with actual data corresponding to your setup. For Azure Monitor, set up a <a href = "https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal" rel="noopener noreferrer nofollow" target="_blank" >service principal</a> or utilize a <a href = "https://learn.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity" rel="noopener noreferrer nofollow" target="_blank" >pod-managed identity</a> with `Read` permissions to your Azure subscription.
 
@@ -177,7 +177,6 @@ exporters:
       insecure: false
     headers:
       "signoz-access-token": "<ingestion-key>"
-
 ```
 
 **Step 3.** **Deploy the OpenTelemetry Collector to your Kubernetes cluster:**
@@ -196,9 +195,9 @@ If you're not using Kubernetes, setting up the OpenTelemetry Collector on a Virt
 
 **Step 1.** **Download and Install the OpenTelemetry Collector Binary:**
 
-Please visit [Documentation For VM](https://signoz.io/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine/) which  provides further guidance on a VM installation. 
+Please visit [Documentation For VM](https://signoz.io/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine/) which provides further guidance on a VM installation.
 
-It's prudent to check available resources to ensure you're following the latest practices and utilizing updated features offered by OpenTelemetry. 
+It's prudent to check available resources to ensure you're following the latest practices and utilizing updated features offered by OpenTelemetry.
 Follow the documentation to set up your collector and test the setup.
 
 **Step 2. Configure the OpenTelemetry Collector:**
@@ -228,7 +227,6 @@ exporters:
       insecure: false
     headers:
       "signoz-access-token": "<ingestion-key>"
-
 ```
 
 Ensure you replace the placeholders `<region>` and `<ingestion-key>` with the appropriate values for your observability backend.
@@ -239,7 +237,7 @@ With your configuration file ready, you can now start the Collector using the fo
 
 ```bash
 # Runs in background with the configuration we just created
-./otelcol-contrib --config ./otel-collector-config.yaml &> otelcol-output.log & echo "$!" > otel-pid 
+./otelcol-contrib --config ./otel-collector-config.yaml &> otelcol-output.log & echo "$!" > otel-pid
 ```
 
 **Step 4.** **Validating the Deployment:**
@@ -250,8 +248,6 @@ Once the Collector is running, ensure that telemetry data is being successfully 
 
 Once the above setup is done, you will be able to access the metrics in the SigNoz dashboard. You can go to the `Dashboards` tab and try adding a new panel. You can learn how to create dashboards in SigNoz [here](https://signoz.io/docs/userguide/manage-dashboards-and-panels/).
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/opentelemetry-azure-plotting-metrics.webp" alt="Plotting a metric into a panel in a dashboard"/>
     <figcaption><i>Plotting a metric into a panel in a dashboard.</i></figcaption>
@@ -259,8 +255,6 @@ Once the above setup is done, you will be able to access the metrics in the SigN
 <br/>
 
 You can easily create charts with [query builder](https://signoz.io/docs/userguide/create-a-custom-query/#sample-examples-to-create-custom-query) in SigNoz. Here are the [steps](https://signoz.io/docs/userguide/manage-panels/#steps-to-add-a-panel-to-a-dashboard) to add a new panel to the dashboard.
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/opentelemetry-azure-aks-dashboard.webp" alt="AKS Dashboard"/>
@@ -273,8 +267,6 @@ You can easily create charts with [query builder](https://signoz.io/docs/usergu
 You have the ability to set up customized alerts based on various metrics, with options to receive notifications via Slack, Microsoft Teams, or PagerDuty. To learn how to configure these alerts, visit our detailed guide [here](https://signoz.io/docs/userguide/alerts-management/).
 
 Consider, for instance, a scenario relevant to your Azure Kubernetes Service (AKS) operations team or Site Reliability Engineers (SREs): It’s crucial that they receive immediate notifications if the number of pods that cannot be scheduled on a node persists above zero for a duration exceeding 10 minutes. This alert ensures that your team can quickly address any issues that may prevent pods from running properly on your cluster.
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/opentelemetry-azure-alerts.webp" alt="Creating Alerts"/>

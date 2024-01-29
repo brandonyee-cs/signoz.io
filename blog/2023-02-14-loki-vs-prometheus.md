@@ -25,7 +25,6 @@ Loki and Prometheus are both open source tools. While Loki is a log aggregation 
 
 ![Cover Image](/img/blog/2023/02/loki_vs_prometheus_cover.webp)
 
-
 Log management and metrics monitoring are critical aspects of monitoring a software system effectively. With the growing complexity of cloud-based software systems, it is even more important to choose the right monitoring tools which can help you attain a global view of all the different components of a software system.
 
 Loki is designed to be a cost-effective tool for log management. On the other hand, Prometheus is a very popular open source metrics monitoring tool.
@@ -73,7 +72,6 @@ Prometheus uses a pull-based monitoring model to collect metrics and store them
 
 Prometheus doesn't have built-in visualization or dashboard capabilities. It aims to provide you with a powerful query language called <a href = "https://prometheus.io/docs/prometheus/latest/querying/basics/" rel="noopener noreferrer nofollow" target="_blank" >PromQL</a> that queries and analyzes metrics in real-time. It is usually combined with Grafana to build dashboards.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/02/grafana_prometheus.webp" alt="A Prometheus dashboard creating with Grafana"/>
     <figcaption><i>A Prometheus dashboard creating with Grafana</i></figcaption>
@@ -83,7 +81,7 @@ Prometheus doesn't have built-in visualization or dashboard capabilities. It aim
 
 ### Key Features of Prometheus
 
-Some of the key features of Prometheus are: 
+Some of the key features of Prometheus are:
 
 - Multi-dimensional Data Model using time-series data with metric names and key-value pairs as identifiers.
 - Uses PromQL as a querying language to leverage a multi-dimensional data model.
@@ -107,8 +105,6 @@ A brief overview of components in Prometheus architecture:
 - Alertmanager - It handles alerts.
 - Prometheus web UI/SigNoz - SigNoz or other API consumers can be used to visualize the collected data.
 
-
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/02/prometheus_architecture.webp" alt="Architecture of Prometheus"/>
     <figcaption><i>Architecture of Prometheus</i></figcaption>
@@ -125,7 +121,6 @@ A brief overview of components in Loki architecture:
 - Ingestor - It builds compressed chunks of log data and flushes them out as chunks.
 - Querior - It handles the read path, scanning the index to figure out which chunks match.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/02/loki_architecture.webp" alt="The architecture of Loki"/>
     <figcaption><i>The architecture of Loki</i></figcaption>
@@ -141,7 +136,7 @@ Loki stores log data in two parts: index and chunks. The chunks are put into obj
 
 ### Indexing
 
-Prometheus stores data into basic units of storage known as *blocks*. Each block contains data corresponding to a particular time range and has two important elements:
+Prometheus stores data into basic units of storage known as _blocks_. Each block contains data corresponding to a particular time range and has two important elements:
 
 - Sample data - The actual metrics data, including timestamps.
 - Indexes - Data used to access stored metrics.
@@ -188,7 +183,7 @@ Some of the key use cases for Loki are:
 
 Loki is efficient at keeping the cost of log management low. But it doesn’t perform well if you want to index and query high cardinality data. Prometheus can only be used for metrics monitoring. You will have to use other tools for monitoring other telemetry signals. Using multiple tools for setting up your monitoring stack results in operational complexity and dependencies.
 
-Instead of using Loki and Prometheus, you can use [SigNoz](https://signoz.io/) - an open source full-stack observability platform. SigNoz provides log management, metrics monitoring, and distributed tracing under a single pane of glass and can be a one-stop solution for all your monitoring needs. 
+Instead of using Loki and Prometheus, you can use [SigNoz](https://signoz.io/) - an open source full-stack observability platform. SigNoz provides log management, metrics monitoring, and distributed tracing under a single pane of glass and can be a one-stop solution for all your monitoring needs.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_dashboard_homepage.webp" alt="SigNoz dashboard"/>
@@ -208,9 +203,7 @@ SigNoz uses OpenTelemetry for generating and collecting telemetry signals. OpenT
 
 <br/>
 
-
 SigNoz also supports PromQL and Prometheus metrics. It is easy to get started with SigNoz.
-
 
 ## Getting Started with SigNoz
 
@@ -224,16 +217,13 @@ cd signoz/deploy/
 ./install.sh
 ```
 
-
 You can visit our documentation for instructions on how to install SigNoz using Docker Swarm and Helm Charts.
-
 
 [![Deployment Docs](/img/blog/common/deploy_docker_documentation.webp)](https://signoz.io/docs/install/)
 
 If you liked what you read, then check out our GitHub repo 👇
 
 [![SigNoz GitHub repo](/img/blog/common/signoz_github.webp)](https://github.com/SigNoz/signoz)
-
 
 ---
 

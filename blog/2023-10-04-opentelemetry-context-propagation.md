@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: muskan
 description: OpenTelemetry context propagation helps in moving data between services. Context propagation forms the basis of distributed tracing in which a trace and span context are passed along a request across network boundaries and processes...
 image: /img/blog/2023/10/opentelemetry-context-propagation-cover.jpg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - observability
   - opentelemetry
@@ -15,7 +15,6 @@ keywords:
 
 import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 
-
 <head>
   <link rel="canonical" href="https://signoz.io/blog/opentelemetry-context-propagation/"/>
 </head>
@@ -23,9 +22,10 @@ import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 In today's rapidly evolving landscape of software applications, where complexity often thrives, the need for observability and tracing has never been more pronounced. The ability to comprehend the inner workings of distributed systems and track the journey of requests as they traverse through various components is paramount for maintaining optimal performance and troubleshooting issues. This is where OpenTelemetry, a prominent observability framework, steps in.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/10/opentelemetry-context-propagation-cover.webp)
 
-In this article, we embark on a journey to explore the core concept of context propagation within Open Telemetry. We'll dissect its significance, delve into its mechanics, and uncover the diverse mechanisms it employs. 
+In this article, we embark on a journey to explore the core concept of context propagation within Open Telemetry. We'll dissect its significance, delve into its mechanics, and uncover the diverse mechanisms it employs.
 
 ## The Fundamentals of Context Propagation
 
@@ -147,13 +147,13 @@ with trace.get_tracer(__name__).start_as_current_span("Operation in Service A") 
     # Write the current context into the carrier.
     # A TextMapPropagator works with any dict-like object as its Carrier by default.
     TraceContextTextMapPropagator().inject(carrier)
-    
+
     # Attach trace context to the message
     message = {
         "content": "Hello, Service B!",
         "trace_context": carrier
     }
-    
+
     # Publish the message to RabbitMQ
     rabbitmq_publisher.publish(message)
 ```
@@ -168,7 +168,7 @@ def process_message(message):
     # Extract the trace context from the received message
     carrier = message.get("trace_context")
     ctx = TraceContextTextMapPropagator().extract(carrier=carrier)
-    
+
     # Create a new span in Service B using the extracted trace context
     with trace.get_tracer(__name__).start_as_current_span("Operation in Service B", context=ctx):
         # Your code for processing the message here
@@ -178,7 +178,7 @@ This concise example demonstrates how manual context propagation allows for prec
 
 ## Conclusion
 
-In conclusion, context propagation in OpenTelemetry forms the basis of passing essential information with a request across network boundaries and processes. By understanding the inner workings and various propagation mechanisms, organizations can harness the power of OpenTelemetry to gain actionable insights, troubleshoot effectively, and optimize their applications for peak performance. 
+In conclusion, context propagation in OpenTelemetry forms the basis of passing essential information with a request across network boundaries and processes. By understanding the inner workings and various propagation mechanisms, organizations can harness the power of OpenTelemetry to gain actionable insights, troubleshoot effectively, and optimize their applications for peak performance.
 
 Once you have collected data with OpenTelemetry, you can use a backend like SigNoz to store and analyze your OpenTelemetry data. SigNoz is an OpenTelemetry-native APM built to provide the best visualizations for OpenTelemetry data.
 

@@ -6,7 +6,7 @@ tags: [OpenTelemetry, Docker]
 authors: [abhishek-kothari]
 description: Want to monitor your Docker container metrics with OpenTelemetry. Here’s the guide for you. Steps to monitor Docker container metrics with OpenTelemetry - 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect Docker Container metrics 3. Send collected metrics to SigNoz...
 image: /img/blog/2024/01/opentelemetry-docker-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -24,8 +24,8 @@ Monitoring Docker container metrics is essential for understanding the performan
 
 ![Cover Image](/img/blog/2024/01/opentelemetry-docker-cover.webp)
 
-
 In this tutorial, we cover:
+
 - [Why monitor Docker container metrics?](#why-monitor-docker-container-metrics)
 - [A Brief Overview of OpenTelemetry](#a-brief-overview-of-opentelemetry)
 - [How does OpenTelemetry Collector collect data?](#how-does-opentelemetry-collector-collect-data)
@@ -34,8 +34,6 @@ In this tutorial, we cover:
 - [Monitoring with Signoz Dashboard](#monitoring-with-signoz-dashboard)
 - [Reference: Docker container metrics and labels collected by OpenTelemetry Collector](#reference-docker-container-metrics-and-labels-collected-by-opentelemetry-collector)
 - [Conclusion](#conclusion)
-
-
 
 If you want to jump straight into implementation, start with this [Prerequisites](#pre-requisites) section.
 
@@ -104,7 +102,7 @@ receivers:
           max_age: 7200
 ```
 
-You can find more details on advanced configurations  <a href = "https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md" rel="noopener noreferrer nofollow" target="_blank" >here</a>.
+You can find more details on advanced configurations <a href = "https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md" rel="noopener noreferrer nofollow" target="_blank" >here</a>.
 
 After configuring a receiver, **you must enable it**. Receivers are enabled via pipelines within the service section. A pipeline consists of a set of receivers, processors, and exporters.
 
@@ -124,15 +122,15 @@ service:
 
 ## Pre-requisites
 
-In order to gather metrics from Docker containers, we would first require a Docker client to be installed. Once done, we can run a few simple containers and try to gather metrics related to them. This section guides you through quick database setup using <a href = "https://docs.docker.com/engine/install/" rel="noopener noreferrer nofollow" target="_blank" >Docker</a> and <a href = "https://docs.docker.com/compose" rel="noopener noreferrer nofollow" target="_blank" >Docker-Compose</a>. You can skip the setup if you already have Docker running on your system and have a few containers started. 
+In order to gather metrics from Docker containers, we would first require a Docker client to be installed. Once done, we can run a few simple containers and try to gather metrics related to them. This section guides you through quick database setup using <a href = "https://docs.docker.com/engine/install/" rel="noopener noreferrer nofollow" target="_blank" >Docker</a> and <a href = "https://docs.docker.com/compose" rel="noopener noreferrer nofollow" target="_blank" >Docker-Compose</a>. You can skip the setup if you already have Docker running on your system and have a few containers started.
 
-The below links can help you with the Docker installation: 
+The below links can help you with the Docker installation:
 
 - <a href = "https://docs.docker.com/desktop/install/linux-install/" rel="noopener noreferrer nofollow" target="_blank">Docker Desktop for Linux</a>
 - <a href = "https://docs.docker.com/desktop/install/mac-install" rel="noopener noreferrer nofollow" target="_blank">Docker Desktop for Mac (macOS)</a>
 - <a href = "https://docs.docker.com/desktop/install/windows-install" rel="noopener noreferrer nofollow" target="_blank">Docker Desktop for Windows</a>
 
-Once the Docker container is installed, start a few containers using the below commands: 
+Once the Docker container is installed, start a few containers using the below commands:
 
 ```shell
 docker run nginx:latest -p 8080:80 -d
@@ -140,7 +138,7 @@ docker run httpd:latest -p 8081:80 -d
 docker run mysql:latest -e MYSQL_ROOT_PASSWORD=mysecretpassword -p 3306:3306 -d
 ```
 
-The above commands will start 3 containers on your system to allow us to gather some metrics when we start the OpenTelemetry collector. Next, let us start with the setup of OpenTelemetry Collector. It is assumed that you are setting up the OpenTelemetry collector on the same machine where you are running the Docker containers. 
+The above commands will start 3 containers on your system to allow us to gather some metrics when we start the OpenTelemetry collector. Next, let us start with the setup of OpenTelemetry Collector. It is assumed that you are setting up the OpenTelemetry collector on the same machine where you are running the Docker containers.
 
 ## Setting up OpenTelemetry Collector
 
@@ -168,9 +166,9 @@ mkdir otelcol-contrib && tar xvzf otelcol-contrib_0.88.0_darwin_arm64.tar.gz -C 
 
 ### Step 3 - Setting up the configuration file
 
-Create a `config.yaml` file in the `otelcol-contrib` folder. This configuration file will enable the collector to connect with the Docker socket and have other settings like at what frequency you want to monitor the containers. The `docker` `stats` receiver communicates directly with the docker socket that provides the metrics and other relevant details for monitoring. 
+Create a `config.yaml` file in the `otelcol-contrib` folder. This configuration file will enable the collector to connect with the Docker socket and have other settings like at what frequency you want to monitor the containers. The `docker` `stats` receiver communicates directly with the docker socket that provides the metrics and other relevant details for monitoring.
 
-Note: The configuration file should be created in the same directory where you unpack the `otel-collector-contrib` binary. In case you have globally installed the binary, it is ok to create on any path. 
+Note: The configuration file should be created in the same directory where you unpack the `otel-collector-contrib` binary. In case you have globally installed the binary, it is ok to create on any path.
 
 ```yaml
 receivers:
@@ -184,7 +182,7 @@ receivers:
     timeout: 10s
     api_version: 1.24
     metrics:
-      container.uptime: 
+      container.uptime:
         enabled: true
       container.restarts:
         enabled: true
@@ -214,7 +212,7 @@ exporters:
       signoz-access-token: "{signoz-token}"
   logging:
     verbosity: normal
-    
+
 service:
   pipelines:
     metrics:
@@ -223,14 +221,13 @@ service:
       exporters: [otlp]
 ```
 
-You would need to replace `region` and `signoz-token` in the above file with the region of your choice (for Signoz Cloud) and token obtained from Signoz Cloud → Settings → Ingestion Settings. 
+You would need to replace `region` and `signoz-token` in the above file with the region of your choice (for Signoz Cloud) and token obtained from Signoz Cloud → Settings → Ingestion Settings.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/ingestion-key-details.webp" alt="Find ingestion settings in SigNoz dashboard"/>
     <figcaption><i>Find ingestion settings in SigNoz dashboard</i></figcaption>
 </figure>
 <br/>
-
 
 The above configuration additionally contains a `resource detection` process that helps identify the host attributes better. The docker socket path remains the same for UNIX-based systems; however, for any other systems, you can refer to this <a href = "https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option" rel="noopener noreferrer nofollow" target="_blank" >documentation</a> to know more.
 
@@ -267,12 +264,11 @@ You can stop the collector service with the following command:
 kill "$(< otel-pid)"
 ```
 
-You should start seeing the metrics on your Signoz Cloud UI in about 30 seconds. You can import this (link to be added) dashboard JSON into your Signoz environment quite easily to monitor your MongoDB database. 
+You should start seeing the metrics on your Signoz Cloud UI in about 30 seconds. You can import this (link to be added) dashboard JSON into your Signoz environment quite easily to monitor your MongoDB database.
 
 ## Monitoring with Signoz Dashboard
 
 Once the above setup is done, you will be able to access the metrics in the SigNoz dashboard. You can go to the Dashboards tab and try adding a new panel. You can learn how to create dashboards in SigNoz [here](https://signoz.io/docs/userguide/manage-dashboards-and-panels/).
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/opentelemetry-docker-metrics.webp" alt="Docker container metrics collected by OpenTelemetry collector"/>
@@ -280,9 +276,7 @@ Once the above setup is done, you will be able to access the metrics in the SigN
 </figure>
 <br/>
 
-
 You can easily create charts with [query builder](https://signoz.io/docs/userguide/create-a-custom-query/#sample-examples-to-create-custom-query) in SigNoz. Here are the [steps](https://signoz.io/docs/userguide/manage-panels/#steps-to-add-a-panel-to-a-dashboard) to add a new panel to the dashboard.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/opentelemetry-docker-create-dashboard.webp" alt="Creating a dashboard panel for average memory usage per container"/>
@@ -290,10 +284,7 @@ You can easily create charts with [query builder](https://signoz.io/docs/usergu
 </figure>
 <br/>
 
-
 You can build a complete dashboard around various metrics emitted. Here’s a look at a sample dashboard we built out using the metrics collected. You can get started quickly with this dashboard by using the JSON <a href = "https://github.com/SigNoz/dashboards/blob/main/docker-container-metrics/dockerstats.json" rel="noopener noreferrer nofollow" target="_blank" >here</a>.
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/opentelemetry-docker-dashboard-panel.webp" alt="Dashboard for monitoring Docker Container Metrics in SigNoz"/>
@@ -301,9 +292,7 @@ You can build a complete dashboard around various metrics emitted. Here’s a lo
 </figure>
 <br/>
 
-
 You can also create alerts on any metric. Learn how to create alerts [here](https://signoz.io/docs/userguide/alerts-management/).
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/01/opentelemetry-docker-alerts.webp" alt="Create alerts on any Docker container metrics"/>
@@ -311,25 +300,24 @@ You can also create alerts on any metric. Learn how to create alerts [here](htt
 </figure>
 <br/>
 
-
 ## Reference: Docker container metrics and labels collected by OpenTelemetry Collector
 
-| Name | Description | Availability (cgroup v1/v2) | Type |
-| --- | --- | --- | --- |
-| container.blockio.io_service_bytes_recursive | Number of bytes transferred to/from the disk by the group and descendant groups. | Both | Sum |
-| container.cpu.usage.kernelmode | Time spent by tasks of the cgroup in kernel mode (Linux). Time spent by all container processes in kernel mode (Windows). | Both | Sum |
-| container.cpu.usage.total | Total consumed CPU time | Both | Sum |
-| container.cpu.usage.usermode | Time spent by tasks of the cgroup in user mode (Linux). Time spent by all container processes in user mode (Windows). | Both | Sum |
-| container.cpu.utilization | Percentage usage of CPU | Both | Gauge |
-| container.memory.file | Total memory used | cgroup v2 | Sum |
-| container.memory.percent | Percentage of memory used. | cgroup v1 | Gauge |
-| container.memory.total_cache | Total cache memory used by the processes of the cgroup | Both | Sum |
-| container.memory.usage.limit | Memory limits for the container (if specified) | Both | Sum |
-| container.memory.usage.total | Memory usage of the containers excluding cache | Both | Sum |
-| container.network.io.usage.rx_bytes | Bytes received by the container | Both | Sum |
-| container.network.io.usage.rx_dropped | Incoming packets dropped by the container | Both | Sum |
-| container.network.io.usage.tx_bytes | Bytes transmitted by the container | Both | Sum |
-| container.network.io.usage.tx_dropped | Outgoing packets that got dropped | Both | Sum |
+| Name                                         | Description                                                                                                               | Availability (cgroup v1/v2) | Type  |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ----- |
+| container.blockio.io_service_bytes_recursive | Number of bytes transferred to/from the disk by the group and descendant groups.                                          | Both                        | Sum   |
+| container.cpu.usage.kernelmode               | Time spent by tasks of the cgroup in kernel mode (Linux). Time spent by all container processes in kernel mode (Windows). | Both                        | Sum   |
+| container.cpu.usage.total                    | Total consumed CPU time                                                                                                   | Both                        | Sum   |
+| container.cpu.usage.usermode                 | Time spent by tasks of the cgroup in user mode (Linux). Time spent by all container processes in user mode (Windows).     | Both                        | Sum   |
+| container.cpu.utilization                    | Percentage usage of CPU                                                                                                   | Both                        | Gauge |
+| container.memory.file                        | Total memory used                                                                                                         | cgroup v2                   | Sum   |
+| container.memory.percent                     | Percentage of memory used.                                                                                                | cgroup v1                   | Gauge |
+| container.memory.total_cache                 | Total cache memory used by the processes of the cgroup                                                                    | Both                        | Sum   |
+| container.memory.usage.limit                 | Memory limits for the container (if specified)                                                                            | Both                        | Sum   |
+| container.memory.usage.total                 | Memory usage of the containers excluding cache                                                                            | Both                        | Sum   |
+| container.network.io.usage.rx_bytes          | Bytes received by the container                                                                                           | Both                        | Sum   |
+| container.network.io.usage.rx_dropped        | Incoming packets dropped by the container                                                                                 | Both                        | Sum   |
+| container.network.io.usage.tx_bytes          | Bytes transmitted by the container                                                                                        | Both                        | Sum   |
+| container.network.io.usage.tx_dropped        | Outgoing packets that got dropped                                                                                         | Both                        | Sum   |
 
 ### Optional Metrics
 
@@ -341,77 +329,77 @@ metrics:
     enabled: true
 ```
 
-| Name | Description | Availability (cgroup v1/v2) | Type |
-| --- | --- | --- | --- |
-| container.blockio.io_merged_recursive | Number of bios/requests merged into requests belonging to this cgroup and its descendant cgroups | cgroup v1 | Sum |
-| container.blockio.io_queued_recursive | Number of requests queued up for this cgroup and its descendant cgroups | cgroup v1 | Sum |
-| container.blockio.io_service_time_recursive | Total amount of time in nanoseconds between request dispatch and request completion for the IOs done by this cgroup and descendant cgroups | cgroup v1 | Sum |
-| container.blockio.io_serviced_recursive | Number of IOs (bio) issued to the disk by the group and descendant groups | cgroup v1 | Sum |
-| container.blockio.io_time_recursive | Disk time allocated to cgroup (and descendant cgroups) per device in milliseconds | cgroup v1 | Sum |
-| container.blockio.io_wait_time_recursive | Total amount of time the IOs for this cgroup (and descendant cgroups) spent waiting in the scheduler queues for service | cgroup v1 | Sum |
-| container.blockio.sectors_recursive | Number of sectors transferred to/from disk by the group and descendant groups | cgroup v1 | Sum |
-| container.cpu.limit | CPU limit set for the container. | Both | Sum |
-| container.cpu.shares | CPU shares set for the container. | Both | Sum |
-| container.cpu.throttling_data.periods | Number of periods with throttling active | Both | Sum |
-| container.cpu.throttling_data.throttled_periods | Number of periods when the container hits its throttling limit. | Both | Sum |
-| container.cpu.throttling_data.throttled_time | Aggregate time the container was throttled | Both | Sum |
-| container.cpu.usage.percpu | Per-core CPU usage by the container | cgroup v1 | Sum |
-| container.cpu.usage.system | System CPU usage, as reported by docker | Both | Sum |
-| container.memory.active_anon | The amount of anonymous memory that has been identified as active by the kernel. | Both | Sum |
-| container.memory.active_file | Cache memory that has been identified as active by the kernel. | Both | Sum |
-| container.memory.anon | Amount of memory used in anonymous mappings such as brk(), sbrk(), and mmap(MAP_ANONYMOUS) (Only available with cgroups v2). | cgroup v2 | Sum |
-| container.memory.cache | The amount of memory used by the processes of this control group that can be associated precisely with a block on a block device | cgroup v1 | Sum |
-| container.memory.dirty | Bytes that are waiting to get written back to the disk, from this cgroup | cgroup v1 | Sum |
-| container.memory.hierarchical_memory_limit | The maximum amount of physical memory that can be used by the processes of this control group | cgroup v1 | Sum |
-| container.memory.hierarchical_memsw_limit | The maximum amount of RAM + swap that can be used by the processes of this control group | cgroup v1 | Sum |
-| container.memory.inactive_anon | The amount of anonymous memory that has been identified as inactive by the kernel. | Both | Sum |
-| container.memory.inactive_file | Cache memory that has been identified as inactive by the kernel. | Both | Sum |
-| container.memory.mapped_file | Indicates the amount of memory mapped by the processes in the control group | cgroup v1 | Sum |
-| container.memory.pgfault | Indicate the number of times that a process of the cgroup triggered a page fault. | Both | Sum |
-| container.memory.pgmajfault | Indicate the number of times that a process of the cgroup triggered a major fault. | Both  | Sum |
-| container.memory.pgpgin | Number of pages read from disk by the cgroup | cgroup v1 | Sum |
-| container.memory.pgpgout | Number of pages written to disk by the cgroup | cgroup v1 | Sum |
-| container.memory.rss | The amount of memory that doesn’t correspond to anything on disk: stacks, heaps, and anonymous memory maps | cgroup v1 | Sum |
-| container.memory.rss_huge | Number of bytes of anonymous transparent hugepages in this cgroup | cgroup v1 | Sum |
-| container.memory.total_active_anon | The amount of anonymous memory that has been identified as active by the kernel. Includes descendant cgroups | cgroup v1 | Sum |
-| container.memory.total_active_file | Cache memory that has been identified as active by the kernel. Includes descendant cgroups | cgroup v1 | Sum |
-| container.memory.total_dirty | Bytes that are waiting to get written back to the disk, from this cgroup and descendants | cgroup v1 | Sum |
-| container.memory.total_inactive_anon | The amount of anonymous memory that has been identified as inactive by the kernel. Includes descendant cgroups | cgroup v1 | Sum |
-| container.memory.total_inactive_file | Cache memory that has been identified as inactive by the kernel. Includes descendant cgroups | cgroup v1 | Sum |
-| container.memory.total_mapped_file | Indicates the amount of memory mapped by the processes in the control group and descendant groups | cgroup v1 | Sum |
-| container.memory.total_pgfault | Indicate the number of times that a process of the cgroup (or descendant cgroups) triggered a page fault | cgroup v1 | Sum |
-| container.memory.total_pgmajfault | Indicate the number of times that a process of the cgroup (or descendant cgroups) triggered a major fault | cgroup v1 | Sum |
-| container.memory.total_pgpgin | Number of pages read from disk by the cgroup and descendant groups | cgroup v1 | Sum |
-| container.memory.total_pgpgout | Number of pages written to disk by the cgroup and descendant groups | cgroup v1 | Sum |
-| container.memory.total_rss | The amount of memory that doesn’t correspond to anything on disk: stacks, heaps, and anonymous memory maps. Includes descendant cgroups | cgroup v1 | Sum |
-| container.memory.total_rss_huge | Number of bytes of anonymous transparent hugepages in this cgroup and descendant cgroups | cgroup v1 | Sum |
-| container.memory.total_unevictable | The amount of memory that cannot be reclaimed. Includes descendant cgroups | cgroup v1 | Sum |
-| container.memory.total_writeback | Number of bytes of file/anon cache that are queued for syncing to disk in this cgroup and descendants | cgroup v1 | Sum |
-| container.memory.unevictable | The amount of memory that cannot be reclaimed. | Both | Sum |
-| container.memory.usage.max | Maximum memory usage. | Both | Sum |
-| container.memory.writeback | Number of bytes of file/anon cache that are queued for syncing to disk in this cgroup | cgroup v1 | Sum |
-| container.network.io.usage.rx_errors | Received network errors  | Both | Sum |
-| container.network.io.usage.rx_packets | Errors in received packets | Both | Sum |
-| container.network.io.usage.tx_errors | Transmission errors | Both | Sum |
-| container.network.io.usage.tx_packets | Packets with transmission errors | Both | Sum |
-| container.pids.count | Total container PIDs | Both | Sum |
-| container.pids.limit | PIDs limits  | Both | Sum |
-| container.restarts | Number of restarts for the container. | Both | Sum |
-| container.uptime | Time elapsed since container start time. | Both | Gauge |
+| Name                                            | Description                                                                                                                                | Availability (cgroup v1/v2) | Type  |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- | ----- |
+| container.blockio.io_merged_recursive           | Number of bios/requests merged into requests belonging to this cgroup and its descendant cgroups                                           | cgroup v1                   | Sum   |
+| container.blockio.io_queued_recursive           | Number of requests queued up for this cgroup and its descendant cgroups                                                                    | cgroup v1                   | Sum   |
+| container.blockio.io_service_time_recursive     | Total amount of time in nanoseconds between request dispatch and request completion for the IOs done by this cgroup and descendant cgroups | cgroup v1                   | Sum   |
+| container.blockio.io_serviced_recursive         | Number of IOs (bio) issued to the disk by the group and descendant groups                                                                  | cgroup v1                   | Sum   |
+| container.blockio.io_time_recursive             | Disk time allocated to cgroup (and descendant cgroups) per device in milliseconds                                                          | cgroup v1                   | Sum   |
+| container.blockio.io_wait_time_recursive        | Total amount of time the IOs for this cgroup (and descendant cgroups) spent waiting in the scheduler queues for service                    | cgroup v1                   | Sum   |
+| container.blockio.sectors_recursive             | Number of sectors transferred to/from disk by the group and descendant groups                                                              | cgroup v1                   | Sum   |
+| container.cpu.limit                             | CPU limit set for the container.                                                                                                           | Both                        | Sum   |
+| container.cpu.shares                            | CPU shares set for the container.                                                                                                          | Both                        | Sum   |
+| container.cpu.throttling_data.periods           | Number of periods with throttling active                                                                                                   | Both                        | Sum   |
+| container.cpu.throttling_data.throttled_periods | Number of periods when the container hits its throttling limit.                                                                            | Both                        | Sum   |
+| container.cpu.throttling_data.throttled_time    | Aggregate time the container was throttled                                                                                                 | Both                        | Sum   |
+| container.cpu.usage.percpu                      | Per-core CPU usage by the container                                                                                                        | cgroup v1                   | Sum   |
+| container.cpu.usage.system                      | System CPU usage, as reported by docker                                                                                                    | Both                        | Sum   |
+| container.memory.active_anon                    | The amount of anonymous memory that has been identified as active by the kernel.                                                           | Both                        | Sum   |
+| container.memory.active_file                    | Cache memory that has been identified as active by the kernel.                                                                             | Both                        | Sum   |
+| container.memory.anon                           | Amount of memory used in anonymous mappings such as brk(), sbrk(), and mmap(MAP_ANONYMOUS) (Only available with cgroups v2).               | cgroup v2                   | Sum   |
+| container.memory.cache                          | The amount of memory used by the processes of this control group that can be associated precisely with a block on a block device           | cgroup v1                   | Sum   |
+| container.memory.dirty                          | Bytes that are waiting to get written back to the disk, from this cgroup                                                                   | cgroup v1                   | Sum   |
+| container.memory.hierarchical_memory_limit      | The maximum amount of physical memory that can be used by the processes of this control group                                              | cgroup v1                   | Sum   |
+| container.memory.hierarchical_memsw_limit       | The maximum amount of RAM + swap that can be used by the processes of this control group                                                   | cgroup v1                   | Sum   |
+| container.memory.inactive_anon                  | The amount of anonymous memory that has been identified as inactive by the kernel.                                                         | Both                        | Sum   |
+| container.memory.inactive_file                  | Cache memory that has been identified as inactive by the kernel.                                                                           | Both                        | Sum   |
+| container.memory.mapped_file                    | Indicates the amount of memory mapped by the processes in the control group                                                                | cgroup v1                   | Sum   |
+| container.memory.pgfault                        | Indicate the number of times that a process of the cgroup triggered a page fault.                                                          | Both                        | Sum   |
+| container.memory.pgmajfault                     | Indicate the number of times that a process of the cgroup triggered a major fault.                                                         | Both                        | Sum   |
+| container.memory.pgpgin                         | Number of pages read from disk by the cgroup                                                                                               | cgroup v1                   | Sum   |
+| container.memory.pgpgout                        | Number of pages written to disk by the cgroup                                                                                              | cgroup v1                   | Sum   |
+| container.memory.rss                            | The amount of memory that doesn’t correspond to anything on disk: stacks, heaps, and anonymous memory maps                                 | cgroup v1                   | Sum   |
+| container.memory.rss_huge                       | Number of bytes of anonymous transparent hugepages in this cgroup                                                                          | cgroup v1                   | Sum   |
+| container.memory.total_active_anon              | The amount of anonymous memory that has been identified as active by the kernel. Includes descendant cgroups                               | cgroup v1                   | Sum   |
+| container.memory.total_active_file              | Cache memory that has been identified as active by the kernel. Includes descendant cgroups                                                 | cgroup v1                   | Sum   |
+| container.memory.total_dirty                    | Bytes that are waiting to get written back to the disk, from this cgroup and descendants                                                   | cgroup v1                   | Sum   |
+| container.memory.total_inactive_anon            | The amount of anonymous memory that has been identified as inactive by the kernel. Includes descendant cgroups                             | cgroup v1                   | Sum   |
+| container.memory.total_inactive_file            | Cache memory that has been identified as inactive by the kernel. Includes descendant cgroups                                               | cgroup v1                   | Sum   |
+| container.memory.total_mapped_file              | Indicates the amount of memory mapped by the processes in the control group and descendant groups                                          | cgroup v1                   | Sum   |
+| container.memory.total_pgfault                  | Indicate the number of times that a process of the cgroup (or descendant cgroups) triggered a page fault                                   | cgroup v1                   | Sum   |
+| container.memory.total_pgmajfault               | Indicate the number of times that a process of the cgroup (or descendant cgroups) triggered a major fault                                  | cgroup v1                   | Sum   |
+| container.memory.total_pgpgin                   | Number of pages read from disk by the cgroup and descendant groups                                                                         | cgroup v1                   | Sum   |
+| container.memory.total_pgpgout                  | Number of pages written to disk by the cgroup and descendant groups                                                                        | cgroup v1                   | Sum   |
+| container.memory.total_rss                      | The amount of memory that doesn’t correspond to anything on disk: stacks, heaps, and anonymous memory maps. Includes descendant cgroups    | cgroup v1                   | Sum   |
+| container.memory.total_rss_huge                 | Number of bytes of anonymous transparent hugepages in this cgroup and descendant cgroups                                                   | cgroup v1                   | Sum   |
+| container.memory.total_unevictable              | The amount of memory that cannot be reclaimed. Includes descendant cgroups                                                                 | cgroup v1                   | Sum   |
+| container.memory.total_writeback                | Number of bytes of file/anon cache that are queued for syncing to disk in this cgroup and descendants                                      | cgroup v1                   | Sum   |
+| container.memory.unevictable                    | The amount of memory that cannot be reclaimed.                                                                                             | Both                        | Sum   |
+| container.memory.usage.max                      | Maximum memory usage.                                                                                                                      | Both                        | Sum   |
+| container.memory.writeback                      | Number of bytes of file/anon cache that are queued for syncing to disk in this cgroup                                                      | cgroup v1                   | Sum   |
+| container.network.io.usage.rx_errors            | Received network errors                                                                                                                    | Both                        | Sum   |
+| container.network.io.usage.rx_packets           | Errors in received packets                                                                                                                 | Both                        | Sum   |
+| container.network.io.usage.tx_errors            | Transmission errors                                                                                                                        | Both                        | Sum   |
+| container.network.io.usage.tx_packets           | Packets with transmission errors                                                                                                           | Both                        | Sum   |
+| container.pids.count                            | Total container PIDs                                                                                                                       | Both                        | Sum   |
+| container.pids.limit                            | PIDs limits                                                                                                                                | Both                        | Sum   |
+| container.restarts                              | Number of restarts for the container.                                                                                                      | Both                        | Sum   |
+| container.uptime                                | Time elapsed since container start time.                                                                                                   | Both                        | Gauge |
 
 ### Attributes
 
 The attributes collected for all the metrics are as follows:
 
-| Name | Description | Values | Enabled |
-| --- | --- | --- | --- |
-| container.command_line | The full command executed by the container. | Any Str | false |
-| container.hostname | The hostname of the container. | Any Str | true |
-| container.id | The ID of the container. | Any Str | true |
-| container.image.id | The ID of the container image. | Any Str | false |
-| container.image.name | The name of the docker image in use by the container. | Any Str | true |
-| container.name | The name of the container. | Any Str | true |
-| container.runtime | The runtime of the container. For this receiver, it will always be 'docker'. | Any Str | true |
+| Name                   | Description                                                                  | Values  | Enabled |
+| ---------------------- | ---------------------------------------------------------------------------- | ------- | ------- |
+| container.command_line | The full command executed by the container.                                  | Any Str | false   |
+| container.hostname     | The hostname of the container.                                               | Any Str | true    |
+| container.id           | The ID of the container.                                                     | Any Str | true    |
+| container.image.id     | The ID of the container image.                                               | Any Str | false   |
+| container.image.name   | The name of the docker image in use by the container.                        | Any Str | true    |
+| container.name         | The name of the container.                                                   | Any Str | true    |
+| container.runtime      | The runtime of the container. For this receiver, it will always be 'docker'. | Any Str | true    |
 
 ## Conclusion
 
@@ -419,11 +407,11 @@ In this tutorial, you installed an OpenTelemetry collector to collect Docker con
 
 Visit our complete guide on OpenTelemetry Collector to learn more about it. OpenTelemetry is quietly becoming the world standard for open-source observability, and by using it, you can have advantages like a single standard for all telemetry signals, no vendor lock-in, etc.
 
-SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/) that can be used as a single backend for all your observability needs. 
+SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/) that can be used as a single backend for all your observability needs.
 
 ---
 
-**Further Reading** 
+**Further Reading**
 
 [Complete Guide on OpenTelemetry Collector](https://signoz.io/blog/opentelemetry-collector-complete-guide/)
 

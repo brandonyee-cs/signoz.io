@@ -6,13 +6,13 @@ tags: [OpenTelemetry]
 authors: abhishek-kothari
 description: A guide to collecting and monitoring AWS ECS metrics with OpenTelemetry. Steps to monitor AWS ECS metrics with OpenTelemetry 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect AWS ECS metrics 3. Send collected metrics to SigNoz...
 image: /img/blog/2023/12/opentelemetry-ecs-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
   - observability
   - AWS_ECS
-  - metrics 
+  - metrics
 ---
 
 <head>
@@ -23,12 +23,12 @@ import { LiteYoutubeEmbed } from "react-lite-yt-embed";
 
 OpenTelemetry can be used to monitor ECS clusters. In this tutorial, you will install OpenTelemetry Collector to collect ECS metrics and then send the collected data to SigNoz for monitoring and visualization.
 
-
 <!--truncate-->
 
 ![Cover Image](/img/blog/2023/12/opentelemetry-ecs-cover.webp)
 
 In this tutorial, we cover:
+
 - [A brief overview of AWS ECS](#a-brief-overview-of-aws-ecs)
 - [What is OpenTelemetry Collector?](#what-is-opentelemetry-collector)
 - [How does OpenTelemetry Collector collect data?](#how-does-opentelemetry-collector-collect-data)
@@ -37,7 +37,6 @@ In this tutorial, we cover:
 - [Setting up OpenTelemetry Collector](#setting-up-opentelemetry-collector)
 - [Reference: Metrics collected by OpenTelemetry ECS Container insights receiver for ECS](#reference-metrics-collected-by-opentelemetry-ecs-container-insights-receiver-for-ecs)
 - [Conclusion](#conclusion)
-
 
 If you want to jump straight into implementation, start with this [Pre-requisites](#pre-requisites) section.
 
@@ -127,35 +126,35 @@ If you do not have a service up and running, you can easily set up a simple NGIN
 
 #### Create Cluster
 
-1. Login to your AWS console 
-2. Head to the AWS ECS service console 
-3. Click “Create cluster” and fill out the below details 
-    1. Cluster name - `MetricsTestCluster` 
-    2. Infrastructure - Select Amazon EC2 instances
-    3. Autoscaling group - Create new 
-    4. Instance type - `t3.medium` (to allow enough space for the collector and NGINX to run)
-    5. Minimum 1 - Maximum 2
-    6. Leave the rest of it as default
+1. Login to your AWS console
+2. Head to the AWS ECS service console
+3. Click “Create cluster” and fill out the below details
+   1. Cluster name - `MetricsTestCluster`
+   2. Infrastructure - Select Amazon EC2 instances
+   3. Autoscaling group - Create new
+   4. Instance type - `t3.medium` (to allow enough space for the collector and NGINX to run)
+   5. Minimum 1 - Maximum 2
+   6. Leave the rest of it as default
 4. Create cluster
 
-This will create a cluster and register instances, and the cluster will be ready to deploy tasks. 
+This will create a cluster and register instances, and the cluster will be ready to deploy tasks.
 
 #### Create Task Definition
 
 Next, head to the Task Definitions screen to create a new task definition. Follow the below steps:
 
-1. Create a new task definition 
-2. Enter task family name: `nginx` 
+1. Create a new task definition
+2. Enter task family name: `nginx`
 3. Launch type: Amazon EC2 instances
 4. Task size: 0.25vCPU and 0.5GB memory
 5. Leave the roles empty/defaults
-6. Container-1 Name: `nginx` & Image URL: `nginx:latest` 
+6. Container-1 Name: `nginx` & Image URL: `nginx:latest`
 7. Leave the rest as defaults
 8. Create Task definition
 
 #### Create Service
 
-Finally, go to the cluster you just created and click “Create Service” in the services tab. Select the task definition you just created - Leave the rest of the options default and create the service. 
+Finally, go to the cluster you just created and click “Create Service” in the services tab. Select the task definition you just created - Leave the rest of the options default and create the service.
 
 ### Installing AWS CLI
 
@@ -163,15 +162,15 @@ Next, we will require your system to be configured to deploy resources on AWS us
 
 ## Setting up OpenTelemetry Collector
 
-Unlike our previous [tutorials](https://signoz.io/blog/opentelemetry-mysql-metrics-monitoring/), we wouldn’t be running OpenTelemetry Collector as a local service on your laptop anymore. In order to monitor ECS containers, we need to run the OpenTelemetry collector on every EC2 instance that is providing compute for ECS. This implies that we need to run the collector as a Daemon service, which creates one task per node. 
+Unlike our previous [tutorials](https://signoz.io/blog/opentelemetry-mysql-metrics-monitoring/), we wouldn’t be running OpenTelemetry Collector as a local service on your laptop anymore. In order to monitor ECS containers, we need to run the OpenTelemetry collector on every EC2 instance that is providing compute for ECS. This implies that we need to run the collector as a Daemon service, which creates one task per node.
 
-You can follow [this tutorial](https://signoz.io/docs/userguide/collecting-ecs-logs-and-metrics/) to install the OpenTelemetry collector as a Daemon service on your ECS. The Cloud Formation template in Step 3 of the linked tutorial creates the below resources: 
+You can follow [this tutorial](https://signoz.io/docs/userguide/collecting-ecs-logs-and-metrics/) to install the OpenTelemetry collector as a Daemon service on your ECS. The Cloud Formation template in Step 3 of the linked tutorial creates the below resources:
 
 - Task Definition as Daemon for Opentelemetry Collector
 - Service as a Daemon for the OpenTelemetry Collector
 - IAM roles required for calling the container insights API
 
-The OpenTelemetry collector config would be as shown below: 
+The OpenTelemetry collector config would be as shown below:
 
 ```yaml
 extensions:
@@ -263,7 +262,7 @@ service:
   extensions: [health_check]
 ```
 
-This `config` does multiple metrics collection which includes collection of ECS Container insights. The receiver contacts ECS metadata endpoints and internal docker sockets to gather statistics. 
+This `config` does multiple metrics collection which includes collection of ECS Container insights. The receiver contacts ECS metadata endpoints and internal docker sockets to gather statistics.
 
 To verify that the data is being sent to SigNoz Cloud, you can go to the SigNoz dashboard page and import the dashboards below:
 
@@ -272,13 +271,11 @@ To verify that the data is being sent to SigNoz Cloud, you can go to the SigNoz
 
 Once imported, select the variables - Cluster name, Autoscaling group, and instance name respectively. You will be able to see the metrics as shown below:
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/aws_ecs_metrics.webp" alt="OpenTelemetry ECS monitoring with SigNoz"/>
     <figcaption><i>AWS ECS metrics were collected by OpenTelemetry Collector and visualized with SigNoz.</i></figcaption>
 </figure>
 <br/>
-
 
 You can additionally check logs of your service as well using the same configuration as shown below:
 
@@ -288,95 +285,94 @@ You can additionally check logs of your service as well using the same configura
 </figure>
 <br/>
 
-
-The `resourcedetection` processor takes care of identifying key attributes for the container automatically and allows you to view logs by container name, task defintion arn, service name etc. 
+The `resourcedetection` processor takes care of identifying key attributes for the container automatically and allows you to view logs by container name, task defintion arn, service name etc.
 
 ## Reference: Metrics collected by OpenTelemetry ECS Container insights receiver for ECS
 
 Note that the below list is specific to AWS ECS. The <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awscontainerinsightreceiver" rel="noopener noreferrer nofollow" target="_blank" >documentation</a> for this receiver contains a broader list which includes Kubernetes-specific metrics, too.
 
-| Metric | Unit | Type | Attributes |
-| --- | --- | --- | --- |
-| cluster_failed_node_count | Count | Count | ClusterName, NodeName, Type, Timestamp, Version, Sources |
-| cluster_node_count | Count | Count | ClusterName, NodeName, Type, Timestamp, Version, Sources |
-| container_cpu_limit | Millicore | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_cpu_request | Millicore | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_cpu_usage_system | Millicore | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_cpu_usage_total | Millicore | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_cpu_usage_user | Millicore | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_cpu_utilization | Percent | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_cache | Bytes | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_failcnt | Count | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_hierarchical_pgfault | Count/Second | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| Metric                                   | Unit         | Type  | Attributes                                                                                                                                                                                             |
+| ---------------------------------------- | ------------ | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| cluster_failed_node_count                | Count        | Count | ClusterName, NodeName, Type, Timestamp, Version, Sources                                                                                                                                               |
+| cluster_node_count                       | Count        | Count | ClusterName, NodeName, Type, Timestamp, Version, Sources                                                                                                                                               |
+| container_cpu_limit                      | Millicore    | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_cpu_request                    | Millicore    | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_cpu_usage_system               | Millicore    | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_cpu_usage_total                | Millicore    | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_cpu_usage_user                 | Millicore    | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_cpu_utilization                | Percent      | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_cache                   | Bytes        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_failcnt                 | Count        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_hierarchical_pgfault    | Count/Second | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
 | container_memory_hierarchical_pgmajfault | Count/Second | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_limit | Bytes | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_mapped_file | Bytes | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_max_usage | Bytes | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_pgfault | Count/Second | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_pgmajfault | Count/Second | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_request | Bytes | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_rss | Bytes | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_swap | Bytes | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_usage | Bytes | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_utilization | Percent | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| container_memory_working_set | Bytes | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| number_of_container_restarts | Count | Count | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
-| instance_cpu_limit | Millicore | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_cpu_reserved_capacity | Percent | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_cpu_usage_system | Millicore | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_cpu_usage_total | Millicore | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_cpu_usage_user | Millicore | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_cpu_utilization | Percent | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_cache | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_failcnt | Count | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_hierarchical_pgfault | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_hierarchical_pgmajfault | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_limit | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_mapped_file | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_max_usage | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_pgfault | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_pgmajfault | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_reserved_capacity | Percent | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_rss | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_swap | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_usage | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_utilization | Percent | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_memory_working_set | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_network_rx_bytes | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_network_rx_dropped | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_network_rx_errors | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_network_rx_packets | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_network_total_bytes | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_network_tx_bytes | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_network_tx_dropped | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_network_tx_errors | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_network_tx_packets | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_number_of_running_tasks | Count | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_serviced_async | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_serviced_read | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_serviced_sync | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_serviced_total | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_serviced_write | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_service_bytes_async | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_service_bytes_read | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_service_bytes_sync | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_service_bytes_total | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_diskio_io_service_bytes_write | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_filesystem_available | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_filesystem_capacity | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_filesystem_inodes | Count | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_filesystem_inodes_free | Count | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_filesystem_usage | Bytes | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_filesystem_utilization | Percent | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_interface_network_rx_bytes | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_interface_network_rx_dropped | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_interface_network_rx_errors | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_interface_network_rx_packets | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_interface_network_total_bytes | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_interface_network_tx_bytes | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_interface_network_tx_dropped | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_interface_network_tx_errors | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
-| instance_interface_network_tx_packets | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId, |
+| container_memory_limit                   | Bytes        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_mapped_file             | Bytes        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_max_usage               | Bytes        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_pgfault                 | Count/Second | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_pgmajfault              | Count/Second | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_request                 | Bytes        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_rss                     | Bytes        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_swap                    | Bytes        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_usage                   | Bytes        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_utilization             | Percent      | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| container_memory_working_set             | Bytes        | Gauge | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| number_of_container_restarts             | Count        | Count | AutoScalingGroupName,ClusterName,ContainerId,ContainerName,InstanceId,InstanceType,Namespace,Timestamp,Type,Version,Sources,container_status,container_status_reason,container_last_termination_reason |
+| instance_cpu_limit                       | Millicore    | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_cpu_reserved_capacity           | Percent      | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_cpu_usage_system                | Millicore    | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_cpu_usage_total                 | Millicore    | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_cpu_usage_user                  | Millicore    | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_cpu_utilization                 | Percent      | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_cache                    | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_failcnt                  | Count        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_hierarchical_pgfault     | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_hierarchical_pgmajfault  | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_limit                    | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_mapped_file              | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_max_usage                | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_pgfault                  | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_pgmajfault               | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_reserved_capacity        | Percent      | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_rss                      | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_swap                     | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_usage                    | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_utilization              | Percent      | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_memory_working_set              | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_network_rx_bytes                | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_network_rx_dropped              | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_network_rx_errors               | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_network_rx_packets              | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_network_total_bytes             | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_network_tx_bytes                | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_network_tx_dropped              | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_network_tx_errors               | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_network_tx_packets              | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_number_of_running_tasks         | Count        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_serviced_async        | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_serviced_read         | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_serviced_sync         | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_serviced_total        | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_serviced_write        | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_service_bytes_async   | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_service_bytes_read    | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_service_bytes_sync    | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_service_bytes_total   | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_diskio_io_service_bytes_write   | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_filesystem_available            | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_filesystem_capacity             | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_filesystem_inodes               | Count        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_filesystem_inodes_free          | Count        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_filesystem_usage                | Bytes        | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_filesystem_utilization          | Percent      | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_interface_network_rx_bytes      | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_interface_network_rx_dropped    | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_interface_network_rx_errors     | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_interface_network_rx_packets    | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_interface_network_total_bytes   | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_interface_network_tx_bytes      | Bytes/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_interface_network_tx_dropped    | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_interface_network_tx_errors     | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
+| instance_interface_network_tx_packets    | Count/Second | Gauge | ClusterName,InstanceType,AutoScalingGroupName,Timestamp,Type,Version,Sources,ContainerInstanceId,InstanceId,                                                                                           |
 
 ## Conclusion
 
@@ -384,7 +380,7 @@ In this tutorial, you installed an OpenTelemetry Collector to collect AWS ECS me
 
 Visit our complete guide on OpenTelemetry Collector to learn more about it. OpenTelemetry is quietly becoming the world standard for open-source observability, and by using it, you can have advantages like a single standard for all telemetry signals, no vendor lock-in, etc.
 
-SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/) that can be used as a single backend for all your observability needs. 
+SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opentelemetry-apm/) that can be used as a single backend for all your observability needs.
 
 ---
 

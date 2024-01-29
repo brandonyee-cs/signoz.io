@@ -17,18 +17,19 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/justifying-a-million-dollar-observability-bill/"/>
 </head>
 
-In a recent reddit thread, I got into a conversation about <a href = "https://devops.com/observability-costs-are-too-damn-high/" rel="noopener noreferrer nofollow" target="_blank" >justifying the cost of observability</a>. It got to a really basic question about running a tech company: how do you know that any cost is justified? While a small number of expenses have clear and direct business values, a bunch of other costs, I would even say *most* costs, just aren’t that clear cut.
+In a recent reddit thread, I got into a conversation about <a href = "https://devops.com/observability-costs-are-too-damn-high/" rel="noopener noreferrer nofollow" target="_blank" >justifying the cost of observability</a>. It got to a really basic question about running a tech company: how do you know that any cost is justified? While a small number of expenses have clear and direct business values, a bunch of other costs, I would even say _most_ costs, just aren’t that clear cut.
 
-I’d like to write a bit about how Observability costs are significant, how these costs tend to be justified, and how precise amount a company spends on *anything* tends to be more subjective than you’d think. This article is not about how to reduce or control these costs, but rather how the costs are justified.
+I’d like to write a bit about how Observability costs are significant, how these costs tend to be justified, and how precise amount a company spends on _anything_ tends to be more subjective than you’d think. This article is not about how to reduce or control these costs, but rather how the costs are justified.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/10/million-dollar-bill-cover.webp)
 
 ### Observability is expensive
 
 SaaS tools to do observability have significant costs for any large-scale user, and no observability tool has a cost of 0. While tools like SigNoz have self-hosted solutions that will cut your Datadog bill down to zero dollars, you still have to consider both the infrastructure costs of hosting your own data backend and the support you’ll need to do on such a tool. Even with the (amazing) open-source options, the cost is never zero when you count implementation effort and storage costs.
 
-While everyone knows that observability costs *something* I think most people don’t really understand just how expensive it can be. While many organizations may target spending 10% of their Ops budget for full-stack observability, it’s common for observability to be the [second-highest cost after infrastructure](https://devops.com/observability-costs-are-too-damn-high/). Why so expensive? And why so universally? For an object lesson, consider my demo flask app before and after I add OpenTelemetry instrumentation. 
+While everyone knows that observability costs _something_ I think most people don’t really understand just how expensive it can be. While many organizations may target spending 10% of their Ops budget for full-stack observability, it’s common for observability to be the [second-highest cost after infrastructure](https://devops.com/observability-costs-are-too-damn-high/). Why so expensive? And why so universally? For an object lesson, consider my demo flask app before and after I add OpenTelemetry instrumentation.
 
 ```python
 # Acquire a tracer
@@ -45,7 +46,7 @@ def do_roll():
     # Do the thing
     rollspan.set_attribute("roll.value", res)
     return res
-    
+
 def do_work(work_type):
     print("doing some work...")
 ```
@@ -73,7 +74,7 @@ def do_roll():
         current_span.add_event("Did it!")
         rollspan.set_attribute("roll.value", res)
         return res
-    
+
 
 metric_reader = PeriodicExportingMetricReader(ConsoleMetricExporter())
 provider = MeterProvider(metric_readers=[metric_reader])
@@ -97,9 +98,9 @@ Obviously a contrived example, but it’s worth noting that there were more line
 
 ### Cost reductions are possible
 
-Again, this is not the focus of this piece (geez don’t you read the introductory paragraphs??), but it’s important to note that it’s completely possible to significantly reduce the costs of observability. Tools like the OpenTelemetry Collector have tons of processors available to filter, parse, and compress data so that you’re sending way less data than your app’s actual workload. 
+Again, this is not the focus of this piece (geez don’t you read the introductory paragraphs??), but it’s important to note that it’s completely possible to significantly reduce the costs of observability. Tools like the OpenTelemetry Collector have tons of processors available to filter, parse, and compress data so that you’re sending way less data than your app’s actual workload.
 
-And open-source options are absolutely going to give more bang for your buck than closed-source SaaS tools. While companies like Datadog and New Relic may claim support for open standards like OpenTelemetry, [the reality is a little different](https://signoz.io/blog/is-opentelemetry-a-first-class-citizen-in-your-dashboard-a-datadog-and-newrelic-comparison/). 
+And open-source options are absolutely going to give more bang for your buck than closed-source SaaS tools. While companies like Datadog and New Relic may claim support for open standards like OpenTelemetry, [the reality is a little different](https://signoz.io/blog/is-opentelemetry-a-first-class-citizen-in-your-dashboard-a-datadog-and-newrelic-comparison/).
 
 However costs exist, they’re never going to be smaller than, say, what your office spends on sugar packets. How do we justify these expenses?
 
@@ -109,8 +110,8 @@ Back to the Reddit thread where we started, the question is really how do we dec
 
 ### Costs with a clear, quantifiable benefit
 
-- *Infrastructure & Operations -* When we talk about infrastructure costs, it’s possible to calculate the marginal cost of a single user and show the value of a single additional user to our business, and therefore justify the costs. The same is true of the Operations team and SRE teams: they’re needed to keep the system up and running, so easy to put a dollar value on the benefit.
-- *Sales & Marketing -* Here again, the calculation is fairly simple: calculate the benefit of new business, and you can show whether what you’re paying to acquire it makes sense
+- _Infrastructure & Operations -_ When we talk about infrastructure costs, it’s possible to calculate the marginal cost of a single user and show the value of a single additional user to our business, and therefore justify the costs. The same is true of the Operations team and SRE teams: they’re needed to keep the system up and running, so easy to put a dollar value on the benefit.
+- _Sales & Marketing -_ Here again, the calculation is fairly simple: calculate the benefit of new business, and you can show whether what you’re paying to acquire it makes sense
 
 Okay, if these costs can be justified to the last clipped Scottish groat, can’t we do that for all business expenses? Not at all:
 
@@ -119,8 +120,8 @@ Okay, if these costs can be justified to the last clipped Scottish groat, can’
 Here are some costs where the benefit is harder to quantify
 
 - **Literally, everyone else who works at the office -** Not to start with a bold one, but the benefit of literally everyone else isn’t a number you can type into a spreadsheet. Some examples of people at your company who have a nebulous, hard-to-exactly define benefit:
-    - All executives - At publicly traded companies, we often give credit for all stock moves to the CEO. But everyone knows this can’t be an accurate number, and the direct benefit of all other executives is similarly hard to pin down. Again, this doesn’t mean they have zero benefit, just that it can’t be quantified as an exact figure.
-    - All Managers - If we set an arbitrary value for the contributions of a team of engineers, say (shudder) a dollar value on each line of code added, we can arrive at some vague estimate of the engineers’ contribution to value. Even this rough estimate isn’t possible with the team’s management. And as such, the benefit of management is impossible to get a perfect read on. We know that a great manager can get great things from their team. But the dollar value is quite difficult to calculate.
+  - All executives - At publicly traded companies, we often give credit for all stock moves to the CEO. But everyone knows this can’t be an accurate number, and the direct benefit of all other executives is similarly hard to pin down. Again, this doesn’t mean they have zero benefit, just that it can’t be quantified as an exact figure.
+  - All Managers - If we set an arbitrary value for the contributions of a team of engineers, say (shudder) a dollar value on each line of code added, we can arrive at some vague estimate of the engineers’ contribution to value. Even this rough estimate isn’t possible with the team’s management. And as such, the benefit of management is impossible to get a perfect read on. We know that a great manager can get great things from their team. But the dollar value is quite difficult to calculate.
 - **The Office itself** - More on this in later sections. But the value of all those cubicles does not fit on a spreadsheet.
 
 So, we can see that a ton of the expenses a company runs up, especially at a tech company, can’t be calculated against the exact value they produce.
@@ -129,9 +130,9 @@ If this situation is hard to believe, consider that most airlines can’t specif
 
 ### The real argument for observability: the cost of not having it
 
-When a developer uses a cool tracing tool to find the bit of code that’s slowing down performance, the dollar benefit of that act to the company is extremely difficult to show. You might try calculating how long the developer would have spent trying to fix the problem without the tool, but that’s always going to be a *very* rough estimate since a proper observability tool <a href = "https://www.cncf.io/blog/2022/12/16/why-opentelemetry-is-taking-cloud-native-to-new-heights/" rel="noopener noreferrer nofollow" target="_blank" >fundamentally alters the way dev teams operate</a> so a simple time estimate is unlikely to be accurate. 
+When a developer uses a cool tracing tool to find the bit of code that’s slowing down performance, the dollar benefit of that act to the company is extremely difficult to show. You might try calculating how long the developer would have spent trying to fix the problem without the tool, but that’s always going to be a _very_ rough estimate since a proper observability tool <a href = "https://www.cncf.io/blog/2022/12/16/why-opentelemetry-is-taking-cloud-native-to-new-heights/" rel="noopener noreferrer nofollow" target="_blank" >fundamentally alters the way dev teams operate</a> so a simple time estimate is unlikely to be accurate.
 
-No, the real way to show what observability has to offer is the cost of *not* having it. The cost of downtime, system slowdowns, and dissatisfied users is one that every exec can estimate.
+No, the real way to show what observability has to offer is the cost of _not_ having it. The cost of downtime, system slowdowns, and dissatisfied users is one that every exec can estimate.
 
 No one wants to be responsible for the site going down, and the cost of downtime can be millions of dollars an hour for a large enough system.
 

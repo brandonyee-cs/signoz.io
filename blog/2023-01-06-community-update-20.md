@@ -8,25 +8,22 @@ description: It's time for the monthly product update of SigNoz - a full-stack o
 image: /img/blog/2023/01/signal_20_cover-min.jpg
 hide_table_of_contents: false
 keywords:
- - SigNoz Product Update
- - Dev community
+  - SigNoz Product Update
+  - Dev community
 ---
 
 <head>
   <link rel="canonical" href="https://signoz.io/blog/community-update-20/"/>
 </head>
 
-
 > “There is only one thing that makes a dream impossible to achieve: the fear of failure.”<br></br> -
 > Paulo Coelho
-
 
 Welcome to the last monthly product newsletter from the year 2022. The month of December ended on a high note for the team at SigNoz. An amazing team workation in Goa was all we could ask for to end the year in which we shipped consistently and made SigNoz better with constant user inputs.
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2023/01/signal_20_cover.webp)
- 
 
 Our latest release comes equipped with better scaling capabilities and improved user experience. Let’s dive in to see what humans at SigNoz were up to in the month of December 2022.
 
@@ -38,9 +35,9 @@ We have shipped some much-awaited features over our latest releases. You can now
 
 ### Distributed ClickHouse Support
 
-Modern-day software systems emit huge amounts of observability data. We have made it easier for our users to handle the scale of their observability data with the release of distributed ClickHouse support. 
+Modern-day software systems emit huge amounts of observability data. We have made it easier for our users to handle the scale of their observability data with the release of distributed ClickHouse support.
 
-From SigNoz v0.12, you can use ClickHouse shard instance to manage your observability data. Check out our [docs](https://signoz.io/docs/operate/clickhouse/distributed-clickhouse/) on how to set up distributed ClickHouse for SigNoz. 
+From SigNoz v0.12, you can use ClickHouse shard instance to manage your observability data. Check out our [docs](https://signoz.io/docs/operate/clickhouse/distributed-clickhouse/) on how to set up distributed ClickHouse for SigNoz.
 
 ### Google Auth implementation for SSO
 
@@ -50,14 +47,12 @@ We have shipped Google auth support for Single Sign-On. SSO and SAML are importa
 
 Since we released log management in SigNoz, we have been working closely with our users to improve it. Our latest release consists of considerable improvements in our logs management experience. The logs tab should feel much snappier now. If you are on an older version of SigNoz, we suggest you upgrade to the <a href = "https://github.com/SigNoz/signoz/releases/tag/v0.13.0" rel="noopener noreferrer nofollow" target="_blank" >latest version</a>.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/signal_20_logs.webp" alt="Log Management Tab in SigNoz"/>
     <figcaption><i>Log Management Tab in SigNoz</i></figcaption>
 </figure>
 
 <br/>
-
 
 ### Other Improvements
 
@@ -71,8 +66,6 @@ We have also introduced filters on our exceptions page. Now, you can use filteri
 
 We are working on creating more compact views in our logs tab so that it’s easier for our users to analyze logs quickly. We are currently iterating on solutions based on user feedback. Feel free to open up a <a href = "https://github.com/SigNoz/signoz/discussions" rel="noopener noreferrer nofollow" target="_blank" > GitHub discussion</a> if you have ideas or feedback to share.
 
-
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/logs-table-view.webp" alt="A sneak peek into on of the compact views we are thinking of having in SigNoz logs management tab"/>
     <figcaption><i>A sneak peek into one of the compact views we are thinking of having in SigNoz logs management tab</i></figcaption>
@@ -80,11 +73,9 @@ We are working on creating more compact views in our logs tab so that it’s eas
 
 <br/>
 
-
-
 ### Logs Parser
 
-Log parsing is an important step in creating meaningful log data. It is critical to parse log files to extract meaningful information from logs. Our team is working on making it easier for our users to parse logs quickly. 
+Log parsing is an important step in creating meaningful log data. It is critical to parse log files to extract meaningful information from logs. Our team is working on making it easier for our users to parse logs quickly.
 
 The plan is to create a UI-based logs parser where users can specify how to parse logs being sent to SigNoz easily. Users can decide which field to extract, and what attributes to keep with a few simple clicks.
 
@@ -107,13 +98,9 @@ We want to make it easier for our users to get started with SigNoz. One of the i
 
 If you have some requirements based on application frameworks you use in your stack, feel free to comment on this <a href = "https://github.com/SigNoz/signoz/issues/1964" rel="noopener noreferrer nofollow" target="_blank" > GitHub issue </a>.
 
-
-
 ## Customer Stories
 
 Our vision of open source observability under a single pane of glass is solving the pain points of great engineering teams out there. We sat down with two of our users to understand how they are using SigNoz to build more robust and resilient applications.
-
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/outplay_customer_story.webp" alt="Outplay Customer Story"/>
@@ -124,14 +111,12 @@ Our vision of open source observability under a single pane of glass is solving 
 
 <a href = "https://outplayhq.com/" rel="noopener noreferrer nofollow" target="_blank" >Outplay</a>, a sales engagement and sales automation platform uses SigNoz to monitor their APM metrics. The Outplay team has used SigNoz to optimize their APIs after migrating their entire workload from EC2 to Kubernetes. Check out the full story <a href = "https://signoz.io/case-study/outplay/" target="_blank" >here</a>.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/wombo_customer_story.webp" alt="Wombo Customer Story"/>
     <figcaption><i>Wombo Customer Story</i></figcaption>
 </figure>
 
 <br/>
-
 
 <a href = "https://www.wombo.ai/" rel="noopener noreferrer nofollow" target="_blank" >Wombo</a>, an AI-powered content generator, uses SigNoz to make the user experience smooth for more than 5 million monthly active users. They have used SigNoz to optimize their key user experience metrics and to identify the root cause of application performance issues. Check out the full story <a href = "https://signoz.io/case-study/wombo/" target="_blank" >here</a>.
 
@@ -145,14 +130,12 @@ The week in Goa was so much fun that we are already making plans for our next ge
 
 Here are some amazing snapshots from our trip 👇
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/signal_20_group2.webp" alt="Building the finest observability platform - plandid or candid?"/>
     <figcaption><i>Building the finest observability platform - plandid or candid?</i></figcaption>
 </figure>
 
 <br/>
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/signal_20_group1.webp" alt="A wholesome team and a wholesome picture!"/>
@@ -174,22 +157,17 @@ It’s always great to see shoutouts from the community about SigNoz solving the
 
 Having a smooth onboarding process is something we are focused on, and it’s great to see users finding it easy to get started with SigNoz.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/01/signal_20_vignesh.webp" alt=""/>
     <figcaption><i></i></figcaption>
 </figure>
 <br/>
 
-
 ### Contributor Highlight
 
-We can not thank our open source contributors enough. Open source is one of the rare ecosystems where collaboration happens across international borders and language barriers. We say internally - code unites all! 
+We can not thank our open source contributors enough. Open source is one of the rare ecosystems where collaboration happens across international borders and language barriers. We say internally - code unites all!
 
 We want to thank the following contributors who made contributions to SigNoz last month 🤗
-
-
-
 
 <div class="row">
     <div class="col col--6">
@@ -266,7 +244,6 @@ We want to thank the following contributors who made contributions to SigNoz las
    </div>
 
 </div>
-
 
 ## From the Blog
 

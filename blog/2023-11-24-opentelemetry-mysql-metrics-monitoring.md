@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: abhishek-kothari
 description: Steps to monitor MySQL metrics with OpenTelemetry 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect MySQL metrics 3. Send collected metrics to SigNoz...
 image: /img/blog/2023/11/opentelemetry-mysql-metrics-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -18,7 +18,6 @@ keywords:
 <head>
   <link rel="canonical" href="https://signoz.io/blog/opentelemetry-mysql-metrics-monitoring/"/>
 </head>
-
 
 Database monitoring is an important aspect to look at for a high-volume or high-traffic system. The database performance drastically impacts the response times for the application. In this tutorial, you will install OpenTelemetry Collector to collect MySQL metrics and then send the collected data to SigNoz for monitoring and visualization.
 
@@ -39,14 +38,13 @@ In this tutorial, we cover:
 - [Conclusion](#conclusion)
 - [Further Reading](#further-reading)
 
-
 If you want to jump straight into implementation, start with this [pre-requisites](#pre-requisites) section.
 
 ## A brief overview of MySQL Database
 
-MySQL is an open-source relational database used by several popular companies around the world. Over the years, it has matured quite well and provides excellent performance even at large scale. Despite this, the tooling provided by the MySQL community is not good enough to monitor the database easily. With a metrics collector like Opentelemetry Collector, we could easily fetch the metrics and publish them to a remote destination like SigNoz to visualize them. 
+MySQL is an open-source relational database used by several popular companies around the world. Over the years, it has matured quite well and provides excellent performance even at large scale. Despite this, the tooling provided by the MySQL community is not good enough to monitor the database easily. With a metrics collector like Opentelemetry Collector, we could easily fetch the metrics and publish them to a remote destination like SigNoz to visualize them.
 
-In this tutorial, we will build an end-to-end monitoring solution for MySQL using an <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/mysqlreceiver/README.md" rel="noopener noreferrer nofollow" target="_blank">OpenTelemetry MySQL receiver</a> to collect the metrics and [Signoz](https://signoz.io) to visualize the collected metrics. 
+In this tutorial, we will build an end-to-end monitoring solution for MySQL using an <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/mysqlreceiver/README.md" rel="noopener noreferrer nofollow" target="_blank">OpenTelemetry MySQL receiver</a> to collect the metrics and [Signoz](https://signoz.io) to visualize the collected metrics.
 
 ## A Brief Overview of OpenTelemetry
 
@@ -91,12 +89,11 @@ receivers:
         cors:
           allowed_origins:
             - http://test.com
-# Origins can have wildcards with *, use * by itself to match any origin.
+            # Origins can have wildcards with *, use * by itself to match any origin.
             - https://*.example.com
           allowed_headers:
             - Example-Header
           max_age: 7200
-
 ```
 
 You can find more details on advanced configurations <a href = "https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md" rel="noopener noreferrer nofollow" target="_blank">here</a>.
@@ -133,28 +130,28 @@ This tutorial assumes that the OpenTelemetry Collector is installed on the same 
 
 For the purpose of this tutorial, we can use a local MySQL setup if you have it installed already. In case you do not have a MySQL database installed already, you can follow the below guide to run the MySQL database locally using <a href = "https://docs.docker.com/engine/install" rel="noopener noreferrer nofollow" target="_blank">Docker</a> and <a href = "https://docs.docker.com/compose" rel="noopener noreferrer nofollow" target="_blank">Docker-Compose</a>.
 
-This would help you get rid of any technical challenges related to setting up the agent or database locally. Below links can help you with the Docker installation: 
+This would help you get rid of any technical challenges related to setting up the agent or database locally. Below links can help you with the Docker installation:
 
 - <a href = "https://docs.docker.com/desktop/install/linux-install/" rel="noopener noreferrer nofollow" target="_blank">Docker Desktop for Linux</a>
 - <a href = "https://docs.docker.com/desktop/install/mac-install" rel="noopener noreferrer nofollow" target="_blank">Docker Desktop for Mac (macOS)</a>
 - <a href = "https://docs.docker.com/desktop/install/windows-install" rel="noopener noreferrer nofollow" target="_blank">Docker Desktop for Windows</a>
 
-Once you have Docker installation ready to go, create the below `docker-compose.yaml` file. 
+Once you have Docker installation ready to go, create the below `docker-compose.yaml` file.
 
 ```yaml
-version: '3.3'
+version: "3.3"
 services:
   mysqldb:
     image: mysql
     restart: always
     environment:
-      MYSQL_DATABASE: 'myoteldb'
-      MYSQL_ROOT_PASSWORD: 'password123'
+      MYSQL_DATABASE: "myoteldb"
+      MYSQL_ROOT_PASSWORD: "password123"
     ports:
-      - '3306:3306'
+      - "3306:3306"
     expose:
       # Opens port 3306 on the container
-      - '3306'
+      - "3306"
       # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
@@ -162,13 +159,13 @@ volumes:
   my-db:
 ```
 
-Once done, execute the below command from the same folder to get the MySQL database server up and running. 
+Once done, execute the below command from the same folder to get the MySQL database server up and running.
 
 ```yaml
 docker-compose up -d
 ```
 
-This is a very simple Docker compose file that can spin up MySQL Database in no time. It stores the data from MySQL DB locally in your disk and mounts it onto the container. It makes the database accessible on port 3306 locally.  
+This is a very simple Docker compose file that can spin up MySQL Database in no time. It stores the data from MySQL DB locally in your disk and mounts it onto the container. It makes the database accessible on port 3306 locally.
 
 ## Setting up SigNoz
 
@@ -208,7 +205,7 @@ Create a `config.yaml` file in the `otelcol-contrib` folder. This configuration 
 
 **Note:**
 
-The configuration file should be created in the same directory where you unpack the `otel-collector-contrib` binary. In case you have globally installed the binary, it is ok to create on any path. 
+The configuration file should be created in the same directory where you unpack the `otel-collector-contrib` binary. In case you have globally installed the binary, it is ok to create on any path.
 
 ```yaml
 receivers:
@@ -250,16 +247,15 @@ service:
 
 You would need to replace `region` and `signoz-token` in the above file with the region of your choice (for Signoz Cloud) and token obtained from Signoz Cloud → Settings → Integration Settings. The ingestion key details are also available in the SigNoz Cloud dashboard.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/11/ingestion-key-details.webp" alt="You can find ingestion details in the SigNoz dashboard"/>
     <figcaption><i>You can find ingestion details in the SigNoz dashboard</i></figcaption>
 </figure>
 <br />
 
-Additionally, replace the MySQL username and password as well. In case you are using the `docker-compose`-based setup, the username will be `root`, and the password will be `password123`. 
+Additionally, replace the MySQL username and password as well. In case you are using the `docker-compose`-based setup, the username will be `root`, and the password will be `password123`.
 
-The above configuration is quite simple - Whenever you wish to monitor a different remote database, all you would need to change is the `endpoint` URL for the `mysql` receiver. You can also monitor multiple MySQL databases by adding multiple receivers, as shown below: 
+The above configuration is quite simple - Whenever you wish to monitor a different remote database, all you would need to change is the `endpoint` URL for the `mysql` receiver. You can also monitor multiple MySQL databases by adding multiple receivers, as shown below:
 
 ```yaml
 receivers:
@@ -300,7 +296,7 @@ service:
       address: localhost:8888
   pipelines:
     metrics:
-      receivers: [otlp, mysql,mysql/2]
+      receivers: [otlp, mysql, mysql/2]
       processors: [batch]
       exporters: [otlp]
 ```
@@ -344,7 +340,6 @@ You should start seeing the metrics on your Signoz Cloud UI in about 30 seconds.
 
 Once the above setup is done, you will be able to access the metrics in the SigNoz dashboard. You can go to the Dashboards tab and try adding a new panel. You can learn how to create dashboards in SigNoz [here](https://signoz.io/docs/userguide/manage-dashboards-and-panels/).
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/mysql_metrics.webp" alt="MySQL metrics collected by OTel Collector and sent to Signoz"/>
     <figcaption><i>MySQL metrics collected by OTel Collector and sent to Signoz</i></figcaption>
@@ -353,17 +348,13 @@ Once the above setup is done, you will be able to access the metrics in the SigN
 
 You can easily create charts with [query builder](https://signoz.io/docs/userguide/create-a-custom-query/#sample-examples-to-create-custom-query) in SigNoz. Here are the [steps](https://signoz.io/docs/userguide/manage-panels/#steps-to-add-a-panel-to-a-dashboard) to add a new panel to the dashboard.
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/mysql_build_chart.webp" alt="Building a chart to monitor the number of queries executed for each operation type"/>
     <figcaption><i>Building a chart to monitor the number of queries executed for each operation type</i></figcaption>
 </figure>
 <br/>
 
-You can build a complete dashboard around various metrics emitted. Here’s a look at a sample dashboard we built out using the metrics collected. 
-
-
+You can build a complete dashboard around various metrics emitted. Here’s a look at a sample dashboard we built out using the metrics collected.
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/mysql_dashboard.webp" alt=""/>
@@ -372,8 +363,6 @@ You can build a complete dashboard around various metrics emitted. Here’s a lo
 <br/>
 
 You can also create alerts on any metric. Learn how to create alerts [here](https://signoz.io/docs/userguide/alerts-management/).
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/mysql_alerts.webp" alt="Creating alerts using a metric panel"/>
@@ -385,59 +374,59 @@ For instance, as shown above, you could create an uptime alert that quickly upda
 
 ## Reference: MySQL metrics and labels collected by OpenTelemetry
 
-The OpenTelemetry collector receiver connects with your desired MySQL database and gathers the below set of metrics: 
+The OpenTelemetry collector receiver connects with your desired MySQL database and gathers the below set of metrics:
 
-| Metric | Description | Attributes | Type |
-| --- | --- | --- | --- |
-| mysql.buffer_pool.data_pages | Number of data pages for an InnoDB buffer pool | status | Sum |
-| mysql.buffer_pool.limit | Configured size of the InnoDB buffer pool | none | Sum |
-| mysql.buffer_pool.operations | Number of operations on the InnoDB buffer pool | operation | Sum |
-| mysql.buffer_pool.page_flushes | Sum of Requests to flush pages for the InnoDB buffer pool | none | Sum |
-| mysql.buffer_pool.pages | Sum of pages in the InnoDB buffer pool | kind | Sum |
-| mysql.buffer_pool.usage | Number of bytes in the InnoDB buffer pool | status | Sum |
-| mysql.double_writes | Number of writes to the InnoDB doublewrite buffer pool | kind | Sum |
-| mysql.handlers | Number of requests to various MySQL handlers | kind | Sum |
-| mysql.index.io.wait.count | Sum of I/O wait events for a particular index | operation, table, schema, index | Sum |
-| mysql.index.io.wait.time | Total time of I/O wait events for a particular index | operation, table, schema, index | Sum |
-| mysql.locks | Total MySQL locks | kind | Sum |
-| mysql.log_operations | Number of InnoDB log operations  | operation | Sum |
-| mysql.mysqlx_connections | Total MySQLx connections | status | Sum |
-| mysql.opened_resources | Total opened resources  | kind | Sum |
-| mysql.operations | Total operations including fsync, reads and writes | operation | Sum |
-| mysql.page_operations | Total operation on InnoDB pages  | operation | Sum |
-| mysql.prepared_statements | Number of times each type of Prepared statement command got issued | command | Sum |
-| mysql.row_locks | Total InnoDB row locks present | kind | Sum |
-| mysql.row_operations | Total row operations executed | operation | Sum |
-| mysql.sorts | Total MySQL sort execution | kind | Sum |
-| mysql.table.io.wait.count | Total I/O wait events for a specific table | operation, table, schema | Sum |
-| mysql.table.io.wait.time | Total wait time for I/O events for a table | operation, table,schema | Sum |
-| mysql.threads | Current state of MySQL threads | kind | Sum |
-| mysql.tmp_resources | Number of temporary resources created | resource | Sum |
-| mysql.uptime | Number of seconds since the server has been up | none | Sum |
-| mysql.client.network.io | Number of transmitted bytes between server and clients | kind | Sum |
-| mysql.commands | Total number of executions for each type of command | command | Sum |
-| mysql.connection.count | Total connection attempts (including successful and failed) | none | Sum |
-| mysql.connection.errors | Errors occured during the connections | error | Sum |
-| mysql.joins | Number of joins that performed table scans  | kind | Sum |
-| mysql.mysqlx_worker_threads | Number of available worker threads | kind | Sum |
-| mysql.query.client.count | Number of statements executed by the server and sent by a client  | none | Sum |
-| mysql.query.count | Number of statements executed including the statements ran by system | none | Sum |
-| mysql.query.slow.count | Number of Slow queries  | none | Sum |
-| mysql.replica.sql_delay | Lag in seconds for the replica compared to source  | none | Sum |
-| mysql.replica.time_behind_source | Delay in replication  | none | Sum |
-| mysql.statement_event.count | Summary of current and recent events | schema, digest, digest_text, kind | Sum |
-| mysql.statement_event.wait.time | Total Wait time for the summarized timed events | schema, digest, digest_text | Sum |
-| mysql.table.lock_wait.read.count | Total table lock wait read events | schema, table,kind | Sum |
-| mysql.table.lock_wait.read.time | Total table lock wait time for read events | schema, table, kind | Sum |
-| mysql.table.lock_wait.write.count | Total table lock wait read events | schema, table, kind | Sum |
-| mysql.table.lock_wait.write.time | Total table lock wait time for write events | schema, table, kind | Sum |
-| mysql.table_open_cache | Number of hits, misses or overflows for open tables cache lookups | status | Sum |
+| Metric                            | Description                                                          | Attributes                        | Type |
+| --------------------------------- | -------------------------------------------------------------------- | --------------------------------- | ---- |
+| mysql.buffer_pool.data_pages      | Number of data pages for an InnoDB buffer pool                       | status                            | Sum  |
+| mysql.buffer_pool.limit           | Configured size of the InnoDB buffer pool                            | none                              | Sum  |
+| mysql.buffer_pool.operations      | Number of operations on the InnoDB buffer pool                       | operation                         | Sum  |
+| mysql.buffer_pool.page_flushes    | Sum of Requests to flush pages for the InnoDB buffer pool            | none                              | Sum  |
+| mysql.buffer_pool.pages           | Sum of pages in the InnoDB buffer pool                               | kind                              | Sum  |
+| mysql.buffer_pool.usage           | Number of bytes in the InnoDB buffer pool                            | status                            | Sum  |
+| mysql.double_writes               | Number of writes to the InnoDB doublewrite buffer pool               | kind                              | Sum  |
+| mysql.handlers                    | Number of requests to various MySQL handlers                         | kind                              | Sum  |
+| mysql.index.io.wait.count         | Sum of I/O wait events for a particular index                        | operation, table, schema, index   | Sum  |
+| mysql.index.io.wait.time          | Total time of I/O wait events for a particular index                 | operation, table, schema, index   | Sum  |
+| mysql.locks                       | Total MySQL locks                                                    | kind                              | Sum  |
+| mysql.log_operations              | Number of InnoDB log operations                                      | operation                         | Sum  |
+| mysql.mysqlx_connections          | Total MySQLx connections                                             | status                            | Sum  |
+| mysql.opened_resources            | Total opened resources                                               | kind                              | Sum  |
+| mysql.operations                  | Total operations including fsync, reads and writes                   | operation                         | Sum  |
+| mysql.page_operations             | Total operation on InnoDB pages                                      | operation                         | Sum  |
+| mysql.prepared_statements         | Number of times each type of Prepared statement command got issued   | command                           | Sum  |
+| mysql.row_locks                   | Total InnoDB row locks present                                       | kind                              | Sum  |
+| mysql.row_operations              | Total row operations executed                                        | operation                         | Sum  |
+| mysql.sorts                       | Total MySQL sort execution                                           | kind                              | Sum  |
+| mysql.table.io.wait.count         | Total I/O wait events for a specific table                           | operation, table, schema          | Sum  |
+| mysql.table.io.wait.time          | Total wait time for I/O events for a table                           | operation, table,schema           | Sum  |
+| mysql.threads                     | Current state of MySQL threads                                       | kind                              | Sum  |
+| mysql.tmp_resources               | Number of temporary resources created                                | resource                          | Sum  |
+| mysql.uptime                      | Number of seconds since the server has been up                       | none                              | Sum  |
+| mysql.client.network.io           | Number of transmitted bytes between server and clients               | kind                              | Sum  |
+| mysql.commands                    | Total number of executions for each type of command                  | command                           | Sum  |
+| mysql.connection.count            | Total connection attempts (including successful and failed)          | none                              | Sum  |
+| mysql.connection.errors           | Errors occured during the connections                                | error                             | Sum  |
+| mysql.joins                       | Number of joins that performed table scans                           | kind                              | Sum  |
+| mysql.mysqlx_worker_threads       | Number of available worker threads                                   | kind                              | Sum  |
+| mysql.query.client.count          | Number of statements executed by the server and sent by a client     | none                              | Sum  |
+| mysql.query.count                 | Number of statements executed including the statements ran by system | none                              | Sum  |
+| mysql.query.slow.count            | Number of Slow queries                                               | none                              | Sum  |
+| mysql.replica.sql_delay           | Lag in seconds for the replica compared to source                    | none                              | Sum  |
+| mysql.replica.time_behind_source  | Delay in replication                                                 | none                              | Sum  |
+| mysql.statement_event.count       | Summary of current and recent events                                 | schema, digest, digest_text, kind | Sum  |
+| mysql.statement_event.wait.time   | Total Wait time for the summarized timed events                      | schema, digest, digest_text       | Sum  |
+| mysql.table.lock_wait.read.count  | Total table lock wait read events                                    | schema, table,kind                | Sum  |
+| mysql.table.lock_wait.read.time   | Total table lock wait time for read events                           | schema, table, kind               | Sum  |
+| mysql.table.lock_wait.write.count | Total table lock wait read events                                    | schema, table, kind               | Sum  |
+| mysql.table.lock_wait.write.time  | Total table lock wait time for write events                          | schema, table, kind               | Sum  |
+| mysql.table_open_cache            | Number of hits, misses or overflows for open tables cache lookups    | status                            | Sum  |
 
-**Note:** Some of the above metrics are specific to the Enterprise edition of MySQL and would not be available in this exercise. 
+**Note:** Some of the above metrics are specific to the Enterprise edition of MySQL and would not be available in this exercise.
 
 ## Conclusion
 
-In this tutorial, you configured an OpenTelemetry collector to fetch metrics from the MySQL database and visualize them using SigNoz Cloud. You also learned about the variety of MySQL metrics that are available for monitoring. 
+In this tutorial, you configured an OpenTelemetry collector to fetch metrics from the MySQL database and visualize them using SigNoz Cloud. You also learned about the variety of MySQL metrics that are available for monitoring.
 
 Visit our [complete guide](https://signoz.io/blog/opentelemetry-collector-complete-guide/) on OpenTelemetry Collector to learn more about it. OpenTelemetry is quietly becoming the world standard for open-source observability, and by using it, you can have advantages like a single standard for all telemetry signals, no vendor lock-in, etc.
 

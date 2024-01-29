@@ -20,7 +20,7 @@ keywords:
 
 import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 
-This guide covers key metrics important for efficiently monitoring RabbitMQ. We will also talk about in-built RabbitMQ monitoring tools with which you can start monitoring your RabbitMQ instances. 
+This guide covers key metrics important for efficiently monitoring RabbitMQ. We will also talk about in-built RabbitMQ monitoring tools with which you can start monitoring your RabbitMQ instances.
 
 <!--truncate-->
 
@@ -48,7 +48,7 @@ Furthermore, RabbitMQ can scale horizontally to handle high volumes of messages 
 
 ### Important RabbitMQ Terms
 
-A node in RabbitMQ typically refers to an individual instance of a RabbitMQ message broker that runs on a single server or machine within a RabbitMQ cluster. Each RabbitMQ node is a self-contained installation of the RabbitMQ server software and functions independently. 
+A node in RabbitMQ typically refers to an individual instance of a RabbitMQ message broker that runs on a single server or machine within a RabbitMQ cluster. Each RabbitMQ node is a self-contained installation of the RabbitMQ server software and functions independently.
 
 Nodes within a RabbitMQ cluster work together to distribute and manage queues, exchanges, and messages. A RabbitMQ cluster can consist of multiple nodes, and each node in the cluster has a unique name or identifier.
 
@@ -58,14 +58,13 @@ Imagine a fleet of delivery trucks crisscrossing a bustling city, carrying vital
 
 RabbitMQ is designed to be highly scalable, which means it can handle a large volume of messages. With the increase in messages, nearly 100% availability becomes necessary for the system. To ensure that, we need to monitor and analyze the behavior of our RabbitMQ instance.
 
-
 [Tutorial on how to monitor RabbitMQ with OpenTelemetry](https://signoz.io/blog/opentelemetry-rabbitmq-metrics-monitoring/)
 
 ### In-Built Monitoring Tools
 
 RabbitMQ comes with an in-built management monitoring tool that comes with a Web UI as well as an HTTP API to collect the metrics. To enable the management tool in your cluster, you just need to execute the following command.
 
-**CLI Command :** 
+**CLI Command :**
 
 ```bash
 rabbitmq-plugins enable rabbitmq_management
@@ -76,11 +75,9 @@ rabbitmq-plugins enable rabbitmq_management
     <figcaption><i>UI Management Dashboard.</i></figcaption>
 </figure>
 
+It will enable the management dashboard on the path - _http://SERVER-IP:15672_
 
-
-It will enable the management dashboard on the path - *http://SERVER-IP:15672*
-
-& API on the path - *http://SERVER-IP:15672/api*
+& API on the path - _http://SERVER-IP:15672/api_
 
 ```bash
 curl -u {username}:{password} {hostname}:15672/api/overview
@@ -95,7 +92,7 @@ To overcome these shortcomings, you can use a centralized monitoring tool like [
 
 ## Key RabbitMQ Metrics to Monitor with In-Built Monitoring Tools
 
-We can divide the key RabbitMQ metrics to monitor into four sections - 
+We can divide the key RabbitMQ metrics to monitor into four sections -
 
 - Operational
 - Latency and Reliability
@@ -110,20 +107,18 @@ We can divide the key RabbitMQ metrics to monitor into four sections -
 
 Queue length measures the number of messages waiting in a queue at any given time. High queue lengths can indicate backlogs. You can either access queue metrics in the web-based management interface, or you can build your own system through HTTP requests to endpoints like `/api/queues` to retrieve queue statistics, including message counts.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/10/rabbitmq-queues.webp" alt="UI Interface - Queues."/>
     <figcaption><i>UI Interface - Queues.</i></figcaption>
 </figure>
 
-
 #### 2. Node Resource Utilization
 
-Monitoring CPU, memory, and disk usage on RabbitMQ nodes helps maintain their health and prevents resource exhaustion. You can either check the "Nodes" section in the web-based interface or programmatically through API **`/api/nodes`.** 
+Monitoring CPU, memory, and disk usage on RabbitMQ nodes helps maintain their health and prevents resource exhaustion. You can either check the "Nodes" section in the web-based interface or programmatically through API **`/api/nodes`.**
 
 This provides an overview of resource consumption. It includes params like File descriptors, Socket descriptors, Memory, Disk space, and Erlang processes with values such as used and max available.
 
-RabbitMQ nodes consume varying amounts of memory and disk space, and resource usage can reach critical levels. If memory is exhausted, the operating system's "OOM killer" may terminate the node, while low disk space can impair internal operations. 
+RabbitMQ nodes consume varying amounts of memory and disk space, and resource usage can reach critical levels. If memory is exhausted, the operating system's "OOM killer" may terminate the node, while low disk space can impair internal operations.
 
 To prevent these scenarios, RabbitMQ uses resource watermarks(refer to the screenshot attached) to block connections that publish messages when memory or disk space reaches critical thresholds. Connections that publish messages are blocked, preventing system instability, while connections that only consume messages remain unaffected.
 
@@ -133,7 +128,6 @@ This blocking state is visible within the built-in monitoring tools; however, th
     <img src="/img/blog/2023/10/rabbitmq-node.webp" alt="UI Interface - Nodes Section."/>
     <figcaption><i>UI Interface - Nodes Section.</i></figcaption>
 </figure>
-
 
 #### 3. Connection Metrics
 
@@ -145,22 +139,20 @@ These metrics track the state and activity of client connections, including
 
 **Heartbeat Failures -** Heartbeats are essential for maintaining the connection's health. Frequent heartbeat failures suggest communication problems between clients and the RabbitMQ server. Monitoring this metric is crucial for ensuring reliable connections.
 
-You can either check the "Connections" tab in the web-based interface or programmatically through API **`/api/connections`.** 
+You can either check the "Connections" tab in the web-based interface or programmatically through API **`/api/connections`.**
 
 API furnishes connection information, covering aspects like state, heartbeat, publish rate, subscription rate, and whatnot. However, it's the user's responsibility to establish alerting mechanisms for tracking rising connection numbers and identifying connection failures. A centralized monitoring tool like [SigNoz](https://signoz.io/) can help you set up alerts on critical RabbitMQ metrics.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/10/rabbitmq-connection-details.webp" alt="UI Interface - Connections Details."/>
     <figcaption><i>UI Interface - Connections Details.</i></figcaption>
 </figure>
 
-
 ### Latency and Reliability
 
 #### 1. Message Latency
 
-Message latency, in simpler terms, gauges the time it actually takes for a message to make its journey from the producer, the one who sent it, to the consumer, the one meant to receive it. 
+Message latency, in simpler terms, gauges the time it actually takes for a message to make its journey from the producer, the one who sent it, to the consumer, the one meant to receive it.
 
 To monitor message latency, you can set up custom metrics using native RabbitMQ tools. You will need to calculate message latency by comparing the time a message spends in the "Ready" state to its time in the "Unacknowledged" state. This helps you assess the efficiency of message processing in your RabbitMQ system.
 
@@ -168,20 +160,18 @@ Or with custom monitoring, you can create timestamp fields in your messages or u
 
 #### 2. Queue Depth
 
-Queue depth is essentially a measure of how many messages are currently piled up in a queue. This count includes all messages, whether they're ready to be processed or still awaiting acknowledgment. 
+Queue depth is essentially a measure of how many messages are currently piled up in a queue. This count includes all messages, whether they're ready to be processed or still awaiting acknowledgment.
 
 RabbitMQ's native tools, such as the management plugin or Management API, allow you to view queue depths for all your queues. The "Queue" section of the web interface provides insights into individual queue depths, while the `/api/queues` endpoint in the Management API offers programmatic access.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/10/rabbitmq-queues-2.webp" alt="UI Interface - Queues."/>
     <figcaption><i>UI Interface - Queues.</i></figcaption>
 </figure>
 
-
 #### 3. Message Acknowledgment Times
 
-Acknowledgment times represent how long it takes for messages to be acknowledged by consumers after being delivered. Utilize RabbitMQ's built-in management plugin or Management API to access message acknowledgment times. 
+Acknowledgment times represent how long it takes for messages to be acknowledged by consumers after being delivered. Utilize RabbitMQ's built-in management plugin or Management API to access message acknowledgment times.
 
 Examine acknowledgment rates within the "Queue" section of the web-based management interface or the `/api/queues` endpoint through the Management API.
 
@@ -189,7 +179,6 @@ Examine acknowledgment rates within the "Queue" section of the web-based managem
     <img src="/img/blog/2023/10/rabbitm1-queue-stat.webp" alt="UI Interface - Queues Stats."/>
     <figcaption><i>UI Interface - Queues Stats.</i></figcaption>
 </figure>
-
 
 ### System Health
 
@@ -206,9 +195,9 @@ $ df -h
 
 #### 2. Fault Tolerance
 
-In the world of computing systems, you can’t ensure that something bad will not happen. So you must prepare your systems to be prepared as much as you can. 
+In the world of computing systems, you can’t ensure that something bad will not happen. So you must prepare your systems to be prepared as much as you can.
 
-Just imagine you're watching a gymnast perform incredible flips and somersaults on a balance beam. You're in awe of their skill and precision, but what's truly remarkable is their ability to recover when they stumble or make a minor mistake. 
+Just imagine you're watching a gymnast perform incredible flips and somersaults on a balance beam. You're in awe of their skill and precision, but what's truly remarkable is their ability to recover when they stumble or make a minor mistake.
 
 It can gracefully handle errors and mishaps without causing a complete breakdown. Replication, clustering, and backup servers are some of the ways to make your system fault-proof and avoid the doom’s day.
 
@@ -245,6 +234,7 @@ SigNoz is a full-stack application performance monitoring tool that can be used 
 <GetStartedSigNoz />
 
 ---
+
 ## Further Reading
 
 - [How To Monitor RabbitMQ Metrics With OpenTelemetry](https://signoz.io/blog/opentelemetry-rabbitmq-metrics-monitoring/)

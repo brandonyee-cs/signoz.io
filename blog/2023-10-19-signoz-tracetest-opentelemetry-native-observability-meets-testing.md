@@ -20,9 +20,10 @@ keywords:
 </head>
 
 What is the hidden potential of <a href = "https://opentelemetry.io/" rel="noopener noreferrer nofollow" target="_blank">OpenTelemetry</a>? It goes a lot further than the (awesome) application of tracing and monitoring your software. The OpenTelemetry project is an attempt to standardize how performance is reported **and** how trace data is passed around your microservice architecture. This context propagation is a superpower for those who adopt OpenTelemetry tracing. Tracetest promises to make this deep tracing a huge new asset in your testing landscape, and SigNoz helps all engineers get insight into what OpenTelemetry can see.
-<!--truncate-->
-![Cover Image](/img/blog/2023/10/signoz-tracetest-cover.webp)
 
+<!--truncate-->
+
+![Cover Image](/img/blog/2023/10/signoz-tracetest-cover.webp)
 
 > _Check out this [hands-on Demo example](https://github.com/kubeshop/tracetest/tree/main/examples/tracetest-signoz-pokeshop) of how Tracetest works with SigNoz! Or, if you like watching videos more, view a [demo of Tracetest in the SigNoz Community call](https://www.youtube.com/watch?v=a4OpEPoQTaE)._
 
@@ -34,14 +35,14 @@ It collects data using OpenTelemetry, an open-source observability solution. Ope
 
 With SigNoz, you can:
 
-* Visualize Traces, Metrics, and Logs in a single pane of glass.
-* Monitor application metrics like p99 latency, error rates for your services, external API calls, and individual endpoints.
-* Find the root cause of the problem by going to the exact traces that are causing the problem and see detailed flame graphs of individual request traces.
-* Run aggregates on trace data to get business-relevant metrics.
-* Filter and query logs, build dashboards and alerts based on attributes in logs.
-* Monitor infrastructure metrics such as CPU utilization or memory usage.
-* Record exceptions automatically in Python, Java, Ruby, and Javascript.
-* Easily set alerts with DIY query builder.
+- Visualize Traces, Metrics, and Logs in a single pane of glass.
+- Monitor application metrics like p99 latency, error rates for your services, external API calls, and individual endpoints.
+- Find the root cause of the problem by going to the exact traces that are causing the problem and see detailed flame graphs of individual request traces.
+- Run aggregates on trace data to get business-relevant metrics.
+- Filter and query logs, build dashboards and alerts based on attributes in logs.
+- Monitor infrastructure metrics such as CPU utilization or memory usage.
+- Record exceptions automatically in Python, Java, Ruby, and Javascript.
+- Easily set alerts with DIY query builder.
 
 ## What is Tracetest?
 
@@ -51,12 +52,12 @@ Tracetest uses your existing <a href = "https://opentelemetry.io/" rel="noopener
 
 Tracetest makes it possible to:
 
-* <a href = "https://docs.tracetest.io/concepts/assertions" rel="noopener noreferrer nofollow" target="_blank">Define tests and assertions</a> against every single microservice a trace goes through.
-* Build tests based on your already instrumented system.
-* <a href = "https://docs.tracetest.io/analyzer/concepts" rel="noopener noreferrer nofollow" target="_blank">Improve your OpenTelemetry instrumentation</a> by ensuring rules and semantic convention standards are met.
-* Define multiple transaction triggers, such as a GET against an API endpoint, a GRPC request, a [Kafka message queue](https://docs.tracetest.io/examples-tutorials/recipes/testing-kafka-go-api-with-opentelemetry-tracetest), etc.
-* Define assertions against both the response and trace data, ensuring both your response and the underlying processes worked as intended.
-* Save and run the tests manually or via CI build jobs with the Tracetest CLI.
+- <a href = "https://docs.tracetest.io/concepts/assertions" rel="noopener noreferrer nofollow" target="_blank">Define tests and assertions</a> against every single microservice a trace goes through.
+- Build tests based on your already instrumented system.
+- <a href = "https://docs.tracetest.io/analyzer/concepts" rel="noopener noreferrer nofollow" target="_blank">Improve your OpenTelemetry instrumentation</a> by ensuring rules and semantic convention standards are met.
+- Define multiple transaction triggers, such as a GET against an API endpoint, a GRPC request, a [Kafka message queue](https://docs.tracetest.io/examples-tutorials/recipes/testing-kafka-go-api-with-opentelemetry-tracetest), etc.
+- Define assertions against both the response and trace data, ensuring both your response and the underlying processes worked as intended.
+- Save and run the tests manually or via CI build jobs with the Tracetest CLI.
 
 ## Tracetest Now Works with SigNoz!
 
@@ -68,13 +69,11 @@ If you already have OpenTelemetry instrumentation configured in your code and ar
 <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1697716957/Blogposts/signoz-integration/new/Untitled-2023-05-22-1321_m03lvk.webp" alt="architecture"/>
 <figcaption><i>Image 1: Application architecture.</i></figcaption></figure>
 
-
 When running integration tests, it's hard to pinpoint where an HTTP transaction fails in a network of microservices. Tracetest solves this by letting you run tests with assertions using existing trace data across all services. These tests can then be seamlessly integrated into your CI/CD process to ensure your system works well and to catch any regressions.
 
 <figure data-zoomable align='center'>
 <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1697715804/Blogposts/signoz-integration/new/image_51_ctrfnj.webp" alt="test spec sample"/>
 <figcaption><i>Image 2: In this example, within the Tracetest UI you can see that test assertions for trace spans succeeded.</i></figcaption></figure>
-
 
 Elevate your testing approach by harnessing Tracetest for test creation and SigNoz for analyzing test results. SigNoz empowers you to monitor test executions, establish connections between relevant services across different time frames and gain valuable perspectives on system performance. This combination enables you to understand system behavior, gives you insights into system performance and highlights the impact of changes on performance.
 
@@ -82,13 +81,11 @@ Elevate your testing approach by harnessing Tracetest for test creation and SigN
 <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1697715804/Blogposts/signoz-integration/new/image_52_hqyisz.webp" alt="tracetest tests triggered and visualized in signoz"/>
 <figcaption><i>Image 3: Traces triggered by Tracetest surfaced in SigNoz.</i></figcaption></figure>
 
-
 When using Tracetest, you can find problems by checking trace data over time in SigNoz. Any problems you encounter can become new tests or points to check in Tracetest. This gives you a quick feedback loop for continuous improvement.
 
 <figure data-zoomable align='center'>
 <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1697715807/Blogposts/signoz-integration/new/image_53_ms9rcw.webp" alt="Image 4: Here you see a trace drilldown of a test in the SigNoz front end."/>
 <figcaption><i>Image 4: Here you see a trace drilldown of a test in the SigNoz front end.</i></figcaption></figure>
-
 
 ## Try Tracetest with SigNoz
 
@@ -105,7 +102,6 @@ From here, follow the [official documentation](https://docs.tracetest.io/getting
 <figure data-zoomable align='center'>
 <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1697715806/Blogposts/signoz-integration/new/image_54_ymupdj.webp" alt="Image 5: Selecting SigNoz in the Tracetest settings."/>
 <figcaption><i>Image 5: Selecting SigNoz in the Tracetest settings.</i></figcaption></figure>
-
 
 The <a href = "https://opentelemetry.io/docs/collector/" rel="noopener noreferrer nofollow" target="_blank">Collector</a> is the recommended way to send OpenTelemetry data to an observability back-end. It is a highly configurable binary that allows you to ingest, process, and export OpenTelemetry data.
 
@@ -175,7 +171,6 @@ This will trigger the test and display a distributed trace in the Trace tab. You
 <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1697715808/Blogposts/signoz-integration/new/image_55_mk5mi1.webp" alt="Image 6: Trace Analyzer in the Tracetest Web UI. Validate the quality of the code instrumentation."/>
 <figcaption><i>Image 6: Trace Analyzer in the Tracetest Web UI. Validate the quality of the code instrumentation.</i></figcaption></figure>
 
-
 Proceed to add a test spec to assert that all HTTP requests return status code 200. Click the Test tab and proceed to click the Add Test Spec button.
 
 In the span selector, add this selector:
@@ -189,7 +184,7 @@ It will select the HTTP spans.
 In the assertion field, add:
 
 ```css
-attr:http.status_code = 200
+attr: http.status_code = 200;
 ```
 
 Save the test spec and publish the test.
@@ -197,7 +192,6 @@ Save the test spec and publish the test.
 <figure data-zoomable align='center'>
 <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1697715808/Blogposts/signoz-integration/new/image_56_rua1fi.webp" alt="Image 7: Adding assertions to a test in the Tracetest Web UI."/>
 <figcaption><i>Image 7: Adding assertions to a test in the Tracetest Web UI.</i></figcaption></figure>
-
 
 If an HTTP span is returning anything other than a 200 status code it will be labeled in red. This is an example of a trace-based test that can assert against every single part of an HTTP transaction, including Kafka streams, and external API calls. (See image 2)
 
@@ -213,13 +207,11 @@ Data in the Tracetest service will give you insight into every test run. Start b
 <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1697715807/Blogposts/signoz-integration/new/image_57_lzugvy.webp" alt="Image 8: Filter “Tracetest trigger” traces."/>
 <figcaption><i>Image 8: Filter “Tracetest trigger” traces.</i></figcaption></figure>
 
-
 The distributed traces chart will be filtered and display performance over time.
 
 <figure data-zoomable align='center'>
 <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1697715805/Blogposts/signoz-integration/new/image_58_tlqtqa.webp" alt="Image 9: Show the results of the filter above. View the chart to see performance and select a distinct trace to drill down."/>
 <figcaption><i>Image 9: Show the results of the filter above. View the chart to see performance and select a distinct trace to drill down.</i></figcaption></figure>
-
 
 From here, you can drill down into the specific trace to troubleshoot. Open the **Tracetest trigger** trace. Choose a trace that is slow. Once open, the trace waterfall within SigNoz can help you pinpoint exactly which span is causing an issue. (Shown in Image 4, above)
 

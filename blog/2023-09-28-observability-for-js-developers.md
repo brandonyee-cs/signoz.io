@@ -20,9 +20,10 @@ keywords:
 
 ## Why Observability Matters to JS Developers
 
-”Isn’t Observability something for Ops to worry about?” I’ve heard this response more than once when talking about how developers should learn OpenTelemetry. I wanted to write this piece to show you how important *and* how easy it is to learn observability from day one as a coder. We’ll start with explaining observability’s role in software development, and the second half of this piece is a guide to instrumenting a demo app with the open source tools OpenTelemetry and SigNoz.
+”Isn’t Observability something for Ops to worry about?” I’ve heard this response more than once when talking about how developers should learn OpenTelemetry. I wanted to write this piece to show you how important _and_ how easy it is to learn observability from day one as a coder. We’ll start with explaining observability’s role in software development, and the second half of this piece is a guide to instrumenting a demo app with the open source tools OpenTelemetry and SigNoz.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/09/js-otel-cover.webp)
 
 ### Feeling it out: we need observability to write code
@@ -34,7 +35,7 @@ How do we code now? Specifically, what’s the ratio of writing code to running 
     <figcaption><i>You think vim was old school, imagine writing code here</i></figcaption>
 </figure>
 
-Modern developers… don’t work like that. For most of us, the second we hit cmd + s on our file, our code is run in a local development environment. When working in a new codebase I often find myself ‘feeling my way through’ a coding problem: trying small changes in series, making sure little steps compile and run correctly, and changing no more than 5-10 lines of code before seeing it run. 
+Modern developers… don’t work like that. For most of us, the second we hit cmd + s on our file, our code is run in a local development environment. When working in a new codebase I often find myself ‘feeling my way through’ a coding problem: trying small changes in series, making sure little steps compile and run correctly, and changing no more than 5-10 lines of code before seeing it run.
 
 This is how modern development works, and its why you can’t release production code without observability. No one would claim that you could practically write code without a linter, logging, or debugger; it would be like driving a car with a blindfold. However, astoundingly, when we release code from our dev environment to production we often find ourselves in the dark with very limited information about how our code is worse.
 
@@ -51,14 +52,14 @@ There are some key skills that all developers need that are outside of coding. I
 
 In the last five years a few key skills have been added to the list:
 
-- Running a container on your machine - have you seen a cool open source project that *wasn’t* distributed as a docker image?
+- Running a container on your machine - have you seen a cool open source project that _wasn’t_ distributed as a docker image?
 - How to deploy your code - I remember when my work was done once code was merged to `main` on GitHub. Now, from Netlify to Dockerhub, developers have had to understand how their code goes from ‘works on my machine’ to ‘running in production
 - Security Best Practices - everything from 2fa to software supply chains are something every developer should understand
 - Observability - The topic of this article. While logging and even debugging were afterthoughts a few years ago, now we expect competent developers to bake in observability features right from the start
 
 Something that’s true about all four points above is, in any large software team, none of these areas will be handled entirely by you, a lone developer. As you increase your skills, understanding these areas will help you ship clean code that gets deployed fast and is easy to maintain. Observability is part of that story.
 
-Another common thread connects the four points above: as you learn programming all of these skills can be hard to run on a laptop by yourself. Without an operations team to support you it can be tough to learn the right way to run containers, secure your code, and observe running software. 
+Another common thread connects the four points above: as you learn programming all of these skills can be hard to run on a laptop by yourself. Without an operations team to support you it can be tough to learn the right way to run containers, secure your code, and observe running software.
 
 ### Observability as a team of one can be easy
 
@@ -78,47 +79,46 @@ Start by creating a new directory with `mkdir` and initializing a `package.json`
 npm init -y
 ```
 
-Then install Express with 
+Then install Express with
 
 ```bash
 npm install express
 ```
 
-Now let’s make our dice rolling app. 
+Now let’s make our dice rolling app.
 
 ```js
 /*app.js*/
-const express = require('express');
-const PORT = parseInt(process.env.PORT || '8080');
+const express = require("express");
+const PORT = parseInt(process.env.PORT || "8080");
 const app = express();
 
 function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 function rollTheDice(rolls, min, max) {
-    const result = [];
-    for (let i = 0; i < rolls; i++) {
-        result.push(getRandomNumber(min, max));
-    }
-    return result;
-
+  const result = [];
+  for (let i = 0; i < rolls; i++) {
+    result.push(getRandomNumber(min, max));
+  }
+  return result;
 }
 
-app.get('/rolldice', (req, res) => {
-    console.log('rolling dice')
-    const rolls = req.query.rolls ? parseInt(req.query.rolls.toString()) : NaN;
-    if (isNaN(rolls)) {
-        res
-            .status(400)
-            .send("Request parameter 'rolls' is missing or not a number.");
-        return;
-    }
-    res.send(JSON.stringify(rollTheDice(rolls, 1, 6)));
+app.get("/rolldice", (req, res) => {
+  console.log("rolling dice");
+  const rolls = req.query.rolls ? parseInt(req.query.rolls.toString()) : NaN;
+  if (isNaN(rolls)) {
+    res
+      .status(400)
+      .send("Request parameter 'rolls' is missing or not a number.");
+    return;
+  }
+  res.send(JSON.stringify(rollTheDice(rolls, 1, 6)));
 });
 
 app.listen(PORT, () => {
-    console.log(`Listening for requests on http://localhost:${PORT}`);
+  console.log(`Listening for requests on http://localhost:${PORT}`);
 });
 ```
 
@@ -148,15 +148,15 @@ Next we’ll create an instrumentation file that will instruct our automatic ins
 ```js
 /*instrumentation.js*/
 // Require dependencies
-const { NodeSDK } = require('@opentelemetry/sdk-node');
-const { ConsoleSpanExporter } = require('@opentelemetry/sdk-trace-node');
+const { NodeSDK } = require("@opentelemetry/sdk-node");
+const { ConsoleSpanExporter } = require("@opentelemetry/sdk-trace-node");
 const {
   getNodeAutoInstrumentations,
-} = require('@opentelemetry/auto-instrumentations-node');
+} = require("@opentelemetry/auto-instrumentations-node");
 const {
   PeriodicExportingMetricReader,
   ConsoleMetricExporter,
-} = require('@opentelemetry/sdk-metrics');
+} = require("@opentelemetry/sdk-metrics");
 
 const sdk = new NodeSDK({
   traceExporter: new ConsoleSpanExporter(),
@@ -183,35 +183,35 @@ Once you run your dice roller app and send it a request, you should get large am
 
 ```json
 {
-  traceId: '770e3ec56b4e75bb5dda2083994e755f',
-  parentId: undefined,
-  traceState: undefined,
-  name: 'GET /rolldice',
-  id: 'd410de7ac1d353b0',
-  kind: 1,
-  timestamp: 1695705076935000,
-  duration: 5649.458,
-  attributes: {
-    'http.url': 'http://localhost:8080/rolldice?rolls=3',
-    'http.host': 'localhost:8080',
-    'net.host.name': 'localhost',
-    'http.method': 'GET',
-    'http.scheme': 'http',
-    'http.target': '/rolldice?rolls=3',
-    'http.user_agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
-    'http.flavor': '1.1',
-    'net.transport': 'ip_tcp',
-    'net.host.ip': '::1',
-    'net.host.port': 8080,
-    'net.peer.ip': '::1',
-    'net.peer.port': 59101,
-    'http.status_code': 200,
-    'http.status_text': 'OK',
-    'http.route': '/rolldice'
+  "traceId": "770e3ec56b4e75bb5dda2083994e755f",
+  "parentId": undefined,
+  "traceState": undefined,
+  "name": "GET /rolldice",
+  "id": "d410de7ac1d353b0",
+  "kind": 1,
+  "timestamp": 1695705076935000,
+  "duration": 5649.458,
+  "attributes": {
+    "http.url": "http://localhost:8080/rolldice?rolls=3",
+    "http.host": "localhost:8080",
+    "net.host.name": "localhost",
+    "http.method": "GET",
+    "http.scheme": "http",
+    "http.target": "/rolldice?rolls=3",
+    "http.user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+    "http.flavor": "1.1",
+    "net.transport": "ip_tcp",
+    "net.host.ip": "::1",
+    "net.host.port": 8080,
+    "net.peer.ip": "::1",
+    "net.peer.port": 59101,
+    "http.status_code": 200,
+    "http.status_text": "OK",
+    "http.route": "/rolldice"
   },
-  status: { code: 0 },
-  events: [],
-  links: []
+  "status": { "code": 0 },
+  "events": [],
+  "links": []
 }
 ```
 
@@ -237,36 +237,36 @@ You’ll want to set the `exporterOptions:url` and `SemanticResourceAttributes.S
 
 ```js
 // tracing.js
-'use strict';
-const process = require('process');
-const opentelemetry = require('@opentelemetry/sdk-node');
+"use strict";
+const process = require("process");
+const opentelemetry = require("@opentelemetry/sdk-node");
 const {
-	getNodeAutoInstrumentations,
-} = require('@opentelemetry/auto-instrumentations-node');
+  getNodeAutoInstrumentations,
+} = require("@opentelemetry/auto-instrumentations-node");
 const {
-	OTLPTraceExporter,
-} = require('@opentelemetry/exporter-trace-otlp-http');
-const { Resource } = require('@opentelemetry/resources');
+  OTLPTraceExporter,
+} = require("@opentelemetry/exporter-trace-otlp-http");
+const { Resource } = require("@opentelemetry/resources");
 const {
-	SemanticResourceAttributes,
-} = require('@opentelemetry/semantic-conventions');
+  SemanticResourceAttributes,
+} = require("@opentelemetry/semantic-conventions");
 
 // do not set headers in exporterOptions, the OTel spec recommends setting headers through ENV variables
 // https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/protocol/exporter.md#specifying-headers-via-environment-variables
 
 const exporterOptions = {
-	url: 'https://ingest.us.signoz.cloud:443/v1/traces',
+  url: "https://ingest.us.signoz.cloud:443/v1/traces",
 };
 
 const traceExporter = new OTLPTraceExporter(exporterOptions);
 const sdk = new opentelemetry.NodeSDK({
-	traceExporter,
-	instrumentations: [getNodeAutoInstrumentations()],
-	resource: new Resource({
-// this service name will show up in the SigNoz ui, name it something descriptive
-// if you're working in a team!
-		[SemanticResourceAttributes.SERVICE_NAME]: 'node_dice_app',
-	}),
+  traceExporter,
+  instrumentations: [getNodeAutoInstrumentations()],
+  resource: new Resource({
+    // this service name will show up in the SigNoz ui, name it something descriptive
+    // if you're working in a team!
+    [SemanticResourceAttributes.SERVICE_NAME]: "node_dice_app",
+  }),
 });
 
 // initialize the SDK and register with the OpenTelemetry API
@@ -274,16 +274,16 @@ const sdk = new opentelemetry.NodeSDK({
 sdk.start();
 
 // gracefully shut down the SDK on process exit
-process.on('SIGTERM', () => {
-	sdk
-		.shutdown()
-		.then(() => console.log('Tracing terminated'))
-		.catch((error) => console.log('Error terminating tracing', error))
-		.finally(() => process.exit(0));
+process.on("SIGTERM", () => {
+  sdk
+    .shutdown()
+    .then(() => console.log("Tracing terminated"))
+    .catch((error) => console.log("Error terminating tracing", error))
+    .finally(() => process.exit(0));
 });
 ```
 
-*NOTE:*  In this simplified first run, our node app will speak directly to the SigNoz servers. This isn’t ideal, to start with because we really shouldn’t be hard-coding anything’s URL. For this tutorial we’re not using an OpenTelemetry Collector. Later articles will cover running this necessary ‘middleman’ between our running code and our metrics back end.
+_NOTE:_ In this simplified first run, our node app will speak directly to the SigNoz servers. This isn’t ideal, to start with because we really shouldn’t be hard-coding anything’s URL. For this tutorial we’re not using an OpenTelemetry Collector. Later articles will cover running this necessary ‘middleman’ between our running code and our metrics back end.
 
 Find your ingestion key in the account setup email, then run our revised app with:
 
@@ -291,7 +291,7 @@ Find your ingestion key in the account setup email, then run our revised app wit
 OTEL_EXPORTER_OTLP_HEADERS="signoz-access-token=<SIGNOZ_INGESTION_KEY>" node --require ./tracing.js app.js
 ```
 
-exercise your application a few times by visiting [`http://localhost:8080/rolldice?rolls=3`](http://localhost:8080/rolldice?rolls=3) a few more times. 
+exercise your application a few times by visiting [`http://localhost:8080/rolldice?rolls=3`](http://localhost:8080/rolldice?rolls=3) a few more times.
 
 If your settings are correct you’ll be able to log into SigNoz and see your first few traces.
 

@@ -22,33 +22,33 @@ import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 Debugging errors in distributed systems can be a challenging task, as it involves tracing the flow of operations across numerous microservices. This complexity often leads to difficulties in pinpointing the root cause of performance issues or errors.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2023/09/observability-spans-cover.webp)
 
-OpenTelemetry provides instrumentation libraries in most programming languages for tracing. 
+OpenTelemetry provides instrumentation libraries in most programming languages for tracing.
 
-Using tracing,  you can break down the operations into smaller parts or pieces by identifying what happened, where, when, and how it happened, along with every other relevant information. This structured approach significantly enhances the effectiveness and efficiency of the debugging process.
+Using tracing, you can break down the operations into smaller parts or pieces by identifying what happened, where, when, and how it happened, along with every other relevant information. This structured approach significantly enhances the effectiveness and efficiency of the debugging process.
 
 This article discusses OpenTelemetry, OpenTelemetry spans, and the processes involved in creating and utilizing them.
 
 ## What is OpenTelemetry?
 
-OpenTelemetry, often abbreviated as Otel, is an open-source observability framework designed to generate, gather, and export telemetry data (logs, metrics, and traces) that can be used to troubleshoot performance issues in applications. 
+OpenTelemetry, often abbreviated as Otel, is an open-source observability framework designed to generate, gather, and export telemetry data (logs, metrics, and traces) that can be used to troubleshoot performance issues in applications.
 
 It is incubated under <a href = "https://www.cncf.io/" rel="noopener noreferrer nofollow" target="_blank" >Cloud Native Computing Foundation</a>, the same foundation that incubated Kubernetes.
 
 OpenTelemetry follows a <a href = "https://opentelemetry.io/docs/specs/otel/" rel="noopener noreferrer nofollow" target="_blank" >specification-driven</a>
  development and provides client libraries to instrument applications in most programming languages. Once you have instrumented with OpenTelemetry, you should be able to collect various telemetry signals like logs, metrics, and traces from it.
 
-OpenTelemetry is also vendor-agnostic and contributes to standardization by allowing data to be exported to a wide range of backend systems and observability platforms, for example, [SigNoz](https://signoz.io/docs/). 
+OpenTelemetry is also vendor-agnostic and contributes to standardization by allowing data to be exported to a wide range of backend systems and observability platforms, for example, [SigNoz](https://signoz.io/docs/).
 
 SigNoz is an OpenTelemetry-native APM that you can use to visualize OpenTelemetry data.
 
 ## What is OpenTelemetry span?
 
-As requests flow through distributed systems, it's important to keep track of how it travels, as this can be useful for monitoring and troubleshooting. 
+As requests flow through distributed systems, it's important to keep track of how it travels, as this can be useful for monitoring and troubleshooting.
 
-Tracing allows you to track the journey of a request as it moves through different services in a distributed environment. It provides a way to understand the flow of operations across these services, making it easier to pinpoint performance issues or errors. 
-
+Tracing allows you to track the journey of a request as it moves through different services in a distributed environment. It provides a way to understand the flow of operations across these services, making it easier to pinpoint performance issues or errors.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/otel-spans.webp" alt="Spans of a trace visualized with the help of flamegraphs and gantt charts in SigNoz dashboard"/>
@@ -61,7 +61,7 @@ Tracing is a fundamental aspect of observability. A trace is a collection of spa
 
 An OpenTelemetry **span** represents a single unit of work within a system. It encapsulates information about a specific operation, including its start time, duration, associated attributes, and any events or errors during its execution.
 
-To illustrate, consider an e-commerce application where customers place orders for products. A **trace** would represent the entire process of a customer's order, from the moment they click "checkout" to the point of order confirmation. 
+To illustrate, consider an e-commerce application where customers place orders for products. A **trace** would represent the entire process of a customer's order, from the moment they click "checkout" to the point of order confirmation.
 
 Within this trace, we have multiple spans, each signifying a crucial step in the order processing. For instance, one span might mark the moment the order was placed, recording when it began, how long it took, and any essential details about the order itself. Another span could denote the payment processing, while another might represent the inventory check. Any noteworthy events or errors, such as a payment failure or a product being out of stock, would be recorded as part of these spans within the trace.
 
@@ -74,17 +74,17 @@ From the illustration of traces and spans, we can liken that to span attributes.
 For example:
 
 1. **Order ID**:
-    - Key: **`order_id`**
-    - Value: **`12345`**
-    - This attribute helps uniquely identify the specific order being processed.
+   - Key: **`order_id`**
+   - Value: **`12345`**
+   - This attribute helps uniquely identify the specific order being processed.
 2. **Payment Method**:
-    - Key: **`payment_method`**
-    - Value: **`Credit Card`**
-    - This attribute indicates the payment method chosen by the customer.
+   - Key: **`payment_method`**
+   - Value: **`Credit Card`**
+   - This attribute indicates the payment method chosen by the customer.
 3. **Inventory Status**:
-    - Key: **`inventory_status`**
-    - Value: **`In Stock`**
-    - This attribute informs whether the product is currently available in the inventory.
+   - Key: **`inventory_status`**
+   - Value: **`In Stock`**
+   - This attribute informs whether the product is currently available in the inventory.
 
 The above can also be written as:
 
@@ -113,13 +113,13 @@ There are two approaches to incorporating tracing with OpenTelemetry: manual and
 
 1. **Manual Instrumentation:**
 
-    In this approach, developers explicitly control creating and managing spans in their code. They determine when spans begin and end, as well as what information is added to them.
+   In this approach, developers explicitly control creating and managing spans in their code. They determine when spans begin and end, as well as what information is added to them.
 
 2. **Automatic Instrumentation:**
 
-    Here, a library or agent is used to trace specific frameworks, libraries, or services automatically. This process occurs without the need for manual intervention. The agents or libraries integrate seamlessly into your application's code, capturing spans effortlessly.
+   Here, a library or agent is used to trace specific frameworks, libraries, or services automatically. This process occurs without the need for manual intervention. The agents or libraries integrate seamlessly into your application's code, capturing spans effortlessly.
 
-We will be looking at how to create a trace using the manual instrumentation technique using Golang. More information can be found in the <a href = "https://opentelemetry.io/docs/instrumentation/go/manual" rel="noopener noreferrer nofollow" target="_blank" >documentation</a> and the implementation for  <a href = "https://opentelemetry.io/docs/instrumentation" rel="noopener noreferrer nofollow" target="_blank" >other languages</a>. 
+We will be looking at how to create a trace using the manual instrumentation technique using Golang. More information can be found in the <a href = "https://opentelemetry.io/docs/instrumentation/go/manual" rel="noopener noreferrer nofollow" target="_blank" >documentation</a> and the implementation for <a href = "https://opentelemetry.io/docs/instrumentation" rel="noopener noreferrer nofollow" target="_blank" >other languages</a>.
 
 ### Creation of Traces
 
@@ -227,7 +227,7 @@ After a span has been completed, it becomes immutable, and any attempt to modify
 
 ### Getting current span
 
-To obtain the current span, you must extract it from a `context.Context` instance that you have a handle on. 
+To obtain the current span, you must extract it from a `context.Context` instance that you have a handle on.
 
 ```jsx
 // This context needs contain the active span you plan to extract.
@@ -271,11 +271,9 @@ Remember that once a span has been completed, it becomes immutable, and any furt
 
 If you’re looking for the right distributed tracing tool that supports OpenTelemetry, then SigNoz is the right choice. SigNoz is an open-source distributed tracing tool that supports OpenTelemetry natively. It also provides metrics monitoring and logs management under a single pane of glass.
 
-One of the key strengths of SigNoz is its native support for OpenTelemetry, which is rapidly emerging as the global standard for application instrumentation. By adopting OpenTelemetry, users can avoid vendor lock-in and gain access to a set of convenient client libraries that streamline the implementation of distributed tracing. 
+One of the key strengths of SigNoz is its native support for OpenTelemetry, which is rapidly emerging as the global standard for application instrumentation. By adopting OpenTelemetry, users can avoid vendor lock-in and gain access to a set of convenient client libraries that streamline the implementation of distributed tracing.
 
 With SigNoz's support for OpenTelemetry, users can easily integrate their applications with SigNoz's observability platform, enabling them to gain deeper insights into their applications and improve their overall performance.
-
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_charts_application_metrics.webp" alt="An OpenTelemetry backend built natively for OpenTelemetry, SigNoz provides out-of-box charts for application metrics"/>
@@ -284,11 +282,9 @@ With SigNoz's support for OpenTelemetry, users can easily integrate their applic
 
 <br/>
 
-One of the standout features of SigNoz is its intuitive visualization capabilities. It enables users to generate insightful visual representations like flamegraphs and Gantt charts based on the tracing data collected through OpenTelemetry. 
+One of the standout features of SigNoz is its intuitive visualization capabilities. It enables users to generate insightful visual representations like flamegraphs and Gantt charts based on the tracing data collected through OpenTelemetry.
 
 These visualizations provide valuable insights into the performance and behavior of applications, making troubleshooting and performance optimization significantly more efficient.
-
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_flamegraphs.webp" alt="Spans of a trace visualized with the help of flamegraphs and gantt charts in SigNoz dashboard"/>
@@ -300,7 +296,6 @@ These visualizations provide valuable insights into the performance and behavior
 ### Getting started with SigNoz
 
 <GetStartedSigNoz />
-
 
 ---
 

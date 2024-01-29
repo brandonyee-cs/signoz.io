@@ -6,7 +6,7 @@ tags: [APM, Security]
 authors: [ankit_anand]
 description: RBI has issued guidelines on storing payment system data of Indian users for fintech companies in India. All user data needs to be stored in India. This also applies to all third-party tools they use, including monitoring tools..
 image: /img/blog/2023/04/challenges_in_choosing_APM_tool_cover-min.jpg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - application performance monitoring
   - apm tool
@@ -15,6 +15,7 @@ keywords:
   - data storage
   - signoz
 ---
+
 <head>
   <link rel="canonical" href="https://signoz.io/blog/challenges-in-choosing-a-monitoring-tool-for-fintech-companies-in-india/"/>
 </head>
@@ -72,7 +73,6 @@ The circular is applicable to the following entities:
 - System participants, service providers, intermediaries, payment gateways, third-party vendors, and other entities, whatever name they are referred to in the payment ecosystem
 
 > Note: The subtle mention of `other entities whatever name they are referred`. A fintech company should be careful in the selection of its third-party services.
-> 
 
 :::caution
 💡 What happens in case of non-compliance?<br></br>
@@ -87,12 +87,12 @@ And according to the circular, the following data needs to be stored in India:
 
 - End-to-end transaction details
 - Data related to payment or settlement transaction that is gathered/transmitted/processed as part of the payment message/instruction. This might include:
-    - Customer Data (name, mobile number, email, Aadhar number, PAN number, etc. as applicable)
-    - Payment sensitive data (customer and beneficiary account details)
-    - Payment credentials (OTP, pin, passwords, etc.)
-    - Transaction data (originating and destination system information, transaction reference, timestamp, amount, etc.)
+  - Customer Data (name, mobile number, email, Aadhar number, PAN number, etc. as applicable)
+  - Payment sensitive data (customer and beneficiary account details)
+  - Payment credentials (OTP, pin, passwords, etc.)
+  - Transaction data (originating and destination system information, transaction reference, timestamp, amount, etc.)
 
-:::note    
+:::note  
 The list can get updated by RBI, and the definition of payment systems data might evolve.
 :::
 
@@ -102,8 +102,7 @@ The list can get updated by RBI, and the definition of payment systems data migh
    src="/img/blog/2022/02/user_data.webp"
    title="Snippet of original notification from RBI. Their wordings indicate that they can identify and classify new data under this purview"
    width={700}
-/> 
-    
+/>
 
 ### About System Audit Report
 
@@ -175,7 +174,6 @@ Most of these tools solve a particular use-case, e.g., Prometheus is used for me
    title="Depending on the use-cases, these tools can take a good amount of bandwidth to set up (Source:reddit)"
    width={700}
 />](https://www.reddit.com/r/devops/comments/o56csn/why_use_datadog_when_it_is_so_expensive/)
-
 
 [<Screenshot
    alt="Complexity of maintaining popular open-source tools increases with scale"

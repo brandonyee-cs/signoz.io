@@ -6,9 +6,9 @@ tags: [OpenTelemetry]
 authors: nicamellifera
 description: Should you send your OpenTelemetry data to a generic database or use a specific tool. In this post, I discuss about pros and cons of building your own OpenTelemetry stack...
 image: /img/blog/2023/07/diy_otel_cover-min.jpg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
- - OpenTelemetry
+  - OpenTelemetry
 ---
 
 <head>
@@ -47,17 +47,17 @@ I don’t really need to hammer on the reasons to use a purpose-built tool, but 
 
 > Let's assume you need a team of 5 people to design, run, support, and improve a Prometheus at scale (at least 1000 instances/servers/containers across used by multiple teams) for you on an average salary of £40,000/year, and that you need to spend an additional £250/person in training, along with internal charge-backs of around £2500/month for the infrastructure:
 
-> Annual Salary: £40,000 * 5 = £200,000
+> Annual Salary: £40,000 \* 5 = £200,000
 
-> Annual Hosting: £2,500 * 12 = £30,000
+> Annual Hosting: £2,500 \* 12 = £30,000
 
-> First Year Training Costs: £250 * 5 = £1,250
+> First Year Training Costs: £250 \* 5 = £1,250
 
 > Total First Year Costs: £231,250
 
 > Ongoing Annual Costs: £230,000
 
-Quite the cost for a free tool! 
+Quite the cost for a free tool!
 
 Notably: if you’re a very large team of developers, this actually might make sense. If observability problems are causing major crises for Operations, and you have reason to beleive that your problems are unique, maybe it’s worth a quarter million pounds per annum to fix. For most of us though: we should either buy a tool or find the right FOSS product.
 
@@ -67,16 +67,16 @@ Reading so far, it seems like the agreement is universal: you should never ever 
 
 > This is a very common usecase. Send to a vendor or OSS backend to have the analysis features for production observability, then push to something like S3 and use athena for auditing and other types of querying that doesn't need really fast querying and visualisations […] I used to put trace data into redshift years ago to look at search data for trend/performance analysis over 12 months.
 
-Here we see one of the superpowers of OpenTelemetry. With the OTel Collector you can send data almost anywhere, even sending copies to multiple endpoints. And there will always be ways that an out-of-the-box observability tool doesn’t do all the analysis you want. Martin makes a strong point that while you shouldn’t use your own DB for *all* your observability, it’s a good tool to keep in your quiver.
+Here we see one of the superpowers of OpenTelemetry. With the OTel Collector you can send data almost anywhere, even sending copies to multiple endpoints. And there will always be ways that an out-of-the-box observability tool doesn’t do all the analysis you want. Martin makes a strong point that while you shouldn’t use your own DB for _all_ your observability, it’s a good tool to keep in your quiver.
 
 ## A hybrid option: SaaS for prod, local for dev
 
-This ability to route OpenTelemetry data to multiple endpoints: using self hosted tools for your development and QA environments, with a SaaS offering for your data from production. There are some definite advantages to this approach, firstly for production. We often need our production observability data to be shared across a large team. Everyone from Support to Sales might want to do a quick check of the system health. So a SaaS tool that works from anywhere is appealing. We also generally need observability data from production to be bulletproof: we don’t want a system outage to *also* disable the thing that alerts us of outages! So a SaaS tool can definitely be tempting for monitoring prod.
+This ability to route OpenTelemetry data to multiple endpoints: using self hosted tools for your development and QA environments, with a SaaS offering for your data from production. There are some definite advantages to this approach, firstly for production. We often need our production observability data to be shared across a large team. Everyone from Support to Sales might want to do a quick check of the system health. So a SaaS tool that works from anywhere is appealing. We also generally need observability data from production to be bulletproof: we don’t want a system outage to _also_ disable the thing that alerts us of outages! So a SaaS tool can definitely be tempting for monitoring prod.
 
-In our dev and QA space, the situation is largely reversed: we have a smaller number of people who need access, anyone with access is also able to access a small controlled network, and it is probably okay if the system sometimes fails. One final advantage is the experimentation that self-hosted observability allows. If we let our developers and operations engineer try out changes to our observability setup ****and**** control the observability backend, they’ll have greater ownership of the process. This can lead us to improvements in our developer experience, largely ‘for free’ just by enabling our teams to experiment with their monitoring.
+In our dev and QA space, the situation is largely reversed: we have a smaller number of people who need access, anyone with access is also able to access a small controlled network, and it is probably okay if the system sometimes fails. One final advantage is the experimentation that self-hosted observability allows. If we let our developers and operations engineer try out changes to our observability setup \***\*and\*\*** control the observability backend, they’ll have greater ownership of the process. This can lead us to improvements in our developer experience, largely ‘for free’ just by enabling our teams to experiment with their monitoring.
 
 ## Open source options can help!
 
 There are several projects built specifically to receive and process OpenTelemetry data, without having to start from scratch. One of these is [SigNoz](https://github.com/signoz/signoz).
 
-SigNoz is a complete solution to the need for ‘out of the box’ observability tooling for storing, analyzing, and displaying your data.  SigNoz uses ClickHouse as its datastore, as mentioned above that means great performance for observability data. That means you can host your own OpenTelemetry endpoint without needing to lock into a closed-source SaaS tool. If you want to use open tools but don’t want the headache of running your own data storage for observability, consider SigNoz cloud, our latest offering that takes the self hosting off your plate. <a href="https://signoz.io/teams/" rel="noopener noreferrer nofollow" target="_blank" >Sign up to demo our cloud tool today</a>!
+SigNoz is a complete solution to the need for ‘out of the box’ observability tooling for storing, analyzing, and displaying your data. SigNoz uses ClickHouse as its datastore, as mentioned above that means great performance for observability data. That means you can host your own OpenTelemetry endpoint without needing to lock into a closed-source SaaS tool. If you want to use open tools but don’t want the headache of running your own data storage for observability, consider SigNoz cloud, our latest offering that takes the self hosting off your plate. <a href="https://signoz.io/teams/" rel="noopener noreferrer nofollow" target="_blank" >Sign up to demo our cloud tool today</a>!

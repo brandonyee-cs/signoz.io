@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: daniel
 description: In this tutorial, you will configure Promtail to send logs to OpenTelemetry Collector instead of Loki. This can be done by using the Loki receiver in OpenTelemetry Collector. The logs collected by OpenTelemetry Collector can then be sent to SigNoz - an OpenTelemetry-native APM...
 image: /img/blog/2023/12/otel-col-loki-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -20,7 +20,6 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/using-opentelemetry-loki-receiver-to-collect-logs/"/>
 </head>
 
-
 In this tutorial, you will learn how to collect logs using the Loki receiver in OpenTelemetry Collector to send logs to SigNoz. If you’re using Promtail to collect logs, you can send them to SigNoz instead of Loki via the OpenTelemetry Collector.
 
 <!--truncate-->
@@ -28,6 +27,7 @@ In this tutorial, you will learn how to collect logs using the Loki receiver in 
 ![Cover Image](/img/blog/2023/12/otel-col-loki-cover.webp)
 
 In this tutorial, we cover:
+
 - [What is OpenTelemetry Collector?](#what-is-opentelemetry-collector)
 - [How does OpenTelemetry Collector collect data?](#how-does-opentelemetry-collector-collect-data)
 - [Collecting logs with Loki receiver in OpenTelemetry Collector](#collecting-logs-with-loki-receiver-in-opentelemetry-collector)
@@ -39,7 +39,6 @@ In this tutorial, we cover:
 - [Visualizing Loki logs with the SigNoz dashboard](#visualizing-loki-logs-with-the-signoz-dashboard)
 - [Setting up alerts](#setting-up-alerts)
 - [Conclusion](#conclusion)
-
 
 If you want to jump straight into implementation, start with this [prerequisites](#prerequisites) section.
 
@@ -121,7 +120,6 @@ Note down the path where this file exists.
 
 The OpenTelemetry Collector offers various deployment options to suit different environments and preferences. It can be deployed using Docker, Kubernetes, Nomad, or directly on Linux systems. You can find all the installation options <a href = "https://opentelemetry.io/docs/collector/installation" rel="noopener noreferrer nofollow" target="_blank" >here</a>. For this article, the OpenTelemetry Collector will be installed manually.
 
-
 :::info
 We are assuming that the OpenTelemetry Collector will be installed on the same host as your Promtail server for this tutorial.
 :::
@@ -136,10 +134,10 @@ curl --proto '=https' --tlsv1.2 -fOL https://github.com/open-telemetry/opentelem
 
 Note: For macOS users, download the binary package specific to your system.
 
-| Build | Architecture |
-| --- | --- |
-| M1 Chip | arm64 |
-| Intel | amd64 (x86-64) |
+| Build   | Architecture   |
+| ------- | -------------- |
+| M1 Chip | arm64          |
+| Intel   | amd64 (x86-64) |
 
 ### Extract the package
 
@@ -217,11 +215,11 @@ We have configured the Loki receiver to listen for log entries at the endpoint: 
 
 The Loki receiver is a component of the OpenTelemetry Collector designed to receive logs in the Loki format and transform them into the OTLP format. This allows the OpenTelemetry Collector to process and export logs in a standardized format.
 
-The Loki receiver essentially acts as a bridge between Promtail and the OpenTelemetry Collector. 
+The Loki receiver essentially acts as a bridge between Promtail and the OpenTelemetry Collector.
 
 It receives logs from Promtail, transforms them from the Loki format to the OTLP format, and then passes them to the OpenTelemetry Collector for further processing and exporting to SigNoz. You can find more information on the OpenTelemetry Loki receiver <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/lokireceiver" rel="noopener noreferrer nofollow" target="_blank" >here</a>.
 
-Replace  `{region}` with the region for your SigNoz cloud account and `<SIGNOZ_INGESTION_KEY>` with the ingestion key for your account. You can find these settings in the SigNoz dashboard under `Settings > Ingestion Settings`.
+Replace `{region}` with the region for your SigNoz cloud account and `<SIGNOZ_INGESTION_KEY>` with the ingestion key for your account. You can find these settings in the SigNoz dashboard under `Settings > Ingestion Settings`.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/ingestion-key-details.webp" alt="You can find ingestion details in the SigNoz dashboard"/>
@@ -254,7 +252,7 @@ You should receive a similar output to show it has started successfully:
 2023-12-06T03:49:57.224+0100    info    zapgrpc/zapgrpc.go:178  [core] [Channel #1] parsed dial target is: {URL:{Scheme:ingest.in.signoz.cloud Opaque:443 User: Host: Path: RawPath: OmitHost:false ForceQuery:false RawQuery: Fragment: RawFragment:}}      {"service": "loki", "grpc_log": true}
 2023-12-06T03:49:57.224+0100    info    zapgrpc/zapgrpc.go:178  [core] [Channel #1] fallback to scheme "passthrough"    {"service": "loki", "grpc_log": true}
 2023-12-06T03:49:57.224+0100    info    zapgrpc/zapgrpc.go:178  [core] [Channel #1] parsed dial target is: {URL:{Scheme:passthrough Opaque: User: Host: Path:/ingest.in.signoz.cloud:443 RawPath: OmitHost:false ForceQuery:false RawQuery: Fragment: RawFragment:}} {"service": "loki", "grpc_log": true}
-2023-12-06T03:49:57.224+0100    info    zapgrpc/zapgrpc.go:178  [core] [Channel #1] Channel authority set to "ingest.in.signoz.cloud:443"       {"service": "loki", "grpc_log": true} 
+2023-12-06T03:49:57.224+0100    info    zapgrpc/zapgrpc.go:178  [core] [Channel #1] Channel authority set to "ingest.in.signoz.cloud:443"       {"service": "loki", "grpc_log": true}
 ```
 
 ## Configuring Promtail
@@ -273,10 +271,10 @@ chmod a+x "promtail-darwin-amd64"
 
 Note: For macOS users, download the binary package specific to your system.
 
-| Build | Architecture |
-| --- | --- |
-| M1 Chip | arm64 |
-| Intel | amd64 (x86-64) |
+| Build   | Architecture   |
+| ------- | -------------- |
+| M1 Chip | arm64          |
+| Intel   | amd64 (x86-64) |
 
 ### Setting up the Configuration file
 
@@ -340,7 +338,6 @@ Start Promtail with the below command:
 
 To see Promtail running, visit [localhost:9080/targets](http://localhost:9080/targets) on your browser.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_promtail.webp" alt=""/>
     <figcaption><i></i></figcaption>
@@ -352,7 +349,6 @@ The above image shows that Promtail is running and scraping logs from the specif
 ## Visualizing Loki logs with the SigNoz dashboard
 
 Once the Collector service has been started successfully, navigate to your SigNoz Cloud account and access the “Logs tab” and click on “Logs Explorer”.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_logs_tab_option1.webp" alt="Logs tab options"/>
@@ -370,17 +366,15 @@ Verify that the OpenTelemetry Collector is sending the collected logs to your Si
 
 Once confirmed that logs are being received, go back to the “Logs” tab and click on “Logs Pipelines”.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_logs_tab_option2.webp" alt="Logs tab options"/>
     <figcaption><i>Logs tab options</i></figcaption>
 </figure>
 <br/>
 
-Logs Pipelines are a set of rules for transforming logs before they get stored in the database. They allow you to preprocess your logs to suit your querying and aggregation needs. You can learn more about Logs pipelines in the [SigNoz docs](https://signoz.io/docs/logs-pipelines/introduction/). 
+Logs Pipelines are a set of rules for transforming logs before they get stored in the database. They allow you to preprocess your logs to suit your querying and aggregation needs. You can learn more about Logs pipelines in the [SigNoz docs](https://signoz.io/docs/logs-pipelines/introduction/).
 
 In the Logs Pipelines page, click on the “+ New Pipeline” button to create a new pipeline:
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_logs_pipeline_page.webp" alt="Logs Pipelines page"/>
@@ -389,7 +383,6 @@ In the Logs Pipelines page, click on the “+ New Pipeline” button to create a
 <br/>
 
 Specify a name of your preference for the pipeline, optionally include a description, and choose a filter to apply to the pipeline. In the below image, the filter was set to the `filename=/path/to/the/flask.log`file. Upon selection, preview the filtered logs in the "Filter Logs Preview" section. Once satisfied with the configuration, proceed to create the pipeline.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_creating_the_pipeline.webp" alt="Creating the pipeline"/>
@@ -401,8 +394,7 @@ After successfully creating the pipeline, a processor needs to be created for th
 
 In the context of logs and data processing pipelines, a "[processor](https://signoz.io/docs/logs-pipelines/concepts/#processors)" refers to a component that performs specific operations on the logs as they flow through the pipeline. Processors are used to manipulate, transform, or enrich the log data according to predefined rules or configurations.
 
-Click "Add Processor" to choose a method for processing the logs. 
-
+Click "Add Processor" to choose a method for processing the logs.
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_adding_processor.webp" alt="Adding a processor"/>
@@ -413,8 +405,6 @@ Click "Add Processor" to choose a method for processing the logs.
 There are several processor types to select from; pick any one of your choice. For this example, select the “Regex” processor type.
 
 Regular expressions, often abbreviated as “regex,” are powerful and flexible sequences of characters that define a search pattern. It is a tool used for pattern matching within strings, making it useful for tasks such as string validation, search and replace operations, and data extraction. You can learn more about Regex <a href = "https://www.sitepoint.com/learn-regex/" rel="noopener noreferrer nofollow" target="_blank" >here</a>.
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_processor_types.webp" alt="Processor types"/>
@@ -432,7 +422,6 @@ This regex extracts specific pieces of information from log entries that follow 
 
 Set `Parse from` to `body`, `Parse to` to `attributes` and `On Error` to `send`, then save/update.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_regex_settings.webp" alt="Regex settings"/>
     <figcaption><i>Regex settings</i></figcaption>
@@ -440,8 +429,6 @@ Set `Parse from` to `body`, `Parse to` to `attributes` and `On Error` to `send`,
 <br/>
 
 You can view the processor settings by clicking on the eye icon for that particular pipeline.
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_unprocessed_logs.webp" alt="Unprocessed logs"/>
@@ -451,8 +438,6 @@ You can view the processor settings by clicking on the eye icon for that particu
 
 Select the opposing blue arrows to view the initial format of the logs.
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_initial_logs_format.webp" alt="The initial format of the logs"/>
     <figcaption><i>The initial format of the logs</i></figcaption>
@@ -461,8 +446,6 @@ Select the opposing blue arrows to view the initial format of the logs.
 
 Return to the previous screen and select "Simulate Processing." Next, click on the opposing blue arrows under the “Processed Output” tab to examine the logs after processing.
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_processed_output.webp" alt="Processed output"/>
     <figcaption><i>Processed output</i></figcaption>
@@ -470,8 +453,6 @@ Return to the previous screen and select "Simulate Processing." Next, click on t
 <br/>
 
 The processed logs should look as below:
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_processed_log_format.webp" alt="Processed logs format"/>
@@ -482,7 +463,6 @@ The processed logs should look as below:
 As seen above, more fields have been included through the Regex processor. In contrast to the former, without the regex processor, your queries are confined to the displayed fields. However, by incorporating a Regex processor with more succinct field options, log queries become more streamlined and flexible.
 
 Save the pipeline settings and navigate to the "Change History" tab to confirm the success of the deployment. Ensure that the “Deployment Stage” reads as "Deployed" before proceeding, as this signifies the completion of the deployment process triggered by saving the pipeline settings.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_pipeline_deployment.webp" alt="Pipeline deployment"/>
@@ -500,7 +480,6 @@ Return to the “Logs Explorer” tab to perform log queries using the configure
 
 Click on "tag_status_code" and run the query.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_query_builder.webp" alt="Query builder"/>
     <figcaption><i>Query builder</i></figcaption>
@@ -511,7 +490,6 @@ Click on "tag_status_code" and run the query.
 
 You can set up alerts from queries that you run directly. From the previous query, click on the Setup Alerts button.
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_settup_alert_query.webp" alt="Setup alert from query"/>
     <figcaption><i>Setup alert from query</i></figcaption>
@@ -521,7 +499,6 @@ You can set up alerts from queries that you run directly. From the previous quer
 ### Define the metric
 
 Set your filter to whatever information you want to filter from your logs, and choose the metrics of your choice.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_choose_metrics.webp" alt="Choosing your metrics"/>
@@ -534,7 +511,6 @@ Set your filter to whatever information you want to filter from your logs, and c
 Set the alert condition for your use case. The below alert condition is just a sample of how it can be set. In the alert configuration section, set the severity of your alert, the name, description, labels, and the notification channel the alert should go to. To learn how to set up notification channels for alerting, check out the [docs](https://signoz.io/docs/userguide/alerts-management/#setting-notification-channel).
 
 Test the notification, and if it shows success, proceed to create the alert rule.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_alert_condition.webp" alt="Alert condition and configuration"/>
@@ -551,7 +527,6 @@ In the Alert tab, under the Alert rules section, you can see the alerts you have
 <br/>
 
 Within the Triggered Alerts section, you can view alerts that have already been triggered. This indicates that the alert rule has surpassed its defined threshold, prompting the system to send a notification to the specified alerting channel.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/loki_triggered_alerts.webp" alt="Triggered alerts"/>
@@ -571,7 +546,7 @@ SigNoz is an open-source [OpenTelemetry-native APM](https://signoz.io/blog/opent
 
 ---
 
-**Further Reading** 
+**Further Reading**
 
 - [Logs Performance Benchmark: SigNoz vs Elasticsearch vs Loki](https://signoz.io/blog/logs-performance-benchmark/)
 

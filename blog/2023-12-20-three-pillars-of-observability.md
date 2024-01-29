@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: leigh-finch
 description: Observability is often defined in the context of three pillars - logs, metrics, and traces. Modern-day cloud-native applications are complex and dynamic. To avoid surprises and performance issues, you need a robust observability stack. But is observability limited to collecting logs, metrics, and traces?...
 image: /img/blog/2023/12/3-pillars-of-observability-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -19,7 +19,6 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/three-pillars-of-observability/"/>
 </head>
 
-
 Observability is often defined in the context of three pillars: logs, metrics, and traces. Modern-day cloud-native applications are complex and dynamic. To avoid surprises and performance issues, you need a robust observability stack. But is observability limited to collecting logs, metrics, and traces? How is observability evolving to make our systems more observable?
 
 <!--truncate-->
@@ -27,6 +26,7 @@ Observability is often defined in the context of three pillars: logs, metrics, a
 ![Cover Image](/img/blog/2023/12/3-pillars-of-observability-cover.webp)
 
 In this tutorial, we cover:
+
 - [A Brief Overview of Observability](#a-brief-overview-of-observability)
 - [Metrics](#metrics)
 - [Traces](#traces)
@@ -35,7 +35,6 @@ In this tutorial, we cover:
 - [Data Visualization - The Critical Component in Observability](#data-visualization---the-critical-component-in-observability)
 - [Navigating Observability Maturity in Your Organization](#navigating-observability-maturity-in-your-organization)
 - [Conclusion](#conclusion)
-
 
 ## A Brief Overview of Observability
 
@@ -66,7 +65,6 @@ Two popular types of metrics are related to utilization and saturation. Utilizat
 Traces offer insights into events over time. In the context of APM and OpenTelemetry, this usually involves embedding libraries into the code or using a profiler/agent to profile applications and runtimes. For an example of integrating Spring Boot with OpenTelemetry and SigNoz for all three pillars of observability, refer to my article on [Spring Boot Monitoring](https://signoz.io/blog/spring-boot-monitoring/).
 
 A typical example of a trace is an HTTP request to a web front end, involving multiple tasks to complete and return a response. Consider an HTTP POST request to add a new pet to an owner's profile. This request encompasses 25 units of work ([Spans](https://signoz.io/blog/distributed-tracing-span/)), each containing detailed attributes about the unit of work, SQL statements, thread IDs, and service details.
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/sample_http_trace.webp" alt="Sample HTTP Trace"/>
@@ -125,7 +123,6 @@ Effective dashboards require empathy for the intended audience. For example, an 
 
 > “**Key to effective dashboards: simplicity, readability, and user-centric design.**"
 
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/12/simple_CPU_dashboard.webp" alt="Simple CPU and threads dashboard in SigNoz"/>
     <figcaption><i>Simple CPU and threads dashboard in SigNoz</i></figcaption>
@@ -146,7 +143,7 @@ For each of these elements, we would apply a current state vs. a desired state u
 
 ## Conclusion
 
-We presented a comprehensive view of the evolving landscape of observability in modern cloud-native applications. It moves beyond the traditional scope of monitoring, highlighting how observability has become more dynamic and interconnected with the inclusion of context as a fourth pillar. The future of observability is seen as increasingly reliant on AI and effective data visualization to make complex data understandable and actionable. 
+We presented a comprehensive view of the evolving landscape of observability in modern cloud-native applications. It moves beyond the traditional scope of monitoring, highlighting how observability has become more dynamic and interconnected with the inclusion of context as a fourth pillar. The future of observability is seen as increasingly reliant on AI and effective data visualization to make complex data understandable and actionable.
 
 For organizations looking to enhance their digital experience and system reliability, embracing these evolving aspects of observability is crucial. The key is to integrate these practices into their operational culture, ensuring a robust, responsive, and resilient technological ecosystem.
 

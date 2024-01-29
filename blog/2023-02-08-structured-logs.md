@@ -25,8 +25,7 @@ Structured logging is the method of having a consistent log format for your appl
 
 ![Cover Image](/img/blog/2023/02/structured_logs_cover.webp)
 
-
-Logging is an essential aspect of system administration and monitoring. Logging allows you to record information data about the application's activity. The primary purpose of obtaining logs is to streamline the debugging, troubleshooting, or auditing practices. 
+Logging is an essential aspect of system administration and monitoring. Logging allows you to record information data about the application's activity. The primary purpose of obtaining logs is to streamline the debugging, troubleshooting, or auditing practices.
 
 Logs include system events, user actions, and error messages. They can be stored in various forms, such as text files and databases. This allows them to analyze and visualize using log management platforms such as [SigNoz](https://signoz.io/docs/userguide/logs/). The structure of these logs falls on a large spectrum. A log can be structured, semi-structured or unstructured. In this blog, we will learn about structured logging and its benefits.
 
@@ -105,7 +104,7 @@ Structured logging has many benefits. Based on this guide, you have understood t
 
 The first step to structured logging starts at the application level. There are numerous logging libraries that help with structured logging. For example, [winston logger](https://signoz.io/blog/winston-logger/) is one of the most popular logging libraries for nodejs. It provides consistent formats and logging levels to be used in application logs.
 
-The next step is to choose a log analytics tool. When choosing a log analytics tool, three things must be kept in mind - ingestion, query, and storage. Based on these parameters and your use case, you can choose a log analytics tool that suits you. SigNoz is an open-source log management tool that you can use for structured logging. 
+The next step is to choose a log analytics tool. When choosing a log analytics tool, three things must be kept in mind - ingestion, query, and storage. Based on these parameters and your use case, you can choose a log analytics tool that suits you. SigNoz is an open-source log management tool that you can use for structured logging.
 
 It uses OpenTelemetry to collect logs and uses a columnar database for storage. You can check out the logs performance benchmark of SigNoz to see if it fits your needs.
 
@@ -121,7 +120,6 @@ cd signoz/deploy/
 
 You can visit our documentation for instructions on how to install SigNoz using Docker Swarm and Helm Charts.
 
-
 [![Deployment Docs](/img/blog/common/deploy_docker_documentation.webp)](https://signoz.io/docs/install/)
 
 ## Conclusion
@@ -129,7 +127,6 @@ You can visit our documentation for instructions on how to install SigNoz using 
 Logging is an integral part of all software systems. You can understand what's happening and where problems might be. Generally, if something goes wrong in production, you have a reference to trace your logs. Structured logs make it easier to search, query, and analyze logs data at scale.
 
 A log analysis tool like SigNoz can help you derive insights from logs data quickly while ensuring efficient management and storage. You can check out the SigNoz GitHub repo <a href = "https://github.com/SigNoz/signoz" rel="noopener noreferrer nofollow" target="_blank" >here</a>.
-
 
 ---
 

@@ -17,6 +17,7 @@ keywords:
   - apm tools
   - application performance monitoring
 ---
+
 <head>
   <link rel="canonical" href="https://signoz.io/blog/prometheus-vs-elasticsearch/"/>
 </head>
@@ -40,8 +41,7 @@ Let’s learn about both these tools in detail.
 Prometheus is an open-source metrics monitoring tool. It collects and stores metrics as time-series data (metrics that change over time). It is suited to monitor metrics both from traditional IT infrastructure as well as dynamic container environments. Its primary focus is on gathering, storing, and querying metrics.
 
 > What are metrics?<br></br>
-Metrics are measurements taken from an application or IT infrastructure that change over time. Examples could be error responses, service requests, response latency, CPU usage, memory usage, etc.
-> 
+> Metrics are measurements taken from an application or IT infrastructure that change over time. Examples could be error responses, service requests, response latency, CPU usage, memory usage, etc.
 
 Prometheus provides a visualization layer called the Expression browser. But it’s quite basic in nature. Prometheus is often combined with Grafana, an open-source data visualization tool to provide richer dashboards.
 
@@ -50,19 +50,19 @@ Prometheus provides a visualization layer called the Expression browser. But it�
 Some of the key features of Prometheus are:
 
 - **Multi-dimensional data model**<br></br>
-It stores data as time series (data that is tracked at an increment in time). You can also store an optional set of key-value pairs called labels for that metrics. The multi-dimensional data model enables rich contextual metrics monitoring.
+  It stores data as time series (data that is tracked at an increment in time). You can also store an optional set of key-value pairs called labels for that metrics. The multi-dimensional data model enables rich contextual metrics monitoring.
 
 - **Query Language**<br></br>
-Prometheus uses a query language called “Prom QL” to query the metrics data collected.
+  Prometheus uses a query language called “Prom QL” to query the metrics data collected.
 
 - **Pull model data collection over HTTP**<br></br>
-Data collection for Prometheus is pull-based. It pulls metrics from an application and exposes them in a format it understands on an HTTP endpoint. It provides client libraries in various programming languages to do(Go, Python, Ruby, etc.).
+  Data collection for Prometheus is pull-based. It pulls metrics from an application and exposes them in a format it understands on an HTTP endpoint. It provides client libraries in various programming languages to do(Go, Python, Ruby, etc.).
 
 - **Alert Manager**<br></br>
-Prometheus comes with an alert manager that lets you create alerts on metrics. The alert manager also provides capabilities to group alerts in a single notification.
+  Prometheus comes with an alert manager that lets you create alerts on metrics. The alert manager also provides capabilities to group alerts in a single notification.
 
 - **Visualization layer**<br></br>
-Prometheus comes with a basic visualization layer, but it can be combined with Grafana to create rich visualizations.
+  Prometheus comes with a basic visualization layer, but it can be combined with Grafana to create rich visualizations.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2022/06/grafana_prometheus_dashboard.webp" alt="prometheus dashboards built using Grafana"/>
@@ -76,13 +76,13 @@ Prometheus comes with a basic visualization layer, but it can be combined with G
 The Elasticsearch stack or the ELK stack consists of three tools: Elasticsearch, Logstash, and Kibana. Together, they provide log management and analysis capabilities. All here’s what the three tools do:
 
 - **Elasticsearch**<br></br>
-Elasticsearch is a NoSQL document-oriented database. But it is more popularly known as a search and analytics engine because of its extensive features on search capabilities.
+  Elasticsearch is a NoSQL document-oriented database. But it is more popularly known as a search and analytics engine because of its extensive features on search capabilities.
 
 - **Logstash**<br></br>
-Logstash is a log collector that helps you to collect, process, and transform log data. It can ingest data from multiple sources in both structured and unstructured formats and then parse it. Finally, it can send the filtered data to multiple destinations.
+  Logstash is a log collector that helps you to collect, process, and transform log data. It can ingest data from multiple sources in both structured and unstructured formats and then parse it. Finally, it can send the filtered data to multiple destinations.
 
 - **Kibana**<br></br>
-Kibana acts as the frontend of the Elastic stack and enables you to create visualizations from the data stored in the Elasticsearch database. With data querying and analysis features, Kibana lets you analyze your log data for insights. Some common charts are area charts, pie charts, heat maps, etc.
+  Kibana acts as the frontend of the Elastic stack and enables you to create visualizations from the data stored in the Elasticsearch database. With data querying and analysis features, Kibana lets you analyze your log data for insights. Some common charts are area charts, pie charts, heat maps, etc.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2022/06/elasticsearch_stack.webp" alt="The Elasticsearch stack"/>
@@ -96,16 +96,16 @@ Kibana acts as the frontend of the Elastic stack and enables you to create visua
 Some of the key features of the Elasticsearch stack include:
 
 - **Centralized Logging Capabilities**<br></br>
-The ELK stack is capable of ingesting log data of different types and from different platforms, thanks to Logstash. Logstash can collect and parse a wide variety of data types. Log analysis at scale requires structured logging, and Logstash can transform unstructured logs to be sent for analysis. The ELK stack is also suited to collect logs from distributed environments.
+  The ELK stack is capable of ingesting log data of different types and from different platforms, thanks to Logstash. Logstash can collect and parse a wide variety of data types. Log analysis at scale requires structured logging, and Logstash can transform unstructured logs to be sent for analysis. The ELK stack is also suited to collect logs from distributed environments.
 
 - **Full-text search**<br></br>
-Elasticsearch is built on top of [Apache Lucene](https://lucene.apache.org/core/), an open-source information retrieval software. Apache Lucene enables Elasticsearch can perform complex full-text searches using a single or combination of word phrases against its No SQL database.
+  Elasticsearch is built on top of [Apache Lucene](https://lucene.apache.org/core/), an open-source information retrieval software. Apache Lucene enables Elasticsearch can perform complex full-text searches using a single or combination of word phrases against its No SQL database.
 
 - **Real-time data analysis & visualization**<br></br>
-The ELK stack provides you the capabilities to query real-time data and build dashboards with it. The real-time analysis capabilities enable engineering teams to react faster.
+  The ELK stack provides you the capabilities to query real-time data and build dashboards with it. The real-time analysis capabilities enable engineering teams to react faster.
 
 - **Other use-cases**<br></br>
-The Elasticsearch stack is not confined to log management and analytics. Although log management is its most popular use case, the ELK stack can also be used for security monitoring and analytics, business information analytics, etc.
+  The Elasticsearch stack is not confined to log management and analytics. Although log management is its most popular use case, the ELK stack can also be used for security monitoring and analytics, business information analytics, etc.
 
 ## Comparing Prometheus and Elasticsearch
 
@@ -125,7 +125,7 @@ Elasticsearch is a NoSQL database, and you can store your collected data in it. 
 
 ### Data Visualization
 
-Prometheus provides basic data visualization capabilities with its in-built Prometheus expression browser. It is usually combined with Grafana, an open-source data visualization tool for providing more analysis and visualization capabilities. 
+Prometheus provides basic data visualization capabilities with its in-built Prometheus expression browser. It is usually combined with Grafana, an open-source data visualization tool for providing more analysis and visualization capabilities.
 
 The ELK stack uses Kibana for data visualization. As Kibana runs on top of the Elasticsearch stack, its UI is better suited for querying log messages, whereas Grafana is more suited for charts based on metrics monitoring like CPU usage, memory, disk, etc.
 

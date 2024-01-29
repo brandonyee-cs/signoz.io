@@ -79,8 +79,8 @@ You must connect to an Elasticsearch cluster in order to use Elasticsearch in Py
 The host and port of one or more cluster nodes must be specified in order to connect to an Elasticsearch cluster using the Python client for Elasticsearch. To connect to a cluster, construct an Elasticsearch client object as shown in the following example:
 
 ```python
-es = Elasticsearch([    
-	{'host': 'node1', 'port': 9200},    
+es = Elasticsearch([
+	{'host': 'node1', 'port': 9200},
 	{'host': 'node2', 'port': 9200}
 ])
 ```
@@ -90,8 +90,8 @@ In this example, we’re connecting to a pair of nodes in an Elasticsearch clust
 You might need to supply additional credentials to authenticate your connection if your Elasticsearch cluster is set for security. An illustration of how to create an Elasticsearch client object with fundamental authentication is shown below:
 
 ```python
-es = Elasticsearch(    
-	[{'host': 'node1', 'port': 9200}],    
+es = Elasticsearch(
+	[{'host': 'node1', 'port': 9200}],
 	http_auth=('username', 'password')
 )
 ```
@@ -113,8 +113,8 @@ from elasticsearch import Elasticsearch
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 
 # define the document data
-doc = {    
-	'title': 'The quick brown fox',    
+doc = {
+	'title': 'The quick brown fox',
 	'content': 'The quick brown fox jumps over the lazy dog'
 }
 
@@ -136,11 +136,11 @@ You must specify the index or indices to search for your search query when using
 
 ```python
 # define the search query
-query = {    
-	'query': {        
-		'match': {            
-			'content': 'quick brown fox'        
-		}    
+query = {
+	'query': {
+		'match': {
+			'content': 'quick brown fox'
+		}
 	}
 }
 
@@ -162,9 +162,9 @@ Using the Python client, you can update a document in Elasticsearch by using the
 
 ```python
 # define the update data
-update_data = {    
-	'doc': {        
-		'content': 'A quick brown fox'    
+update_data = {
+	'doc': {
+		'content': 'A quick brown fox'
 	}
 }
 # update the document
@@ -178,9 +178,9 @@ In Elasticsearch, when you edit a document, the newly updated version is combine
 This indicates that the modified document appears as follows:
 
 ```json
-{    
-	"title": "The quick brown fox",    
-	"content": "A quick brown fox"
+{
+  "title": "The quick brown fox",
+  "content": "A quick brown fox"
 }
 ```
 
@@ -222,21 +222,21 @@ The `search` method of the Elasticsearch client, which enables you to specify th
 
 ```python
 # perform a terms aggregation on the 'category' field in the index 'my_index'
-es = es.search(    
-	index='my_index',    
-	body={        
-		'size': 0,        
-		'aggs': {            
-			'category_count': {            
-				'terms': {                
-					'field': 'category'            
-				}            
-			}        
+es = es.search(
+	index='my_index',
+	body={
+		'size': 0,
+		'aggs': {
+			'category_count': {
+				'terms': {
+					'field': 'category'
+				}
+			}
 		}
 	}
 )
 # print the aggregation results
-for bucket in res['aggregations']['category_count']['buckets']:    
+for bucket in res['aggregations']['category_count']['buckets']:
 	print(bucket['key'], bucket['doc_count'])
 ```
 
@@ -246,22 +246,22 @@ Additionally, you can utilize metric aggregations, histogram aggregations, and o
 
 ```python
 # perform a histogram aggregation on the 'price' field in the index 'my_index'
-es = es.search(    
-	index='my_index',    
-	body={        
-		'size': 0,        
-		'aggs': {            
-			'price_histogram': {            
-				'histogram': {                
-					'field': 'price',                
-					'interval': 10            
-				}            
-			}        
+es = es.search(
+	index='my_index',
+	body={
+		'size': 0,
+		'aggs': {
+			'price_histogram': {
+				'histogram': {
+					'field': 'price',
+					'interval': 10
+				}
+			}
 		}
 	}
 )
 # print the aggregation results
-for bucket in res['aggregations']['price_histogram']['buckets']:    
+for bucket in res['aggregations']['price_histogram']['buckets']:
 	print(bucket['key'], bucket['doc_count'])
 ```
 

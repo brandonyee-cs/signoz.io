@@ -23,9 +23,10 @@ import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 Are you looking for Grafana alternatives? Then you have come to the right place. Grafana started as a data visualization tool. It slowly evolved into a tool that can take data from multiple data sources for visualization. For observability, Grafana offers the LGTM stack (Loki for logs, Grafana for visualization, Tempo for traces, and Mimir for metrics). You need to configure and maintain multiple configurations for a full-stack observability setup.
 
 <!--truncate-->
+
 ![Cover Image](/img/blog/2024/01/grafana-alternatives-cover.webp)
 
-While Grafana offers great visualization capabilities, it lacks advanced analytics features that organizations with complex data monitoring needs may require. For example, Loki is the product by Grafana for log management. It is designed to keep indexing low. 
+While Grafana offers great visualization capabilities, it lacks advanced analytics features that organizations with complex data monitoring needs may require. For example, Loki is the product by Grafana for log management. It is designed to keep indexing low.
 
 It does not support high cardinality. For example, if you create a label for the user's IP address, you will have thousands of log streams, as every user will have a unique IP. This can make Loki very slow as it requires building a huge index.
 
@@ -55,33 +56,26 @@ SigNoz is built to support OpenTelemetry. <a href = "https://opentelemetry.io/" 
 
 SigNoz comes with out-of-the-box APM charts like p90, p99 latency, request rates, and error rates. You can also monitor database calls and external calls as soon as you instrument your application with OpenTelemetry SDKs.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_charts_application_metrics.webp" alt="SigNoz UI showing application overview metrics like RPS, 50th/90th/99th Percentile latencies, and Error Rate"/>
     <figcaption><i>SigNoz UI showing application overview metrics like RPS, 50th/90th/99th Percentile latencies, and Error Rate</i></figcaption>
 </figure>
 
-
 SigNoz offers comprehensive insights into tracing data through visual representations like Flamegraphs and Gantt charts. The Gantt charts provide a clear visual hierarchy of services and events, easily identifying latency-causing events in a request call.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_flamegraphs.webp" alt="Flamegraphs showing the exact duration taken by each spans - a concept of distributed tracing"/>
     <figcaption><i>Flamegraphs showing the exact duration taken by each spans - a concept of distributed tracing</i></figcaption>
 </figure>
 
-
 With SigNoz, you have the capability to perform aggregates on traces, allowing you to gain deeper insights into both your application and infrastructure.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/traces_custom_aggregates.webp" alt="Run custom aggregates on traces to get deeper application performance insights"/>
     <figcaption><i>Run custom aggregates on traces to get deeper application performance insights</i></figcaption>
 </figure>
 
-
 Querying logs in SigNoz is fast, and an advanced query builder lets you search through your logs data easily.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_logs_query_builder_2.webp" alt="Logs Query Builder in SigNoz"/>
@@ -89,7 +83,6 @@ Querying logs in SigNoz is fast, and an advanced query builder lets you search t
 </figure>
 
 You can [sign up](https://signoz.io/teams/) for SigNoz cloud to get started quickly.
-
 
 ## Kibana
 
@@ -104,12 +97,10 @@ Some key features of Kibana include:
 - Dynamic and real-time visualizations of data
 - Seamless integration with the Elastic Stack
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/kibana_dashboard.webp" alt="A snapshot of Kibana Dashboard"/>
     <figcaption><i>A snapshot of Kibana Dashboard</i></figcaption>
 </figure>
-
 
 ## Datadog
 
@@ -125,14 +116,13 @@ Some key features of Datadog include:
 - Infrastructure Monitoring
 - Network Monitoring
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/datadog_dashboard.webp" alt="Datadog dashboard"/>
     <figcaption><i>Datadog dashboard (Source: Datadog website)</i></figcaption>
 </figure>
 
-
 ## New Relic
+
 <a href = "https://newrelic.com/" rel="noopener noreferrer nofollow" target="_blank" >New Relic</a> is a comprehensive observability platform offering a compelling alternative to Grafana. Unlike conventional monitoring solutions, it takes a holistic approach, covering applications, infrastructure, and user experiences. By employing an agent-based monitoring system across servers, containers, and applications, New Relic delivers detailed performance insights. Its seamless integration with various third-party tools, coupled with scalability and enterprise-grade support, solidifies its standing as a formidable Grafana alternative.
 
 Features of New Relic include:
@@ -145,14 +135,13 @@ Features of New Relic include:
 - Customizable alerts
 - Robust dashboard creation
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/new-relic-dasboard.webp" alt="New Relic APM"/>
     <figcaption><i>New Relic APM (Source: New Relic website)</i></figcaption>
 </figure>
 
-
 ## Splunk
+
 <a href = "https://www.splunk.com/" rel="noopener noreferrer nofollow" target="_blank" >Splunk</a> is a powerful centralized log management platform that excels in collecting and storing extensive data from diverse sources, including messaging systems, databases, and network devices. It allows real-time data search and analysis through a web interface, complemented by pre-built visualizations for swift dashboard creation.
 
 Splunk's strengths lie in its adeptness at handling large-scale data ingestion and robust analytics capabilities. This makes it invaluable for organizations with complex data monitoring needs, particularly in enterprise security and observability.
@@ -164,12 +153,10 @@ Splunk’s key features include:
 - Real-time data search and analysis
 - Collection and analysis of data from diverse sources
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/splunk-dashboard.webp" alt="Splunk Dasbhoard"/>
     <figcaption><i>Splunk Dasbhoard (Source: Splunk Website)</i></figcaption>
 </figure>
-
 
 ## Prometheus
 
@@ -197,12 +184,10 @@ Some of the key features of Dynatrace are:
 - **Infrastructure Monitoring**: Dynatrace monitors the underlying infrastructure, including servers, virtual machines, containers, and cloud services.
 - **Integration**: It offers integrations with other observability tools, DevOps pipelines, and collaboration platforms to streamline workflows.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/dynatrace_dashboard.webp" alt="Dynatrace Dashboard"/>
     <figcaption><i>Dynatrace Dashboard</i></figcaption>
 </figure>
-
 
 ## AppDynamics
 
@@ -212,12 +197,10 @@ AppDynamics is compatible with major technologies and can be deployed on-premise
 
 The platform stands out for its clean and modern UI, featuring heat maps for a clearer overview of metrics.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/appdynamics_splunk_alternative.webp" alt="Appdynamics observability platform for full visibility of application performance"/>
     <figcaption><i>Appdynamics observability platform for full visibility of application performance</i></figcaption>
 </figure>
-
 
 ## VictoriaMetrics
 
@@ -238,12 +221,10 @@ Some key features of Metabase include:
 - High-quality data visualizations
 - User-friendly
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/metabase-visualization-options.webp" alt="Data Visualization"/>
     <figcaption><i>Data Visualization (Source: [Metabase Website](https://www.metabase.com/learn/getting-started/tour-of-metabase#visualize-results))</i></figcaption>
 </figure>
-
 
 ## Zabbix
 
@@ -260,18 +241,16 @@ Some of the key features of Zabbix include:
 - User-friendly web-based interface
 - Visualization capabilities through customizable dashboards
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/zabbix_dashboard.webp" alt="Zabbix Global Dashboard"/>
     <figcaption><i>Zabbix Global Dashboard (Source: Zabbix Website)</i></figcaption>
 </figure>
 
-
 ## How to choose between so many Grafana Alternatives?
 
 <!-- Understanding your application's performance and behavior is paramount for optimal functionality. While Grafana excels in visualizing time-series data, it's important to recognize that it may fall short in providing the comprehensive monitoring and observability solution your application needs, as it primarily focuses on data visualization.
 
-For a truly holistic approach to managing your applications' performance and behavior, you need a tool that offers advanced capabilities beyond visualization. 
+For a truly holistic approach to managing your applications' performance and behavior, you need a tool that offers advanced capabilities beyond visualization.
 
 With over 14k+ Github stars, 100+ contributors, and 20k+ community members, SigNoz can be right alternative to Grafana as it is also open-source. SigNoz provides a one-stop solution to all your observability needs with logs, metrics, and traces under a single pane of glass. -->
 

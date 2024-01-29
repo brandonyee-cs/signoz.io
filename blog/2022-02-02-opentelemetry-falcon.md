@@ -6,7 +6,7 @@ tags: [OpenTelemetry Instrumentation, Python]
 authors: [ankit_anand, ankit_nayan]
 description: OpenTelemetry provides an open-source standard with a consistent collection mechanism and data format. In this article, learn how to set up monitoring for a Falcon based web application using OpenTelemetry.
 image: /img/blog/2022/02/opentelemetry_falcon.webp
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - opentelemetry falcon
@@ -50,7 +50,7 @@ First, you need to install SigNoz. We will use OpenTelemetry to instrument the s
 
 You can get started with SigNoz using just three commands at your terminal.
 
-``` bash
+```bash
 git clone -b main https://github.com/SigNoz/signoz.git
 cd signoz/deploy/
 ./install.sh
@@ -63,7 +63,6 @@ The above instruction is for MacOS and linux distributions. For detailed instruc
 If you have installed SigNoz on your local host, you can access the UI at: [http://localhost:3301](http://localhost:3301/application)
 
 The application list shown in the dashboard is from a sample app called HOT R.O.D that comes bundled with the SigNoz installation package.
-
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_dashboard_homepage.webp" alt="Homepage SigNoz dashboard"/>
@@ -81,16 +80,18 @@ The application list shown in the dashboard is from a sample app called HOT R.O.
 
 2. Redis<br></br>
    For Mac users
+
    ```bash
    brew install redis
    brew services start redis
    ```
-   
+
    For Ubuntu users
+
    ```bash
    sudo apt install redis-server
    ```
-   
+
    You can also read a [detailed guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04) to installing Redis on Ubuntu.
 
 #### Running sample Falcon based app with OpenTelemetry
@@ -120,7 +121,7 @@ python -m pip install -r requirements/base.txt
 
 The dependencies included are briefly explained below:
 
-`opentelemetry-distro` - The distro provides a mechanism to automatically configure some of the more common options for users. It helps to get started with OpenTelemetry auto-instrumentation quickly. 
+`opentelemetry-distro` - The distro provides a mechanism to automatically configure some of the more common options for users. It helps to get started with OpenTelemetry auto-instrumentation quickly.
 
 `opentelemetry-exporter-otlp` - This library provides a way to install all OTLP exporters. You will need an exporter to send the data to SigNoz.
 
@@ -135,9 +136,9 @@ The dependencies included are briefly explained below:
 The `opentelemetry-exporter-otlp-proto-grpc` package installs the gRPC exporter which depends on the `grpcio` package. The installation of `grpcio` may fail on some platforms for various reasons. If you run into such issues, or you don't want to use gRPC, you can install the HTTP exporter instead by installing the `opentelemetry-exporter-otlp-proto-http` package. You need to set the `OTEL_EXPORTER_OTLP_PROTOCOL` environment variable to `http/protobuf` to use the HTTP exporter.
 :::
 
-
 **Step 4. Install application-specific packages**<br></br>
 This step is required to install packages specific to the application. This command figures out which instrumentation packages the user might want to install and installs it for them:
+
 ```bash
 opentelemetry-bootstrap --action=install
 ```
@@ -167,7 +168,7 @@ OTEL_EXPORTER_OTLP_PROTOCOL=grpc opentelemetry-instrument gunicorn src.app -b 0.
 ```
 
 `IP of SigNoz backend` is the IP of the machine where you installed SigNoz. If you have installed SigNoz on `localhost`, the endpoint will be `http://localhost:4317` for gRPC exporter and `http://localhost:4318` for HTTP exporter.
-      
+
 :::note
 The port numbers are 4317 and 4318 for the gRPC and HTTP exporters respectively. Remember to allow incoming requests to port **4317**/**4318** of machine where SigNoz backend is hosted.
 :::
@@ -193,6 +194,7 @@ If you have installed SigNoz on your local machine, you can access the SigNoz da
 <br></br>
 
 ### Open-source tool to visualize telemetry data
+
 SigNoz makes it easy to visualize metrics and traces captured through OpenTelemetry instrumentation.
 
 SigNoz comes with out of box RED metrics charts and visualization. RED metrics stands for:
@@ -219,7 +221,6 @@ You can then choose a particular timestamp where latency is high to drill down t
 
 You can use flamegraphs to exactly identify the issue causing the latency.
 
-
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/signoz_flamegraphs.webp" alt=""/>
     <figcaption><i>View of traces at a particular timestamp</i></figcaption>
@@ -237,6 +238,7 @@ You can also build custom metrics dashboard for your infrastructure.
 <br></br>
 
 ## Conclusion
+
 OpenTelemetry makes it very convenient to instrument your Falcon application. You can then use an open-source APM tool like SigNoz to analyze the performance of your app. SigNoz provides both metrics monitoring and distributed tracing so that you don't have to use multiple tools for your monitoring needs.
 
 You can try out SigNoz by visiting its GitHub repo 👇
@@ -261,6 +263,3 @@ If you want to read more about SigNoz 👇
 [Golang Aplication Monitoring with OpenTelemetry and SigNoz](https://signoz.io/opentelemetry/go/)
 
 [OpenTelemetry collector - complete guide](https://signoz.io/blog/opentelemetry-collector-complete-guide/)
-
-
-

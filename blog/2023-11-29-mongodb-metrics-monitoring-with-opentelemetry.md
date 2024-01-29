@@ -6,7 +6,7 @@ tags: [OpenTelemetry]
 authors: abhishek-kothari
 description: Steps to monitor MongoDB metrics with OpenTelemetry 1. Setting up OpenTelemetry Collector 2. Configuring OpenTelemetry Collector to collect MongoDB metrics 3. Send collected metrics to SigNoz...
 image: /img/blog/2023/11/opentelemetry-mongodb-metrics-cover.jpeg
-hide_table_of_contents: true
+hide_table_of_contents: false
 keywords:
   - opentelemetry
   - signoz
@@ -19,13 +19,14 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/mongodb-metrics-monitoring-with-opentelemetry/"/>
 </head>
 
-For high throughput systems that focus on gathering continuous data or have a heavy read-only traffic, NoSQL databases came as a blessing. NoSQL databases, due to their unstructured nature of data, allow relatively faster inserts as well as reads compared to relational databases. One such database that’s quite popular today is MongoDB. In this article, our focus would be to understand how to extract metrics out of MongoDB and ship them to Signoz using the Open Telemetry collector. 
+For high throughput systems that focus on gathering continuous data or have a heavy read-only traffic, NoSQL databases came as a blessing. NoSQL databases, due to their unstructured nature of data, allow relatively faster inserts as well as reads compared to relational databases. One such database that’s quite popular today is MongoDB. In this article, our focus would be to understand how to extract metrics out of MongoDB and ship them to Signoz using the Open Telemetry collector.
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2023/11/opentelemetry-mongodb-metrics-cover.webp)
 
 In this tutorial, we cover:
+
 - [A Brief Overview of MongoDB](#a-brief-overview-of-mongodb)
 - [A Brief Overview of OpenTelemetry](#a-brief-overview-of-opentelemetry)
 - [How does OpenTelemetry Collector collect data?](#how-does-opentelemetry-collector-collect-data)
@@ -37,13 +38,11 @@ In this tutorial, we cover:
 - [Conclusion](#conclusion)
 - [Further Reading](#further-reading)
 
-
-
 If you want to jump straight into implementation, start with this [prerequisites](#prerequisites) section.
 
 ## A Brief Overview of MongoDB
 
-First released in early 2009, MongoDB is one of the most popular NoSQL databases in use today. MongoDB practically made the concept of NoSQL more popular. As of today, MongoDB is available as a community edition database and a licensed database for use similar to MySQL and PostgreSQL in the relational database world. 
+First released in early 2009, MongoDB is one of the most popular NoSQL databases in use today. MongoDB practically made the concept of NoSQL more popular. As of today, MongoDB is available as a community edition database and a licensed database for use similar to MySQL and PostgreSQL in the relational database world.
 
 MongoDB is known for its high throughput for the insertion of records and, hence, is generally utilized for systems that have high insertions or reads expected primarily for unstructured data. This nature of usage makes it necessary to monitor MongoDB to ensure that it performs at its best and is scaled as needed.
 
@@ -78,7 +77,6 @@ receivers:
 ```
 
 An OTLP receiver can receive data via gRPC or HTTP using the <a href = "https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md" rel="noopener noreferrer nofollow" target="_blank">OTLP</a> format. There are advanced configurations that you can enable via the YAML file.
-
 
 Here’s a sample configuration for an otlp receiver.
 
@@ -120,11 +118,11 @@ Now that you understand how OpenTelemetry collector collects data, let’s see w
 
 ## Prerequisites
 
-This tutorial assumes that you have the Opentelemetry collector installed on the same host as your database if you plan to monitor a local database. 
+This tutorial assumes that you have the Opentelemetry collector installed on the same host as your database if you plan to monitor a local database.
 
 ### Preparing MongoDB database setup
 
-For the purpose of this tutorial, we can use any of the following: 
+For the purpose of this tutorial, we can use any of the following:
 
 - A local MongoDB installation
 - A free/paid hosted service like <a href = "https://www.mongodb.com/atlas/database" rel="noopener noreferrer nofollow" target="_blank">MongoDB Atlas</a>
@@ -132,14 +130,13 @@ For the purpose of this tutorial, we can use any of the following:
 
 This section guides you through quick database setup using <a href = "https://docs.docker.com/engine/install" rel="noopener noreferrer nofollow" target="_blank">Docker</a> and <a href = "https://docs.docker.com/compose" rel="noopener noreferrer nofollow" target="_blank">Docker-Compose</a>.
 
-This would help you get rid of any technical challenges related to setting up the agent or database locally. The below links can help you with the Docker installation: 
+This would help you get rid of any technical challenges related to setting up the agent or database locally. The below links can help you with the Docker installation:
 
 - <a href = "https://docs.docker.com/desktop/install/linux-install/" rel="noopener noreferrer nofollow" target="_blank">Docker Desktop for Linux</a>
 - <a href = "https://docs.docker.com/desktop/install/mac-install" rel="noopener noreferrer nofollow" target="_blank">Docker Desktop for Mac (macOS)</a>
 - <a href = "https://docs.docker.com/desktop/install/windows-install" rel="noopener noreferrer nofollow" target="_blank">Docker Desktop for Windows</a>
 
-
-Once you have the Docker installation ready to go, create the below `docker-compose.yaml` file. Note that the `mongodbreceiver` as of today, supports only v4.0+ and v5.x. Thus, we will be using the initial stable release of v5. 
+Once you have the Docker installation ready to go, create the below `docker-compose.yaml` file. Note that the `mongodbreceiver` as of today, supports only v4.0+ and v5.x. Thus, we will be using the initial stable release of v5.
 
 ```bash
 version: '3.8'
@@ -158,7 +155,7 @@ volumes:
   dbdata6:
 ```
 
-Once done, execute the below command from the same folder to get the MongoDB database server up and running. 
+Once done, execute the below command from the same folder to get the MongoDB database server up and running.
 
 ```yaml
 docker-compose up -d
@@ -204,7 +201,7 @@ Create a config.yaml file in the otelcol-contrib folder. This configuration file
 
 **Note:**
 
-The configuration file should be created in the same directory where you unpack the `otel-collector-contrib` binary. In case you have globally installed the binary, it is ok to create on any path. 
+The configuration file should be created in the same directory where you unpack the `otel-collector-contrib` binary. In case you have globally installed the binary, it is ok to create on any path.
 
 ```yaml
 receivers:
@@ -248,7 +245,7 @@ service:
       exporters: [otlp]
 ```
 
-You would need to replace `region` and `signoz-token` in the above file with the region of your choice (for Signoz Cloud) and token obtained from Signoz Cloud → Settings → Ingestion Settings. 
+You would need to replace `region` and `signoz-token` in the above file with the region of your choice (for Signoz Cloud) and token obtained from Signoz Cloud → Settings → Ingestion Settings.
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/common/ingestion-key-details.webp" alt="You can find ingestion details in the SigNoz dashboard"/>
@@ -256,9 +253,9 @@ You would need to replace `region` and `signoz-token` in the above file with the
 </figure>
 <br />
 
-Additionally, replace the MySQL username and password as well. In case you are using the `docker-compose` based setup, the username will be `root`, and the password will be `password123`. 
+Additionally, replace the MySQL username and password as well. In case you are using the `docker-compose` based setup, the username will be `root`, and the password will be `password123`.
 
-The above configuration is quite simple - Whenever you wish to monitor a different remote self-hosted database (other than MongoDB Atlas), all you would need to change is `endpoint` url for the `mongodbreceiver`. You can also monitor multiple MongoDB servers by adding multiple receivers as shown below: 
+The above configuration is quite simple - Whenever you wish to monitor a different remote self-hosted database (other than MongoDB Atlas), all you would need to change is `endpoint` url for the `mongodbreceiver`. You can also monitor multiple MongoDB servers by adding multiple receivers as shown below:
 
 ```yaml
 receivers:
@@ -345,12 +342,11 @@ You can stop the collector service with the following command:
 kill "$(< otel-pid)"
 ```
 
-You should start seeing the metrics on your Signoz Cloud UI in about 30 seconds. 
+You should start seeing the metrics on your Signoz Cloud UI in about 30 seconds.
 
 ## Monitoring with Signoz Dashboard
 
 Once the above setup is done, you will be able to access the metrics in the SigNoz dashboard. You can go to the Dashboards tab and try adding a new panel. You can learn how to create dashboards in SigNoz [here](https://signoz.io/docs/userguide/manage-dashboards-and-panels/).
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/mongodb_metrics.webp" alt="MongoDB metrics collected using Opentelemetry Collector"/>
@@ -360,9 +356,6 @@ Once the above setup is done, you will be able to access the metrics in the SigN
 
 You can easily create charts with [query builder](https://signoz.io/docs/userguide/create-a-custom-query/#sample-examples-to-create-custom-query) in SigNoz. Here are the [steps](https://signoz.io/docs/userguide/manage-panels/#steps-to-add-a-panel-to-a-dashboard) to add a new panel to the dashboard.
 
-
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/mongodb_create_dashboard.webp" alt="Creating a dashboard panel for average queries executed"/>
     <figcaption><i>Creating a dashboard panel for average queries executed</i></figcaption>
@@ -371,8 +364,6 @@ You can easily create charts with [query builder](https://signoz.io/docs/usergu
 
 You can build a complete dashboard around various metrics emitted. Here’s a look at a sample dashboard we built out using the metrics collected. If you want to get started quickly with MongoDB monitoring, you can load this <a href = "" rel="noopener noreferrer nofollow" target="_blank">MongoDB JSON</a> in the SigNoz dashboard and get started.
 
-
-
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/mongodb_dashboard.webp" alt="Complete MongoDB monitoring Dashboard"/>
     <figcaption><i>Complete MongoDB monitoring Dashboard</i></figcaption>
@@ -380,8 +371,6 @@ You can build a complete dashboard around various metrics emitted. Here’s a lo
 <br/>
 
 You can also create alerts on any metric. Learn how to create alerts [here](https://signoz.io/docs/userguide/alerts-management/).
-
-
 
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/mongodb_alerts.webp" alt="Creating alerts from Dashboard panels"/>
@@ -393,38 +382,38 @@ You can also create alerts on any metric. Learn how to create alerts [here](htt
 
 The <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/mongodbreceiver" rel="noopener noreferrer nofollow" target="_blank">mongodbreceiver</a> available with Open Telemetry Collector Contrib collects the below set of metrics and labels.
 
-| Metric | Description | Attributes | Type |
-| --- | --- | --- | --- |
-| mongodb.cache.operations | The number of Cache operations of the instance | type | Sum |
-| mongodb.collection.count | Total collections | database | Sum |
-| mongodb.data.size | Total size of the collection | database | Sum |
-| mongodb.connection.count | Total connections by type | connection_type, database | Sum |
-| mongodb.extent.count | The total number of extents | database | Sum |
-| mongodb.global_lock.time | Total time for which global_lock is held | none | Sum |
-| mongodb.index.count | Total number of indexes | database | Sum |
-| mongodb.index.size | Total size of indexes | database | Sum |
-| mongodb.memory.usage | Net memory used | database | Sum |
-| mongodb.object.count | Total number of objects | database | Sum |
-| mongodb.operation.latency.time | Latency in operations by operation_type | operation_latency | Gauge |
-| mongodb.operation.count | Total number of operations of each type | operation | Sum |
-| mongodb.operation.repl.count | Number of replicated operations executed | operation | Sum |
-| mongodb.storage.size | Total storage allocated to the collection | database | Sum |
-| mongodb.database.count | Total databases that exist | none | Sum |
-| mongodb.index.access.count | Total indexes that have been accessed | database,collection | Sum |
-| mongodb.document.operation.count | Number of document operations executed | database, operation | Sum |
-| mongodb.network.io.receive | Number of bytes received - Indicates inflow rate of data | none | Sum |
-| mongodb.network.io.transmit | Number of bytes transmitted out | none | Sum |
-| mongodb.network.request.count | Total number of requests received by the server | none | Sum |
-| mongodb.operation.time | Time spent performing specific operations | operation | Sum |
-| mongodb.session.count | Number of active session | none | Sum |
-| mongodb.cursor.count | Count of total open cursors | none | Sum |
-| mongodb.cursor.timeout.count | Count of cursors that timed out  | none | Sum |
-| mongodb.lock.acquire.count | Number of times lock was acquired in specific mode | database, lock_type, lock_mode | Sum |
-| mongodb.lock.acquire.wait_count | Number of times lock acquisitions encountered wait because the locks were held in conflicting mode | database, lock_type, lock_mode | Sum |
-| mongodb.lock.acquire.time | Cumulative wait time for lock acquisition | database, lock_type, lock_mode | Sum |
-| mongodb.lock.deadlock.count | Number of times lock acquisition acquired deadlocks | database, lock_type, lock_mode | Sum |
-| mongodb.health | Health status of MongoDB | none | Gauge |
-| mongodb.uptime | Time the server has been up and running | none | Sum |
+| Metric                           | Description                                                                                        | Attributes                     | Type  |
+| -------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------ | ----- |
+| mongodb.cache.operations         | The number of Cache operations of the instance                                                     | type                           | Sum   |
+| mongodb.collection.count         | Total collections                                                                                  | database                       | Sum   |
+| mongodb.data.size                | Total size of the collection                                                                       | database                       | Sum   |
+| mongodb.connection.count         | Total connections by type                                                                          | connection_type, database      | Sum   |
+| mongodb.extent.count             | The total number of extents                                                                        | database                       | Sum   |
+| mongodb.global_lock.time         | Total time for which global_lock is held                                                           | none                           | Sum   |
+| mongodb.index.count              | Total number of indexes                                                                            | database                       | Sum   |
+| mongodb.index.size               | Total size of indexes                                                                              | database                       | Sum   |
+| mongodb.memory.usage             | Net memory used                                                                                    | database                       | Sum   |
+| mongodb.object.count             | Total number of objects                                                                            | database                       | Sum   |
+| mongodb.operation.latency.time   | Latency in operations by operation_type                                                            | operation_latency              | Gauge |
+| mongodb.operation.count          | Total number of operations of each type                                                            | operation                      | Sum   |
+| mongodb.operation.repl.count     | Number of replicated operations executed                                                           | operation                      | Sum   |
+| mongodb.storage.size             | Total storage allocated to the collection                                                          | database                       | Sum   |
+| mongodb.database.count           | Total databases that exist                                                                         | none                           | Sum   |
+| mongodb.index.access.count       | Total indexes that have been accessed                                                              | database,collection            | Sum   |
+| mongodb.document.operation.count | Number of document operations executed                                                             | database, operation            | Sum   |
+| mongodb.network.io.receive       | Number of bytes received - Indicates inflow rate of data                                           | none                           | Sum   |
+| mongodb.network.io.transmit      | Number of bytes transmitted out                                                                    | none                           | Sum   |
+| mongodb.network.request.count    | Total number of requests received by the server                                                    | none                           | Sum   |
+| mongodb.operation.time           | Time spent performing specific operations                                                          | operation                      | Sum   |
+| mongodb.session.count            | Number of active session                                                                           | none                           | Sum   |
+| mongodb.cursor.count             | Count of total open cursors                                                                        | none                           | Sum   |
+| mongodb.cursor.timeout.count     | Count of cursors that timed out                                                                    | none                           | Sum   |
+| mongodb.lock.acquire.count       | Number of times lock was acquired in specific mode                                                 | database, lock_type, lock_mode | Sum   |
+| mongodb.lock.acquire.wait_count  | Number of times lock acquisitions encountered wait because the locks were held in conflicting mode | database, lock_type, lock_mode | Sum   |
+| mongodb.lock.acquire.time        | Cumulative wait time for lock acquisition                                                          | database, lock_type, lock_mode | Sum   |
+| mongodb.lock.deadlock.count      | Number of times lock acquisition acquired deadlocks                                                | database, lock_type, lock_mode | Sum   |
+| mongodb.health                   | Health status of MongoDB                                                                           | none                           | Gauge |
+| mongodb.uptime                   | Time the server has been up and running                                                            | none                           | Sum   |
 
 ## Conclusion
 
