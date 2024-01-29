@@ -753,15 +753,6 @@ a.no-underline {
   position: relative;
 }
 
-:root {
-  --primary-nav-height: 72px;
-  --content-spacing: 64px;
-  --scroll-padding-top: calc(
-    var(--primary-nav-height) + var(--content-spacing)
-  );
-  scroll-padding-top: var(--scroll-padding-top);
-}
-
 .blog-post-page {
   .main-wrapper {
     .container {
@@ -796,7 +787,7 @@ a.no-underline {
               .cta-image-container {
                 cursor: pointer;
                 position: sticky;
-                top: var(--scroll-padding-top);
+                top: 136px; /* --primary-nav-height + --content-spacing */
                 height: 240px;
 
                 margin: 0 16px;
