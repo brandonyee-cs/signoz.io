@@ -1,7 +1,7 @@
 ---
-title: Getting started with OpenTelemetry visualization
+title: Getting Started with OpenTelemetry Visualization
 slug: opentelemetry-visualization
-date: 2023-09-14
+date: 2024-01-29
 tags: [OpenTelemetry, SigNoz]
 authors: [ankit_anand]
 description: OpenTelemetry provides language-specific client libraries to instrument application code for generating telemetry data. You can then use a backend analysis tool to visualize the collected OpenTelemetry data. In this article, we will see what types of OpenTelemetry visualizations are possible and how to use a backend analysis tool for OpenTelemetry visualization...
@@ -45,7 +45,7 @@ OpenTelemetry provides instrumentation in almost all the major programming langu
 - Community<br></br>
 OpenTelemetry is backed by a huge community and is incubating under CNCF. It is also backed by major cloud vendors. The huge community support makes it a safe choice for future-proofing your instrumentation layer.
 
-<SignUps />
+[![Try SigNoz Cloud CTA](/img/blog/2024/01/opentelemetry-collector-try-signoz-cloud-cta.webp)](https://signoz.io/teams/)
 
 But once the telemetry data is collected with OpenTelemetry, it needs to be stored and visualized for end-user consumption. A good visualization of telemetry data collected by OpenTelemetry can lead to quicker insights to debug performance issues.
 
@@ -122,7 +122,7 @@ Using SigNoz dashboards, you can run and visualize aggregated trace data collect
 You can also analyze the trace data using a set of powerful filters like `status`, `operation`, `HTTP codes`, etc. SigNoz uses OpenTelemetry semantic conventions to visualize this data.
 
 <figure data-zoomable align='center'>
-    <img src="/img/blog/common/trace_filter_apply_aggregates.webp" alt="Trace aggregates on SigNoz dashboard"/>
+    <img className="box-shadowed-image" src="/img/blog/common/trace_filter_apply_aggregates.webp" alt="Trace aggregates on SigNoz dashboard"/>
     <figcaption><i>Visualize  and analyze trace aggregates with SigNoz</i></figcaption>
 </figure>
 
@@ -133,8 +133,8 @@ You can also analyze the trace data using a set of powerful filters like `status
 OpenTelemetry provides [receivers](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver) for receiving metrics from metrics exporters of a lot of common technologies. For example, there are receivers for Redis, AWS container insights, Docker stats, etc. Using these receivers, you can build custom dashboards with SigNoz.
 
 <figure data-zoomable align='center'>
-    <img src="/img/blog/2022/06/k8s_node_monitoring.webp" alt="Node metrics monitoring with SigNoz"/>
-    <figcaption><i>Using OpenTelemetry receivers, you can create custom dashboards with SigNoz. For example, this is a custom dashboard for Kubernetes host metrics monitoring</i></figcaption>
+    <img src="/img/blog/common/hostmetrics-dashboard-overview.webp" alt="Hostmetrics dashboard with SigNoz"/>
+    <figcaption><i>Using OpenTelemetry receivers, you can create custom dashboards with SigNoz. For example, this is a custom dashboard for host metrics monitoring</i></figcaption>
 </figure>
 
 
@@ -149,16 +149,16 @@ Below are the steps required to start with OpenTelemetry visualization:
 - Configure OpenTelemetry Exporters to send data to SigNoz
 - Visualize and analyze telemetry data using SigNoz dashboards
 
-OpenTelemetry has language-specific instrumentation steps. You can explore our blog for specific instructions for different programming languages:
+OpenTelemetry has language-specific instrumentation steps. You can explore our docs for specific instructions for different programming languages:
 
-- [Java](https://signoz.io/blog/opentelemetry-spring-boot/)
-- [Python](https://signoz.io/blog/opentelemetry-django/)
-- [Nodejs](https://signoz.io/opentelemetry/nodejs/)
-- [PHP](https://signoz.io/blog/opentelemetry-php/)
-- [Ruby](https://signoz.io/blog/opentelemetry-ruby/)
-- [Rust](https://signoz.io/blog/opentelemetry-rust/)
-- [Elixir](https://signoz.io/blog/opentelemetry-elixir/)
-- [.NET](https://signoz.io/blog/opentelemetry-dotnet/)
+- [Java](https://signoz.io/docs/instrumentation/java/)
+- [Python](https://signoz.io/docs/instrumentation/python/)
+- [Nodejs](https://signoz.io/docs/instrumentation/javascript/)
+- [PHP](https://signoz.io/docs/instrumentation/php/)
+- [Ruby](https://signoz.io/docs/instrumentation/ruby-on-rails/)
+- [Rust](https://signoz.io/docs/instrumentation/rust/)
+- [Elixir](https://signoz.io/docs/instrumentation/elixir/)
+- [.NET](https://signoz.io/docs/instrumentation/dotnet/)
 
 <GetStartedSigNoz />
 

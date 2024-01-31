@@ -107,9 +107,9 @@ The OpenTelemetry Collector or the OTel collector enables a vendor-netrual way t
 
 ### Key Components of OpenTelemetry
 
-OpenTelemetry has a lot of components in its ecosystem. Everything in OpenTelemetry is based on [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/)s, which are a detailed set of rules and guidelines. It defines what telemetry data (like traces, metrics, and logs) should look like and how it should be collected, processed, and exported.
+OpenTelemetry has a lot of components in its ecosystem. Everything in OpenTelemetry is based on [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/), which are a detailed set of rules and guidelines. It defines what telemetry data (like traces, metrics, and logs) should look like and how it should be collected, processed, and exported.
 
-Users who are getting started with OpenTelemetry sometimes get confused. But as an end-user, you only need to know about two key components to get started.
+Users who are getting started with OpenTelemetry sometimes get confused with so many components in the OpenTelemetry ecosystem. But as an end-user, you only need to know about two key components to get started.
 
 - **OpenTelemetry Client libraries**<br></br>
     These are specific implementations of the OpenTelemetry API and SDK for different programming languages. They are the actual packages or modules that developers integrate into their software applications to collect, process, and export telemetry data (metrics, logs, and traces).
@@ -119,7 +119,7 @@ Users who are getting started with OpenTelemetry sometimes get confused. But as 
 
 [OpenTelemetry Collector - architecture and configuration guide](https://signoz.io/blog/opentelemetry-collector-complete-guide/)
 
-Apart from these two there are a few other OpenTelemetry components too which are useful for end-users. For example, [OpenTelemetry Operator](https://signoz.io/blog/opentelemetry-operator-complete-guide/) is a Kubernetes operator designed to simplify the deployment and management of the OpenTelemetry Collector in Kubernetes environments.
+Apart from these two, there are a few other OpenTelemetry components too which are useful for end-users. For example, [OpenTelemetry Operator](https://signoz.io/blog/opentelemetry-operator-complete-guide/) is a Kubernetes operator designed to simplify the deployment and management of the OpenTelemetry Collector in Kubernetes environments.
 
 <!-- ### Advantages of OpenTelemetry
 
