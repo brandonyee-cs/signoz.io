@@ -267,19 +267,19 @@ const config = {
     ],
     // Redocusaurus config
     [
-      'redocusaurus',
+      "redocusaurus",
       {
         // Plugin Options for loading OpenAPI files
         specs: [
           {
-            spec: 'openapi/alerts.yaml',
-            route: '/api_reference',
+            spec: "openapi/alerts.yaml",
+            route: "/api_reference",
           },
         ],
         // Theme Options for modifying how redoc renders them
         theme: {
           // Change with your site colors
-          primaryColor: '#1890ff',
+          primaryColor: "#1890ff",
         },
       },
     ],
@@ -304,6 +304,7 @@ const config = {
          */
         path: "./opentelemetry",
         blogTitle: "OpenTelemetry",
+        blogSidebarCount: 0,
       },
     ],
     [
