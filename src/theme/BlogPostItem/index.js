@@ -13,6 +13,8 @@ function useContainerClassName(isBlogPostPage) {
   return !isBlogPostPage ? "margin-bottom--xl" : "isBlogPostPage";
 }
 
+const TEAMS_PAGE_URL = "https://signoz.io/teams/";
+
 export default function BlogPostItem({ children, className }) {
   const { isBlogPostPage } = useBlogPost();
   const containerClassName = useContainerClassName(isBlogPostPage);
@@ -31,7 +33,7 @@ export default function BlogPostItem({ children, className }) {
         {isBlogPostPage && (
           <div className="blog-post-cta">
             <Link
-              to="/teams"
+              href={TEAMS_PAGE_URL}
               className="cta-image-container"
               id="try-signoz-cloud-blogpage-cta"
             >
