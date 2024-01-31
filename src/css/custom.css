@@ -838,16 +838,12 @@ a.no-underline {
 }
 
 @media (max-width: 1279px) {
-  .isBlogPostPage {
-    .blog-cta-container {
-      .blog-post-cta {
-        display: none !important;
-      }
+  .isBlogPostPage .blog-cta-container .blog-post-cta {
+    display: none !important;
+  }
 
-      .blog-post-content {
-        flex: 1 !important;
-      }
-    }
+  .isBlogPostPage .blog-cta-container .blog-post-content {
+    flex: 1 !important;
   }
 }
 
