@@ -1,5 +1,5 @@
 ---
-title: A Practical Guide to Logging in Microservices []
+title: A Practical Guide to Logging in Microservices [Includes Best Practices]
 slug: microservices-logging
 date: 2024-02-01
 tags: [Tech Tutorial, Log Management]
