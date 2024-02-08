@@ -11,8 +11,7 @@ slug: technical-content-writer-in
 
 </head>
 
-## Technical Content Writer (Remote) (India) 
-
+## Technical Content Writer (Remote) (India)
 
 SigNoz is a global open source project with users in 30+ countries. We are building an open-source application monitoring which helps developers monitor their applications and troubleshoot problems, quickly.
 

@@ -22,6 +22,11 @@ keywords:
 
 # SigNoz Technical Writer Program - Write for us
 
+:::note
+Our Technical Writer Program is currently on pause. We hope to resume it soon. Stay tuned!
+:::
+
+
 Are you a developer who loves creating content and getting it across to a global audience? We're looking for developer-authors and experienced technical writers who can contribute to our community writer program.
 
 <div align="center">
