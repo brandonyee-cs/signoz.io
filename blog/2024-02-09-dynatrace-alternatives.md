@@ -14,7 +14,8 @@ keywords:
   - dynatrace competitors
   - dynatrace
   - application monitoring
-  - observability
+  - opentelemetry
+  - signoz
 ---
 
 <head>
@@ -64,8 +65,6 @@ Out-of-box charts for application metrics like p99 latency, error rates, request
 </figure>
 <br/>
 
-
-
 Distributed tracing capabilities: If you found something suspicious in the metric, you can seamlessly move to traces around that time to investigate further.
 
 <figure data-zoomable align='center'>
@@ -73,7 +72,6 @@ Distributed tracing capabilities: If you found something suspicious in the metri
     <figcaption><i>Move from metrics to traces at any point of time which needs more analysis</i></figcaption>
 </figure>
 <br/>
-
 
 Traces aggregation: You can do aggregates on traces to get deeper insights from your application and infrastructure.
 
@@ -83,7 +81,6 @@ Traces aggregation: You can do aggregates on traces to get deeper insights from 
 </figure>
 <br/>
 
-
 Log management: SigNoz also provides logs that can be intelligently correlated with traces for quick application debugging.
 
 <figure data-zoomable align='center'>
@@ -91,7 +88,6 @@ Log management: SigNoz also provides logs that can be intelligently correlated w
     <figcaption><i>With log management, you have everything under a single dashboard to debug application performance issues</i></figcaption>
 </figure>
 <br/>
-
 
 The pricing of SigNoz is usage-based. The cloud plan starts at $199 per month, which includes data usage. After that, logs and traces are charged at $0.3 per GB ingested and metrics at $0.1 per mn samples.
 
@@ -124,7 +120,6 @@ The <a href = "https://www.datadoghq.com/pricing/?product=log-management#product
     <figcaption><i>Datadog Dashboard (Source: Datadog website)</i></figcaption>
 </figure>
 <br/>
-
 
 ## AppDynamics
 
@@ -172,8 +167,6 @@ New Relic's pricing is user-centric, with costs determined by the volume of data
 </figure>
 <br/>
 
-
-
 ## ManageEngine Application Monitor
 
 <a href = "https://www.manageengine.com/products/applications_manager/" rel="noopener noreferrer nofollow" target="_blank" >ManageEngine Application Monitor</a> is an application performance monitoring solution that provides deep visibility into the performance and user experience of complex distributed infrastructure from a single console. It serves as a good Dynatrace alternative, offering several key features:
@@ -191,7 +184,6 @@ The pricing for ManageEngine Application Monitor is structured around the number
     <figcaption><i>APM (Source: ManageEngine Website)</i></figcaption>
 </figure>
 <br/>
-
 
 ## Sematex
 
