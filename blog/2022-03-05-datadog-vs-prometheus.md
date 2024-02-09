@@ -1,5 +1,5 @@
 ---
-title: DataDog vs Prometheus - Comprehensive Comparison Guide [Updated for 2024]
+title: DataDog vs Prometheus - Comprehensive Comparison Guide [2024]
 slug: datadog-vs-prometheus
 date: 2024-02-07
 tags: [Tools Comparison, Prometheus]
@@ -43,6 +43,7 @@ The major difference between DataDog and Prometheus lies in the scope of monitor
 On the other hand, Prometheus is an open-source metrics monitoring tool used to monitor metrics or time-series data.
 
 Some of the key differences between DataDog and Prometheus at a glance:
+
 | Categories | Datadog | Prometheus |
 | --- | --- | --- |
 | Deployment | Cloud-based SaaS solution | Manual download |
