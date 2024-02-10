@@ -246,4 +246,4 @@ If you liked what you read, then check out our GitHub repo 👇
 
 [Log Monitoring 101 Detailed Guide](https://signoz.io/blog/log-monitoring/)
 
-[OpenTelemetry Logs - A Complete Introduction & Implementation | SigNoz](https://signoz.io/blog/opentelemetry-logs/)
+[Top Log Monitoring tools in spotlight](https://signoz.io/blog/log-monitoring-tools/)

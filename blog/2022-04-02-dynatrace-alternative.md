@@ -187,7 +187,7 @@ Some of the key advantages of using OpenTelemetry are:
 #### **Related Content**
 
 **[SigNoz vs Dynatrace](https://signoz.io/comparisons/signoz-vs-dynatrace/)**<br></br>
-**[Is a $1 million observability bill worth it?](https://signoz.io/blog/justifying-a-million-dollar-observability-bill/)**<br></br>
+**[Top 9 Dynatrace Alternatives](https://signoz.io/blog/dynatrace-alternatives/)**<br></br>
 
 
 
