@@ -98,7 +98,7 @@ git clone https://github.com/SigNoz/sample-fastAPI-app.git
 cd sample-fastapi-app/
 cd app
 ```
-It’s a good practice to create virtual environments for running Python apps, so we will using a virtual python environment for this sample fastAPI app.
+It’s a good practice to create virtual environments for running Python apps, so we will be using a virtual python environment for this sample fastAPI app.
 
 #### Create a Virtual Environment
 ```bash
