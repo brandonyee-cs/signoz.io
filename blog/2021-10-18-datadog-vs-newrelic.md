@@ -76,50 +76,6 @@ Here’s a quick overview of the overall platform features and functionality of 
 🟡 - Limited
 
 
-## Log Management: Datadog for more filters, New Relic for quick-start
-
-### New Relic
-
-New Relic automatically collected logs from my Java application and showed them in their logs tab. It allows you to search your logs using Lucene, an open-source search library that allows for indexing and searching of text by breaking down text into searchable terms.
-
-New Relic also gives you the option to query your log data using NRQL. It’s a query language developed by New Relic which has a SQL-like syntax.
-
-<figure data-zoomable align='center'>
-    <img className="box-shadowed-image" src="/img/blog/2024/02/new-relic-log-management-dashboard.webp" alt="Log Management Dashboard in New Relic"/>
-    <figcaption><i>Log Management Dashboard in New Relic showing logs from instrumented Java application</i></figcaption>
-</figure>
-<br/>
-
-Other key features in New Relic’s log management and how they worked with my Java application logs are:
-
-- Takes out attributes automatically from logs.<br></br>
-
-    <figure data-zoomable align='center'>
-    <img className="box-shadowed-image" src="/img/blog/2024/02/new-relic-log-attributes.webp" alt="Log Attributes in New Relic"/>
-    <figcaption><i>Attributes filtered from Java application logs in New Relic</i></figcaption>
-    </figure>
-    <br/>
-    
-- It provides a feature called patterns, which claims to make log data discoverable without spending a lot of time. However, it couldn’t detect any pattern in my Java application logs.
-
-- Gives you tools to manage your log data by optimizing for storage by dropping filters.
-
-### Datadog
-
-For Datadog, there was no automatic collection of logs. Collecting logs is disabled by default in the Datadog agent, and you need to enable it in the agent’s config file. You also need to activate a java integration that will collect application logs from a file.
-
-<figure data-zoomable align='center'>
-    <img className="box-shadowed-image" src="/img/blog/2024/02/datadog-logs-tab.webp" alt="Log Tab in Datadog"/>
-    <figcaption><i>Log Tab in Datadog showing logs from my Spring Boot Application</i></figcaption>
-</figure>
-<br/>
-
-Both Datadog and New Relic have a feature to find patterns in logs automatically. While Datadog showed some patterns from my application logs, New Relic did not. Datadog offers more options to slice and dice your log data in its UI. 
-
-Both tools provide ways to optimize log data ingestion at scale. Datadog allows you to use your own cloud storage for logs, which seems to be a handy feature for storing logs for the long term.
-
-Compared to New Relic, setting up log collection took more time in Datadog. But Datadog provides more visualization options to see your logs.
-
 ## APM: Datadog for more control, New Relic for Simplicity
 
 I instrumented a sample Java application and sent data to both Datadog and New Relic for APM. The steps are almost the same in both Datadog and New Relic, with New Relic having a few extra steps. Both New Relic and Datadog require you to install their agent as well as a programming language-specific agent, which, in my case, was a Java agent.
@@ -165,6 +121,53 @@ You can get flamegraphs for your traces in New Relic, too. Compared to Datadog, 
 <br/>
 
 Overall, if you need a simpler experience, then choose New Relic’s APM. But if you need more control over what things you can do with your data, then choose Datadog’s APM.
+
+
+## Log Management: Datadog for more filters, New Relic for quick-start
+
+### New Relic
+
+New Relic automatically collected logs from my Java application and showed them in their logs tab. It allows you to search your logs using Lucene, an open-source search library that allows for indexing and searching of text by breaking down text into searchable terms.
+
+New Relic also gives you the option to query your log data using NRQL. It’s a query language developed by New Relic which has a SQL-like syntax.
+
+<figure data-zoomable align='center'>
+    <img className="box-shadowed-image" src="/img/blog/2024/02/new-relic-log-management-dashboard.webp" alt="Log Management Dashboard in New Relic"/>
+    <figcaption><i>Log Management Dashboard in New Relic showing logs from instrumented Java application</i></figcaption>
+</figure>
+<br/>
+
+Other key features in New Relic’s log management and how they worked with my Java application logs are:
+
+- Takes out attributes automatically from logs.<br></br>
+
+    <figure data-zoomable align='center'>
+    <img className="box-shadowed-image" src="/img/blog/2024/02/new-relic-log-attributes.webp" alt="Log Attributes in New Relic"/>
+    <figcaption><i>Attributes filtered from Java application logs in New Relic</i></figcaption>
+    </figure>
+    <br/>
+    
+- It provides a feature called patterns, which claims to make log data discoverable without spending a lot of time. However, it couldn’t detect any pattern in my Java application logs.
+
+- Gives you tools to manage your log data by optimizing for storage by dropping filters.
+
+### Datadog
+
+For Datadog, there was no automatic collection of logs. Collecting logs is disabled by default in the Datadog agent, and you need to enable it in the agent’s config file. You also need to activate a java integration that will collect application logs from a file.
+
+<figure data-zoomable align='center'>
+    <img className="box-shadowed-image" src="/img/blog/2024/02/datadog-logs-tab.webp" alt="Log Tab in Datadog"/>
+    <figcaption><i>Log Tab in Datadog showing logs from my Spring Boot Application</i></figcaption>
+</figure>
+<br/>
+
+Both Datadog and New Relic have a feature to find patterns in logs automatically. While Datadog showed some patterns from my application logs, New Relic did not. Datadog offers more options to slice and dice your log data in its UI. 
+
+Both tools provide ways to optimize log data ingestion at scale. Datadog allows you to use your own cloud storage for logs, which seems to be a handy feature for storing logs for the long term.
+
+Compared to New Relic, setting up log collection took more time in Datadog. But Datadog provides more visualization options to see your logs.
+
+
 
 ## Infrastructure Monitoring: Tie, decide based on cost
 
