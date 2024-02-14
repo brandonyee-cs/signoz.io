@@ -209,13 +209,13 @@ Both Datadog and New Relic are expensive tools. The following points might help 
     - User Seats
 - You get 100GB of free data ingest each month.
 - Post 100GB, you need to pay $0.3/GB or $0.5/GB ingested based on your plan.
-- User seats can get expensive. New Relic allows only 5 full platform users in its standard plan, and the cost of full platform users can be up to $549/user per month for enterprise plans.
+- [User seats](https://signoz.io/blog/pricing-comparison-signoz-vs-datadog-vs-newrelic-vs-grafana/#no-user-based-pricing-collaborate-seamlessly-with-signoz) can get expensive. New Relic allows only 5 full platform users in its standard plan, and the cost of full platform users can be up to $549/user per month for enterprise plans.
 
 ### Datadog
 
 - Datadog is known for being very expensive - here’s a <a href = "https://blog.pragmaticengineer.com/datadog-65m-year-customer-mystery/" rel="noopener noreferrer nofollow" target="_blank" >scoop</a> on Datadog’s 65 million dollar bill.
 - Complex SKU-based pricing. Each product(like APM, logs, infra) is priced differently, and it’s very hard to predict your actual usage.
-- Datadog defines its standard set of metrics; anything outside that definition falls under the category of custom metrics. If you’re not careful, the cost of custom metrics can be a significant component of your billing.
+- Datadog defines its standard set of metrics; anything outside that definition falls under the category of custom metrics. If you’re not careful, the [cost of custom metrics](https://signoz.io/blog/pricing-comparison-signoz-vs-datadog-vs-newrelic-vs-grafana/#no-limits-on-custom-metrics-with-signoz) can be a significant component of your billing.
 
 ## OpenTelemetry Support: Not Great in Both Datadog & New Relic
 
@@ -233,7 +233,7 @@ For example, Datadog cannot link traces and logs automatically with the DataDog 
 </figure>
 <br/>
 
-If you are looking to use OpenTelemetry, then I would recommend SigNoz (of course) - an OpenTelemetry-native APM. And just like OpenTelemetry, SigNoz is also open-source. So you can have a full-stack open-source observability stack with SigNoz and OpenTelemetry.
+If you are looking to use OpenTelemetry, then I would recommend [SigNoz](https://signoz.io/) (of course) - an OpenTelemetry-native APM. And just like OpenTelemetry, SigNoz is also open-source. So you can have a full-stack open-source observability stack with SigNoz and OpenTelemetry.
 
 ## Datadog vs New Relic: Final Verdict
 
@@ -242,9 +242,13 @@ You should choose Datadog over New Relic if you are an observability expert and 
 Here’s a use-case-based guide for Datadog vs New Relic:
 
 - If you want a better correlation between your signals, then choose Datadog.
+
 - If you want to use the entire platform without worrying too much about billing, then choose New Relic, as the pricing is based on usage.
+
 - If you want more granular controls over your data, choose Datadog.
+
 - If your use case is Cloud SIEM, then choose Datadog.
+
 - If your use case is real-user monitoring, then choose New Relic.
 
 Datadog and New Relic are great products for application monitoring and observability, but they are mostly suited for bigger enterprises. And if you’re looking to use OpenTelemetry, then neither product is that well-suited. SigNoz is an OpenTelemetry-native APM that can be used as an alternative to Datadog and New Relic.
@@ -254,12 +258,10 @@ Datadog and New Relic are great products for application monitoring and observab
 Datadog and New Relic have been leaders in the application monitoring domain for many years. But they are not suited for everyone. SigNoz can be a great choice as an alternative to Datadog or New Relic. Some of the advantages of using SigNoz over Datadog and New Relic are:
 
 - **Open-Source**<br></br>
-  SigNoz is open-source, just like OpenTelemetry. We believe a developer tool that developers use to make their applications more resilient should be more accessible. But the open-source ecosystem lacked a good SaaS-like experience, and that’s [why we built SigNoz](https://signoz.io/blog/open-source-datadog-alternative/).
-
-  Being open-source, SigNoz is more suited to use cases where privacy is a concern, as it can be self-hosted. It can also be used in a hybrid way - using open-source for the dev and staging environment and [cloud](https://signoz.io/teams/) for the production environment.
+  SigNoz is open-source, just like OpenTelemetry. Being open-source, SigNoz is more suited to use cases where privacy is a concern, as it can be self-hosted. It can also be used in a hybrid way - using open-source for the dev and staging environment and [cloud](https://signoz.io/teams/) for the production environment.
 
 - **OpenTelemetry-native**<br></br>
-  We believe OpenTelemetry is the future. It is one of the leading open-source projects backed by CNCF and second only to Kubernetes when it comes to popularity. It also makes a lot of sense to have an open-source standard deeply integrated with your application and infrastructure rather than a vendor-specific agent. OpenTelemetry frees you from vendor lock-in.
+  OpenTelemetry is one of the leading open-source projects backed by CNCF and second only to Kubernetes when it comes to popularity. It is also safer to have an open-source standard deeply integrated with your application and infrastructure rather than a vendor-specific agent. OpenTelemetry frees you from vendor lock-in.
 
   SigNoz is built to support OpenTelemetry from day 1. Our APM experience is based fully on OpenTelemetry data, and we provide features that utilize OpenTelemetry data well.
 
