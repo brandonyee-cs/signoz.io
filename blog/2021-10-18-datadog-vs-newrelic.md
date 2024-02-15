@@ -60,7 +60,7 @@ Here’s a quick overview of the overall platform features and functionality of 
 | Cloud SIEM | ✅ | ❌ |
 | Real User Monitoring | 🟡 | ✅ |
 | Application Security | ✅ | 🟡 |
-| Self-hosted Log Archives | ✅ | ❌ |
+| Log Archives | ✅ | 🟡 |
 | Container Monitoring | ✅ | 🟡 |
 | Free Tier | ❌ | ✅ (100GB free data per month) |
 
