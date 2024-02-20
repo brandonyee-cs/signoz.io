@@ -91,12 +91,12 @@ const config = {
           label: "Blog",
           position: "left",
         },
-        {
-          to: "comparisons/",
-          activeBasePath: "comparisons",
-          label: "Comparisons",
-          position: "left",
-        },
+        // {
+        //   to: "comparisons/",
+        //   activeBasePath: "comparisons",
+        //   label: "Comparisons",
+        //   position: "left",
+        // },
         {
           to: "opentelemetry/",
           activeBasePath: "opentelemetry",
