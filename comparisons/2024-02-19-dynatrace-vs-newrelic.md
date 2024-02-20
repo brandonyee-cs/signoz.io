@@ -26,7 +26,9 @@ import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
 
 Dynatrace and New Relic are monitoring tools that provide a wide range of products and services for monitoring. In this post, I have compared Dynatrace and New Relic on important features like APM, log management, infrastructure monitoring, etc.
 
-> 💡 I instrumented a sample Python application and sent data to Dynatrace and New Relic to evaluate my experience. Some takeaways are subjective and based on personal preference.
+:::info
+💡 I instrumented a sample Python application and sent data to Dynatrace and New Relic to evaluate my experience. Some takeaways are subjective and based on personal preference.
+:::
 
 <!--truncate-->
 
