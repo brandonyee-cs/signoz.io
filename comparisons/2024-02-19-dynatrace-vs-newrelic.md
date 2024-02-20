@@ -19,7 +19,7 @@ keywords:
 ---
 
 <head>
-  <link rel="canonical" href="https://signoz.io/blog/dynatrace-vs-newrelic/"/>
+  <link rel="canonical" href="https://signoz.io/comparisons/dynatrace-vs-newrelic/"/>
 </head>
 
 import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
