@@ -291,7 +291,6 @@ Some of the key things that we solved with the revamp are:
     <img className="box-shadowed-image" src="/img/events/launch-week-1/side-panel-logs.webp" alt="Logs Side Panel"/>
     <figcaption><i>The side panel for logs creates enough space to show all details related to a single log line in a consumable format</i></figcaption>
     </figure>
-    <br/>
 
 
 
