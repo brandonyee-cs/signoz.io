@@ -275,23 +275,23 @@ Some of the key things that we solved with the revamp are:
     
     
     
-- **Balancing Simplicity & Configurability**
-The user base of SigNoz is diverse. One area we focussed on was balancing simplicity for new users with the need for advanced configurations for power users. This led to bifurcating the logs query builder into a simple search bar and an advanced query builder.
+- **Balancing Simplicity & Configurability**<br></br>
+    The user base of SigNoz is diverse. One area we focussed on was balancing simplicity for new users with the need for advanced configurations for power users. This led to bifurcating the logs query builder into a simple search bar and an advanced query builder.
 
-<figure data-zoomable align='center'>
-<img className="box-shadowed-image" src="/img/events/launch-week-1/search-and-query-builder.gif" alt="Traced to logs"/>
-</figure>
-<br/>
+    <figure data-zoomable align='center'>
+    <img className="box-shadowed-image" src="/img/events/launch-week-1/search-and-query-builder.gif" alt="Traced to logs"/>
+    </figure>
+    <br/>
     
 
-- **Simplifying Complex Information**
-There is a lot of detail associated with a single log line which developers need to consume quickly. Our new design includes a side panel for log details, which you can access by clicking on a single log line. The side panel provides enough space to include a lot of details about log lines while also segregating views for things like seeing logs in context.
+- **Simplifying Complex Information**<br></br>
+    There is a lot of detail associated with a single log line which developers need to consume quickly. Our new design includes a side panel for log details, which you can access by clicking on a single log line. The side panel provides enough space to include a lot of details about log lines while also segregating views for things like seeing logs in context.
 
-<figure data-zoomable align='center'>
-<img className="box-shadowed-image" src="/img/events/launch-week-1/side-panel-logs.webp" alt="Logs Side Panel"/>
-<figcaption><i>The side panel for logs creates enough space to show all details related to a single log line in a consumable format</i></figcaption>
-</figure>
-<br/>
+    <figure data-zoomable align='center'>
+    <img className="box-shadowed-image" src="/img/events/launch-week-1/side-panel-logs.webp" alt="Logs Side Panel"/>
+    <figcaption><i>The side panel for logs creates enough space to show all details related to a single log line in a consumable format</i></figcaption>
+    </figure>
+    <br/>
 
 
 
