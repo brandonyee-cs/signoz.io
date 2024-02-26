@@ -339,7 +339,7 @@ Nitya will be working on further advancing searching through logs at scale. Log 
 <div class="row spotlight-row">
   <div class="col col--6">
     <div class="card-demo">
-      <a class="card" href="https://www.signoz.io"
+      <a class="card" href="https://signoz.io/newsroom/launch-week-1-day-1/"
 						rel="noopener noreferrer"
 						target="_blank">
         <div class="card__image">

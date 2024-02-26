@@ -100,9 +100,7 @@ First feature to go live soon, subscribe to our Youtube event:
 <div class="row spotlight-row">
   <div class="col col--6">
     <div class="card-demo">
-      <a class="card" href="https://www.signoz.io"
-						rel="noopener noreferrer"
-						target="_blank">
+      <a class="card">
         <div class="card__image">
         <img
           src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
