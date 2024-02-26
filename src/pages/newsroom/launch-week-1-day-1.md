@@ -25,6 +25,15 @@ keywords:
 
 <div className='announcementContainer'>
 
+<span class="badge badge--primary">Launch Week 1.0</span>
+
+
+
+<br></br>
+
+
+
+
 # Feature in Spotlight: Logs Explorer [Day 1] 🪵
 
 <div class="avatar">
