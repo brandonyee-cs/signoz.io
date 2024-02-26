@@ -91,12 +91,6 @@ First feature to go live soon, subscribe to our Youtube event:
 
 <p>&nbsp;</p>
 
-Subscribe to our Linkedin launch event:
-
-[![SigNoz Launch Week Linkedin Event](/img/events/launch-week-1/signoz-launch-week-linkedin-cta.png)](https://www.linkedin.com/events/signozlaunchweek1-07159457438146985984/)
-
-<br></br>
-
 <br></br>
 
 # Features in Spotlight:
@@ -209,6 +203,12 @@ Subscribe to our Linkedin launch event:
 </div>
 </div>
 </div>
+
+<br></br>
+
+Subscribe to our Linkedin launch event:
+
+[![SigNoz Launch Week Linkedin Event](/img/events/launch-week-1/signoz-launch-week-linkedin-cta.png)](https://www.linkedin.com/events/signozlaunchweek1-07159457438146985984/)
 
 <br></br>
 

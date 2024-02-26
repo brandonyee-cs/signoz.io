@@ -17,6 +17,8 @@ keywords:
   - observability
 ---
 
+import { LiteYoutubeEmbed } from "react-lite-yt-embed";
+
 <head>
   <link rel="canonical" href="https://signoz.io/newsroom/launch-week-1-day-1/"/>
    <meta property="og:image" content="https://signoz.io/img/events/launch-week-1/launch-week-day-1-cover.webp"/>
@@ -25,12 +27,11 @@ keywords:
 
 <div className='announcementContainer'>
 
-<span class="badge badge--primary">Launch Week 1.0</span>
+<span class="badge badge--secondary">Launch Week 1.0</span>
 
 
 
 <br></br>
-
 
 
 
@@ -274,7 +275,7 @@ Some of the key things that we solved with the revamp are:
     
     
 - **Increasing Data Density Without Sacrificing Usability**<br></br>
-    Recognizing the need for developers to view more log data at once, we aimed to make the interface more data-dense. However, he balanced this by ensuring that the added data did not overwhelm users or compromise the readability of logs.
+    Recognizing the need for developers to view more log data at once, we aimed to make the interface more data-dense. However, we balanced this by ensuring that the added data did not overwhelm users or compromise the readability of logs.
 
     <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/events/launch-week-1/logs-explorer-full.webp" alt="Increasing data density"/>
@@ -285,7 +286,7 @@ Some of the key things that we solved with the revamp are:
     
     
 - **Balancing Simplicity & Configurability**<br></br>
-    The user base of SigNoz is diverse. One area we focussed on was balancing simplicity for new users with the need for advanced configurations for power users. This led to bifurcating the logs query builder into a simple search bar and an advanced query builder.
+    The user base of SigNoz is diverse. One area we focused on was balancing simplicity for new users with the need for advanced configurations for power users. This led to bifurcating the logs query builder into a simple search bar and an advanced query builder.
 
     <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/events/launch-week-1/search-and-query-builder.gif" alt="Traced to logs"/>
@@ -322,6 +323,125 @@ We don’t have to reach out to users for feedback, and there is a lot of inboun
 On the design front, we will be working on revamping the way users interact with other signals in SigNoz, just like logs. A lot of design effort will also be on revamping the way users use dashboarding in SigNoz. Shuvam is working on pushing the boundaries of what shareable configurations can look like. We are also exploring ways to build on open standards for better compatibility with other tools. 
 
 Nitya will be working on further advancing searching through logs at scale. Log data can be humungous and one of our key focus is to enable quick log search at any scale. On that front, Nitya will be exploring projections in ClickHouse more deeply.
+
+
+<p>&nbsp;</p>
+
+<LiteYoutubeEmbed id="4_uVfiNB4oY" mute={false} />
+
+<p>&nbsp;</p>
+
+
+# Features in Spotlight:
+
+<br></br>
+
+<div class="row spotlight-row">
+  <div class="col col--6">
+    <div class="card-demo">
+      <a class="card" href="https://www.signoz.io"
+						rel="noopener noreferrer"
+						target="_blank">
+        <div class="card__image">
+        <img
+          src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
+          alt="Image alt text"
+          title="Launch Week Day 1" />
+        </div>
+        <div class="card__body">
+        <h4>Feature in Spotlight: Day 1</h4>
+        <small>
+          Coming Soon...
+        </small>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="col col--6">
+    <div class="card-demo">
+      <div class="card">
+        <div class="card__image">
+        <img
+          src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
+          alt="Image alt text"
+          title="Launch Week Day 2" />
+        </div>
+        <div class="card__body">
+        <h4>Feature in Spotlight: Day 2</h4>
+        <small>
+          Coming Soon...
+        </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row spotlight-row">
+<div class="col col--6">
+<div class="card-demo">
+  <div class="card">
+    <div class="card__image">
+      <img
+        src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
+        alt="Image alt text"
+        title="Launch Week Day 3" />
+    </div>
+    <div class="card__body">
+      <h4>Feature in Spotlight: Day 3</h4>
+      <small>
+        Coming Soon...
+      </small>
+    </div>
+    
+  </div>
+</div>
+</div>
+
+<div class="col col--6">
+<div class="card-demo">
+  <div class="card">
+    <div class="card__image">
+      <img
+        src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
+        alt="Image alt text"
+        title="Launch Week Day 4" />
+    </div>
+    <div class="card__body">
+      <h4>Feature in Spotlight: Day 4</h4>
+      <small>
+        Coming Soon...
+      </small>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+
+<div class="row spotlight-row">
+
+<div class="col col--6">
+<div class="card-demo">
+  <div class="card">
+    <div class="card__image">
+      <img
+        src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
+        alt="Image alt text"
+        title="Launch Week Day 5" />
+    </div>
+    <div class="card__body">
+      <h4>Feature in Spotlight: Day 5</h4>
+      <small>
+        Coming Soon...
+      </small>
+    </div>
+    
+  </div>
+</div>
+</div>
+</div>
 
 
 </div>
