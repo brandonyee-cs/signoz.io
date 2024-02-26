@@ -100,17 +100,19 @@ First feature to go live soon, subscribe to our Youtube event:
 <div class="row spotlight-row">
   <div class="col col--6">
     <div class="card-demo">
-      <a class="card">
+      <a class="card" href="https://signoz.io/newsroom/launch-week-1-day-1/"
+						rel="noopener noreferrer"
+						target="_blank">
         <div class="card__image">
         <img
-          src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
+          src="/img/events/launch-week-1/launch-week-day-1-cover.webp"
           alt="Image alt text"
           title="Launch Week Day 1" />
         </div>
         <div class="card__body">
-        <h4>Feature in Spotlight: Day 1</h4>
+        <h4>Feature in Spotlight: Logs Explorer</h4>
         <small>
-          Coming Soon...
+          Builder: Nitya & Shuvam.
         </small>
         </div>
       </a>
