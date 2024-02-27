@@ -209,12 +209,6 @@ Subscribe to our upcoming Youtube event:
 
 <br></br>
 
-Subscribe to our Linkedin launch event:
-
-[![SigNoz Launch Week Linkedin Event](/img/events/launch-week-1/signoz-launch-week-linkedin-cta.png)](https://www.linkedin.com/events/signozlaunchweek1-07159457438146985984/)
-
-<br></br>
-
 For those interested, check out our Github repo:
 
 [![SigNoz GitHub repo](/img/blog/common/signoz_github.webp)](https://github.com/SigNoz/signoz)
