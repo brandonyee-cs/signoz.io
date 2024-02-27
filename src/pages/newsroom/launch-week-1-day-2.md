@@ -249,7 +249,9 @@ The next big thing in metrics is enabling integrations for getting metrics data 
 
   <div class="col col--6">
     <div class="card-demo">
-      <div class="card">
+      <a class="card" href="https://signoz.io/newsroom/launch-week-1-day-2/"
+						rel="noopener noreferrer"
+						target="_blank">
         <div class="card__image">
         <img
           src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
@@ -257,12 +259,12 @@ The next big thing in metrics is enabling integrations for getting metrics data 
           title="Launch Week Day 2" />
         </div>
         <div class="card__body">
-        <h4>Feature in Spotlight: Day 2</h4>
+        <h4>Feature in Spotlight: Metrics & Query Builder</h4>
         <small>
-          Coming Soon...
+          Builder: Srikanth Chekuri.
         </small>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </div>
@@ -331,6 +333,5 @@ The next big thing in metrics is enabling integrations for getting metrics data 
 </div>
 </div>
 </div>
-
 
 </div>
