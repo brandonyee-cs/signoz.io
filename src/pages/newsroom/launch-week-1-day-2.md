@@ -254,7 +254,7 @@ The next big thing in metrics is enabling integrations for getting metrics data 
 						target="_blank">
         <div class="card__image">
         <img
-          src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
+          src="/img/events/launch-week-1/launch-week-day-2-cover.webp"
           alt="Image alt text"
           title="Launch Week Day 2" />
         </div>
