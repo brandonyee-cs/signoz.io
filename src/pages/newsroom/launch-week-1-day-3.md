@@ -265,7 +265,7 @@ Once you’re done with the set up, you can create a customized dashboard for mo
 </figure>
 <br/>
 
-SigNoz lets you writer queries on all signals - logs, metrics, and traces. For error tracking, you can create queries on trace data to build different panels.
+SigNoz lets you write queries on all signals - logs, metrics, and traces. For error tracking, you can create queries on trace data to build different panels.
 
 <figure data-zoomable align='center'>
 <img className="box-shadowed-image" src="/img/events/launch-week-1/query-builder-trace-data.webp" alt="Query trace data for error tracking"/>
@@ -313,11 +313,13 @@ We have also implemented design tokens for making our frontend development more 
 
 ## What’s next?
 
+One of our key objectives is to introduce out-of-the-box dashboards tailored specifically for frontend observability. We're also excited to unveil panel grouping functionality, which will help users organize their dashboard panels more effectively, providing clearer and more insightful visualizations.
+
+We will also be working on implementing a wide array of integrations. These integrations will facilitate easy onboarding to SigNoz, allowing users to effortlessly connect to a variety of sources and sinks for telemetry data. Additionally, we're exploring the possibility of incorporating query suggestions and quick filters, streamlining the data exploration process for users of all levels.
+
 We’re going to work on more frontend-specific features that takes user experience in SigNoz to the next level. For example, our team is working on keyboard shortcuts which will enable users to access different things in SigNoz quickly. The first version is already available to users of SigNoz.
 
-We are also working on enhancing our component library for making frontend development more efficient. We will also working on enabling our product and marketing teams to update copy in the product without needing to involve the engineering team.
-
-In the long term, we are also planning to work on enabling frontend observability with out-of-box dashboards.
+Furthermore, we will be working towards empowering our product and marketing teams with the ability to update copy within the product independently, without needing to involve the engineering team. This will streamline the process of iterating on our product's messaging and ensure that our users receive the most up-to-date information at all times.
 
 
 <p>&nbsp;</p>
