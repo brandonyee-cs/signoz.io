@@ -320,6 +320,13 @@ We are also working on enhancing our component library for making frontend devel
 In the long term, we are also planning to work on enabling frontend observability with out-of-box dashboards.
 
 
+<p>&nbsp;</p>
+
+<LiteYoutubeEmbed id="pmxl11pAQRQ" mute={false} />
+
+<p>&nbsp;</p>
+
+
 # Features in Spotlight:
 
 <br></br>
