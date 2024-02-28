@@ -83,14 +83,14 @@ And, of course, where there is SigNoz, there is OpenTelemetry. We will share lot
 
 Subscribe to our upcoming Linkedin event:
 
-[![Upcoming Linkedin Live Event](/img/events/launch-week-1/linkedin-live.webp)](https://www.linkedin.com/events/7168128891910377472/)
+[![Upcoming Linkedin Live Event](/img/events/launch-week-1/linkedin-live.webp)](https://www.linkedin.com/events/7168477432965005313/)
 
 
 Subscribe to our upcoming Youtube event:
 
 <p>&nbsp;</p>
 
-<LiteYoutubeEmbed id="fl-z1YoSB_w" mute={false} />
+<LiteYoutubeEmbed id="pmxl11pAQRQ" mute={false} />
 
 <p>&nbsp;</p>
 
