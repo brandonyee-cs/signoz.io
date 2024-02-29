@@ -19,23 +19,28 @@ The SigNoz Logs API is a robust interface which enables developers to manage and
 
 ## API Endpoint
 
-Endpoint for Logs API: 
+Endpoint for Logs API:
 
 `POST` `https://{URL}/api/v3/query_range`
 
 Replace `{URL}` with your instance URL, e.g., example.signoz.io.
 
 ## Prerequisites
-Personal Access Token (PAT): To access this API, you need a PAT token. Obtain your PAT by contacting cloud-support@signoz.io.
+
+Access Token: To access this API, you need an Access Token. Navigate to the `Settings` page in the SigNoz UI and create a new Access Token.
+
+<img width="1101" alt="image" src="https://github.com/SigNoz/signoz/assets/9512100/9ca6c788-b60d-4051-8c14-c260a31bdb7d" />
+
+Access Tokens can only be created/managed by users with the `Admin` role. If you don't have the `Admin` role, contact your organization's admin to create an Access Token for you.
 
 ## Authentication
 
-Using the PAT Token: Add the PAT token to your request header as follows: 
+Using the Access Token: Add the Access token to your request header as follows: 
 
 ```bash
-SIGNOZ-API-KEY:{YOUR_PAT_TOKEN}
+SIGNOZ-API-KEY:{YOUR_ACCESS_TOKEN}
 ```
 
 :::tip
-Secure storage and handling of your PAT token is crucial to prevent unauthorized access.
+Secure storage and handling of your Access Token is crucial to prevent unauthorized access.
 :::
