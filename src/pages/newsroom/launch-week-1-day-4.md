@@ -184,7 +184,7 @@ OpenTelemetry has standardized the write path for observability. In the long-ter
 
 <p>&nbsp;</p>
 
-<LiteYoutubeEmbed id="pmxl11pAQRQ" mute={false} />
+<LiteYoutubeEmbed id="5QcoUvFtk2M" mute={false} />
 
 <p>&nbsp;</p>
 
