@@ -20,7 +20,7 @@ keywords:
 import { LiteYoutubeEmbed } from "react-lite-yt-embed";
 
 <head>
-  <link rel="canonical" href="https://signoz.io/newsroom/launch-week-1-day-3/"/>
+  <link rel="canonical" href="https://signoz.io/newsroom/launch-week-1-day-4/"/>
    <meta property="og:image" content="https://signoz.io/img/events/launch-week-1/launch-week-day-4-cover.webp"/>
   <meta name ="twitter:image" content="https://signoz.io/img/events/launch-week-1/launch-week-day-4-cover.webp"/>
 </head>
