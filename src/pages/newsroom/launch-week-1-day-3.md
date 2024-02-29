@@ -428,24 +428,25 @@ Furthermore, we will be working towards empowering our product and marketing tea
 <div class="row spotlight-row">
 
 <div class="col col--6">
-<div class="card-demo">
-  <div class="card">
-    <div class="card__image">
-      <img
-        src="/img/events/launch-week-1/signoz-launch-week-coming-soon.webp"
-        alt="Image alt text"
-        title="Launch Week Day 5" />
+    <div class="card-demo">
+      <a class="card" href="https://signoz.io/newsroom/launch-week-1-day-5/"
+						rel="noopener noreferrer"
+						target="_blank">
+        <div class="card__image">
+        <img
+          src="/img/events/launch-week-1/launch-week-day-5-cover.webp"
+          alt="Image alt text"
+          title="Launch Week Day 5" />
+        </div>
+        <div class="card__body">
+        <h4>Feature in Spotlight: Access Token Management & Onboarding </h4>
+        <small>
+          Builder: Vishal & Chitransh.
+        </small>
+        </div>
+      </a>
     </div>
-    <div class="card__body">
-      <h4>Feature in Spotlight: Day 5</h4>
-      <small>
-        Coming Soon...
-      </small>
-    </div>
-    
   </div>
-</div>
-</div>
 </div>
 
 
