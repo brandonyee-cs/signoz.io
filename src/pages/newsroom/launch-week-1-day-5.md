@@ -157,7 +157,7 @@ Pranay sat down with Ankit to discuss a lot of interesting things about SigNoz, 
 
 ### Evolution of SigNoz
 
-When we launched, we started out with a complex complex architecture that included Kafka and Druid. However, we quickly received feedback on the need for a more accessible solution. Our users wanted to try out the product quickly. This led to a pivotal shift towards ClickHouse, significantly simplifying the setup and boosting adoption. The focus was on building a minimum viable product (MVP) swiftly and iterating based on user feedback, laying the foundation for SigNoz's growth and evolution in the observability domain.
+When we launched, we started out with a complex architecture that included Kafka and Druid. However, we quickly received feedback on the need for a more accessible solution. Our users wanted to try out the product quickly. This led to a pivotal shift towards ClickHouse, significantly simplifying the setup and boosting adoption. The focus was on building a minimum viable product (MVP) swiftly and iterating based on user feedback, laying the foundation for SigNoz's growth and evolution in the observability domain.
 
 The next phase at SigNoz involved a significant emphasis on feature building and understanding market needs that were previously underserved. The team focused on developing solutions that provided more value to users, driven by direct feedback from companies adopting SigNoz.
 
