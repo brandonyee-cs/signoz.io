@@ -218,7 +218,7 @@ We will continue on our mission of democratizing observability for engineering t
 
 <p>&nbsp;</p>
 
-<LiteYoutubeEmbed id="5QcoUvFtk2M" mute={false} />
+<LiteYoutubeEmbed id="Lxtdw_xeUtM" mute={false} />
 
 <p>&nbsp;</p>
 
