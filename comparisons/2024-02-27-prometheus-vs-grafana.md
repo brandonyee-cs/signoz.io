@@ -43,7 +43,6 @@ In this post, I have compared Prometheus and Grafana on important features like 
 
 | Features | Prometheus | Grafana |
 | --- | --- | --- |
-| Ease of Deployment | ✅  | ✅  |
 | Data Collection | 🟡 | ✅  |
 | Visualization Capabilities | 🟡 | ✅  |
 | Data Query | ✅  | ✅  |
