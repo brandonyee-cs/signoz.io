@@ -82,15 +82,21 @@ const config = {
           label: "Docs",
           position: "left",
         },
+        {
+          to: "pricing/",
+          activeBasePath: "pricing",
+          label: "Pricing",
+          position: "left",
+        },
         //docusaurus expects href elements to be full links
         //https://stackoverflow.com/questions/63268853/how-do-i-link-to-non-docusaurus-defined-routes-from-a-docusuarus-footer
         //{href: 'https://signoz.io/blog/', label: 'Blog', position: 'left'}
-        {
-          to: "blog/",
-          activeBasePath: "blog",
-          label: "Blog",
-          position: "left",
-        },
+        // {
+        //   to: "blog/",
+        //   activeBasePath: "blog",
+        //   label: "Blog",
+        //   position: "left",
+        // },
         // {
         //   to: "comparisons/",
         //   activeBasePath: "comparisons",
@@ -98,11 +104,35 @@ const config = {
         //   position: "left",
         // },
         {
-          to: "opentelemetry/",
-          activeBasePath: "opentelemetry",
-          label: "OpenTelemetry",
-          position: "left",
+          to: '/resources', // Path to your comparison section
+          label: 'Resources', // Text for the link
+          position: 'left', // Position on the navbar (left or right)
+          items: [
+            {
+              label: 'Blog',
+              to: '/blog',
+            },
+            {
+              label: 'OpenTelemetry',
+              to: '/opentelemetry',
+            },
+            // {
+            //   label: 'Documentation',
+            //   to: '/docs',
+            // },
+            {
+              label: 'Comparisons',
+              to: '/comparisons',
+            },
+            // Add more article links here...
+          ]
         },
+        // {
+        //   to: "opentelemetry/",
+        //   activeBasePath: "opentelemetry",
+        //   label: "OpenTelemetry",
+        //   position: "left",
+        // },
         {
           to: "case-study/",
           activeBasePath: "case-study/",
@@ -126,12 +156,12 @@ const config = {
         //   label: "About",
         //   position: "right",
         // },
-        {
-          to: "pricing/",
-          activeBasePath: "pricing",
-          label: "Pricing",
-          position: "left",
-        },
+        // {
+        //   to: "pricing/",
+        //   activeBasePath: "pricing",
+        //   label: "Pricing",
+        //   position: "left",
+        // },
       ],
     },
     footer: {
