@@ -5,6 +5,8 @@ date: 2024-02-28
 tags: [Tools Comparison]
 authors: daniel
 description: New Relic excels in providing comprehensive application monitoring solutions, while Prometheus specializes in metric collection. We have compared New Relic and Prometheus on important features like data collection, visualization capabilities, APM, data storage...
+
+New Relic and Prometheus are both monitoring tools. But while New Relic is a comprehensive application monitoring platform which provides a lot of features 
 image: /img/blog/2024/02/newrelic-vs-prometheus-cover.webp
 hide_table_of_contents: false
 toc_min_heading_level: 2
@@ -41,28 +43,17 @@ In this post, I have compared New Relic and Prometheus on important features lik
 > 💡 I configured two sample applications: one in Python and the other in PHP, alongside a MySQL database. I sent their data to both New Relic and Prometheus for evaluation. Some takeaways are subjective and based on personal preference.
 
 
-| Features | New Relic | Prometheus |
-| --- | --- | --- |
-| Deployment | ✅ ✅  | ✅  |
-| Data Collection | ✅ ✅ | ✅  |
-| Visualization Capabilities | ✅ ✅  | 🟡  |
-| APM | ✅ ✅  | ❌  |
-| Data Storage | ✅ ✅  | ✅ |
-| Data Query | ✅ | ✅ |
-| Alerting | ✅ ✅ | ✅ |
-| UI/UX | ✅ ✅ | ✅  |
-| Pricing | ✅  | ✅ ✅ |
-| Documentation & Community Support | ✅ ✅ | ✅ |
+## New Relic vs Prometheus: An Overview
 
-✅ ✅  - Excellent
+New Relic is a versatile monitoring tool that offers a wide range of features, including Application Performance Monitoring (APM), log monitoring, infrastructure monitoring, and real-user monitoring. In contrast, Prometheus focuses on monitoring time-series data.
 
-✅ - Good
+Prometheus is open-source and free to use, while New Relic is a paid tool, which can become expensive as usage scales. Prometheus is commonly used in conjunction with Grafana, where Grafana serves as the visualization layer, providing a user interface to visualize Prometheus metrics.
 
-🟡 - Limited
+To use New Relic, you simply need to sign up, create an account, and follow the onboarding steps to get started. As Prometheus is open-source, it requires self-installation and management. However, managed services for Prometheus are available from many cloud vendors, including [AWS](https://aws.amazon.com/prometheus/).
 
-❌ - Does not exist
 
-## Deployment: New Relic
+
+## Getting Started: New Relic
 
 ### New Relic
 
@@ -299,16 +290,13 @@ While New Relic and Prometheus are valuable monitoring solutions, they are not w
 
 Here are a few reasons why you should choose SigNoz over New Relic and Prometheus:
 
-- **Open-Source**
-    
+- **Open-Source**<br></br>
     SigNoz offers both an open-source and cloud version, providing users with flexibility based on their specific requirements. Users can choose between the versions depending on their use case: opt for the self-hosted (open-source) version for complete control over environment management, or choose the cloud version for hassle-free management without the need for self-hosting.
     
-- **OpenTelemetry support**
-    
+- **OpenTelemetry support**<br></br>
     SigNoz is designed to natively support OpenTelemetry, a CNCF project rapidly gaining popularity and emerging as the standard for observability. It generates and manages telemetry data (logs, metrics, and traces) which are vital for achieving comprehensive application observability and monitoring. OpenTelemetry also frees you from vendor lock-in, enabling users to export data to any backend of choice. 
     
-- **Transparent Pricing**
-    
+- **Transparent Pricing**<br></br>
     Unlike New Relic's usage-based model, which charges based on the number of users, SigNoz Cloud allows you to invite an unlimited number of team members without additional charges for user seats. SigNoz offers transparent and predictable pricing, where you are billed solely based on the volume of data you send, preventing unexpected costs.
     
     The open-source version is also completely free to use and can save costs for new users looking to try out SigNoz.
