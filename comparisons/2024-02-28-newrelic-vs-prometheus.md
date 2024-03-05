@@ -4,9 +4,7 @@ slug: newrelic-vs-prometheus
 date: 2024-02-28
 tags: [Tools Comparison]
 authors: daniel
-description: New Relic excels in providing comprehensive application monitoring solutions, while Prometheus specializes in metric collection. We have compared New Relic and Prometheus on important features like data collection, visualization capabilities, APM, data storage...
-
-New Relic and Prometheus are both monitoring tools. But while New Relic is a comprehensive application monitoring platform which provides a lot of features 
+description: New Relic and Prometheus are both monitoring tools. But while New Relic is a comprehensive application monitoring platform that offers a wide range of features, including Application Performance Monitoring (APM), log monitoring, infrastructure monitoring, and real-user monitoring, Prometheus is focused only on metrics monitoring...
 image: /img/blog/2024/02/newrelic-vs-prometheus-cover.webp
 hide_table_of_contents: false
 toc_min_heading_level: 2
@@ -40,7 +38,12 @@ In this post, I have compared New Relic and Prometheus on important features lik
 
 **Testing environment**
 
-> 💡 I configured two sample applications: one in Python and the other in PHP, alongside a MySQL database. I sent their data to both New Relic and Prometheus for evaluation. Some takeaways are subjective and based on personal preference.
+
+:::note
+
+💡 I configured two sample applications: one in Python and the other in PHP, alongside a MySQL database. I sent their data to both New Relic and Prometheus for evaluation. Some takeaways are subjective and based on personal preference.
+
+:::
 
 
 ## New Relic vs Prometheus: An Overview
