@@ -104,7 +104,7 @@ const config = {
         //   position: "left",
         // },
         {
-          to: '/resources', // Path to your comparison section
+          // to: '/resources', // Path to your comparison section
           label: 'Resources', // Text for the link
           position: 'left', // Position on the navbar (left or right)
           items: [
