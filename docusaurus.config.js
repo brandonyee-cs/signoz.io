@@ -124,6 +124,10 @@ const config = {
               label: 'Comparisons',
               to: '/comparisons',
             },
+            {
+              label: 'Customer Stories',
+              to: 'case-study/',
+            },
             // Add more article links here...
           ]
         },
@@ -133,12 +137,12 @@ const config = {
         //   label: "OpenTelemetry",
         //   position: "left",
         // },
-        {
-          to: "case-study/",
-          activeBasePath: "case-study/",
-          label: "Customer Stories",
-          position: "right",
-        },
+        // {
+        //   to: "case-study/",
+        //   activeBasePath: "case-study/",
+        //   label: "Customer Stories",
+        //   position: "right",
+        // },
 
         // {
         //   href: "https://signoz.io/pricing/",
