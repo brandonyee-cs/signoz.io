@@ -1,5 +1,5 @@
 ---
-title: New Relic vs Prometheus - Which Monitoring Tool To Choose?
+title: New Relic vs Prometheus - Detailed Comparison for 2024
 slug: newrelic-vs-prometheus
 date: 2024-02-28
 tags: [Tools Comparison]
