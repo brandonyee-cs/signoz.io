@@ -26,7 +26,6 @@ export default function SignozCloudSignUpForm() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitFailed, setSubmitFailed] = useState(false);
 
-  // Handle input changes
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
