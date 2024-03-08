@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactGA from "react-ga4";
 import styles from "./styles.module.css";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -8,6 +9,8 @@ interface ErrorsProps {
   workEmail?: string;
   companyName?: string;
 }
+
+ReactGA.initialize("G-6NFJ2Y6NQN");
 
 export default function SignozCloudSignUpForm() {
   const [formData, setFormData] = useState({
@@ -79,17 +82,16 @@ export default function SignozCloudSignUpForm() {
   };
 
   const handleGTMCustomEventTrigger = (payload) => {
-    try {
-      if (window && window?.dataLayer && Array.isArray(window.dataLayer)) {
-        window.dataLayer.push({
-          event: "signoz-cloud-signup-form-submit",
-          ...payload,
-        });
-      }
-    } catch (error) {
-      console.error("GTM Event Failed:", error.message);
-      // Handle other error cases, like network errors
-    }
+      ReactGA.event({
+        category: "SigNoz Cloud Signup",
+        action: "SigNozCloudSignup",
+        value: 99, // optional, must be a number
+        nonInteraction: true, // optional, true/false
+        transport: "xhr", // optional, beacon/xhr/image
+          ...payload
+      }, {
+        ...payload
+      });
   };
 
   const handleError = () => {
@@ -111,9 +113,7 @@ export default function SignozCloudSignUpForm() {
       data_region: formData.dataRegion,
       source: formData.source,
     };
-
-    handleGTMCustomEventTrigger(payload);
-
+  
     try {
       const response = await fetch("https://signup.signoz.cloud/api/register", {
         method: "POST",
