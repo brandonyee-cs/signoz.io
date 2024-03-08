@@ -81,6 +81,14 @@ export default function SignozCloudSignUpForm() {
   };
 
   const handleGTMCustomEventTrigger = (payload) => {
+
+      if (window && window?.dataLayer && Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({
+            event: "signoz-cloud-signup-form-submit",
+            ...payload,
+          });
+      }
+    
       ReactGA.event({
         category: "SigNoz Cloud Signup",
         action: "SigNozCloudSignup",
