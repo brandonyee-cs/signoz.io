@@ -50,6 +50,8 @@ Before the evolution of JavaScript libraries, webpages were rendered using serve
 
 Then we have client-side rendering, which became popular recently. The client and server are independent of each other. The browser first gets the barebones HTML and JavaScript chunks to begin with. Later the client makes "API calls" to the server to fetch the data, process it, and then renders the UI.
 
+<br></br>
+
 <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2024/03/api-monitoring-complete-guide-api.webp" alt="Web pages rendering using API calls"/>
     <figcaption><i>How web pages get rendered using API calls</i></figcaption>
@@ -108,11 +110,17 @@ A ton of insights can be gathered by setting up API monitoring for different tea
 Here are a few reasons why API monitoring is critical:
 
 - It’s crucial for large scale systems to be monitored constantly as any failure in service request would lead to a business loss. The reputation is on the line, and failure in service could cripple it.
+
 - With constant monitoring and alerting, failures can be better prevented even before the issue arises.
+
 - Constantly monitoring APIs guarantees lower rates of failure, thereby ensuring customer retention. The reliable services has a chance to spread through word-of-mouth.
+
 - Monitoring APIs are helpful while debugging a service failure as well. With the help of logs, traces and metrics one can perform Root Cause Analysis(RCA) swiftly and effectively.
+
 - Product managers are responsible for making the API feature roadmap. By analysing trends and patterns they can make data-driven decisions about resource allocation, feature prioritisation, and product strategy.
+
 - Monitoring ensures API metrics are intricately connected to key performance indicators (KPIs), grounding technical achievements in business realities and driving organizational success.
+
 - Adoption metrics like API usage, Unique API consumers is useful for Growth/Business teams. This will help them focus on product revenue, adoption, and customer success.
 
 ## Some Key Metrics for API Monitoring
@@ -123,9 +131,9 @@ So every organisation needs to decide on an API strategy and align their metrics
 
 Broadly there are three types of API metrics:
 
-1. Operational metrics - Purely based on the API stability, reliability, and performance.
-2. Adoption metrics - Data points that tell how much the end user is adopting the APIs.
-3. Product metrics - APIs linked to the business KPIs in accordance with the business objectives.
+1. **Operational metrics** - Purely based on the API stability, reliability, and performance.
+2. **Adoption metrics** - Data points that tell how much the end user is adopting the APIs.
+3. **Product metrics** - APIs linked to the business KPIs in accordance with the business objectives.
 
 ### Operational metrics
 
@@ -133,16 +141,21 @@ Below are some important operation metrics for API monitoring:
 
 1. **Uptime:**
 This is the single most important metric that determines the availability of a service. It is often tied to a service level agreement (SLA). It is calculated based on the number of minutes or hours the server is available during a selected period.
+
 2. **CPU and memory usage:**
 Tracking resource utilization keeps us aware of when we need to scale our instances. Either vertically by adding more resources or horizontally by tweaking the throughput of each instance. It could also alert us about an anomaly that is taking up way too much CPU and memory than expected.
 Calculating CPU utilization involves a straightforward formula: 
 CPU Utilization = (Total Time Spent on Non-Idle Tasks / Total Time) x 100.
+
 3. **Error Rate:**
 Error rates, like errors per minute and error codes, can help you track down problems in individual APIs. Error codes in the 400 to 500 range can indicate problematic APIs or web service providers. It is calculated in error requests that occur per minute.
+
 4. **Requests per minute/second(RPM/RPS):**
 Requests per minute tracks the number of incoming requests per minute. It describes the API traffic that is being received across the selected times. This is a vital metric to understand the load that is being put up on the system. The metric will also expose how well the API is scaling on increased load.
+
 5. **Response time(Latency):**
 The total turnaround time taken since the origination of the request until the response is received by the client. Latency tells us how slow/fast the API services are responding. It is crucial for large companies to keep their latency as low as possible, or else the user experience will get deteriorated. 
+
 6. **Throttling:**
 When the network gets congested the server no longer accepts anymore new incoming requests. All new requests will be throttled, meaning they will go unhandled. This is due to the fact that the server does not have the additional concurrent bandwidth to process. It is measured in RPS, Requests per second that got throttled.
 
@@ -150,8 +163,10 @@ When the network gets congested the server no longer accepts anymore new incomin
 
 1. **Unique API consumers:**
 Based on the time range selected, the metric measures the count of unique consumers who are using the API service. It is calculated in number of consumers. Commonly used time-ranges are DAU(Daily Active User) , MAU(Monthly Active User). These could be very helpful in understanding the user adoption of the service.
+
 2. **API usage growth:**
 Very similar to tracking API consumers, the growth metric tracks the increase/decrease in the volume of API consumption in a given time frame.
+
 3. **Time to First Call:**
 This metric measures how long it takes a developer to create an account, generate API credentials, and run the first API call. Enabling developers to get up and running as fast as possible is a high priority, making this metric the most important for measuring the overall API developer experience.
 
@@ -159,8 +174,10 @@ This metric measures how long it takes a developer to create an account, generat
 
 1. **Revenue:**
 The total revenue including direct and indirect sources make up this metric. While some APIs are directly monetized, others generate revenue through third-party integrations.
+
 2. **API Usage:**
 API consumption is grouped for each API, allowing identification of the most used or least used APIs.
+
 3. **User usage breakdown:**
 This metric contains a user-wise breakdown of their API usage, helping offer better services/support to them.
 
