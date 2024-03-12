@@ -104,7 +104,7 @@ Once completed, I was taken to the landing page. But I didn’t find the UI very
 As part of the sign-up process, I was taken to the Agent Installation page. I selected Amazon Linux on the left, and it gave me the required command to run.
 
 <figure data-zoomable align='center'>
-    <img className="box-shadowed-image" src="/img/blog/2024/03/datadog-vs-dynatrace-agent-setup.webp" alt="Datadog has easy to follow instructions for setting up the agent"/>
+    <img className="box-shadowed-image" src="/img/blog/2024/03/datadog-agent-installation.webp" alt="Datadog has easy to follow instructions for setting up the agent"/>
     <figcaption><i>Datadog has easy to follow instructions for setting up the agent</i></figcaption>
 </figure>
 <br/>
