@@ -1,6 +1,6 @@
 ---
 title: OpenTelemetry Webinars - The Trace API 
-slug: otel-webinar-trace-api
+slug: opentelemetry-webinar-on-trace-api
 date: 2023-11-27
 tags: [OpenTelemetry]
 authors: nicamellifera

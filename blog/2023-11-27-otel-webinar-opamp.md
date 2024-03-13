@@ -1,11 +1,12 @@
 ---
 title: OpenTelemetry Webinars - The Open Agent Management Protocol 
-slug: otel-webinar-opamp
+slug: opentelemetry-webinar-on-opamp
 date: 2023-11-27
 tags: [OpenTelemetry]
 authors: nicamellifera
 description: Open Agent Management Protocol (OpAMP) is the emerging open standard to manage a fleet of telemetry agents at scale. 
 image: /img/blog/2023/11/otel-webinar-openllmetry-cover.jpeg
+hide_table_of_contents: true
 keywords:
   - opentelemetry
   - webinar
@@ -20,18 +21,11 @@ import { LiteYoutubeEmbed } from "react-lite-yt-embed";
   <link rel="canonical" href="https://signoz.io/blog/otel-webinar-opamp/"/>
 </head>
 
-Open Agent Management Protocol (OpAMP) is the emerging open standard to manage a fleet of telemetry agents at scale. 
-
-### INTRO TEXT [NICA'S PART]
-
-<!--truncate-->
-
-### SOME CONTEXTUAL INFORMATION [NICA'S PART]
+Open Agent Management Protocol (OpAMP) is the emerging open standard to manage a fleet of telemetry agents at scale.
 
 Take a look at the conversation between <a href="https://github.com/serverless-mom" rel="nofollow">Nočnica Mellifera</a> and <a href="https://github.com/srikanthccv/" rel="nofollow">Srikanth</a> as we discuss recent updates to the standard and how you can remotely manage the OpenTelemetry collector with OpAMP.
 
 ## Summary of the Talk
-
 
 <LiteYoutubeEmbed id="Givt10eJcy8" mute={false} />
 

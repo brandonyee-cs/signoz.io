@@ -1,11 +1,12 @@
 ---
 title: OpenTelemetry for AI - OpenLLMetry with SigNoz and Traceloop 
-slug: otel-webinar-openllmetry
+slug: opentelemetry-webinar-openllmetry
 date: 2023-11-16
 tags: [OpenTelemetry]
 authors: priyansh
 description: Join Nica and Nir to discuss how machine learning can be monitored with OpenTelemetry. We'll see how the SigNoz dashboards can help you monitor resource use, performance, and find problems before your infra budget goes haywire....
 image: /img/blog/2023/11/otel-webinar-openllmetry-cover.jpeg
+hide_table_of_contents: true
 keywords:
   - opentelemetry
   - webinar
@@ -18,7 +19,7 @@ keywords:
 import { LiteYoutubeEmbed } from "react-lite-yt-embed";
 
 <head>
-  <link rel="canonical" href="https://signoz.io/blog/otel-webinar-openllmetry/"/>
+  <link rel="canonical" href="https://signoz.io/blog/opentelemetry-webinar-openllmetry/"/>
 </head>
 
 Join <a href="https://github.com/serverless-mom" rel="nofollow">Nočnica Mellifera</a> and <a href="https://www.linkedin.com/in/nirga/" rel="nofollow">Nir</a> to discuss how machine learning can be monitored with OpenTelemetry. We'll see how the SigNoz dashboards can help you monitor resource use, performance, and find problems before your infra budget goes haywire.
@@ -30,8 +31,6 @@ Below is the recording and an edited transcript of the conversation.
 
 
 ## Summary of the Talk
-
-[Nica's part ]
 
 <LiteYoutubeEmbed id="feKopGAlKtc" mute={false} />
 
