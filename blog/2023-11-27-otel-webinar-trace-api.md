@@ -6,6 +6,7 @@ tags: [OpenTelemetry]
 authors: nicamellifera
 description: Join Nica and Srikanth to talk in detail about the OpenTelemetry Trace API. We'll talk about adding spans, events, attributes and other extra info, whether it's really possible to replace logs with traces, and more.
 image: /img/blog/2023/11/otel-webinar-openllmetry-cover.jpeg
+hide_table_of_contents: true
 keywords:
   - opentelemetry
   - webinar
@@ -20,11 +21,6 @@ import { LiteYoutubeEmbed } from "react-lite-yt-embed";
   <link rel="canonical" href="https://signoz.io/blog/otel-webinar-opamp/"/>
 </head>
 
-### INTRO TEXT [NICA'S PART]
-
-<!--truncate-->
-
-### SOME CONTEXTUAL INFORMATION [NICA'S PART]
 
 Join <a href="https://github.com/serverless-mom" rel="nofollow">Nočnica Mellifera</a> and <a href="https://github.com/srikanthccv/" rel="nofollow">Srikanth</a> to talk in detail about the OpenTelemetry Trace API. We'll talk about adding spans, events, attributes and other extra info, whether it's really possible to replace logs with traces, and more.
 
@@ -373,4 +369,4 @@ Thank you for taking out the time to read this transcript :) If you have any fee
 
 Feel free to join our Slack community and say hi! 👋 
 
-[![SigNoz Slack community](/img/blog/common/join_slack_cta.png)](https://signoz.io/slack)
+[![SigNoz Slack community](/img/blog/common/join_slack_cta.webp)](https://signoz.io/slack)
