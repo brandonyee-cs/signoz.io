@@ -88,16 +88,23 @@ export default function SignozCloudSignUpForm() {
             ...payload,
           });
       }
-    
+
+      // Sending a custom event to GA4 using ReactGA
       ReactGA.event({
-        category: "SigNoz Cloud Signup",
-        action: "SigNozCloudSignup",
-        value: 99, // optional, must be a number
-        nonInteraction: true, // optional, true/false
-        transport: "xhr", // optional, beacon/xhr/image
-          ...payload
-      }, {
-        ...payload
+        category: "Signup", // Adjusted to a more general term for the event category
+        action: "Submit", // Simplified action
+        label: "SigNoz Cloud Signup", // Label to provide more context
+        nonInteraction: false, // Setting to false as this is an interactive event
+    
+      // ReactGA.event({
+      //   category: "SigNoz Cloud Signup",
+      //   action: "SigNozCloudSignup",
+      //   value: 99, // optional, must be a number
+      //   nonInteraction: true, // optional, true/false
+      //   transport: "xhr", // optional, beacon/xhr/image
+      //     ...payload
+      // }, {
+      //   ...payload
       });
   };
 
