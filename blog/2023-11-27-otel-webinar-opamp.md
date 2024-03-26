@@ -25,6 +25,9 @@ Open Agent Management Protocol (OpAMP) is the emerging open standard to manage a
 
 Take a look at the conversation between <a href="https://github.com/serverless-mom" rel="nofollow">Nočnica Mellifera</a> and <a href="https://github.com/srikanthccv/" rel="nofollow">Srikanth</a> as we discuss recent updates to the standard and how you can remotely manage the OpenTelemetry collector with OpAMP.
 
+
+<!--truncate-->
+
 ## Summary of the Talk
 
 <LiteYoutubeEmbed id="Givt10eJcy8" mute={false} />

@@ -24,6 +24,8 @@ import { LiteYoutubeEmbed } from "react-lite-yt-embed";
 
 Join <a href="https://github.com/serverless-mom" rel="nofollow">Nočnica Mellifera</a> and <a href="https://github.com/srikanthccv/" rel="nofollow">Srikanth</a> to talk in detail about the OpenTelemetry Trace API. We'll talk about adding spans, events, attributes and other extra info, whether it's really possible to replace logs with traces, and more.
 
+<!--truncate-->
+
 
 ## Summary of the Talk
 
