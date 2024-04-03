@@ -13,14 +13,14 @@ const config = {
   organizationName: "SigNoz", // Usually your GitHub org/user name.
   projectName: "signoz", // Usually your repo name.
   themeConfig: {
-    announcementBar: {
-      id: "funding",
-      content:
-        '🚀 SigNoz Launch Week 1.0 is live. <a target="_blank" rel="noopener noreferrer" href="/newsroom/launch-week-1/">Read more</a>',
-      backgroundColor: "#FAF9F6",
-      textColor: "#091E42",
-      isCloseable: false,
-    },
+    // announcementBar: {
+    //   id: "funding",
+    //   content:
+    //     '🚀 SigNoz Launch Week 1.0 is live. <a target="_blank" rel="noopener noreferrer" href="/newsroom/launch-week-1/">Read more</a>',
+    //   backgroundColor: "#FAF9F6",
+    //   textColor: "#091E42",
+    //   isCloseable: false,
+    // },
     colorMode: {
       defaultMode: "dark",
       disableSwitch: true,
