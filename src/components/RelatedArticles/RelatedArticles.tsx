@@ -3,6 +3,8 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import RelatedArticlesCard from "./RelatedArticlesCard";
 import { fetchRelatedArticles } from "../../api/relatedArticles";
 
+const EXPIRY = 3600000;
+
 export default function RelatedArticles() {
   const {
     siteConfig: { customFields },
@@ -29,7 +31,7 @@ export default function RelatedArticles() {
         const articles = await fetchRelatedArticles(
           AIRTABLE_URL,
           blogPath,
-          3600000,
+          EXPIRY,
           options
         );
 

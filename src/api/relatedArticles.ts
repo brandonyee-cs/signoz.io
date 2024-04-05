@@ -48,8 +48,6 @@ export const fetchRelatedArticles = async (
 
     const responseData = await response.json();
 
-    console.log("response data", responseData);
-
     const relatedArticles = JSON.parse(
       responseData?.records[0]?.fields?.relatedArticles
     );
