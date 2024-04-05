@@ -10,18 +10,20 @@ export default function RelatedArticles() {
 
   const [relatedArticles, setRelatedArticles] = useState([]);
   const [loadingRelatedArticles, setLoadingRelatedArticles] = useState(false);
-  const blogPath = window.location.pathname;
-  const AIRTABLE_URL = `${customFields.AIRTABLE_BASE_URL}?filterByFormula={blogURL}='${blogPath}'&maxRecords=1`;
-
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${customFields.AIRTABLE_KEY}`,
-    },
-  };
 
   useEffect(() => {
     setLoadingRelatedArticles(true);
+
+    const blogPath = window.location.pathname;
+    const AIRTABLE_URL = `${customFields.AIRTABLE_BASE_URL}?filterByFormula={blogURL}='${blogPath}'&maxRecords=1`;
+
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${customFields.AIRTABLE_KEY}`,
+      },
+    };
+
     const fetchAndCacheData = async () => {
       try {
         const articles = await fetchRelatedArticles(
