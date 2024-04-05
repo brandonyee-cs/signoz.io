@@ -1,4 +1,5 @@
 // @ts-check
+require("dotenv").config();
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -10,6 +11,10 @@ const config = {
   trailingSlash: true,
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
+  customFields: {
+    AIRTABLE_KEY: process.env.AIRTABLE_KEY,
+    AIRTABLE_BASE_URL: process.env.AIRTABLE_BASE_URL,
+  },
   organizationName: "SigNoz", // Usually your GitHub org/user name.
   projectName: "signoz", // Usually your repo name.
   themeConfig: {
@@ -105,31 +110,31 @@ const config = {
         // },
         {
           // to: '/resources', // Path to your comparison section
-          label: 'Resources', // Text for the link
-          position: 'left', // Position on the navbar (left or right)
+          label: "Resources", // Text for the link
+          position: "left", // Position on the navbar (left or right)
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: "Blog",
+              to: "/blog",
             },
             {
-              label: 'OpenTelemetry',
-              to: '/opentelemetry',
+              label: "OpenTelemetry",
+              to: "/opentelemetry",
             },
             // {
             //   label: 'Documentation',
             //   to: '/docs',
             // },
             {
-              label: 'Comparisons',
-              to: '/comparisons',
+              label: "Comparisons",
+              to: "/comparisons",
             },
             {
-              label: 'Customer Stories',
-              to: 'case-study/',
+              label: "Customer Stories",
+              to: "case-study/",
             },
             // Add more article links here...
-          ]
+          ],
         },
         // {
         //   to: "opentelemetry/",
