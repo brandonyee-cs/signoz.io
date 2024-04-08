@@ -50,10 +50,17 @@ export default function RelatedArticles() {
 
   return (
     <div className="flex gap-8 flex-wrap py-8">
-      <h2 className="pb-0 mb-0"> Related Articles </h2>
+      {!loadingRelatedArticles &&
+        relatedArticles &&
+        Array.isArray(relatedArticles) &&
+        relatedArticles.length > 0 && (
+          <h2 className="pb-0 mb-0"> Related Articles </h2>
+        )}
 
       <div className="flex gap-8 flex-wrap pb-8">
         {!loadingRelatedArticles &&
+          relatedArticles &&
+          Array.isArray(relatedArticles) &&
           relatedArticles.map((relatedArticle, index) => (
             <RelatedArticlesCard article={relatedArticle} key={index} />
           ))}
