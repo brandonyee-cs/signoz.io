@@ -9,6 +9,12 @@ Before setting up Email as a notification channel in SigNoz, ensure the followin
 - **SMTP Host**: You need to have a SMTP host running through which emails are sent. 
 - **SigNoz Version**: [v0.41.0](https://github.com/SigNoz/signoz/releases/tag/v0.41.0) or later
 
+:::info
+
+This documentation is only required for **Self-Hosted** users. Cloud users don't need to follow this
+
+:::
+
 ## Accessing Alert Channels
 
 To manage your alert channels in SigNoz:
