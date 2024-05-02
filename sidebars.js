@@ -83,6 +83,11 @@ module.exports = {
           label: 'Saved View',
           className: 'new-doc', // Add this line
         },
+        {
+          type: 'doc',
+          id: 'product-features/logs-explorer',
+          label: 'Logs Explorer',
+        },
       ]
     },
     {
